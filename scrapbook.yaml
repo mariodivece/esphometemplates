@@ -14,7 +14,7 @@ substitutions:
 
 esphome:
   name: "${uniquename}"
-  friendly_name: "${friendly_name}"
+  friendly_name: "${friendly}"
   comment: "${device_name} by ${device_make}"
   name_add_mac_suffix: ${usemac}
   min_version: "2023.2.0"
