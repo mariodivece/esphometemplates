@@ -14,7 +14,7 @@ esphome:
   
   project:
     name: "builtin-led.bl24"
-	version: "1.0.0"
+    version: "1.0.0"
 
 # Enable logging
 logger:
