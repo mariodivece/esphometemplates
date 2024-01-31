@@ -10,7 +10,7 @@ substitutions:
   ota_password: !secret ota_password
   device_name: "Node32Sample"
   device_make: "BL24"
-  sw_version: "2024.1.35"
+  sw_version: "2024.1.36"
 
 esphome:
   name: "${uniquename}"
@@ -58,4 +58,17 @@ wifi:
     password: "${wifi_password}"
 
 captive_portal:
+
+light:
+  - platform: monochromatic
+    name: "Built-in LED"
+    # This id must match the output id
+    output: light_output
+
+output:
+  - id: light_output
+    # ledc is the PWM platform for ESP32 chips.
+    platform: ledc
+    # Pin name for the built-in LED of my nodemcu-32s
+    pin: GPIO2
     
