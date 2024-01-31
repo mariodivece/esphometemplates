@@ -1,43 +1,54 @@
 substitutions:
-  name: "project-template"
-  friendly_name: "Project Template"
+  name: yournamegoeshere
+  apikey: enterencryptionkey
+  loglevel: DEBUG
+  wifi_ssid: !secret wifi_ssid
+  wifi_password: !secret wifi_password
+  device_name: "Node32Sample"
+  device_make: "BL24"
+  sw_version: "2024.1.31"
+
+esphome:
+  name: "${name}"
+  comment: "${device_name} by ${device_make}"
+  name_add_mac_suffix: true
+  min_version: "2023.2.0"
+  project:
+    name: "${device_make}.${device_name}"
+    version: "${sw_version}"
 
 esp32:
   board: nodemcu-32s
   framework:
     type: arduino
 
-esphome:
-  name: "${name}"
-  friendly_name: "${friendly_name}"
-  name_add_mac_suffix: true
-  
-  project:
-    name: "builtin-led.bl24"
-    version: "1.0.0"
+dashboard_import:
+  package_import_url: github://mariodivece/esphometemplates/scrapbook.yaml@main
+  import_full_config: false
 
 # Enable logging
 logger:
-  level: DEBUG
+  level: "${loglevel}"
 
 # Enable Home Assistant API
 api:
   encryption:
-    key: "6+jS7G8qNECQke9Yxw7zWgF9QfA2PN9qx1NuzMvAim8="
+    key: "${apikey}"
 
+# Enable OTA
 ota:
 
-dashboard_import:
-  package_import_url: github://mariodivece/esphometemplates/scrapbook.yaml@main
-  import_full_config: true
-
+# Enable WiFi and AP for captive portal
 wifi:
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
+  fast_connect: false
+  power_save_mode: none
+  ssid: "${wifi_ssid}"
+  password: "${wifi_password}"
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    password: "bzGZ5pa4mPOk"
+    ssid: "${name} Setup"
+    password: "${wifi_password}"
 
 captive_portal:
     
