@@ -1,10 +1,8 @@
 substitutions:
-  name: "sample-device-01"
-  apikey: "6+jS7G8qNECQke9Yxw7zWgF9QfA2PN9qx1NuzMvAim8="
-
-esphome:
-  name: "${name}"
-  name_add_mac_suffix: false
+  usemac: "false"
+  friendly: "My Sample Device 1"
+  uniquename: "sample-device-798400"
+  apikey: "JEkJZAWHGXHUHlmMrwiQKMsO/PytxwPF3eFHvMzwCMk="
 
 packages:
   BL24.Node32Sample:
