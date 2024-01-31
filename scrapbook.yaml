@@ -1,19 +1,22 @@
 # example taken from https://community.home-assistant.io/t/what-is-dashboard-import/422519/7
 substitutions:
-  name: yournamegoeshere
-  apikey: enterencryptionkey
+  usemac: true
+  friendly: "Friendly Name Goes Here"
+  uniquename: "yournamegoeshere"
+  apikey: "enterencryptionkey"
   loglevel: DEBUG
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
   ota_password: !secret ota_password
   device_name: "Node32Sample"
   device_make: "BL24"
-  sw_version: "2024.1.34"
+  sw_version: "2024.1.35"
 
 esphome:
-  name: "${name}"
+  name: "${uniquename}"
+  friendly_name: "${friendly_name}"
   comment: "${device_name} by ${device_make}"
-  name_add_mac_suffix: true
+  name_add_mac_suffix: ${usemac}
   min_version: "2023.2.0"
   project:
     name: "${device_make}.${device_name}"
