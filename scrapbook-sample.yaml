@@ -7,4 +7,8 @@ esphome:
   name_add_mac_suffix: false
 
 packages:
-  BL24.Node32Sample: github://mariodivece/esphometemplates/scrapbook.yaml@main
+  BL24.Node32Sample:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    files: [scrapbook.yaml]
+    refresh: 0d
