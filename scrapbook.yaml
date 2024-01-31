@@ -5,6 +5,7 @@ substitutions:
   loglevel: DEBUG
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
+  ota_password: !secret ota_password
   device_name: "Node32Sample"
   device_make: "BL24"
   sw_version: "2024.1.31"
@@ -38,6 +39,7 @@ api:
 
 # Enable OTA
 ota:
+  password: "${ota_password}"
 
 # Enable WiFi and AP for captive portal
 wifi:
