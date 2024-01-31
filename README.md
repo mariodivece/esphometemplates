@@ -1,0 +1,2 @@
+# esphometemplates
+Templates for ESPhome
