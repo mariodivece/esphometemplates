@@ -26,7 +26,7 @@ esp32:
 
 dashboard_import:
   package_import_url: github://mariodivece/esphometemplates/scrapbook.yaml@main
-  import_full_config: false
+  import_full_config: true
 
 # Enable logging
 logger:
@@ -39,7 +39,8 @@ api:
 
 # Enable OTA
 ota:
-  password: "${ota_password}"
+  safe_mode: true
+  password: !secret ota_password
 
 # Enable WiFi and AP for captive portal
 wifi:
