@@ -1,6 +1,6 @@
 # example taken from https://community.home-assistant.io/t/what-is-dashboard-import/422519/7
 substitutions:
-  usemac: True
+  usemac: "true"
   friendly: "Friendly Name Goes Here"
   uniquename: "yournamegoeshere"
   apikey: "enterencryptionkey"
