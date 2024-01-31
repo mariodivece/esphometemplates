@@ -8,7 +8,7 @@ substitutions:
   ota_password: !secret ota_password
   device_name: "Node32Sample"
   device_make: "BL24"
-  sw_version: "2024.1.31"
+  sw_version: "2024.1.32"
 
 esphome:
   name: "${name}"
