@@ -9,3 +9,6 @@ packages:
     ref: main
     files: [sonoff-m5-3g-us.yaml]
     refresh: 0d
+    
+wifi:
+  use_address: "10.16.40.49"
