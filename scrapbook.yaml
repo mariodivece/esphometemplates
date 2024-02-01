@@ -65,6 +65,9 @@ binary_sensor:
     id: button
     pin: GPIO00
     inverted: True
+    on_double_click:
+      then:
+        - light.toggle: light_output
 
 light:
   - platform: monochromatic
