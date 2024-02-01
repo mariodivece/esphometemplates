@@ -62,20 +62,20 @@ captive_portal:
 # diagnostic output
 text_sensor:
   - platform: template
-    name: "${device_name} Config Version"
+    name: "Deployment Version"
     lambda: return {"${sw_version}"};
     icon: "mdi:tag"
     entity_category: diagnostic
   - platform: wifi_info
     ip_address:
       id: ip_address
-      name: "${device_name} IP Address"
+      name: "IP Address"
       icon: "mdi:wan"
       
 sensor:
   - platform: template
     id: internal_temp
-    name: "${device_name} Internal Temperature"
+    name: "Internal Temperature"
     icon: "mdi:thermometer"
     unit_of_measurement: "°C"
     entity_category: diagnostic
@@ -103,7 +103,7 @@ globals:
 # exposing configuration items example
 number:
   - platform: template
-    name: "${device_name} Min Brightness"
+    name: "Min Brightness"
     id: config_min_brightness
     unit_of_measurement: "%"
     icon: "mdi:car-cruise-control"
@@ -161,7 +161,7 @@ binary_sensor:
               lambda: |-
                 return id(state_onoff);
           then:
-          - delay: 0.5s
+          - delay: 250ms
           - while:
               condition:
                 binary_sensor.is_on: button
@@ -182,7 +182,7 @@ binary_sensor:
                 and:
                   - binary_sensor.is_on: button
                   - lambda: |-
-                      return {id(pwm_led).current_values.get_brightness() > 0.04};
+                      return {id(pwm_led).current_values.get_brightness() > id(min_brightness)};
               then:
                 - light.dim_relative:
                     id: pwm_led
