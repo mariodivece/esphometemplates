@@ -107,7 +107,7 @@ number:
     id: config_min_brightness
     unit_of_measurement: "%"
     icon: "mdi:car-cruise-control"
-    min_value: 0
+    min_value: 10
     max_value: 80
     step: 1
     mode: box
@@ -115,7 +115,7 @@ number:
     optimistic: true
     entity_category: config
     set_action:
-      - lambda: "id(min_brightness) = id(config_min_brightness).state / 100.0;"
+      - lambda: "id(min_brightness) = id(config_min_brightness).state;"
 
 # complex functionality example
 output:
