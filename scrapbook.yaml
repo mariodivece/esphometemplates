@@ -94,17 +94,17 @@ binary_sensor:
     on_click:
       then:
         - if:
-          condition:
-            light.is_off: pwm_led
-          then:
-            - light.turn_on:
-              id: pwm_led
-              brightness: !lambda |-
-                return id(state_level);
-            - lambda: |=
-              id(state_onoff) = (true);
-          else:
-            light.turn_off: pwm_led
+            condition:
+              light.is_off: pwm_led
+            then:
+              - light.turn_on:
+                  id: pwm_led
+                  brightness: !lambda |-
+                    return id(state_level);
+              - lambda: |-
+                  id(state_onoff) = (true);
+            else:
+              light.turn_off: pwm_led
     on_press:
       then:
       - if:
@@ -115,7 +115,7 @@ binary_sensor:
           - delay: 0.5s
           - while:
               condition:
-                binary_sensor.is_on: pwm_led
+                binary_sensor.is_on: button
               then:
                 - light.dim_relative:
                     id: pwm_led
@@ -144,4 +144,3 @@ binary_sensor:
                     id(state_level) = id(pwm_led).current_values.get_brightness();
           - lambda: |-
               id(state_onoff) = (true);
-              
