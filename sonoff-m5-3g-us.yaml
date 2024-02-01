@@ -10,7 +10,7 @@ substitutions:
   ota_password: !secret ota_password
   device_name: "M53G"
   device_make: "Sonoff"
-  sw_version: "2024.2.1"
+  sw_version: "2024.2.2"
 
 esphome:
   name: "${uniquename}"
@@ -149,7 +149,7 @@ light:
     id: led_status
     pin:
       number: GPIO05
-      inverted: True
+      inverted: False
     internal: True
     restore_mode: ALWAYS_OFF
 
