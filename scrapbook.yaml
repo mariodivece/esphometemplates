@@ -68,11 +68,12 @@ binary_sensor:
       inverted: True
     on_double_click:
       then:
-        - light.toggle: light_output
+        - light.toggle: pwm_led
 
 light:
   - platform: monochromatic
     name: "Built-in LED"
+    id: pwm_led
     # This id must match the output id
     output: light_output
 
