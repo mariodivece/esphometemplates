@@ -64,6 +64,7 @@ binary_sensor:
     name: "Built-in Button"
     id: button
     pin: GPIO00
+    inverted: True
 
 light:
   - platform: monochromatic
