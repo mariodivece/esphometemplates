@@ -112,9 +112,9 @@ binary_sensor:
     device_class: 'connectivity'
     lambda: return global_api_server->is_connected();
     on_press:
-      - light.turn_on: led_status
-    on_release:
       - light.turn_off: led_status
+    on_release:
+      - light.turn_on: led_status
 
   - platform: gpio
     name: "Top"
@@ -149,7 +149,7 @@ light:
     id: led_status
     pin:
       number: GPIO05
-      inverted: False
+      inverted: True
     internal: True
     restore_mode: ALWAYS_OFF
 
