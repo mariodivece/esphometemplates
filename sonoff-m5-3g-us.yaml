@@ -84,21 +84,16 @@ switch:
     id: relay_1
 
   - platform: gpio
-    name: "Bottom"
+    name: "Center"
     pin: GPIO19
     id: relay_2
-    on_turn_on:
-      - output.turn_on: led_2
-    on_turn_off:
-      - output.turn_off: led_2
+
+  - platform: gpio
+    name: "Bottom"
+    pin: GPIO22
+    id: relay_3
       
 output:
-  - platform: gpio
-    id: led_2
-    pin:
-      number: GPIO22
-      inverted: False
-
   - platform: ledc
     id: pwm_output
     pin: GPIO18
@@ -131,13 +126,22 @@ binary_sensor:
       - switch.toggle: relay_1
 
   - platform: gpio
+    name: "Center"
+    pin:
+      number: GPIO00
+      mode: INPUT_PULLUP
+      inverted: False
+    on_press:
+      - switch.toggle: relay_2
+
+  - platform: gpio
     name: "Bottom"
     pin:
       number: GPIO15
       mode: INPUT_PULLUP
       inverted: False
     on_press:
-      - switch.toggle: relay_2
+      - switch.toggle: relay_3
 
 light:
   - platform: status_led
