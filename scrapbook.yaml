@@ -59,16 +59,20 @@ wifi:
 
 captive_portal:
 
-binary_sensor:
-  - platform: gpio
-    name: "Built-in Button"
-    id: button
-    pin:
-      number: GPIO00
-      inverted: True
-    on_double_click:
-      then:
-        - light.toggle: pwm_led
+globals:
+  - id: state_onoff
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+  - id: state_level
+    type: float
+    restore_value: no
+    initial_value: '0.3'
+
+output:
+  - id: light_output
+    platform: ledc # ledc is the PWM platform for ESP32 chips.
+    pin: GPIO2 # Pin name for the built-in LED of my nodemcu-32s
 
 light:
   - platform: monochromatic
@@ -77,10 +81,67 @@ light:
     # This id must match the output id
     output: light_output
 
-output:
-  - id: light_output
-    # ledc is the PWM platform for ESP32 chips.
-    platform: ledc
-    # Pin name for the built-in LED of my nodemcu-32s
-    pin: GPIO2
-    
+binary_sensor:
+  - platform: gpio
+    name: "Built-in Button"
+    id: button
+    pin:
+      number: GPIO00
+      inverted: True
+    filters:
+      - delayed_on: 50ms  
+      - delayed_off: 50ms 
+    on_click:
+      then:
+        - if:
+          condition:
+            light.is_off: pwm_led
+          then:
+            - light.turn_on:
+              id: pwm_led
+              brightness: !lambda |-
+                return id(state_level);
+            - lambda: |=
+              id(state_onoff) = (true);
+          else:
+            light.turn_off: pwm_led
+    on_press:
+      then:
+      - if:
+          condition: 
+              lambda: |-
+                return id(state_onoff);
+          then:
+          - delay: 0.5s
+          - while:
+              condition:
+                binary_sensor.is_on: pwm_led
+              then:
+                - light.dim_relative:
+                    id: pwm_led
+                    relative_brightness: 2%
+                    transition_length: 0.1s
+                - delay: 0.1s
+                - lambda: |-
+                    id(state_level) = id(pwm_led).current_values.get_brightness();
+          - lambda: |-
+              id(state_onoff) = (false);
+          else:
+          - delay: 0.5s
+          - while:
+              condition:
+                and:
+                  - binary_sensor.is_on: button
+                  - lambda: |-
+                      return {id(pwm_led).current_values.get_brightness() > 0.04};
+              then:
+                - light.dim_relative:
+                    id: pwm_led
+                    relative_brightness: -2%
+                    transition_length: 0.1s
+                - delay: 0.1s
+                - lambda: |-
+                    id(state_level) = id(pwm_led).current_values.get_brightness();
+          - lambda: |-
+              id(state_onoff) = (true);
+              
