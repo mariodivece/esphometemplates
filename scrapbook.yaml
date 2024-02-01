@@ -59,6 +59,12 @@ wifi:
 
 captive_portal:
 
+binary_sensor:
+  - platform: gpio
+    name: "Built-in Button"
+    id: button
+    pin: GPIO00
+
 light:
   - platform: monochromatic
     name: "Built-in LED"
