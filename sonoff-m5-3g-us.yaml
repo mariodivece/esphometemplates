@@ -155,7 +155,7 @@ light:
 
   - platform: monochromatic
     output: pwm_output
-    name: "LEDs"
+    name: "Off State Brightness"
     restore_mode: RESTORE_DEFAULT_OFF
     icon: 'mdi:led-outline'
     entity_category: 'config'
