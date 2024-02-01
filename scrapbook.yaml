@@ -59,6 +59,33 @@ wifi:
 
 captive_portal:
 
+# diagnostic output
+text_sensor:
+  - platform: template
+    name: "${device_name} Config Version"
+    lambda: return {"${sw_version}"};
+    icon: "mdi:tag"
+    entity_category: diagnostic
+  - platform: wifi_info
+    ip_address:
+      id: ip_address
+      name: "${device_name} IP Address"
+      icon: "mdi:wan"
+      
+sensor:
+  - platform: template
+    id: internal_temp
+    name: "${device_name} Internal Temperature"
+    icon: "mdi:thermometer"
+    unit_of_measurement: "°C"
+    entity_category: diagnostic
+    disabled_by_default: true
+    lambda: return temperatureRead();
+  - platform: wifi_signal
+    name: "${device_name} WiFi Signal"
+    update_interval: 60s
+
+# define global state variables
 globals:
   - id: state_onoff
     type: bool
@@ -68,7 +95,29 @@ globals:
     type: float
     restore_value: no
     initial_value: '0.3'
+  - id: min_brightness
+    type: float
+    restore_value: no
+    initial_value: '0.04'
 
+# exposing configuration items example
+number:
+  - platform: template
+    name: "${device_name} Min Brightness"
+    id: config_min_brightness
+    unit_of_measurement: "%"
+    icon: "mdi:car-cruise-control"
+    min_value: 0
+    max_value: 80
+    step: 1
+    mode: box
+    update_interval: never
+    optimistic: true
+    entity_category: config
+    set_action:
+      - lambda: "id(min_brightness) = id(config_min_brightness).state / 100.0;"
+
+# complex functionality example
 output:
   - id: light_output
     platform: ledc # ledc is the PWM platform for ESP32 chips.
