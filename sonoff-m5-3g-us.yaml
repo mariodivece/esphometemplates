@@ -79,12 +79,12 @@ button:
 
 switch:
   - platform: gpio
-    name: "Left"
+    name: "Top"
     pin: GPIO23
     id: relay_1
 
   - platform: gpio
-    name: "Right"
+    name: "Bottom"
     pin: GPIO19
     id: relay_2
     on_turn_on:
@@ -122,7 +122,7 @@ binary_sensor:
       - light.turn_off: led_status
 
   - platform: gpio
-    name: "Left"
+    name: "Top"
     pin:
       number: GPIO04
       mode: INPUT_PULLUP
@@ -131,7 +131,7 @@ binary_sensor:
       - switch.toggle: relay_1
 
   - platform: gpio
-    name: "Right"
+    name: "Bottom"
     pin:
       number: GPIO15
       mode: INPUT_PULLUP
