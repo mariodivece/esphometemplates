@@ -1,12 +1,14 @@
 substitutions:
-  usemac: "false"
+  usemac: "true"
   friendly: "My Sample Device 1"
-  uniquename: "sample-device-798400"
-  apikey: "JEkJZAWHGXHUHlmMrwiQKMsO/PytxwPF3eFHvMzwCMk="
+  uniquename: "sample-device"
 
 packages:
-  BL24.Node32Sample:
+  somepackagename:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
     files: [scrapbook.yaml]
     refresh: 0d
+    
+wifi:
+  use_address: "192.168.1.11"
