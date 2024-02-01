@@ -63,8 +63,9 @@ binary_sensor:
   - platform: gpio
     name: "Built-in Button"
     id: button
-    pin: GPIO00
-    invert: True
+    pin:
+      number: GPIO00
+      invert: True
     on_double_click:
       then:
         - light.toggle: light_output
