@@ -143,7 +143,7 @@ binary_sensor:
     pin:
       number: GPIO04
       mode: INPUT_PULLUP
-      inverted: False
+      inverted: true
     on_press:
       - switch.toggle: relay_a
 
@@ -152,7 +152,7 @@ binary_sensor:
     pin:
       number: GPIO00
       mode: INPUT_PULLUP
-      inverted: False
+      inverted: true
     on_press:
       - switch.toggle: relay_b
 
@@ -161,7 +161,7 @@ binary_sensor:
     pin:
       number: GPIO15
       mode: INPUT_PULLUP
-      inverted: False
+      inverted: true
     on_press:
       - switch.toggle: relay_c
 
