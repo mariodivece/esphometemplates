@@ -82,7 +82,7 @@ sensor:
     disabled_by_default: true
     lambda: return temperatureRead();
   - platform: wifi_signal
-    name: "${device_name} WiFi Signal"
+    name: "WiFi Signal"
     update_interval: 60s
 
 # define global state variables
