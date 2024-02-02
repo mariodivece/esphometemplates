@@ -103,8 +103,8 @@ number:
     id: config_min_brightness
     unit_of_measurement: "%"
     icon: "mdi:car-cruise-control"
-    min_value: 10
-    max_value: 80
+    min_value: 0.1
+    max_value: 0.8
     step: 1
     mode: box
     update_interval: never
