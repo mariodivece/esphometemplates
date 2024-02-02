@@ -163,8 +163,8 @@ binary_sensor:
       number: GPIO15
       mode: INPUT_PULLUP
       inverted: true
-    on_press:
-      - switch.toggle: relay_c
+#    on_press:
+#      - switch.toggle: relay_c
 
 light:
   - platform: status_led
