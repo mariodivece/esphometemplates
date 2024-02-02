@@ -1,4 +1,5 @@
 # example taken from https://community.home-assistant.io/t/what-is-dashboard-import/422519/7
+# TODO: Enable virtual events: https://community.home-assistant.io/t/double-click-event-from-a-rocker-switch/476060/7
 substitutions:
   usemac: "true"
   friendly: "Sonoff Switchman M5 3G US"
