@@ -10,7 +10,7 @@ substitutions:
   ota_password: !secret ota_password
   device_name: "M53G"
   device_make: "Sonoff"
-  sw_version: "2024.2.2"
+  sw_version: "2024.2.3"
 
 esphome:
   name: "${uniquename}"
@@ -101,19 +101,19 @@ button:
 
 switch:
   - platform: gpio
-    name: "Top"
+    name: "Relay A"
     pin: GPIO23
-    id: relay_1
+    id: relay_a
 
   - platform: gpio
-    name: "Center"
+    name: "Relay B"
     pin: GPIO19
-    id: relay_2
+    id: relay_b
 
   - platform: gpio
-    name: "Bottom"
+    name: "Relay C"
     pin: GPIO22
-    id: relay_3
+    id: relay_c
       
 output:
   - platform: ledc
@@ -139,31 +139,31 @@ binary_sensor:
       - light.turn_on: led_status
 
   - platform: gpio
-    name: "Top"
+    name: "Button A"
     pin:
       number: GPIO04
       mode: INPUT_PULLUP
       inverted: False
     on_press:
-      - switch.toggle: relay_1
+      - switch.toggle: relay_a
 
   - platform: gpio
-    name: "Center"
+    name: "Button B"
     pin:
       number: GPIO00
       mode: INPUT_PULLUP
       inverted: False
     on_press:
-      - switch.toggle: relay_2
+      - switch.toggle: relay_b
 
   - platform: gpio
-    name: "Bottom"
+    name: "Button C"
     pin:
       number: GPIO15
       mode: INPUT_PULLUP
       inverted: False
     on_press:
-      - switch.toggle: relay_3
+      - switch.toggle: relay_c
 
 light:
   - platform: status_led
