@@ -110,8 +110,6 @@ number:
     update_interval: never
     optimistic: true
     entity_category: config
-    filters:
-      - multiply: 0.01
 
 # complex functionality example
 output:
@@ -178,7 +176,7 @@ binary_sensor:
                 and:
                   - binary_sensor.is_on: button
                   - lambda: |-
-                      return {id(pwm_led).current_values.get_brightness() > id(config_min_brightness).state};
+                      return {id(pwm_led).current_values.get_brightness() > id(config_min_brightness).state / 100.0};
               then:
                 - light.dim_relative:
                     id: pwm_led
