@@ -95,10 +95,6 @@ globals:
     type: float
     restore_value: no
     initial_value: '0.3'
-  - id: min_brightness
-    type: float
-    restore_value: no
-    initial_value: '0.04'
 
 # exposing configuration items example
 number:
@@ -114,8 +110,6 @@ number:
     update_interval: never
     optimistic: true
     entity_category: config
-    set_action:
-      - lambda: "id(min_brightness) = id(config_min_brightness).state;"
 
 # complex functionality example
 output:
@@ -182,7 +176,7 @@ binary_sensor:
                 and:
                   - binary_sensor.is_on: button
                   - lambda: |-
-                      return {id(pwm_led).current_values.get_brightness() > id(min_brightness)};
+                      return {id(pwm_led).current_values.get_brightness() > id(config_min_brightness).state};
               then:
                 - light.dim_relative:
                     id: pwm_led
