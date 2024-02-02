@@ -10,7 +10,7 @@ substitutions:
   ota_password: !secret ota_password
   device_name: "Node32Sample"
   device_make: "BL24"
-  sw_version: "2024.2.1"
+  sw_version: "2024.2.2"
 
 esphome:
   name: "${uniquename}"
@@ -103,13 +103,15 @@ number:
     id: config_min_brightness
     unit_of_measurement: "%"
     icon: "mdi:car-cruise-control"
-    min_value: 0.1
-    max_value: 0.8
-    step: 1
+    min_value: 10.0
+    max_value: 80.0
+    step: 1.0
     mode: box
     update_interval: never
     optimistic: true
     entity_category: config
+    filters:
+      - multiply: 0.01
 
 # complex functionality example
 output:
