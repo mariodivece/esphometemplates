@@ -175,6 +175,20 @@ binary_sensor:
             switch.is_off: relay_a_decoupled
           then:
             - switch.toggle: relay_a
+      - homeassistant.event:
+        event: esphome.on_press
+    on_release:
+      - homeassistant.event:
+        event: esphome.on_release
+    on_state:
+      - homeassistant.event:
+        event: esphome.on_state
+    on_click:
+      - homeassistant.event:
+        event: esphome.on_click
+    on_double_click:
+      - homeassistant.event:
+        event: esphome.on_double_click
 
   - platform: gpio
     name: "Button B"
@@ -210,7 +224,7 @@ light:
       number: GPIO05
       inverted: True
     internal: True
-    restore_mode: ALWAYS_OFF
+    restore_mode: RESTORE_DEFAULT_ON 
 
   - platform: monochromatic
     output: pwm_output
