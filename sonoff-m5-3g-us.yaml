@@ -189,18 +189,18 @@ binary_sensor:
 
     on_multi_click:
     - timing:
-        - ON for at most 1s
-        - OFF for at most 1s
-        - ON for at most 1s
-        - OFF for at least 0.2s
+        - ON for at most 100ms
+        - OFF for at most 500ms
+        - ON for at most 500ms
+        - OFF for at least 100ms
       then:
         - homeassistant.event:
             event: esphome.on_gesture
             data:
               name: "double"
     - timing:
-        - ON for at most 1s
-        - OFF for at least 0.5s
+        - ON for at most 100ms
+        - OFF for at least 500ms
       then:
         - homeassistant.event:
             event: esphome.on_gesture
