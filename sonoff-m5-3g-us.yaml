@@ -171,12 +171,12 @@ binary_sensor:
       inverted: true
     on_press:
       then:
-        - if:
-            condition:
-              switch.is_off: relay_a_decoupled
-            then:
-              - switch.toggle: relay_a
-        - homeassistant.event:
+      - if:
+          condition:
+            switch.is_off: relay_a_decoupled
+          then:
+            - switch.toggle: relay_a
+      - homeassistant.event:
           event: esphome.on_press
     on_release:
       - homeassistant.event:
