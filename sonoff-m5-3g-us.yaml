@@ -179,16 +179,16 @@ binary_sensor:
         event: esphome.on_press
     on_release:
       - homeassistant.event:
-        event: esphome.on_release
+          event: esphome.on_release
     on_state:
       - homeassistant.event:
-        event: esphome.on_state
+          event: esphome.on_state
     on_click:
       - homeassistant.event:
-        event: esphome.on_click
+          event: esphome.on_click
     on_double_click:
       - homeassistant.event:
-        event: esphome.on_double_click
+          event: esphome.on_double_click
 
   - platform: gpio
     name: "Button B"
