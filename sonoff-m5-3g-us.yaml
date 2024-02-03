@@ -117,8 +117,24 @@ switch:
     id: relay_c
 
   - platform: template
-    name: "Relay A Deceoupling"
+    name: "Decoupling - Relay A"
     id: relay_a_decoupled
+    optimistic: True
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: 'mdi:link-box-outline'
+    entity_category: 'config'
+
+  - platform: template
+    name: "Decoupling - Relay B"
+    id: relay_b_decoupled
+    optimistic: True
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: 'mdi:link-box-outline'
+    entity_category: 'config'
+
+  - platform: template
+    name: "Decoupling - Relay C"
+    id: relay_c_decoupled
     optimistic: True
     restore_mode: RESTORE_DEFAULT_OFF
     icon: 'mdi:link-box-outline'
@@ -154,7 +170,11 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: true
     on_press:
-      - switch.toggle: relay_a
+      - if:
+          condition:
+            switch.is_off: relay_a_decoupled
+          then:
+            - switch.toggle: relay_a
 
   - platform: gpio
     name: "Button B"
@@ -163,7 +183,11 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: true
     on_press:
-      - switch.toggle: relay_b
+      - if:
+          condition:
+            switch.is_off: relay_b_decoupled
+          then:
+            - switch.toggle: relay_b
 
   - platform: gpio
     name: "Button C"
@@ -172,7 +196,12 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: true
     on_press:
-      - switch.toggle: relay_c
+    on_press:
+      - if:
+          condition:
+            switch.is_off: relay_c_decoupled
+          then:
+            - switch.toggle: relay_c
 
 light:
   - platform: status_led
@@ -186,7 +215,7 @@ light:
 
   - platform: monochromatic
     output: pwm_output
-    name: "Off State Brightness"
+    name: "Background Brightness"
     restore_mode: RESTORE_DEFAULT_OFF
     icon: 'mdi:led-outline'
     entity_category: 'config'
