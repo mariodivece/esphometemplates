@@ -170,13 +170,14 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: true
     on_press:
-      - if:
-          condition:
-            switch.is_off: relay_a_decoupled
-          then:
-            - switch.toggle: relay_a
-      - homeassistant.event:
-        event: esphome.on_press
+      then:
+        - if:
+            condition:
+              switch.is_off: relay_a_decoupled
+            then:
+              - switch.toggle: relay_a
+        - homeassistant.event:
+          event: esphome.on_press
     on_release:
       - homeassistant.event:
           event: esphome.on_release
