@@ -115,7 +115,14 @@ switch:
     name: "Relay C"
     pin: GPIO22
     id: relay_c
-      
+
+  - platform: template
+    name: "Relay A Deceoupling"
+    id: relay_a_decoupled
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: 'mdi:link-box-outline'
+    entity_category: 'config'
+
 output:
   - platform: ledc
     id: pwm_output
