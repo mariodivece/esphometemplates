@@ -126,7 +126,7 @@ switch:
   - platform: template
     name: "Decoupling - Relay A"
     id: relay_a_decoupled
-    optimistic: True
+    optimistic: true
     restore_mode: RESTORE_DEFAULT_OFF
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
@@ -135,7 +135,7 @@ switch:
   - platform: template
     name: "Decoupling - Relay B"
     id: relay_b_decoupled
-    optimistic: True
+    optimistic: true
     restore_mode: RESTORE_DEFAULT_OFF
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
@@ -144,7 +144,7 @@ switch:
   - platform: template
     name: "Decoupling - Relay C"
     id: relay_c_decoupled
-    optimistic: True
+    optimistic: true
     restore_mode: RESTORE_DEFAULT_OFF
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
@@ -163,7 +163,7 @@ binary_sensor:
   - platform: template
     name: "API connected"
     id: sensor_api_connected
-    internal: True
+    internal: true
     entity_category: 'diagnostic'
     device_class: 'connectivity'
     lambda: return global_api_server->is_connected();
@@ -174,7 +174,6 @@ binary_sensor:
 
   - platform: gpio
     name: "Button A"
-    
     pin:
       number: GPIO04
       mode: INPUT_PULLUP
@@ -187,25 +186,39 @@ binary_sensor:
         then:
           - switch.toggle: relay_a
 
+    on_state:
+      then:
+        - binary_sensor.template.publish:
+            id: gesture_tracker_a
+            state: ON
+        - delay: 100ms
+        - binary_sensor.template.publish:
+            id: gesture_tracker_a
+            state: OFF
+
+  - platform: template
+    id: gesture_tracker_a
+    internal: true
     on_multi_click:
-    - timing:
-        - ON for at most 100ms
-        - OFF for at most 500ms
-        - ON for at most 500ms
-        - OFF for at least 100ms
-      then:
-        - homeassistant.event:
-            event: esphome.on_gesture
-            data:
-              name: "double"
-    - timing:
-        - ON for at most 100ms
-        - OFF for at least 500ms
-      then:
-        - homeassistant.event:
-            event: esphome.on_gesture
-            data:
-              name: "single"
+      - timing:
+        - ON for at most 0.5s
+        - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.on_gesture
+              data:
+                name: "single"
+
+      - timing:
+          - ON for at most 0.5s
+          - OFF for at most 0.5s
+          - ON for at most 0.5s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.on_gesture
+              data:
+                name: "double"
 
   - platform: gpio
     name: "Button B"
@@ -239,8 +252,8 @@ light:
     id: led_status
     pin:
       number: GPIO05
-      inverted: True
-    internal: True
+      inverted: true
+    internal: true
     restore_mode: RESTORE_DEFAULT_ON 
 
   - platform: monochromatic
