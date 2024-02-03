@@ -54,6 +54,7 @@ wifi:
   password: "${wifi_password}"
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
+  # password for hostspot is the same as password for net AP
   ap:
     ssid: "${uniquename}-setup"
     password: "${wifi_password}"
@@ -67,12 +68,13 @@ text_sensor:
     lambda: return {"${sw_version}"};
     icon: "mdi:tag"
     entity_category: diagnostic
+
   - platform: wifi_info
     ip_address:
       id: ip_address
       name: "IP Address"
       icon: "mdi:wan"
-      
+
 sensor:
   - platform: template
     id: internal_temp
@@ -96,26 +98,31 @@ sensor:
     entity_category: "diagnostic"
     
 button:
+  # Provide a pre-built button for restarting the device
   - platform: restart
     name: "Restart"
     id: button_restart
 
 switch:
+  # Physical GPIO Button
   - platform: gpio
     name: "Relay A"
     pin: GPIO23
     id: relay_a
 
+  # Physical GPIO Button
   - platform: gpio
     name: "Relay B"
     pin: GPIO19
     id: relay_b
 
+  # Physical GPIO Button
   - platform: gpio
     name: "Relay C"
     pin: GPIO22
     id: relay_c
 
+  # Config-only switch to decouple relay from button
   - platform: template
     name: "Decoupling - Relay A"
     id: relay_a_decoupled
@@ -124,6 +131,7 @@ switch:
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
 
+  # Config-only switch to decouple relay from button
   - platform: template
     name: "Decoupling - Relay B"
     id: relay_b_decoupled
@@ -132,6 +140,7 @@ switch:
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
 
+  # Config-only switch to decouple relay from button
   - platform: template
     name: "Decoupling - Relay C"
     id: relay_c_decoupled
@@ -170,26 +179,21 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: true
     on_press:
-      then:
       - if:
           condition:
             switch.is_off: relay_a_decoupled
           then:
             - switch.toggle: relay_a
-      - homeassistant.event:
-          event: esphome.on_press
-    on_release:
-      - homeassistant.event:
-          event: esphome.on_release
-    on_state:
-      - homeassistant.event:
-          event: esphome.on_state
     on_click:
       - homeassistant.event:
-          event: esphome.on_click
+          event: esphome.on_gesture
+          data:
+            name: "single"
     on_double_click:
       - homeassistant.event:
-          event: esphome.on_double_click
+          event: esphome.on_gesture
+          data:
+            name: "double"
 
   - platform: gpio
     name: "Button B"
@@ -203,6 +207,16 @@ binary_sensor:
             switch.is_off: relay_b_decoupled
           then:
             - switch.toggle: relay_b
+    on_click:
+      - homeassistant.event:
+          event: esphome.on_gesture
+          data:
+            name: "single"
+    on_double_click:
+      - homeassistant.event:
+          event: esphome.on_gesture
+          data:
+            name: "double"
 
   - platform: gpio
     name: "Button C"
@@ -216,6 +230,16 @@ binary_sensor:
             switch.is_off: relay_c_decoupled
           then:
             - switch.toggle: relay_c
+    on_click:
+      - homeassistant.event:
+          event: esphome.on_gesture
+          data:
+            name: "single"
+    on_double_click:
+      - homeassistant.event:
+          event: esphome.on_gesture
+          data:
+            name: "double"
 
 light:
   - platform: status_led
