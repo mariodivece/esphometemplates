@@ -174,26 +174,38 @@ binary_sensor:
 
   - platform: gpio
     name: "Button A"
+    
     pin:
       number: GPIO04
       mode: INPUT_PULLUP
       inverted: true
+    
     on_press:
-      - if:
-          condition:
-            switch.is_off: relay_a_decoupled
-          then:
-            - switch.toggle: relay_a
-    on_click:
-      - homeassistant.event:
-          event: esphome.on_gesture
-          data:
-            name: "single"
-    on_double_click:
-      - homeassistant.event:
-          event: esphome.on_gesture
-          data:
-            name: "double"
+    - if:
+        condition:
+          switch.is_off: relay_a_decoupled
+        then:
+          - switch.toggle: relay_a
+
+    on_multi_click:
+    - timing:
+        - ON for at most 1s
+        - OFF for at most 1s
+        - ON for at most 1s
+        - OFF for at least 0.2s
+      then:
+        - homeassistant.event:
+            event: esphome.on_gesture
+            data:
+              name: "double"
+    - timing:
+        - ON for at most 1s
+        - OFF for at least 0.5s
+      then:
+        - homeassistant.event:
+            event: esphome.on_gesture
+            data:
+              name: "single"
 
   - platform: gpio
     name: "Button B"
@@ -207,16 +219,6 @@ binary_sensor:
             switch.is_off: relay_b_decoupled
           then:
             - switch.toggle: relay_b
-    on_click:
-      - homeassistant.event:
-          event: esphome.on_gesture
-          data:
-            name: "single"
-    on_double_click:
-      - homeassistant.event:
-          event: esphome.on_gesture
-          data:
-            name: "double"
 
   - platform: gpio
     name: "Button C"
@@ -230,16 +232,6 @@ binary_sensor:
             switch.is_off: relay_c_decoupled
           then:
             - switch.toggle: relay_c
-    on_click:
-      - homeassistant.event:
-          event: esphome.on_gesture
-          data:
-            name: "single"
-    on_double_click:
-      - homeassistant.event:
-          event: esphome.on_gesture
-          data:
-            name: "double"
 
 light:
   - platform: status_led
