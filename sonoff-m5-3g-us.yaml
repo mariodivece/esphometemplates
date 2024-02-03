@@ -180,21 +180,20 @@ binary_sensor:
       inverted: true
     
     on_press:
-    - if:
-        condition:
-          switch.is_off: relay_a_decoupled
-        then:
-          - switch.toggle: relay_a
-
-    on_state:
       then:
-        - binary_sensor.template.publish:
-            id: gesture_tracker_a
-            state: ON
-        - delay: 100ms
-        - binary_sensor.template.publish:
-            id: gesture_tracker_a
-            state: OFF
+      - if:
+          condition:
+            switch.is_off: relay_a_decoupled
+          then:
+            - switch.toggle: relay_a
+
+      - binary_sensor.template.publish:
+          id: gesture_tracker_a
+          state: ON
+      - delay: 100ms
+      - binary_sensor.template.publish:
+          id: gesture_tracker_a
+          state: OFF
 
   - platform: template
     id: gesture_tracker_a
