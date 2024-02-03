@@ -196,7 +196,6 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: true
     on_press:
-    on_press:
       - if:
           condition:
             switch.is_off: relay_c_decoupled
