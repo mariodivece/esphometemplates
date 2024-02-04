@@ -180,28 +180,16 @@ binary_sensor:
       inverted: true
     
     on_press:
-      then:
       - if:
           condition:
             switch.is_off: relay_a_decoupled
           then:
             - switch.toggle: relay_a
 
-      - binary_sensor.template.publish:
-          id: gesture_tracker_a
-          state: ON
-      - delay: 100ms
-      - binary_sensor.template.publish:
-          id: gesture_tracker_a
-          state: OFF
-
-  - platform: template
-    id: gesture_tracker_a
-    internal: true
     on_multi_click:
       - timing:
-        - ON for at most 50ms
-        - OFF for at least 50ms
+        - ON for at most 500ms
+        - OFF for at least 500ms
         then:
           - homeassistant.event:
               event: esphome.on_gesture
@@ -209,10 +197,10 @@ binary_sensor:
                 name: "single"
 
       - timing:
-          - ON for at most 0.5s
-          - OFF for at most 0.5s
-          - ON for at most 0.5s
-          - OFF for at least 0.5s
+          - ON for at most 500ms
+          - OFF for at most 500ms
+          - ON for at most 500ms
+          - OFF for at least 500ms
         then:
           - homeassistant.event:
               event: esphome.on_gesture
