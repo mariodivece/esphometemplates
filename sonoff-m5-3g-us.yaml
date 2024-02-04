@@ -4,6 +4,8 @@ substitutions:
   usemac: "true"
   friendly: "Sonoff Switchman M5 3G US"
   uniquename: "switch-m5-3g"
+  timing_short: "250ms"
+  timing_long: "500ms"
   loglevel: DEBUG
   apikey: !secret esp_key
   wifi_ssid: !secret wifi_ssid
@@ -172,6 +174,7 @@ binary_sensor:
     on_release:
       - light.turn_on: led_status
 
+  # Physical Button A
   - platform: gpio
     name: "Button A"
     pin:
@@ -189,10 +192,10 @@ binary_sensor:
     on_multi_click:
       # double click detection
       - timing:
-          - ON for at most 250ms
-          - OFF for at most 250ms
-          - ON for at most 250ms
-          - OFF for at least 250ms
+          - ON for at most ${timing_short}
+          - OFF for at most ${timing_short}
+          - ON for at most ${timing_short}
+          - OFF for at least ${timing_short}
         then:
           - homeassistant.event:
               event: esphome.on_gesture
@@ -201,15 +204,13 @@ binary_sensor:
 
       # single click detection
       - timing:
-        - ON for at most 250ms
-        - OFF for at least 500ms
+        - ON for at most ${timing_short}
+        - OFF for at least ${timing_long}
         then:
           - homeassistant.event:
               event: esphome.on_gesture
               data:
                 gesture: "single"
-
-
 
   - platform: gpio
     name: "Button B"
