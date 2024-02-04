@@ -187,25 +187,29 @@ binary_sensor:
             - switch.toggle: relay_a
 
     on_multi_click:
-      - timing:
-        - ON for at most 500ms
-        - OFF for at least 500ms
-        then:
-          - homeassistant.event:
-              event: esphome.on_gesture
-              data:
-                name: "single"
-
+      # double click detection
       - timing:
           - ON for at most 500ms
           - OFF for at most 500ms
           - ON for at most 500ms
-          - OFF for at least 500ms
+          - OFF for at least 100ms
         then:
           - homeassistant.event:
               event: esphome.on_gesture
               data:
-                name: "double"
+                gesture: "double"
+
+      # single click detection
+      - timing:
+        - ON for at most 500ms
+        - OFF for at least 250ms
+        then:
+          - homeassistant.event:
+              event: esphome.on_gesture
+              data:
+                gesture: "single"
+
+
 
   - platform: gpio
     name: "Button B"
