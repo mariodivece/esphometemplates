@@ -269,12 +269,14 @@ binary_sensor:
               condition:
                 binary_sensor.is_on: button_a
               then:
+                - light.toggle: led_status
                 - homeassistant.event:
                     event: esphome.on_gesture
                     data:
                       button: "A"
                       gesture: "button_hold"
                 - delay: 100ms
+          - light.turn_off: led_status
 
   - platform: gpio
     name: "Button B"
@@ -327,12 +329,14 @@ binary_sensor:
               condition:
                 binary_sensor.is_on: button_b
               then:
+                - light.toggle: led_status
                 - homeassistant.event:
                     event: esphome.on_gesture
                     data:
                       button: "B"
                       gesture: "button_hold"
                 - delay: 100ms
+          - light.turn_off: led_status
 
   - platform: gpio
     name: "Button C"
@@ -385,12 +389,14 @@ binary_sensor:
               condition:
                 binary_sensor.is_on: button_c
               then:
+                - light.toggle: led_status
                 - homeassistant.event:
                     event: esphome.on_gesture
                     data:
                       button: "C"
                       gesture: "button_hold"
                 - delay: 100ms
+          - light.turn_off: led_status
 
 light:
   # Physical pin to the connection status LED
