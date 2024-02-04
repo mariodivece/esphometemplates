@@ -194,7 +194,7 @@ binary_sensor:
     on_multi_click:
       # single click detection
       - timing:
-        - ON for at most 500ms
+        - ON for at most 900ms
         - OFF for at least 600ms
         then:
           - homeassistant.event:
@@ -226,7 +226,7 @@ binary_sensor:
                     event: esphome.on_gesture
                     data:
                       gesture: "button_hold"
-                - delay: 0.1s
+                - delay: 100ms
 
   - platform: gpio
     name: "Button B"
