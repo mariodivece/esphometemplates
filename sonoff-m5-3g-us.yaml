@@ -4,8 +4,6 @@ substitutions:
   usemac: "true"
   friendly: "Sonoff Switchman M5 3G US"
   uniquename: "switch-m5-3g"
-  timing_short: "250ms"
-  timing_long: "500ms"
   loglevel: DEBUG
   apikey: !secret esp_key
   wifi_ssid: !secret wifi_ssid
@@ -177,10 +175,14 @@ binary_sensor:
   # Physical Button A
   - platform: gpio
     name: "Button A"
+    id: button_a
     pin:
       number: GPIO04
       mode: INPUT_PULLUP
       inverted: true
+
+    filters:
+      - delayed_on: 10ms
     
     on_press:
       - if:
@@ -190,28 +192,42 @@ binary_sensor:
             - switch.toggle: relay_a
 
     on_multi_click:
-      # double click detection
-      - timing:
-          - ON for at most ${timing_short}
-          - OFF for at most ${timing_short}
-          - ON for at most ${timing_short}
-          - OFF for at least ${timing_short}
-        then:
-          - homeassistant.event:
-              event: esphome.on_gesture
-              data:
-                gesture: "double"
-
       # single click detection
       - timing:
-        - ON for at most ${timing_short}
-        - OFF for at least ${timing_long}
+        - ON for at most 1s
+        - OFF for at least 0.5s
         then:
           - homeassistant.event:
               event: esphome.on_gesture
               data:
-                gesture: "single"
+                gesture: "single_click"
 
+      # double click detection
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+          - OFF for at least 0.1s
+        then:
+          - homeassistant.event:
+              event: esphome.on_gesture
+              data:
+                gesture: "double_click"
+
+      # hold detection
+      - timing:
+          - ON for at least 1s
+        then:
+          - while:
+              condition:
+                binary_sensor.is_on: button_a
+              then:
+                - homeassistant.event:
+                    event: esphome.on_gesture
+                    data:
+                      gesture: "double_click"
+                - delay: 0.1s
+                
   - platform: gpio
     name: "Button B"
     pin:
