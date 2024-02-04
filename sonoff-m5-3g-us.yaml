@@ -189,7 +189,7 @@ binary_sensor:
     on_multi_click:
       # double click detection
       - timing:
-          - ON for at most 100ms
+          - ON for at most 250ms
           - OFF for at most 250ms
           - ON for at most 250ms
           - OFF for at least 250ms
@@ -201,7 +201,7 @@ binary_sensor:
 
       # single click detection
       - timing:
-        - ON for at most 100ms
+        - ON for at most 250ms
         - OFF for at least 500ms
         then:
           - homeassistant.event:
