@@ -200,8 +200,8 @@ binary_sensor:
     internal: true
     on_multi_click:
       - timing:
-        - ON for at most 0.5s
-        - OFF for at least 0.5s
+        - ON for at most 50ms
+        - OFF for at least 50ms
         then:
           - homeassistant.event:
               event: esphome.on_gesture
