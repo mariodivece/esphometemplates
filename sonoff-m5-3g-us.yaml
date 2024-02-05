@@ -40,6 +40,7 @@ substitutions:
   friendly: "Sonoff Switchman M5 3G US"
   uniquename: "switch-m5-3g"
   loglevel: INFO
+  timezone: "America/Mexico_City"
   apikey: !secret esp_key
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
@@ -102,7 +103,8 @@ captive_portal:
 
 time:
   - platform: sntp
-    id: my_time
+    id: time_service
+    timezone: ${timezone}
 
 # Diagnostic output sensors
 text_sensor:
