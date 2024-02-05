@@ -46,7 +46,7 @@ substitutions:
   ota_password: !secret ota_password
   device_name: "M53G"
   device_make: "Sonoff"
-  sw_version: "2024.2.4"
+  sw_version: "2024.2.5"
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
 
 # Define the board for the compiler
