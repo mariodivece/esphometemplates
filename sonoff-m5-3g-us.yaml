@@ -54,11 +54,7 @@ substitutions:
 esp32:
   board: esp32dev
   framework:
-    type: esp-idf
-    version: recommended
-    # Custom sdkconfig options
-    sdkconfig_options:
-      COMPILER_OPTIMIZATION_SIZE: y
+    type: arduino
       
 # Setup the integration and define some project variables
 esphome:
