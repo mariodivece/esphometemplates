@@ -47,15 +47,19 @@ substitutions:
   ota_password: !secret ota_password
   device_name: "M53G"
   device_make: "Sonoff"
-  sw_version: "2024.2.5"
+  sw_version: "2024.2.8"
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
 
 # Define the board for the compiler
 esp32:
   board: esp32dev
   framework:
-    type: arduino
-
+    type: esp-idf
+    version: recommended
+    # Custom sdkconfig options
+    sdkconfig_options:
+      COMPILER_OPTIMIZATION_SIZE: y
+      
 # Setup the integration and define some project variables
 esphome:
   name: "${uniquename}"
