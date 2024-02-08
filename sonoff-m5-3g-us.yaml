@@ -284,7 +284,7 @@ binary_sensor:
           then:
             - switch.toggle: relay_c
 
-    on_multi_click: on_multi_click: !include { file: sonoff-m5-multiclick.yaml, vars: { button_name: B button_id: button_b } }
+    on_multi_click: on_multi_click: !include { file: sonoff-m5-multiclick.yaml, vars: { button_name: C button_id: button_c } }
 
 light:
   # Physical pin to the connection status LED
