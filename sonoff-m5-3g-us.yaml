@@ -244,18 +244,18 @@ binary_sensor:
     on_press:
       - if:
           condition:
-            - lambda: 'return id(mode_a).active_index() == 0'
+            - lambda: 'return id(mode_a).active_index() == 0;'
           then:
             - switch.toggle: relay_a
       - if:
           condition:
-            - lambda: 'return id(mode_a).active_index() == 1'
+            - lambda: 'return id(mode_a).active_index() == 1;'
           then:
             - switch.turn_on: relay_a
     on_release:
       - if:
           condition:
-            - lambda: 'return id(mode_a).active_index() == 1'
+            - lambda: 'return id(mode_a).active_index() == 1;'
           then:
             - switch.turn_off: relay_a
 
