@@ -149,9 +149,12 @@ button:
     id: button_restart
 
 select:
+    # Config-only select for operation mode
   - platform: template
     name: "A - Operation Mode"
     id: mode_a
+    icon: 'mdi:link-box-outline'
+    entity_category: 'config'
     options:
       - "Toggle Relay"
       - "Sync Relay"
@@ -160,7 +163,7 @@ select:
     optimistic: true
     set_action:
       - switch.turn_off: relay_a
-
+    
 switch:
   # Physical GPIO Relay
   - platform: gpio
@@ -179,15 +182,6 @@ switch:
     name: "Relay C"
     pin: GPIO22
     id: relay_c
-
-  # Config-only switch to decouple relay from button
-  - platform: template
-    name: "Decoupling - Relay A"
-    id: relay_a_decoupled
-    optimistic: true
-    restore_mode: RESTORE_DEFAULT_OFF
-    icon: 'mdi:link-box-outline'
-    entity_category: 'config'
 
   # Config-only switch to decouple relay from button
   - platform: template
@@ -250,10 +244,15 @@ binary_sensor:
     on_press:
       - if:
           condition:
-            switch.is_off: relay_a_decoupled
+            - lambda 'return id(mode_a).active_index() == 0'
           then:
             - switch.toggle: relay_a
-
+      - if:
+          condition:
+            - lambda 'return id(mode_a).active_index() == 1'
+          then:
+            - switch.turn_on: relay_a
+            
     on_multi_click: !include { file: sonoff-m5-multiclick.yaml, vars: { button_name: A button_id: button_a } }
 
   - platform: gpio
