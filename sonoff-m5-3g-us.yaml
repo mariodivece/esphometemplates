@@ -291,6 +291,7 @@ binary_sensor:
       number: GPIO00
       mode: INPUT_PULLUP
       inverted: true
+      ignore_strapping_warning: true
 
     filters:
       - delayed_on: 10ms
@@ -351,6 +352,7 @@ binary_sensor:
       number: GPIO15
       mode: INPUT_PULLUP
       inverted: true
+      ignore_strapping_warning: true
 
     filters:
       - delayed_on: 10ms
@@ -413,6 +415,7 @@ light:
     pin:
       number: GPIO05
       inverted: true
+      ignore_strapping_warning: true
     internal: true
     restore_mode: RESTORE_DEFAULT_ON 
 
