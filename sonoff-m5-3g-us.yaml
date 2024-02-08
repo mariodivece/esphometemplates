@@ -148,6 +148,18 @@ button:
     name: "Restart"
     id: button_restart
 
+select:
+  - platform: template
+    name: "A - Operation Mode"
+    id: mode_a
+    options:
+      - "Toggle Relay"
+      - "Sync Relay"
+      - "Decoupled"
+    initial_option: "Toggle Relay"
+    optimistic: true
+    set_action:
+      - switch.turn_off: relay_a
 
 switch:
   # Physical GPIO Relay
