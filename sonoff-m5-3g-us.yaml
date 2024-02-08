@@ -147,7 +147,7 @@ select:
 
     # Config-only select for operation mode
   - platform: template
-    name: "A - Operation Mode"
+    name: "Mode - Button A"
     id: mode_a
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
@@ -162,7 +162,7 @@ select:
 
     # Config-only select for operation mode
   - platform: template
-    name: "B - Operation Mode"
+    name: "Mode - Button B"
     id: mode_b
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
@@ -177,7 +177,7 @@ select:
 
     # Config-only select for operation mode
   - platform: template
-    name: "C - Operation Mode"
+    name: "Mode - Button C"
     id: mode_c
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
