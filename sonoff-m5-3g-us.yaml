@@ -141,14 +141,10 @@ sensor:
     id: sensor_uptime
     update_interval: 300s
     entity_category: "diagnostic"
-    
-# Provide a pre-built button for restarting the device
-button:
-  - platform: restart
-    name: "Restart"
-    id: button_restart
 
+# Operation Mode Configuration for Buttons
 select:
+
     # Config-only select for operation mode
   - platform: template
     name: "A - Operation Mode"
@@ -163,7 +159,43 @@ select:
     optimistic: true
     set_action:
       - switch.turn_off: relay_a
+
+    # Config-only select for operation mode
+  - platform: template
+    name: "B - Operation Mode"
+    id: mode_b
+    icon: 'mdi:link-box-outline'
+    entity_category: 'config'
+    options:
+      - "Toggle Relay"
+      - "Sync Relay"
+      - "Decoupled"
+    initial_option: "Toggle Relay"
+    optimistic: true
+    set_action:
+      - switch.turn_off: relay_b
+
+    # Config-only select for operation mode
+  - platform: template
+    name: "C - Operation Mode"
+    id: mode_c
+    icon: 'mdi:link-box-outline'
+    entity_category: 'config'
+    options:
+      - "Toggle Relay"
+      - "Sync Relay"
+      - "Decoupled"
+    initial_option: "Toggle Relay"
+    optimistic: true
+    set_action:
+      - switch.turn_off: relay_c
     
+# Provide a pre-built button for restarting the device
+button:
+  - platform: restart
+    name: "Restart"
+    id: button_restart
+
 switch:
   # Physical GPIO Relay
   - platform: gpio
@@ -182,24 +214,6 @@ switch:
     name: "Relay C"
     pin: GPIO22
     id: relay_c
-
-  # Config-only switch to decouple relay from button
-  - platform: template
-    name: "Decoupling - Relay B"
-    id: relay_b_decoupled
-    optimistic: true
-    restore_mode: RESTORE_DEFAULT_OFF
-    icon: 'mdi:link-box-outline'
-    entity_category: 'config'
-
-  # Config-only switch to decouple relay from button
-  - platform: template
-    name: "Decoupling - Relay C"
-    id: relay_c_decoupled
-    optimistic: true
-    restore_mode: RESTORE_DEFAULT_OFF
-    icon: 'mdi:link-box-outline'
-    entity_category: 'config'
 
 output:
   # Physical GPIO PWM for off-state background brightness
@@ -239,7 +253,8 @@ binary_sensor:
       inverted: true
 
     filters:
-      - delayed_on: 10ms
+      - delayed_on: 50ms
+      - delayed_off: 50ms
     
     on_press:
       - if:
@@ -252,6 +267,7 @@ binary_sensor:
             - lambda: 'return id(mode_a).active_index() == 1;'
           then:
             - switch.turn_on: relay_a
+
     on_release:
       - if:
           condition:
@@ -311,14 +327,27 @@ binary_sensor:
       ignore_strapping_warning: true
 
     filters:
-      - delayed_on: 10ms
-
+      - delayed_on: 50ms
+      - delayed_off: 50ms
+    
     on_press:
       - if:
           condition:
-            switch.is_off: relay_b_decoupled
+            - lambda: 'return id(mode_b).active_index() == 0;'
           then:
             - switch.toggle: relay_b
+      - if:
+          condition:
+            - lambda: 'return id(mode_b).active_index() == 1;'
+          then:
+            - switch.turn_on: relay_b
+
+    on_release:
+      - if:
+          condition:
+            - lambda: 'return id(mode_b).active_index() == 1;'
+          then:
+            - switch.turn_off: relay_b
 
     on_multi_click:
       # single click detection
@@ -372,14 +401,27 @@ binary_sensor:
       ignore_strapping_warning: true
 
     filters:
-      - delayed_on: 10ms
-
+      - delayed_on: 50ms
+      - delayed_off: 50ms
+    
     on_press:
       - if:
           condition:
-            switch.is_off: relay_c_decoupled
+            - lambda: 'return id(mode_c).active_index() == 0;'
           then:
             - switch.toggle: relay_c
+      - if:
+          condition:
+            - lambda: 'return id(mode_c).active_index() == 1;'
+          then:
+            - switch.turn_on: relay_c
+
+    on_release:
+      - if:
+          condition:
+            - lambda: 'return id(mode_c).active_index() == 1;'
+          then:
+            - switch.turn_off: relay_c
 
     on_multi_click:
       # single click detection
