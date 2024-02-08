@@ -258,7 +258,7 @@ binary_sensor:
             - lambda: 'return id(mode_a).active_index() == 1'
           then:
             - switch.turn_off: relay_a
-	
+
     on_multi_click:
       # single click detection
       - timing:
