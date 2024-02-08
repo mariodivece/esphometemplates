@@ -242,47 +242,7 @@ binary_sensor:
           then:
             - switch.toggle: relay_a
 
-    on_multi_click:
-      # single click detection
-      - timing:
-        - ON for at most 900ms
-        - OFF for at least 600ms
-        then:
-          - homeassistant.event:
-              event: esphome.on_gesture
-              data:
-                button: "A"
-                gesture: "single_click"
-
-      # double click detection
-      - timing:
-          - ON for at most 500ms
-          - OFF for at most 400ms
-          - ON for at most 500ms
-          - OFF for at least 250ms
-        then:
-          - homeassistant.event:
-              event: esphome.on_gesture
-              data:
-                button: "A"
-                gesture: "double_click"
-
-      # hold detection
-      - timing:
-          - ON for at least 1s
-        then:
-          - while:
-              condition:
-                binary_sensor.is_on: button_a
-              then:
-                - light.toggle: led_status
-                - homeassistant.event:
-                    event: esphome.on_gesture
-                    data:
-                      button: "A"
-                      gesture: "button_hold"
-                - delay: 100ms
-          - light.turn_off: led_status
+    on_multi_click: !include { file: sonoff-m5-multiclick.yaml, vars: { button_name: A button_id: button_a } }
 
   - platform: gpio
     name: "Button B"
