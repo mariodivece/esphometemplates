@@ -1,6 +1,6 @@
       # single click detection
       - timing:
-        - ON for at most 900ms
+        - ON for at most 400ms
         - OFF for at least 600ms
         then:
           - homeassistant.event:
