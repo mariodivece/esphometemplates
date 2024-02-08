@@ -28,7 +28,7 @@
         then:
           - while:
               condition:
-                binary_sensor.is_on: button_a
+                binary_sensor.is_on: ${button_id}
               then:
                 - light.toggle: led_status
                 - homeassistant.event:
