@@ -127,16 +127,6 @@ esp32:
 binary_sensor:
   # Buttn A
   - id: !extend button_a
-    pin:
-      number: ${button_a_gpio}
-      mode: INPUT_PULLUP
-      inverted: true
-      ignore_strapping_warning: false
-
-    filters:
-      - delayed_on: ${filter_delay_on}
-      - delayed_off: ${filter_delay_off}
-    
     on_press:
       - if:
           condition:
