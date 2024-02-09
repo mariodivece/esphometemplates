@@ -121,9 +121,7 @@ esp32:
 switch:
     
   # Modify behavior of imported Relay A
-  - platform: gpio
-    id: relay_a
-    pin: ${relay_a_gpio}
+  - id: !extend relay_a
     on_turn_on:
     - switch.turn_on: led_indicator
     on_turn_off:
@@ -132,9 +130,7 @@ switch:
 binary_sensor:
 
   # Modify behavior of imported Button A
-  - platform: gpio
-    id: button_a
-    pin: ${button_a_gpio}
+  - id: !extend button_a
     on_press:
       - if:
           condition:
