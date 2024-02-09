@@ -137,8 +137,6 @@ binary_sensor:
 
   # Button A
   - id: !extend button_a
-    pin:
-      ignore_strapping_warning: true
     on_press:
       - if:
           condition:
