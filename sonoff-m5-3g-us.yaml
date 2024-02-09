@@ -61,12 +61,22 @@ substitutions:
   timing_double_click_4: OFF for at least 250ms
   timing_hold: ON for at least 1s
 
+# Allow importing this package
+dashboard_import:
+  package_import_url: ${package_url}
+  import_full_config: false
+
 # Import packages
 packages:
   diagnostics_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
     files: [package-diagnostics.yaml]
+    refresh: 0d
+  wifi_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    files: [package-wifi.yaml]
     refresh: 0d
 
 # Define the board for the compiler
@@ -86,39 +96,9 @@ esphome:
     name: "${device_make}.${device_name}"
     version: "${sw_version}"
 
-# Allow importing this package
-dashboard_import:
-  package_import_url: ${package_url}
-  import_full_config: false
-
 # Enable logging
 logger:
   level: "${loglevel}"
-
-# Enable Home Assistant API
-api:
-  encryption:
-    key: "${apikey}"
-
-# Enable OTA
-ota:
-  safe_mode: true
-  password: !secret ota_password
-
-# Enable WiFi and AP for captive portal
-wifi:
-  fast_connect: false
-  power_save_mode: none
-  ssid: "${wifi_ssid}"
-  password: "${wifi_password}"
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  # password for hostspot is the same as password for net AP (needs captive_portal)
-  ap:
-    ssid: "${uniquename}-setup"
-    password: "${wifi_password}"
-
-captive_portal:
 
 # Operation Mode Configuration for Buttons
 select:
