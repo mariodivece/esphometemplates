@@ -71,17 +71,18 @@ packages:
   basics_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
+    refresh: 0d
     files:
       - package-project.yaml
       - package-diagnostics.yaml
       - package-wifi.yaml
-    refresh: 0d
   sonoffm5_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
+    refresh: 0d
     files:
       - package-sonoff-m5-status-led.yaml
-    refresh: 0d
+      - package-sonoff-m5-backlight.yaml
 
 # Define the board for the compiler
 esp32:
@@ -161,15 +162,6 @@ switch:
     name: "Relay C"
     pin: GPIO22
     id: relay_c
-
-output:
-  # Physical GPIO PWM for off-state background brightness
-  # This pin controls the background brightness for all LEDs
-  # physically attached to the relays
-  - platform: ledc
-    id: pwm_output
-    pin: GPIO18
-    frequency: 1000 Hz
 
 binary_sensor:
 
@@ -394,13 +386,3 @@ binary_sensor:
                       gesture: button_hold
                 - delay: 100ms
           - light.turn_off: led_status
-
-light:
-
-  # HA UI connection to the background brightness (PWM) pin
-  - platform: monochromatic
-    output: pwm_output
-    name: "Background Brightness"
-    restore_mode: RESTORE_DEFAULT_OFF
-    icon: 'mdi:led-outline'
-    entity_category: 'config'

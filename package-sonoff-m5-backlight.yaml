@@ -1,0 +1,23 @@
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-backlight.yaml@main"
+  import_full_config: false
+
+output:
+  # Physical GPIO PWM for off-state background brightness
+  # This pin controls the background brightness for all LEDs
+  # physically attached to the relays
+  - platform: ledc
+    id: pwm_output
+    pin: GPIO18
+    frequency: 1000 Hz
+
+light:
+
+  # HA UI connection to the background brightness (PWM) pin
+  - platform: monochromatic
+    output: pwm_output
+    name: "Background Brightness"
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: 'mdi:led-outline'
+    entity_category: 'config'
