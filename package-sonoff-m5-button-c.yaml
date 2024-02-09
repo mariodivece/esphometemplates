@@ -1,5 +1,6 @@
 substitutions:
   button_c_gpio: GPIO15
+  
   # Button timing configurations
   filter_delay_on: 50ms
   filter_delay_off: 50ms
