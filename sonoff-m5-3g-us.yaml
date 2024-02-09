@@ -49,6 +49,8 @@ substitutions:
   device_make: "Sonoff"
   sw_version: "2024.2.8"
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
+
+  # Button timing configurations
   filter_delay_on: 50ms
   filter_delay_off: 50ms
   timing_click_1: ON for at most 400ms
@@ -58,6 +60,14 @@ substitutions:
   timing_double_click_3: ON for at most 500ms
   timing_double_click_4: OFF for at least 250ms
   timing_hold: ON for at least 1s
+
+# Import packages
+packages:
+  diagnostics_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    files: [package-diagnostics.yaml]
+    refresh: 0d
 
 # Define the board for the compiler
 esp32:
@@ -109,48 +119,6 @@ wifi:
     password: "${wifi_password}"
 
 captive_portal:
-
-time:
-  - platform: sntp
-    id: time_service
-    timezone: ${timezone}
-
-# Diagnostic output sensors
-text_sensor:
-  - platform: template
-    name: "Deployment Version"
-    lambda: return {"${sw_version}"};
-    icon: "mdi:tag"
-    entity_category: diagnostic
-
-  - platform: wifi_info
-    ip_address:
-      id: ip_address
-      name: "IP Address"
-      icon: "mdi:wan"
-
-# Diagnostic Output Sensors
-sensor:
-  - platform: template
-    id: internal_temp
-    name: "Internal Temperature"
-    icon: "mdi:thermometer"
-    unit_of_measurement: "°C"
-    entity_category: diagnostic
-    disabled_by_default: true
-    lambda: return temperatureRead();
-
-  - platform: wifi_signal
-    name: "RSSI"
-    id: sensor_rssi
-    update_interval: 90s
-    entity_category: "diagnostic"
-
-  - platform: uptime
-    name: "Uptime"
-    id: sensor_uptime
-    update_interval: 300s
-    entity_category: "diagnostic"
 
 # Operation Mode Configuration for Buttons
 select:

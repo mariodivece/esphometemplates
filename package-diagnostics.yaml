@@ -1,0 +1,50 @@
+substitutions:
+  sw_version: "2024.2.8"
+  timezone: "America/Mexico_City"
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/package-diagnostics.yaml@main"
+  import_full_config: false
+
+time:
+  - platform: sntp
+    id: time_service
+    timezone: ${timezone}
+
+# Diagnostic output sensors
+text_sensor:
+  - platform: template
+    name: "Deployment Version"
+    lambda: return {"${sw_version}"};
+    icon: "mdi:tag"
+    entity_category: diagnostic
+
+  - platform: wifi_info
+    ip_address:
+      id: ip_address
+      name: "IP Address"
+      icon: "mdi:wan"
+
+# Diagnostic Output Sensors
+sensor:
+  - platform: template
+    id: internal_temp
+    name: "Internal Temperature"
+    icon: "mdi:thermometer"
+    unit_of_measurement: "°C"
+    entity_category: diagnostic
+    disabled_by_default: true
+    lambda: return temperatureRead();
+
+  - platform: wifi_signal
+    name: "RSSI"
+    id: sensor_rssi
+    update_interval: 90s
+    entity_category: "diagnostic"
+
+  - platform: uptime
+    name: "Uptime"
+    id: sensor_uptime
+    update_interval: 300s
+    entity_category: "diagnostic"
