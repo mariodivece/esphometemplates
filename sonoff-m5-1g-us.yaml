@@ -129,7 +129,7 @@ switch:
 
 binary_sensor:
 
-  # Modify behavior of imported Button A
+  # Button A
   - id: !extend button_a
     pin:
       ignore_strapping_warning: true

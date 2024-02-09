@@ -123,3 +123,77 @@ esp32:
   board: esp32dev
   framework:
     type: arduino
+
+binary_sensor:
+  # Buttn A
+  - id: !extend button_a
+    pin:
+      number: ${button_a_gpio}
+      mode: INPUT_PULLUP
+      inverted: true
+      ignore_strapping_warning: false
+
+    filters:
+      - delayed_on: ${filter_delay_on}
+      - delayed_off: ${filter_delay_off}
+    
+    on_press:
+      - if:
+          condition:
+            - lambda: 'return id(mode_a).active_index() == 0;'
+          then:
+            - switch.toggle: relay_a
+      - if:
+          condition:
+            - lambda: 'return id(mode_a).active_index() == 1;'
+          then:
+            - switch.turn_on: relay_a
+
+    on_release:
+      - if:
+          condition:
+            - lambda: 'return id(mode_a).active_index() == 1;'
+          then:
+            - switch.turn_off: relay_a
+
+  # Button B
+  - id: !extend button_b
+    on_press:
+      - if:
+          condition:
+            - lambda: 'return id(mode_b).active_index() == 0;'
+          then:
+            - switch.toggle: relay_b
+      - if:
+          condition:
+            - lambda: 'return id(mode_b).active_index() == 1;'
+          then:
+            - switch.turn_on: relay_b
+
+    on_release:
+      - if:
+          condition:
+            - lambda: 'return id(mode_b).active_index() == 1;'
+          then:
+            - switch.turn_off: relay_b
+
+  # Button C
+  - id: !extend button_c
+    on_press:
+      - if:
+          condition:
+            - lambda: 'return id(mode_c).active_index() == 0;'
+          then:
+            - switch.toggle: relay_c
+      - if:
+          condition:
+            - lambda: 'return id(mode_c).active_index() == 1;'
+          then:
+            - switch.turn_on: relay_c
+
+    on_release:
+      - if:
+          condition:
+            - lambda: 'return id(mode_c).active_index() == 1;'
+          then:
+            - switch.turn_off: relay_c  
