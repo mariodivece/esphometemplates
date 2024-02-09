@@ -1,0 +1,14 @@
+substitutions:
+  relay_a_gpio: GPIO23
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-relay-a.yaml@main"
+  import_full_config: false
+
+switch:
+  # Physical GPIO Relay
+  - platform: gpio
+    name: "Relay A"
+    pin: ${relay_a_gpio}
+    id: relay_a

@@ -1,12 +1,18 @@
 substitutions:
   sw_version: "2024.2.8"
   timezone: "America/Mexico_City"
+  loglevel: INFO
 
 # Allow importing this package
 dashboard_import:
   package_import_url: "github://mariodivece/esphometemplates/package-diagnostics.yaml@main"
   import_full_config: false
 
+# Enable logging
+logger:
+  level: "${loglevel}"
+
+# Provide date and time
 time:
   - platform: sntp
     id: time_service
@@ -48,3 +54,9 @@ sensor:
     id: sensor_uptime
     update_interval: 300s
     entity_category: "diagnostic"
+
+# Provide a pre-built button for restarting the device
+button:
+  - platform: restart
+    name: "Restart"
+    id: button_restart

@@ -61,6 +61,11 @@ substitutions:
   timing_double_click_4: OFF for at least 250ms
   timing_hold: ON for at least 1s
 
+  # Relay Configurations
+  relay_a_gpio: GPIO23
+  relay_b_gpio: GPIO19
+  relay_c_gpio: GPIO22
+
 # Allow importing this package
 dashboard_import:
   package_import_url: ${package_url}
@@ -86,37 +91,15 @@ packages:
       - package-sonoff-m5-mode-button-a.yaml
       - package-sonoff-m5-mode-button-b.yaml
       - package-sonoff-m5-mode-button-c.yaml
+      - package-sonoff-m5-relay-a.yaml
+      - package-sonoff-m5-relay-b.yaml
+      - package-sonoff-m5-relay-c.yaml
 
 # Define the board for the compiler
 esp32:
   board: esp32dev
   framework:
     type: arduino
-    
-# Provide a pre-built button for restarting the device
-button:
-  - platform: restart
-    name: "Restart"
-    id: button_restart
-
-switch:
-  # Physical GPIO Relay
-  - platform: gpio
-    name: "Relay A"
-    pin: GPIO23
-    id: relay_a
-
-  # Physical GPIO Relay
-  - platform: gpio
-    name: "Relay B"
-    pin: GPIO19
-    id: relay_b
-
-  # Physical GPIO Relay
-  - platform: gpio
-    name: "Relay C"
-    pin: GPIO22
-    id: relay_c
 
 binary_sensor:
 

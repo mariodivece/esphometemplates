@@ -1,0 +1,14 @@
+substitutions:
+  relay_b_gpio: GPIO19
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-relay-b.yaml@main"
+  import_full_config: false
+
+switch:
+  # Physical GPIO Relay
+  - platform: gpio
+    name: "Relay B"
+    pin: ${relay_b_gpio}
+    id: relay_b

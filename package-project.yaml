@@ -5,7 +5,7 @@ substitutions:
   device_name: "M53G"
   device_make: "Sonoff"
   sw_version: "2024.2.8"
-  loglevel: INFO
+
 
 # Allow importing this package
 dashboard_import:
@@ -22,7 +22,3 @@ esphome:
   project:
     name: "${device_make}.${device_name}"
     version: "${sw_version}"
-
-# Enable logging
-logger:
-  level: "${loglevel}"
