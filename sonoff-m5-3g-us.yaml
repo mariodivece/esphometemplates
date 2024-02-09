@@ -8,7 +8,7 @@
 # - Relays may be configured individually on the UI to work in decoupled mode.
 #   LEDs are physically connected to the relays, and they can't be individually controlled :(
 # - Exposes gestures via events:
-#   esphome.on_gesture { button: (A|B|C), gesture: (click|double_click|hold) }
+#   esphome.on_gesture { button: (A|B|C), gesture: (click|double_click|button_hold) }
 # - Off-state (Background Brightness) of the LEDs is configurable via the UI
 # 
 # For the below example, you need to keep the following entries in your secrets.yaml file:
@@ -49,6 +49,10 @@ substitutions:
   device_make: "Sonoff"
   sw_version: "2024.2.8"
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
+  filter_delay_on: 50ms
+  filter_delay_off: 50ms
+  timing_click_1: ON for at most 400ms
+  timing_click_2: OFF for at least 600ms
 
 # Define the board for the compiler
 esp32:
@@ -120,6 +124,7 @@ text_sensor:
       name: "IP Address"
       icon: "mdi:wan"
 
+# Diagnostic Output Sensors
 sensor:
   - platform: template
     id: internal_temp
@@ -253,8 +258,8 @@ binary_sensor:
       inverted: true
 
     filters:
-      - delayed_on: 50ms
-      - delayed_off: 50ms
+      - delayed_on: ${filter_delay_on}
+      - delayed_off: ${filter_delay_off}
     
     on_press:
       - if:
@@ -278,8 +283,8 @@ binary_sensor:
     on_multi_click:
       # single click detection
       - timing:
-        - ON for at most 400ms
-        - OFF for at least 600ms
+        - $timing_click_1
+        - $timing_click_2
         then:
           - homeassistant.event:
               event: esphome.on_gesture
@@ -327,8 +332,8 @@ binary_sensor:
       ignore_strapping_warning: true
 
     filters:
-      - delayed_on: 50ms
-      - delayed_off: 50ms
+      - delayed_on: ${filter_delay_on}
+      - delayed_off: ${filter_delay_off}
     
     on_press:
       - if:
@@ -352,8 +357,8 @@ binary_sensor:
     on_multi_click:
       # single click detection
       - timing:
-        - ON for at most 400ms
-        - OFF for at least 600ms
+        - $timing_click_1
+        - $timing_click_2
         then:
           - homeassistant.event:
               event: esphome.on_gesture
@@ -401,8 +406,8 @@ binary_sensor:
       ignore_strapping_warning: true
 
     filters:
-      - delayed_on: 50ms
-      - delayed_off: 50ms
+      - delayed_on: ${filter_delay_on}
+      - delayed_off: ${filter_delay_off}
     
     on_press:
       - if:
@@ -426,8 +431,8 @@ binary_sensor:
     on_multi_click:
       # single click detection
       - timing:
-        - ON for at most 400ms
-        - OFF for at least 600ms
+        - $timing_click_1
+        - $timing_click_2
         then:
           - homeassistant.event:
               event: esphome.on_gesture
