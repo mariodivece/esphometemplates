@@ -14,6 +14,12 @@ api:
   encryption:
     key: "${apikey}"
 
+binary_sensor:
+  # Diagnostic sensor for connection
+  - platform: status
+    name: "Status"
+    id: sensor_status
+
 # Enable OTA
 ota:
   safe_mode: true

@@ -166,10 +166,6 @@ output:
     frequency: 1000 Hz
 
 binary_sensor:
-  # Diagnostic sensor for connection
-  - platform: status
-    name: "Status"
-    id: sensor_status
 
   # Make the status LED blink when not connected/trying to connect
   - platform: template
