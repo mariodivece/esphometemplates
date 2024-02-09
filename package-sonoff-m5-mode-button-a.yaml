@@ -1,0 +1,20 @@
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-mode-button-a.yaml@main"
+  import_full_config: false
+
+select:
+    # Config-only select for operation mode
+  - platform: template
+    name: "Mode - Button A"
+    id: mode_a
+    icon: 'mdi:link-box-outline'
+    entity_category: 'config'
+    options:
+      - "Toggle Relay"
+      - "Sync Relay"
+      - "Decoupled"
+    initial_option: "Toggle Relay"
+    optimistic: true
+    set_action:
+      - switch.turn_off: relay_a

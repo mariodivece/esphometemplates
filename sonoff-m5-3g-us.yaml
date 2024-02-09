@@ -83,60 +83,15 @@ packages:
     files:
       - package-sonoff-m5-status-led.yaml
       - package-sonoff-m5-backlight.yaml
+      - package-sonoff-m5-mode-button-a.yaml
+      - package-sonoff-m5-mode-button-b.yaml
+      - package-sonoff-m5-mode-button-c.yaml
 
 # Define the board for the compiler
 esp32:
   board: esp32dev
   framework:
     type: arduino
-
-# Operation Mode Configuration for Buttons
-select:
-
-    # Config-only select for operation mode
-  - platform: template
-    name: "Mode - Button A"
-    id: mode_a
-    icon: 'mdi:link-box-outline'
-    entity_category: 'config'
-    options:
-      - "Toggle Relay"
-      - "Sync Relay"
-      - "Decoupled"
-    initial_option: "Toggle Relay"
-    optimistic: true
-    set_action:
-      - switch.turn_off: relay_a
-
-    # Config-only select for operation mode
-  - platform: template
-    name: "Mode - Button B"
-    id: mode_b
-    icon: 'mdi:link-box-outline'
-    entity_category: 'config'
-    options:
-      - "Toggle Relay"
-      - "Sync Relay"
-      - "Decoupled"
-    initial_option: "Toggle Relay"
-    optimistic: true
-    set_action:
-      - switch.turn_off: relay_b
-
-    # Config-only select for operation mode
-  - platform: template
-    name: "Mode - Button C"
-    id: mode_c
-    icon: 'mdi:link-box-outline'
-    entity_category: 'config'
-    options:
-      - "Toggle Relay"
-      - "Sync Relay"
-      - "Decoupled"
-    initial_option: "Toggle Relay"
-    optimistic: true
-    set_action:
-      - switch.turn_off: relay_c
     
 # Provide a pre-built button for restarting the device
 button:
