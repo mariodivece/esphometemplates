@@ -1,5 +1,5 @@
 substitutions:
-  sw_version: "2024.2.8"
+  sw_version: "2024.2.9"
   timezone: "America/Mexico_City"
   loglevel: INFO
 
@@ -8,9 +8,10 @@ dashboard_import:
   package_import_url: "github://mariodivece/esphometemplates/package-diagnostics.yaml@main"
   import_full_config: false
 
-# Enable logging
+# Enable logging via network and disable serial port
 logger:
   level: "${loglevel}"
+  baud_rate: 0
 
 # Provide date and time
 time:

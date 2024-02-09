@@ -4,7 +4,7 @@ substitutions:
   uniquename: "switch-m5-3g"
   device_name: "M53G"
   device_make: "Sonoff"
-  sw_version: "2024.2.8"
+  sw_version: "2024.2.9"
 
 
 # Allow importing this package
