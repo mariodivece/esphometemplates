@@ -53,6 +53,11 @@ substitutions:
   filter_delay_off: 50ms
   timing_click_1: ON for at most 400ms
   timing_click_2: OFF for at least 600ms
+  timing_double_click_1: ON for at most 500ms
+  timing_double_click_2: OFF for at most 400ms
+  timing_double_click_3: ON for at most 500ms
+  timing_double_click_4: OFF for at least 250ms
+  timing_hold: ON for at least 1s
 
 # Define the board for the compiler
 esp32:
@@ -294,10 +299,10 @@ binary_sensor:
 
       # double click detection
       - timing:
-          - ON for at most 500ms
-          - OFF for at most 400ms
-          - ON for at most 500ms
-          - OFF for at least 250ms
+          - ${timing_double_click_1}
+          - ${timing_double_click_2}
+          - ${timing_double_click_3}
+          - ${timing_double_click_4}
         then:
           - homeassistant.event:
               event: esphome.on_gesture
@@ -307,7 +312,7 @@ binary_sensor:
 
       # hold detection
       - timing:
-          - ON for at least 1s
+          - ${timing_hold}
         then:
           - while:
               condition:
@@ -368,10 +373,10 @@ binary_sensor:
 
       # double click detection
       - timing:
-          - ON for at most 500ms
-          - OFF for at most 400ms
-          - ON for at most 500ms
-          - OFF for at least 250ms
+          - ${timing_double_click_1}
+          - ${timing_double_click_2}
+          - ${timing_double_click_3}
+          - ${timing_double_click_4}
         then:
           - homeassistant.event:
               event: esphome.on_gesture
@@ -381,7 +386,7 @@ binary_sensor:
 
       # hold detection
       - timing:
-          - ON for at least 1s
+          - ${timing_hold}
         then:
           - while:
               condition:
@@ -442,10 +447,10 @@ binary_sensor:
 
       # double click detection
       - timing:
-          - ON for at most 500ms
-          - OFF for at most 400ms
-          - ON for at most 500ms
-          - OFF for at least 250ms
+          - ${timing_double_click_1}
+          - ${timing_double_click_2}
+          - ${timing_double_click_3}
+          - ${timing_double_click_4}
         then:
           - homeassistant.event:
               event: esphome.on_gesture
@@ -455,7 +460,7 @@ binary_sensor:
 
       # hold detection
       - timing:
-          - ON for at least 1s
+          - ${timing_hold}
         then:
           - while:
               condition:
