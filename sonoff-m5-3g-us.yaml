@@ -34,37 +34,57 @@
 # wifi:
 #   use_address: "10.16.40.49"
 
-# Basic substitutions (can be safely overriden)
+# Basic substitutions
 substitutions:
+  # User-required substitutions
   usemac: "true"
   friendly: "Sonoff Switchman M5 3G US"
   uniquename: "switch-m5-3g"
+
+  # Adjust package URL to point to this file
+  package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
+
+  # Project Substitutions
+  device_name: "M53G"
+  device_make: "Sonoff"
+  sw_version: "2024.2.8"
+
+  # Diagnostics Substitutions
   loglevel: INFO
   timezone: "America/Mexico_City"
+
+  # WiFi Substitutions
   apikey: !secret esp_key
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
   ota_password: !secret ota_password
-  device_name: "M53G"
-  device_make: "Sonoff"
-  sw_version: "2024.2.8"
-  package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
-
-  # Button timing configurations
-  filter_delay_on: 50ms
-  filter_delay_off: 50ms
-  timing_click_1: ON for at most 400ms
-  timing_click_2: OFF for at least 600ms
-  timing_double_click_1: ON for at most 500ms
-  timing_double_click_2: OFF for at most 400ms
-  timing_double_click_3: ON for at most 500ms
-  timing_double_click_4: OFF for at least 250ms
-  timing_hold: ON for at least 1s
 
   # Relay Configurations
   relay_a_gpio: GPIO23
   relay_b_gpio: GPIO19
   relay_c_gpio: GPIO22
+
+  # Button Configurations
+  button_a_gpio: GPIO04
+  button_b_gpio: GPIO00
+  button_c_gpio: GPIO15
+
+  # Button timing configurations
+  filter_delay_on: 50ms
+  filter_delay_off: 50ms
+
+  # Single Click Timings
+  timing_click_1: ON for at most 400ms
+  timing_click_2: OFF for at least 600ms
+  
+  # Double Click Timings
+  timing_double_click_1: ON for at most 500ms
+  timing_double_click_2: OFF for at most 400ms
+  timing_double_click_3: ON for at most 500ms
+  timing_double_click_4: OFF for at least 250ms
+
+  # Button Hold Timings
+  timing_hold: ON for at least 1s
 
 # Allow importing this package
 dashboard_import:
@@ -101,6 +121,7 @@ esp32:
   framework:
     type: arduino
 
+# Define buttons and behaviors
 binary_sensor:
 
   # Physical Button A
@@ -108,7 +129,7 @@ binary_sensor:
     name: "Button A"
     id: button_a
     pin:
-      number: GPIO04
+      number: ${button_a_gpio}
       mode: INPUT_PULLUP
       inverted: true
 
@@ -177,11 +198,12 @@ binary_sensor:
                 - delay: 100ms
           - light.turn_off: led_status
 
+  # Physical Button B
   - platform: gpio
     name: "Button B"
     id: button_b
     pin:
-      number: GPIO00
+      number: ${button_b_gpio}
       mode: INPUT_PULLUP
       inverted: true
       ignore_strapping_warning: true
@@ -251,11 +273,12 @@ binary_sensor:
                 - delay: 100ms
           - light.turn_off: led_status
 
+  # Physical Button C
   - platform: gpio
     name: "Button C"
     id: button_c
     pin:
-      number: GPIO15
+      number: ${button_c_gpio}
       mode: INPUT_PULLUP
       inverted: true
       ignore_strapping_warning: true

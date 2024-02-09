@@ -1,0 +1,14 @@
+substitutions:
+  led_indicator_gpio: GPIO19
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-inidcator-led.yaml@main"
+  import_full_config: false
+
+switch:
+  # Physical indicator of the relay
+  - platform: gpio
+    id: led_indicator
+    internal: true
+    pin: ${led_indicator_gpio}

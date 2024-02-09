@@ -12,3 +12,4 @@ switch:
     name: "Relay C"
     pin: ${relay_c_gpio}
     id: relay_c
+    restore_mode: RESTORE_DEFAULT_OFF

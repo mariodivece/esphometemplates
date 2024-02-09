@@ -194,13 +194,13 @@ switch:
     pin: GPIO19
     id: relay_b
     on_turn_on:
-    - switch.turn_on: led_b
+    - switch.turn_on: led_indicator
     on_turn_off:
-    - switch.turn_off: led_b
+    - switch.turn_off: led_indicator
     
   # Physical indicator of the relay
   - platform: gpio
-    id: led_b
+    id: led_indicator
     internal: true
     pin: GPIO22
 
@@ -334,7 +334,7 @@ binary_sensor:
           condition:
             - lambda: 'return id(mode_b).active_index() == 2;'
           then:
-            - switch.turn_on: led_b
+            - switch.turn_on: led_indicator
 
     on_release:
       - if:
@@ -346,7 +346,7 @@ binary_sensor:
           condition:
             - lambda: 'return id(mode_b).active_index() == 2;'
           then:
-            - switch.turn_off: led_b
+            - switch.turn_off: led_indicator
 
     on_multi_click:
       # single click detection
