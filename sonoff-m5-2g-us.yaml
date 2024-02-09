@@ -194,9 +194,9 @@ switch:
     pin: GPIO19
     id: relay_b
     on_turn_on:
-    - switch.turn_on: led_a
+    - switch.turn_on: led_b
     on_turn_off:
-    - switch.turn_off: led_a
+    - switch.turn_off: led_b
     
   # Physical indicator of the relay
   - platform: gpio
