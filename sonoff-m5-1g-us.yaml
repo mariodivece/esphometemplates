@@ -110,6 +110,7 @@ packages:
       - package-sonoff-m5-mode-button-a.yaml
       - package-sonoff-m5-relay-a.yaml
       - package-sonoff-m5-inidcator-led.yaml
+      - package-sonoff-m5-button-a.yaml
 
 # Define the board for the compiler
 esp32:
@@ -119,8 +120,7 @@ esp32:
 
 switch:
     
-  # Physical GPIO Relay A imported from package
-  # and adding some behavior 
+  # Modify behavior of imported Relay A
   - id: relay_a
     on_turn_on:
     - switch.turn_on: led_indicator
@@ -129,20 +129,8 @@ switch:
 
 binary_sensor:
 
-  # Physical Button A
-  - platform: gpio
-    name: "Button A"
-    id: button_a
-    pin:
-      number: ${button_a_gpio}
-      mode: INPUT_PULLUP
-      inverted: true
-      ignore_strapping_warning: true
-
-    filters:
-      - delayed_on: ${filter_delay_on}
-      - delayed_off: ${filter_delay_off}
-    
+  # Modify behavior of imported Button A
+  - id: button_a
     on_press:
       - if:
           condition:
@@ -171,45 +159,3 @@ binary_sensor:
             - lambda: 'return id(mode_a).active_index() == 2;'
           then:
             - switch.turn_off: led_indicator
-
-    on_multi_click:
-      # single click detection
-      - timing:
-        - ${timing_click_1}
-        - ${timing_click_2}
-        then:
-          - homeassistant.event:
-              event: esphome.on_gesture
-              data:
-                button: A
-                gesture: single_click
-
-      # double click detection
-      - timing:
-          - ${timing_double_click_1}
-          - ${timing_double_click_2}
-          - ${timing_double_click_3}
-          - ${timing_double_click_4}
-        then:
-          - homeassistant.event:
-              event: esphome.on_gesture
-              data:
-                button: A
-                gesture: double_click
-
-      # hold detection
-      - timing:
-          - ${timing_hold}
-        then:
-          - while:
-              condition:
-                binary_sensor.is_on: button_a
-              then:
-                - light.toggle: led_status
-                - homeassistant.event:
-                    event: esphome.on_gesture
-                    data:
-                      button: A
-                      gesture: button_hold
-                - delay: 100ms
-          - light.turn_off: led_status
