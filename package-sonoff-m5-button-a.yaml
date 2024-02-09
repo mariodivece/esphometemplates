@@ -32,7 +32,7 @@ binary_sensor:
       number: ${button_a_gpio}
       mode: INPUT_PULLUP
       inverted: true
-      ignore_strapping_warning: true
+      ignore_strapping_warning: false
 
     filters:
       - delayed_on: ${filter_delay_on}
