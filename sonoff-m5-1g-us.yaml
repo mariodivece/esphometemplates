@@ -215,11 +215,11 @@ binary_sensor:
   - platform: gpio
     name: "Button A"
     id: button_a
-    ignore_strapping_warning: true
     pin:
       number: GPIO00
       mode: INPUT_PULLUP
       inverted: true
+      ignore_strapping_warning: true
 
     filters:
       - delayed_on: 50ms
