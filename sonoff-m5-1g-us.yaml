@@ -130,7 +130,8 @@ switch:
 binary_sensor:
 
   # Modify behavior of imported Button A
-  - id: button_a
+  - platform: gpio
+    id: button_a
     on_press:
       - if:
           condition:
