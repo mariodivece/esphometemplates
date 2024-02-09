@@ -131,6 +131,7 @@ binary_sensor:
 
   # Modify behavior of imported Button A
   - id: !extend button_a
+    ignore_strapping_warning: true
     on_press:
       - if:
           condition:
