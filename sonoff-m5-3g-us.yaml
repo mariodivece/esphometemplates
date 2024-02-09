@@ -76,6 +76,12 @@ packages:
       - package-diagnostics.yaml
       - package-wifi.yaml
     refresh: 0d
+  sonoffm5_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    files:
+      - package-sonoff-m5-status-led.yaml
+    refresh: 0d
 
 # Define the board for the compiler
 esp32:
@@ -166,19 +172,6 @@ output:
     frequency: 1000 Hz
 
 binary_sensor:
-
-  # Make the status LED blink when not connected/trying to connect
-  - platform: template
-    name: "API connected"
-    id: sensor_api_connected
-    internal: true
-    entity_category: 'diagnostic'
-    device_class: 'connectivity'
-    lambda: return global_api_server->is_connected();
-    on_press:
-      - light.turn_off: led_status
-    on_release:
-      - light.turn_on: led_status
 
   # Physical Button A
   - platform: gpio
@@ -403,17 +396,6 @@ binary_sensor:
           - light.turn_off: led_status
 
 light:
-  # Physical pin to the connection status LED
-  # We don't expose this to the HA UI (internal)
-  - platform: status_led
-    name: "LED"
-    id: led_status
-    pin:
-      number: GPIO05
-      inverted: true
-      ignore_strapping_warning: true
-    internal: true
-    restore_mode: RESTORE_DEFAULT_ON 
 
   # HA UI connection to the background brightness (PWM) pin
   - platform: monochromatic
