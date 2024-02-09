@@ -71,7 +71,10 @@ packages:
   basics_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
-    files: [package-diagnostics.yaml, package-wifi.yaml]
+    files:
+      - package-project.yaml
+      - package-diagnostics.yaml
+      - package-wifi.yaml
     refresh: 0d
 
 # Define the board for the compiler
@@ -79,21 +82,6 @@ esp32:
   board: esp32dev
   framework:
     type: arduino
-      
-# Setup the integration and define some project variables
-esphome:
-  name: "${uniquename}"
-  friendly_name: "${friendly}"
-  comment: "${device_name} by ${device_make}"
-  name_add_mac_suffix: ${usemac}
-  min_version: "2023.2.0"
-  project:
-    name: "${device_make}.${device_name}"
-    version: "${sw_version}"
-
-# Enable logging
-logger:
-  level: "${loglevel}"
 
 # Operation Mode Configuration for Buttons
 select:
