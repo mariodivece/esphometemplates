@@ -236,6 +236,11 @@ binary_sensor:
             - lambda: 'return id(mode_a).active_index() == 1;'
           then:
             - switch.turn_on: relay_a
+      - if:
+          condition:
+            - lambda: 'return id(mode_a).active_index() == 2;'
+          then:
+            - switch.turn_on: led_a
 
     on_release:
       - if:
@@ -243,6 +248,11 @@ binary_sensor:
             - lambda: 'return id(mode_a).active_index() == 1;'
           then:
             - switch.turn_off: relay_a
+      - if:
+          condition:
+            - lambda: 'return id(mode_a).active_index() == 2;'
+          then:
+            - switch.turn_off: led_a
 
     on_multi_click:
       # single click detection
