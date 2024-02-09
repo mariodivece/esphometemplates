@@ -68,15 +68,10 @@ dashboard_import:
 
 # Import packages
 packages:
-  diagnostics_package:
+  basics_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
-    files: [package-diagnostics.yaml]
-    refresh: 0d
-  wifi_package:
-    url: https://github.com/mariodivece/esphometemplates/
-    ref: main
-    files: [package-wifi.yaml]
+    files: [package-diagnostics.yaml, package-wifi.yaml]
     refresh: 0d
 
 # Define the board for the compiler
