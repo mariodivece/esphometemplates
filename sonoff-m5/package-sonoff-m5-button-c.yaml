@@ -1,5 +1,5 @@
 substitutions:
-  button_b_gpio: GPIO00
+  button_c_gpio: GPIO15
   
   # Button timing configurations
   filter_delay_on: 50ms
@@ -20,16 +20,16 @@ substitutions:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-button-b.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-sonoff-m5-button-c.yaml@main"
   import_full_config: false
 
 binary_sensor:
-  # Physical Button B
+  # Physical Button C
   - platform: gpio
-    name: "Button B"
-    id: button_b
+    name: "Button C"
+    id: button_c
     pin:
-      number: ${button_b_gpio}
+      number: ${button_c_gpio}
       mode: INPUT_PULLUP
       inverted: true
       ignore_strapping_warning: true
@@ -37,7 +37,7 @@ binary_sensor:
     filters:
       - delayed_on: ${filter_delay_on}
       - delayed_off: ${filter_delay_off}
-
+    
     on_multi_click:
       # single click detection
       - timing:
@@ -47,7 +47,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.on_gesture
               data:
-                button: B
+                button: C
                 gesture: single_click
 
       # double click detection
@@ -60,7 +60,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.on_gesture
               data:
-                button: B
+                button: C
                 gesture: double_click
 
       # hold detection
@@ -69,13 +69,13 @@ binary_sensor:
         then:
           - while:
               condition:
-                binary_sensor.is_on: button_b
+                binary_sensor.is_on: button_c
               then:
                 - light.toggle: led_status
                 - homeassistant.event:
                     event: esphome.on_gesture
                     data:
-                      button: B
+                      button: C
                       gesture: button_hold
                 - delay: 100ms
           - light.turn_off: led_status

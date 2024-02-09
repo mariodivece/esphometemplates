@@ -1,13 +1,13 @@
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-mode-button-b.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-sonoff-m5-mode-button-c.yaml@main"
   import_full_config: false
 
 select:
     # Config-only select for operation mode
   - platform: template
-    name: "Mode - Button B"
-    id: mode_b
+    name: "Mode - Button C"
+    id: mode_c
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
     options:
@@ -17,4 +17,4 @@ select:
     initial_option: "Toggle Relay"
     optimistic: true
     set_action:
-      - switch.turn_off: relay_b
+      - switch.turn_off: relay_c

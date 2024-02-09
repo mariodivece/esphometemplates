@@ -95,8 +95,8 @@ dashboard_import:
 
 # Import packages
 packages:
-  basics_package:
-    url: https://github.com/mariodivece/esphometemplates/
+  standard_package:
+    url: https://github.com/mariodivece/esphometemplates/standard/
     ref: main
     refresh: 0d
     files:
@@ -104,7 +104,7 @@ packages:
       - package-diagnostics.yaml
       - package-wifi.yaml
   sonoffm5_package:
-    url: https://github.com/mariodivece/esphometemplates/
+    url: https://github.com/mariodivece/esphometemplates/sonoff-m5/
     ref: main
     refresh: 0d
     files:
