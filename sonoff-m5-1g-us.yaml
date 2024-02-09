@@ -109,7 +109,7 @@ packages:
       - package-sonoff-m5-backlight.yaml
       - package-sonoff-m5-mode-button-a.yaml
       - package-sonoff-m5-relay-a.yaml
-      - package-sonoff-m5-inidcator-led.yaml
+      - package-sonoff-m5-indicator-led.yaml
       - package-sonoff-m5-button-a.yaml
 
 # Define the board for the compiler

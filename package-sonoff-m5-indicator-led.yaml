@@ -3,7 +3,7 @@ substitutions:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-inidcator-led.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/package-sonoff-m5-indicator-led.yaml@main"
   import_full_config: false
 
 switch:
