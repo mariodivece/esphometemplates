@@ -106,6 +106,7 @@ packages:
       - standard/package-project.yaml
       - standard/package-diagnostics.yaml
       - standard/package-wifi.yaml
+      - standard/package-internaltemp.yaml
   sonoffm5_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main

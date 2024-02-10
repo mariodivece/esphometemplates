@@ -28,15 +28,6 @@ text_sensor:
 
 # Diagnostic Output Sensors
 sensor:
-  - platform: template
-    id: internal_temp
-    name: "Internal Temperature"
-    icon: "mdi:thermometer"
-    unit_of_measurement: "°C"
-    entity_category: diagnostic
-    disabled_by_default: true
-    lambda: return temperatureRead();
-
   - platform: wifi_signal
     name: "RSSI"
     id: sensor_rssi
