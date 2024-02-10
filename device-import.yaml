@@ -14,7 +14,7 @@ substitutions:
   repository_url: "mariodivece/esphometemplates"
   repository_branch: "main"
   friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
-  uniquename: "${device_Site}_${device_location}_${device_type}_${device_number}"
+  uniquename: "${device_site}_${device_location}_${device_type}_${device_number}"
   usemac: "false"
 
 wifi:
