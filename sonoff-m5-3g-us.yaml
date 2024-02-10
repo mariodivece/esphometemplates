@@ -26,7 +26,7 @@
 #  device_type: "wasw"
 #  device_type_name: "Wall Switch"
 #  device_number: "003"
-#  device_ip: "192.168.1.223"
+#  device_ip: "192.168.1.31"
 # 
 # packages:
 #   base_package:
@@ -44,7 +44,7 @@ substitutions:
   device_type: "wasw"
   device_type_name: "Wall Switch"
   device_number: "003"
-  device_ip: "192.168.1.223"
+  device_ip: "192.168.1.31"
 
   # No user substitutions beyond this line
   usemac: "false"
