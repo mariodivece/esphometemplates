@@ -32,7 +32,7 @@
 #   base_package:
 #     url: https://github.com/mariodivece/esphometemplates/
 #     ref: main
-#     file: sonoff-m5-2g-us.yaml
+#     file: sonoff-m5-3g-us.yaml
 #     refresh: 0d
 #
 
