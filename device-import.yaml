@@ -22,7 +22,7 @@ wifi:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://${repository_url}/device-import.yaml@${repository_branch}"
+  package_import_url: "github://mariodivece/esphometemplates/device-import.yaml@main"
   import_full_config: false
 
 # Import the device package
