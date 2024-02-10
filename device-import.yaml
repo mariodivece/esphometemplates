@@ -28,7 +28,7 @@ dashboard_import:
 # Import the device package
 packages:
   device_package:
-    url: "https://github.com/${repository_url}"
+    url: "https://github.com/${repository_url}/"
     ref: "${repository_branch}"
     file: "${device_package}"
     refresh: 0d
