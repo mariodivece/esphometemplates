@@ -11,7 +11,7 @@ substitutions:
   device_package: "sonoff-m5-2g-us.yaml"
 
   # No modifications beyond this line
-  repository_url: "github://mariodivece/esphometemplates"
+  repository_url: "https://github.com/mariodivece/esphometemplates"
   friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
   uniquename: "${device_Site}_${device_location}_${device_type}_${device_number}"
   usemac: "false"
