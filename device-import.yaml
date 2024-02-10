@@ -11,7 +11,8 @@ substitutions:
   device_package: "sonoff-m5-2g-us.yaml"
 
   # No modifications beyond this line
-  repository_url: "https://github.com/mariodivece/esphometemplates"
+  repository_url: "mariodivece/esphometemplates"
+  repository_branch: "main"
   friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
   uniquename: "${device_Site}_${device_location}_${device_type}_${device_number}"
   usemac: "false"
@@ -21,13 +22,13 @@ wifi:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "${repository_url}/device-import.yaml@main"
+  package_import_url: "github://${repository_url}/device-import.yaml@${repository_branch}"
   import_full_config: false
 
 # Import the device package
 packages:
   device_package:
-    url: "${repository_url}"
-    ref: main
+    url: "https://github.com/${repository_url}"
+    ref: "${repository_branch}"
     file: "${device_package}"
     refresh: 0d
