@@ -1,0 +1,32 @@
+# Generic Device Import definition for ESPHome
+substitutions:
+  # User Import Definitions
+  device_site: "lab"
+  device_location: "office"
+  device_location_name: "Office"
+  device_type: "wasw"
+  device_type_name: "Wall Switch"
+  device_number: "002"
+  device_ip: "192.168.1.181"
+  device_package: "sonoff-m5-2g-us.yaml"
+
+  # No modifications beyond this line
+  repository_url: "github://mariodivece/esphometemplates"
+  friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
+  uniquename: "${device_Site}_${device_location}_${device_type}_${device_number}"
+  usemac: "false"
+
+wifi:
+  use_address: ${device_ip}
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "${repository_url}/device-import.yaml@main"
+  import_full_config: false
+
+# Import the device package
+  device_package:
+    url: ${repository_url}
+    ref: main
+    file: ${device_package}
+    refresh: 0d
