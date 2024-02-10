@@ -49,7 +49,7 @@ substitutions:
   # No user substitutions beyond this line
   usemac: "false"
   friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
-  uniquename: "${device_site}_${device_location}_${device_type}_${device_number}"
+  uniquename: "${device_site}-${device_location}-${device_type}-${device_number}"
 
   # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-2g-us.yaml@main"
