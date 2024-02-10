@@ -17,7 +17,7 @@ substitutions:
   usemac: "false"
 
 wifi:
-  use_address: ${device_ip}
+  use_address: "${device_ip}"
 
 # Allow importing this package
 dashboard_import:
@@ -27,7 +27,7 @@ dashboard_import:
 # Import the device package
 packages:
   device_package:
-    url: ${repository_url}
+    url: "${repository_url}"
     ref: main
-    file: ${device_package}
+    file: "${device_package}"
     refresh: 0d
