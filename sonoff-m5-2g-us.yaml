@@ -11,13 +11,13 @@
 #   esphome.on_gesture { button: (A|B), gesture: (click|double_click|button_hold) }
 # - Off-state (Background Brightness) of the LEDs is configurable via the UI
 # 
-# For the below example, you need to keep the following entries in your secrets.yaml file:
+# For the below example to work, you need to keep the following entries in your secrets.yaml file:
 #  - wifi_ssid: "<secret>"
 #  - wifi_password: "<secret>"
 #  - ota_password: "<secret>"
 #  - esp_key: "<32-byte-base-64-secret>"
 # 
-# Example file (sonoff-m5-2g-office-01.yaml)
+# Example file (lab-office-wasw-002.yaml.yaml)
 # 
 # substitutions:
 #  device_site: "lab"

@@ -17,35 +17,45 @@
 #  - ota_password: "<secret>"
 #  - esp_key: "<32-byte-base-64-secret>"
 # 
-# Example file (sonoff-m5-3g-office-01.yaml)
+# Example file (lab-office-wasw-003.yaml.yaml)
 # 
 # substitutions:
-#   usemac: "false"
-#   friendly: "Sonoff M5 3G - Office Switch - 01"
-#   uniquename: "sonoff-m5-3g-office-01"
+#  device_site: "lab"
+#  device_location: "office"
+#  device_location_name: "Office"
+#  device_type: "wasw"
+#  device_type_name: "Wall Switch"
+#  device_number: "003"
+#  device_ip: "192.168.1.223"
 # 
 # packages:
 #   base_package:
 #     url: https://github.com/mariodivece/esphometemplates/
 #     ref: main
-#     files: [sonoff-m5-3g-us.yaml]
+#     file: sonoff-m5-2g-us.yaml
 #     refresh: 0d
-#   
-# wifi:
-#   use_address: "10.16.40.49"
+#
 
-# Basic substitutions
 substitutions:
   # User-required substitutions
-  usemac: "true"
-  friendly: "Sonoff Switchman M5 3G US"
-  uniquename: "switch-m5-3g"
+  device_site: "lab"
+  device_location: "office"
+  device_location_name: "Office"
+  device_type: "wasw"
+  device_type_name: "Wall Switch"
+  device_number: "003"
+  device_ip: "192.168.1.223"
+
+  # No user substitutions beyond this line
+  usemac: "false"
+  friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
+  uniquename: "${device_site}-${device_location}-${device_type}-${device_number}"
 
   # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
 
   # Project Substitutions
-  device_name: "M53G"
+  device_name: "Switchman M5 (3-Gang)"
   device_make: "Sonoff"
   sw_version: "2024.2.8"
 
