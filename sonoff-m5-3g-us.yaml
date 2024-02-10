@@ -17,7 +17,7 @@
 #  - ota_password: "<secret>"
 #  - esp_key: "<32-byte-base-64-secret>"
 # 
-# Example file (lab-office-wasw-003.yaml.yaml)
+# Example file (lab-office-wasw-003.yaml)
 # 
 # substitutions:
 #  device_site: "lab"
@@ -38,15 +38,15 @@
 
 substitutions:
   # User-required substitutions
-  device_site: "lab"
-  device_location: "office"
-  device_location_name: "Office"
+  device_site: "home"
+  device_location: "bedroom01"
+  device_location_name: "Bedroom 1"
   device_type: "wasw"
   device_type_name: "Wall Switch"
-  device_number: "003"
-  device_ip: "192.168.1.31"
+  device_number: "044"
+  device_ip: "0.0.0.0"
 
-  # Project Substitutions (not intended for user substitutions)
+  # Project Substitutions (not intended for user substitution)
   device_name: "Switchman M5 (3-Gang)"
   device_make: "Sonoff"
   sw_version: "2024.2.9"
