@@ -7,7 +7,7 @@ packages:
   somepackagename:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
-    files: [scrapbook.yaml]
+    file: samples/scrapbook.yaml
     refresh: 0s
     
 wifi:
