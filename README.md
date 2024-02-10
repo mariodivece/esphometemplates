@@ -1,2 +1,3 @@
-# esphometemplates
-Templates for ESPhome
+# My ESPHome Templates
+
+(Work in progress)
