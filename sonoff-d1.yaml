@@ -21,8 +21,8 @@
 #  device_type_name: "Dimmer"
 #  device_number: "004"
 #  device_ip: "192.168.1.31"
-#  dimmer_min: 0
-#  dimmer_max: 100
+#  dimmer_min: "0"
+#  dimmer_max: "100"
 #
 # packages:
 #   base_package:
@@ -41,8 +41,8 @@ substitutions:
   device_type_name: "Wall Switch"
   device_number: "044"
   device_ip: "0.0.0.0"
-  dimmer_min: 0
-  dimmer_max: 100
+  dimmer_min: "0"
+  dimmer_max: "100"
 
   # Project Substitutions (not intended for user substitution)
   device_name: "D1"
