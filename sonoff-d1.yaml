@@ -21,8 +21,6 @@
 #  device_type_name: "Dimmer"
 #  device_number: "004"
 #  device_ip: "192.168.1.31"
-#  dimmer_min: "0"
-#  dimmer_max: "100"
 #
 # packages:
 #   base_package:
@@ -41,8 +39,6 @@ substitutions:
   device_type_name: "Wall Switch"
   device_number: "044"
   device_ip: "0.0.0.0"
-  dimmer_min: "0"
-  dimmer_max: "100"
 
   # Project Substitutions (not intended for user substitution)
   device_name: "D1"
@@ -92,6 +88,27 @@ uart:
   tx_pin: TX
   baud_rate: 9600
 
+number:
+  - platform: template
+    id: level_min
+    name: "Min Level"
+    icon: "mdi:lightbulb-on-10"
+    entity_category: 'config'
+    optimistic: true
+    min_value: 0
+    max_value: 100
+    step: 1
+
+  - platform: template
+    id: level_max
+    name: "Max Level"
+    icon: "mdi:lightbulb-on-80"
+    entity_category: 'config'
+    optimistic: true
+    min_value: 1
+    max_value: 100
+    step: 1
+
 # And finally the light component
 # gamma correction equal to zero gives linear scale,
 # exactly what's needed for this device
@@ -102,5 +119,5 @@ light:
     restore_mode: RESTORE_DEFAULT_OFF
     gamma_correct: 0.0
     default_transition_length: 1s
-    min_value: ${dimmer_min}
-    max_value: ${dimmer_max}
+    min_value: !lambda "return id(level_min).state;"
+    max_value: !lambda "return id(level_max).state;"
