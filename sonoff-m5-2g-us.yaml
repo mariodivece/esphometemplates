@@ -55,7 +55,7 @@ substitutions:
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-2g-us.yaml@main"
 
   # Project Substitutions
-  device_name: "M52G"
+  device_name: "Switchman M5 (2-Gang)"
   device_make: "Sonoff"
   sw_version: "2024.2.9"
 
