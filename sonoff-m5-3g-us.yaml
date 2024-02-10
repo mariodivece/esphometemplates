@@ -46,18 +46,13 @@ substitutions:
   device_number: "003"
   device_ip: "192.168.1.31"
 
-  # No user substitutions beyond this line
-  usemac: "false"
-  friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
-  uniquename: "${device_site}-${device_location}-${device_type}-${device_number}"
+  # Project Substitutions (not intended for user substitutions)
+  device_name: "Switchman M5 (3-Gang)"
+  device_make: "Sonoff"
+  sw_version: "2024.2.9"
 
   # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
-
-  # Project Substitutions
-  device_name: "Switchman M5 (3-Gang)"
-  device_make: "Sonoff"
-  sw_version: "2024.2.8"
 
   # Diagnostics Substitutions
   loglevel: INFO

@@ -1,11 +1,23 @@
 substitutions:
-  usemac: "true"
-  friendly: "Sonoff Switchman M5 3G US"
-  uniquename: "switch-m5-3g"
-  device_name: "M53G"
-  device_make: "Sonoff"
+  # User-required substitutions
+  device_site: "site" # for example, home
+  device_location: "room" # for example, office
+  device_location_name: "Room" # friendly name for above location
+  device_type: "dimr" # A code for device type, example dimr
+  device_type_name: "Dimmer" # A friendly name for the device type, example Dimmer
+  device_number: "642" # recommended 3-digit serial
+  device_ip: "192.168.1.31" # the ip addess that is statically assigned via DHCP
+
+  # Device Make, Model and Version (intended for device tamplete implementation)
+  device_name: "Moldel 1"
+  device_make: "Cool Brand"
   sw_version: "2024.2.9"
 
+  # Generated friendly and uniquename for the device
+  # Not intended for user substitutions
+  friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
+  uniquename: "${device_site}-${device_location}-${device_type}-${device_number}"
+  usemac: "false"
 
 # Allow importing this package
 dashboard_import:
@@ -22,3 +34,10 @@ esphome:
   project:
     name: "${device_make}.${device_name}"
     version: "${sw_version}"
+
+text_sensor:
+  - platform: template
+    name: "Deployment Version"
+    lambda: return {"${sw_version}"};
+    icon: "mdi:tag"
+    entity_category: diagnostic

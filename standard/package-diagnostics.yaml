@@ -1,5 +1,4 @@
 substitutions:
-  sw_version: "2024.2.9"
   timezone: "America/Mexico_City"
   loglevel: INFO
 
@@ -21,12 +20,6 @@ time:
 
 # Diagnostic output sensors
 text_sensor:
-  - platform: template
-    name: "Deployment Version"
-    lambda: return {"${sw_version}"};
-    icon: "mdi:tag"
-    entity_category: diagnostic
-
   - platform: wifi_info
     ip_address:
       id: ip_address
