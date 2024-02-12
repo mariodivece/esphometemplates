@@ -37,8 +37,8 @@ substitutions:
   device_site: "home"
   device_location: "bedroom01"
   device_location_name: "Bedroom 1"
-  device_type: "wasw"
-  device_type_name: "Wall Switch"
+  device_type: "dimr"
+  device_type_name: "Dimmer"
   device_number: "044"
   device_ip: "0.0.0.0"
   level_min: "0"
@@ -78,6 +78,39 @@ packages:
       - standard/package-diagnostics.yaml
       - standard/package-wifi.yaml
 
+number:
+  - platform: template
+    id: config_level_min
+    name: "Min. Level"
+    optimistic: true
+    min_value: 0
+    max_value: 99
+    step: 1
+    mode: slider
+    restore_value: true
+    icon: 'mdi:led-outline'
+    entity_category: 'config'
+    on_value:
+      lambda: |-
+        Component* ptr = id(d1_controller);
+        static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_min_value(x);
+
+  - platform: template
+    id: config_level_max
+    name: "Max. Level"
+    optimistic: true
+    min_value: 1
+    max_value: 100
+    step: 1
+    mode: slider
+    restore_value: true
+    icon: 'mdi:led-outline'
+    entity_category: 'config'
+    on_value:
+      lambda: |-
+        Component* ptr = id(d1_controller);
+        static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_max_value(x);
+
 # Define the board for the compiler
 esp8266:
   board: esp8285
@@ -97,6 +130,7 @@ uart:
 # exactly what's needed for this device
 light:
   - platform: sonoff_d1
+    id: d1_controller
     use_rm433_remote: false
     name: Brightness
     restore_mode: RESTORE_DEFAULT_OFF
