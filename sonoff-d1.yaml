@@ -178,4 +178,4 @@ light:
     gamma_correct: 0.0
     default_transition_length: 0.75s
     min_value: 0
-    max_value: 100
+    max_value: 20
