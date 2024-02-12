@@ -21,8 +21,6 @@
 #  device_type_name: "Dimmer"
 #  device_number: "004"
 #  device_ip: "192.168.1.31"
-#  level_min: "0"
-#  level_max: "100"
 #
 # packages:
 #   base_package:
@@ -41,8 +39,6 @@ substitutions:
   device_type_name: "Dimmer"
   device_number: "044"
   device_ip: "0.0.0.0"
-  level_min: "0"
-  level_max: "100"
 
   # Project Substitutions (not intended for user substitution)
   device_name: "D1"
@@ -78,7 +74,41 @@ packages:
       - standard/package-diagnostics.yaml
       - standard/package-wifi.yaml
 
+# Define the board for the compiler
+esp8266:
+  board: esp8285
+  restore_from_flash: true
+
+script:
+  - id: configure_remote
+    parameters:
+      is_enabled: bool
+    lambda: |-
+      Component* ptr = id(d1_controller);
+      static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_use_rm433_remote(is_enabled);
+
+# Configuration option to use RM433 Sonoff Remote
+switch:
+  - platform: template
+    id: config_use_remote
+    name: "Use RM433 Remote"
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: 'mdi:remote'
+    entity_category: 'config'
+    on_turn_on:
+      then:
+        - script.execute:
+            id: configure_remote
+            is_enabled: true
+    on_turn_off:
+      then:
+        - script.execute:
+            id: configure_remote
+            is_enabled: false
+
 number:
+  # Configuration option for minimum level
   - platform: template
     id: config_level_min
     name: "Min. Level"
@@ -88,13 +118,21 @@ number:
     step: 1
     mode: slider
     restore_value: true
-    icon: 'mdi:led-outline'
+    initial_value: 0
+    icon: 'mdi:brightness-5'
     entity_category: 'config'
     on_value:
       lambda: |-
+        auto limiter = id(config_level_max);
+        if (x >= limiter.state) {
+          auto call = limiter.make_call();
+          call.set_value(x + 1);
+          call.perform();
+        }
         Component* ptr = id(d1_controller);
         static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_min_value(x);
 
+  # Configuration option for maximum level
   - platform: template
     id: config_level_max
     name: "Max. Level"
@@ -104,17 +142,19 @@ number:
     step: 1
     mode: slider
     restore_value: true
-    icon: 'mdi:led-outline'
+    initial_value: 100
+    icon: 'mdi:brightness-7'
     entity_category: 'config'
     on_value:
       lambda: |-
+        auto limiter = id(config_level_min);
+        if (x <= limiter.state) {
+          auto call = limiter.make_call();
+          call.set_value(x - 1);
+          call.perform();
+        }
         Component* ptr = id(d1_controller);
         static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_max_value(x);
-
-# Define the board for the compiler
-esp8266:
-  board: esp8285
-  restore_from_flash: true
 
 # D1 dimmer uses hardware serial port
 # on the default pins @ 9600 bps to the chip
@@ -136,5 +176,5 @@ light:
     restore_mode: RESTORE_DEFAULT_OFF
     gamma_correct: 0.0
     default_transition_length: 0.75s
-    min_value: ${level_min}
-    max_value: ${level_max}
+    min_value: 0
+    max_value: 100
