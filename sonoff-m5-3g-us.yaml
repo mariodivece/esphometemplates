@@ -129,7 +129,7 @@ esp32:
   board: esp32dev
   framework:
     type: esp-idf
-    version: latest
+    version: recommended
 
 binary_sensor:
   # Buttn A
