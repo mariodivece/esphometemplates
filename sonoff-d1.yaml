@@ -83,9 +83,10 @@ script:
   - id: configure_remote
     parameters:
       is_enabled: bool
-    lambda: |-
-      Component* ptr = id(d1_controller);
-      static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_use_rm433_remote(is_enabled);
+    then:
+      lambda: |-
+        Component* ptr = id(d1_controller);
+        static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_use_rm433_remote(is_enabled);
 
 # Configuration option to use RM433 Sonoff Remote
 switch:
@@ -124,8 +125,8 @@ number:
     on_value:
       lambda: |-
         auto limiter = id(config_level_max);
-        if (x >= limiter.state) {
-          auto call = limiter.make_call();
+        if (x >= limiter->state) {
+          auto call = limiter->make_call();
           call.set_value(x + 1);
           call.perform();
         }
@@ -148,8 +149,8 @@ number:
     on_value:
       lambda: |-
         auto limiter = id(config_level_min);
-        if (x <= limiter.state) {
-          auto call = limiter.make_call();
+        if (x <= limiter->state) {
+          auto call = limiter->make_call();
           call.set_value(x - 1);
           call.perform();
         }
