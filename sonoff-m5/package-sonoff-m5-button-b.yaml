@@ -17,6 +17,7 @@ substitutions:
 
   # Button Hold Timings
   timing_hold: ON for at least 1s
+  timing_hold_repeat: 100ms
 
 # Allow importing this package
 dashboard_import:
@@ -77,5 +78,5 @@ binary_sensor:
                     data:
                       button: B
                       gesture: button_hold
-                - delay: 100ms
+                - delay: ${timing_hold_repeat}
           - light.turn_off: led_status

@@ -49,7 +49,7 @@ substitutions:
   # Project Substitutions (not intended for user substitution)
   device_name: "Switchman M5 (2-Gang)"
   device_make: "Sonoff"
-  sw_version: "2024.2.9"
+  sw_version: "2024.2.13"
 
   # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-2g-us.yaml@main"
@@ -91,6 +91,10 @@ substitutions:
 
   # Button Hold Timings
   timing_hold: ON for at least 1s
+  timing_hold_repeat: 100ms
+
+  # Momentary Switch
+  timing_momentary: 250ms
 
 # Allow importing this package
 dashboard_import:
@@ -132,7 +136,7 @@ esp32:
 
 switch:
     
-  # Modify behavior of imported Relay A
+  # Modify behavior of imported Relay B
   - id: !extend relay_b
     on_turn_on:
     - switch.turn_on: led_indicator
@@ -144,21 +148,28 @@ binary_sensor:
   # Button A
   - id: !extend button_a
     on_press:
-      # Toggle
+      # Latching
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 0;'
           then:
             - switch.toggle: relay_a
-      # Sync
+      # Momentary
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 1;'
           then:
             - switch.turn_on: relay_a
-
+      # Pulse
+      - if:
+          condition:
+            - lambda: 'return id(mode_a).active_index() == 2;'
+          then:
+            - switch.turn_on: relay_a
+            - delay: ${timing_momentary}
+            - switch.turn_off: relay_a
     on_release:
-      # Sync
+      # Momentary
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 1;'
@@ -168,25 +179,25 @@ binary_sensor:
   # Button B
   - id: !extend button_b
     on_press:
-      # Toggle
+      # Latching
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 0;'
           then:
             - switch.toggle: relay_b
-      # Sync
+      # Momentary
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 1;'
           then:
             - switch.turn_on: relay_b
-      # Momentary
+      # Pulse
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 2;'
           then:
             - switch.turn_on: relay_b
-            - delay: 250ms
+            - delay: ${timing_momentary}
             - switch.turn_off: relay_b
       # Decoupled
       - if:
@@ -196,7 +207,7 @@ binary_sensor:
             - switch.turn_on: led_indicator
 
     on_release:
-      # Sync
+      # Momentary
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 1;'
