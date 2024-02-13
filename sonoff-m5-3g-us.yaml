@@ -135,18 +135,29 @@ binary_sensor:
   # Buttn A
   - id: !extend button_a
     on_press:
+      # Toggle
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 0;'
           then:
             - switch.toggle: relay_a
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 1;'
           then:
             - switch.turn_on: relay_a
+      # Momentary
+      - if:
+          condition:
+            - lambda: 'return id(mode_a).active_index() == 2;'
+          then:
+            - switch.turn_on: relay_a
+            - delay: 250ms
+            - switch.turn_off: relay_a
 
     on_release:
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 1;'
@@ -156,18 +167,29 @@ binary_sensor:
   # Button B
   - id: !extend button_b
     on_press:
+      # Toggle
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 0;'
           then:
             - switch.toggle: relay_b
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 1;'
           then:
             - switch.turn_on: relay_b
+      # Momentary
+      - if:
+          condition:
+            - lambda: 'return id(mode_b).active_index() == 2;'
+          then:
+            - switch.turn_on: relay_b
+            - delay: 250ms
+            - switch.turn_off: relay_b
 
     on_release:
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 1;'
@@ -177,18 +199,29 @@ binary_sensor:
   # Button C
   - id: !extend button_c
     on_press:
+      # Toggle
       - if:
           condition:
             - lambda: 'return id(mode_c).active_index() == 0;'
           then:
             - switch.toggle: relay_c
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_c).active_index() == 1;'
           then:
             - switch.turn_on: relay_c
+      # Momentary
+      - if:
+          condition:
+            - lambda: 'return id(mode_c).active_index() == 2;'
+          then:
+            - switch.turn_on: relay_c
+            - delay: 250ms
+            - switch.turn_off: relay_c
 
     on_release:
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_c).active_index() == 1;'

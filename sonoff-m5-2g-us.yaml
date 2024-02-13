@@ -144,11 +144,13 @@ binary_sensor:
   # Button A
   - id: !extend button_a
     on_press:
+      # Toggle
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 0;'
           then:
             - switch.toggle: relay_a
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 1;'
@@ -156,6 +158,7 @@ binary_sensor:
             - switch.turn_on: relay_a
 
     on_release:
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_a).active_index() == 1;'
@@ -165,30 +168,43 @@ binary_sensor:
   # Button B
   - id: !extend button_b
     on_press:
+      # Toggle
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 0;'
           then:
             - switch.toggle: relay_b
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 1;'
           then:
             - switch.turn_on: relay_b
+      # Momentary
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 2;'
           then:
+            - switch.turn_on: relay_b
+            - delay: 250ms
+            - switch.turn_off: relay_b
+      # Decoupled
+      - if:
+          condition:
+            - lambda: 'return id(mode_b).active_index() == 3;'
+          then:
             - switch.turn_on: led_indicator
 
     on_release:
+      # Sync
       - if:
           condition:
             - lambda: 'return id(mode_b).active_index() == 1;'
           then:
             - switch.turn_off: relay_b
+      # Decoupled
       - if:
           condition:
-            - lambda: 'return id(mode_b).active_index() == 2;'
+            - lambda: 'return id(mode_b).active_index() == 3;'
           then:
             - switch.turn_off: led_indicator

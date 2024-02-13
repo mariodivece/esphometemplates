@@ -11,10 +11,12 @@ select:
     icon: 'mdi:link-box-outline'
     entity_category: 'config'
     options:
-      - "Toggle Relay"
-      - "Sync Relay"
-      - "Decoupled"
+      - "Toggle Relay" # 0
+      - "Sync Relay"   # 1
+      - "Momentary"    # 2
+      - "Decoupled"    # 3
     initial_option: "Toggle Relay"
+    restore_value: true
     optimistic: true
     set_action:
       - switch.turn_off: relay_a

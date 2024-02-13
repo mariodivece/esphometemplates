@@ -13,8 +13,10 @@ select:
     options:
       - "Toggle Relay"
       - "Sync Relay"
+      - "Momentary"
       - "Decoupled"
     initial_option: "Toggle Relay"
+    restore_value: true
     optimistic: true
     set_action:
       - switch.turn_off: relay_c
