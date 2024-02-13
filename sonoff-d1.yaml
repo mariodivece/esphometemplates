@@ -92,7 +92,7 @@ script:
         auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
         controller->set_use_rm433_remote(is_enabled);
         {
-          auto call = id(light_1).toggle();
+          auto call = id(d1_controller).toggle();
           call.perform();
           call.perform();
         }
@@ -143,7 +143,7 @@ number:
         auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
         controller->set_min_value(x);
         {
-          auto call = id(light_1).toggle();
+          auto call = id(d1_controller).toggle();
           call.perform();
           call.perform();
         }
@@ -173,7 +173,7 @@ number:
         auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
         controller->set_max_value(x);
         {
-          auto call = id(light_1).toggle();
+          auto call = id(d1_controller).toggle();
           call.perform();
           call.perform();
         }
