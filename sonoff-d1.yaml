@@ -41,6 +41,9 @@ substitutions:
   device_ip: "0.0.0.0"
 
   # Project Substitutions (not intended for user substitution)
+  dimmer_min_level: "0"
+  dimmer_max_level: "100"
+  dimmer_use_remote: "false"
   device_name: "D1"
   device_make: "Sonoff"
   sw_version: "2024.2.9"
@@ -86,7 +89,9 @@ script:
     then:
       lambda: |-
         Component* ptr = id(d1_controller);
-        static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_use_rm433_remote(is_enabled);
+        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
+        controller->set_use_rm433_remote(is_enabled);
+        controller->write_state(id(d1_controller).state);
 
 # Configuration option to use RM433 Sonoff Remote
 switch:
@@ -131,7 +136,9 @@ number:
           call.perform();
         }
         Component* ptr = id(d1_controller);
-        static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_min_value(x);
+        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
+        controller->set_min_value(x);
+        controller->write_state(id(d1_controller).state);
 
   # Configuration option for maximum level
   - platform: template
@@ -155,7 +162,10 @@ number:
           call.perform();
         }
         Component* ptr = id(d1_controller);
-        static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr)->set_max_value(x);
+        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
+        controller->set_max_value(x);
+        controller->write_state(id(d1_controller).state);
+
 
 # D1 dimmer uses hardware serial port
 # on the default pins @ 9600 bps to the chip
@@ -172,10 +182,10 @@ uart:
 light:
   - platform: sonoff_d1
     id: d1_controller
-    use_rm433_remote: false
+    use_rm433_remote: {dimmer_use_remote}
     name: Brightness
     restore_mode: RESTORE_DEFAULT_OFF
     gamma_correct: 0.0
     default_transition_length: 0.75s
-    min_value: 0
-    max_value: 20
+    min_value: ${dimmer_min_level}
+    max_value: ${dimmer_max_level}
