@@ -91,6 +91,11 @@ script:
         Component* ptr = id(d1_controller);
         auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
         controller->set_use_rm433_remote(is_enabled);
+        {
+          auto call = id(light_1).toggle();
+          call.perform();
+          call.perform();
+        }
 
 # Configuration option to use RM433 Sonoff Remote
 switch:
@@ -137,6 +142,11 @@ number:
         Component* ptr = id(d1_controller);
         auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
         controller->set_min_value(x);
+        {
+          auto call = id(light_1).toggle();
+          call.perform();
+          call.perform();
+        }
 
   # Configuration option for maximum level
   - platform: template
@@ -162,6 +172,12 @@ number:
         Component* ptr = id(d1_controller);
         auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
         controller->set_max_value(x);
+        {
+          auto call = id(light_1).toggle();
+          call.perform();
+          call.perform();
+        }
+        
 
 
 # D1 dimmer uses hardware serial port
