@@ -82,89 +82,87 @@ esp8266:
   board: esp8285
   restore_from_flash: true
 
-script:
-  - id: configure_remote
-    parameters:
-      is_enabled: bool
-    then:
-      lambda: |-
-        Component* ptr = id(d1_controller);
-        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
-        controller->set_use_rm433_remote(is_enabled);
+#script:
+#  - id: configure_remote
+#    parameters:
+#      is_enabled: bool
+#    then:
+#      lambda: |-
+#        Component* ptr = id(d1_controller);
+#        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
+#        controller->set_use_rm433_remote(is_enabled);
 
 # Configuration option to use RM433 Sonoff Remote
-switch:
-  - platform: template
-    id: config_use_remote
-    name: "Use RM433 Remote"
-    optimistic: true
-    restore_mode: RESTORE_DEFAULT_OFF
-    icon: 'mdi:remote'
-    entity_category: 'config'
-    on_turn_on:
-      then:
-        - script.execute:
-            id: configure_remote
-            is_enabled: true
-    on_turn_off:
-      then:
-        - script.execute:
-            id: configure_remote
-            is_enabled: false
+#switch:
+#  - platform: template
+#    id: config_use_remote
+#    name: "Use RM433 Remote"
+#    optimistic: true
+#    restore_mode: RESTORE_DEFAULT_OFF
+#    icon: 'mdi:remote'
+#    entity_category: 'config'
+#    on_turn_on:
+#      then:
+#        - script.execute:
+#            id: configure_remote
+#            is_enabled: true
+#    on_turn_off:
+#      then:
+#        - script.execute:
+#            id: configure_remote
+#            is_enabled: false
 
-number:
-  # Configuration option for minimum level
-  - platform: template
-    id: config_level_min
-    name: "Min. Level"
-    optimistic: true
-    min_value: 0
-    max_value: 99
-    step: 1
-    mode: slider
-    restore_value: true
-    initial_value: 0
-    icon: 'mdi:brightness-5'
-    entity_category: 'config'
-    on_value:
-      lambda: |-
-        auto limiter = id(config_level_max);
-        if (x >= limiter->state) {
-          auto call = limiter->make_call();
-          call.set_value(x + 1);
-          call.perform();
-        }
-        Component* ptr = id(d1_controller);
-        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
-        controller->set_min_value(x);
+#number:
+#  # Configuration option for minimum level
+#  - platform: template
+#    id: config_level_min
+#    name: "Min. Level"
+#    optimistic: true
+#    min_value: 0
+#    max_value: 99
+#    step: 1
+#    mode: slider
+#    restore_value: true
+#    initial_value: 0
+#    icon: 'mdi:brightness-5'
+#    entity_category: 'config'
+#    on_value:
+#      lambda: |-
+#        auto limiter = id(config_level_max);
+#        if (x >= limiter->state) {
+#          auto call = limiter->make_call();
+#          call.set_value(x + 1);
+#          call.perform();
+#        }
+#        Component* ptr = id(d1_controller);
+#        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
+#        controller->set_min_value(x);
 
-  # Configuration option for maximum level
-  - platform: template
-    id: config_level_max
-    name: "Max. Level"
-    optimistic: true
-    min_value: 1
-    max_value: 100
-    step: 1
-    mode: slider
-    restore_value: true
-    initial_value: 100
-    icon: 'mdi:brightness-7'
-    entity_category: 'config'
-    on_value:
-      lambda: |-
-        auto limiter = id(config_level_min);
-        if (x <= limiter->state) {
-          auto call = limiter->make_call();
-          call.set_value(x - 1);
-          call.perform();
-        }
-        Component* ptr = id(d1_controller);
-        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
-        controller->set_max_value(x);
+#  # Configuration option for maximum level
+#  - platform: template
+#    id: config_level_max
+#    name: "Max. Level"
+#    optimistic: true
+#    min_value: 1
+#    max_value: 100
+#    step: 1
+#    mode: slider
+#    restore_value: true
+#    initial_value: 100
+#    icon: 'mdi:brightness-7'
+#    entity_category: 'config'
+#    on_value:
+#      lambda: |-
+#        auto limiter = id(config_level_min);
+#        if (x <= limiter->state) {
+#          auto call = limiter->make_call();
+#          call.set_value(x - 1);
+#          call.perform();
+#        }
+#        Component* ptr = id(d1_controller);
+#        auto controller = static_cast<esphome::sonoff_d1::SonoffD1Output*>(ptr);
+#        controller->set_max_value(x);
         
-
-
 # D1 dimmer uses hardware serial port
 # on the default pins @ 9600 bps to the chip
 # that actually controls the dimmer and,
