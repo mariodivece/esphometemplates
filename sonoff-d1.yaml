@@ -182,7 +182,7 @@ uart:
 light:
   - platform: sonoff_d1
     id: d1_controller
-    use_rm433_remote: {dimmer_use_remote}
+    use_rm433_remote: ${dimmer_use_remote}
     name: Brightness
     restore_mode: RESTORE_DEFAULT_OFF
     gamma_correct: 0.0
