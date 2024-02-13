@@ -44,6 +44,7 @@ substitutions:
   dimmer_min_level: "0"
   dimmer_max_level: "100"
   dimmer_use_remote: "false"
+  dimmer_gamma_correct: "0.0"
   device_name: "D1"
   device_make: "Sonoff"
   sw_version: "2024.2.9"
@@ -181,7 +182,7 @@ light:
     use_rm433_remote: ${dimmer_use_remote}
     name: Brightness
     restore_mode: RESTORE_DEFAULT_OFF
-    gamma_correct: 0.0
+    gamma_correct: ${dimmer_gamma_correct}
     default_transition_length: 0.75s
     min_value: ${dimmer_min_level}
     max_value: ${dimmer_max_level}
