@@ -21,12 +21,12 @@ substitutions:
   dimmer_max_temp: "70" # (in °C) # For over-temperature portection
 
   # Project Substitutions (not intended for user substitution)
-  device_name: "Dimmer 2"
+  device_name: "Dimmer2"
   device_make: "Shelly"
   sw_version: "2024.2.13"
 
   # Adjust package URL to point to this file
-  package_url: "github://mariodivece/esphometemplates/shelly-dimmer-2.yaml@main"
+  package_url: "github://mariodivece/esphometemplates/shelly-dimmer2.yaml@main"
 
   # Diagnostics Substitutions
   loglevel: INFO
@@ -126,7 +126,7 @@ light:
 
 
 sensor:
-  # Setup the NTC (depends on resistance and ADC)
+  # Setup the NTC thermistor (depends on resistance and ADC)
   # and setup over-temperature protection
   - platform: ntc
     sensor: temp_resistance_reading
