@@ -1,0 +1,107 @@
+substitutions:
+  # Timing Configurations
+  timing_timer_duration: "5s"
+  timing_dimming_step: "0.5%"
+  timing_dimming_time: "10ms"
+  uniquename: "uniquenamehere"
+  dimmer_max_temp: "70"
+  dimmer_max_current: "1.0"
+  dimmer_max_power: "190"
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-shelly-dimmer2-scripts.yaml@main"
+  import_full_config: false
+
+script:
+
+  # Automatic shutdown protection script
+  # Called when current, temperature or power ratings are exceeded.
+  - id: script_protect_device
+    mode: parallel
+    parameters:
+      measure_name: string
+      measure_value: float
+      measure_unit: string
+    then:
+      - light.turn_off: dimmer
+      - logger.log:
+          format: "Device turned off because %s exceeded %.1f%s"
+          args: [ 'measure_name', 'measure_value', 'measure_unit' ]
+      - homeassistant.service:
+          service: persistent_notification.create
+          data:
+            title: "Device '${uniquename}' self-protected."
+          data_template:
+            message: "Device protection activated. Max measures: ${dimmer_max_temp}°C, ${dimmer_max_current}A, ${dimmer_max_power}W."
+
+  # Stops both, dim-up and dim-down limiting timers.
+  - id: script_stop_dimming
+    then:
+      - script.stop: script_dimming_timer
+      - script.stop: script_start_dimming_down
+      - script.stop: script_start_dimming_up
+
+  # Simple timer that limits the maximum time dim-down is executed.
+  - id: script_dimming_timer
+    mode: restart
+    then:
+      - delay: ${timing_timer_duration}
+
+  # Executes while timer is running, light is on and brightness is in range
+  - id: script_start_dimming_down
+    mode: single
+    then:
+      - script.stop: script_start_dimming_up
+      - script.execute: script_dimming_timer
+      - while:
+          condition:
+            and:
+              # only run while timer is running and brightness >= 1%
+              - light.is_on: dimmer
+              - script.is_running: script_dimming_timer
+              - lambda: 'return(id(dimmer).remote_values.get_brightness() >= 0.01);'
+          then:
+            - light.dim_relative:
+                id: dimmer
+                relative_brightness: -${timing_dimming_step}
+                transition_length: ${timing_dimming_time}
+            - delay: ${timing_dimming_time}
+            
+  # Executes while timer is running, light is on and brightness is in range
+  - id: script_start_dimming_up
+    mode: single
+    then:
+      - script.stop: script_start_dimming_down
+      - script.execute: script_dimming_timer
+      - while:
+          # only run while timer is running and brightness <= 99.9%
+          condition:
+            and:
+              - light.is_on: dimmer
+              - script.is_running: script_dimming_timer
+              - lambda: 'return(id(dimmer).remote_values.get_brightness() <= 0.999);'
+          then:
+            - light.dim_relative:
+                id: dimmer
+                relative_brightness: ${timing_dimming_step}
+                transition_length: ${timing_dimming_time}
+            - delay: ${timing_dimming_time}
+
+  # Toggles the light on or off, depending on current state
+  - id: script_dimmer_toggle
+    mode: single
+    then:
+      - script.execute: script_stop_dimming
+      - if:
+          condition:
+            light.is_on:
+              id: dimmer
+          then:
+            - light.turn_off:
+                id: dimmer
+          else:
+            - light.turn_on:
+                id: dimmer
+                brightness: !lambda |-
+                  return id(dimmer).remote_values.get_brightness();

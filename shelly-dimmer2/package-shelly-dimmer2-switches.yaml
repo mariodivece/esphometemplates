@@ -1,0 +1,55 @@
+substitutions:
+  timing_press_threshold: "300ms"
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-shelly-dimmer2-switches.yaml@main"
+  import_full_config: false
+
+binary_sensor:
+
+  # This sensor maps to S1 on the device terminals
+  # so you can physically connect a momentary
+  # switch for dimming without needing remote automations
+  - platform: gpio
+    name: "S1 - Dim Down"
+    id: sensor_dim_down
+    pin:
+      number: GPIO12
+      mode: INPUT
+    internal: false
+    on_multi_click:
+    - timing:
+        - ON for at most ${timing_press_threshold}
+      then:
+        - script.execute: script_dimmer_toggle
+    - timing:
+        - ON for at least ${timing_press_threshold}
+      then:
+        - script.execute: script_start_dimming_down
+    on_release:
+      then:
+        - script.execute: script_stop_dimming
+
+  # This sensor maps to S2 on the device terminals
+  # so you can physically connect a momentary
+  # switch for dimming without needing remote automations
+  - platform: gpio
+    name: "S2 - Dim Up"
+    id: sensor_dim_up
+    pin:
+      number: GPIO14
+      mode: INPUT
+    internal: false
+    on_multi_click:
+    - timing:
+        - ON for at most ${timing_press_threshold}
+      then:
+        - script.execute: script_dimmer_toggle
+    - timing:
+        - ON for at least ${timing_press_threshold}
+      then:
+        - script.execute: script_start_dimming_up
+    on_release:
+      then:
+        - script.execute: script_stop_dimming

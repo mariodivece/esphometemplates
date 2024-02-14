@@ -1,0 +1,27 @@
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-shelly-dimmer2-buttons.yaml@main"
+  import_full_config: false
+
+# Define virtual control buttons
+# These simply call the scripts
+button:
+
+  - platform: template
+    name: Start Dimming Down
+    on_press:
+      then:
+        - script.execute: script_start_dimming_down
+
+  - platform: template
+    name: Start Dimmming Up
+    on_press:
+      then:
+        - script.execute: script_start_dimming_up
+
+  - platform: template
+    name: Stop Dimming
+    on_press:
+      then:
+        - script.execute: script_stop_dimming
+

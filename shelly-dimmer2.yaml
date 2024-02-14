@@ -28,8 +28,8 @@ substitutions:
   dimmer_max_power: "190" # (in W) Rated for 220W
 
   # Timing Configurations
-  timing_timer_duration: "5s"
   timing_press_threshold: "300ms"
+  timing_timer_duration: "5s"
   timing_dimming_step: "0.5%"
   timing_dimming_time: "10ms"
 
@@ -66,22 +66,22 @@ packages:
       - standard/package-project.yaml
       - standard/package-diagnostics.yaml
       - standard/package-wifi.yaml
-
-# Board and preferences
-esp8266:
-  board: esp01_1m
-  restore_from_flash: true
-
-# UART Connection between ESP and STM32 chips
-uart:
-    tx_pin: 1
-    rx_pin: 3
-    baud_rate: 115200
+  shelly_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    refresh: 0d
+    files:
+      - shelly-dimmer2/package-shelly-dimmer2-board.yaml
+      - shelly-dimmer2/package-shelly-dimmer2-scripts.yaml
+      - shelly-dimmer2/package-shelly-dimmer2-temperature.yaml
+      - shelly-dimmer2/package-shelly-dimmer2-switches.yaml
+      - shelly-dimmer2/package-shelly-dimmer2-buttons.yaml
 
 # Use the shelly_dimmer built-in platform
 light:
+    # Monochromatic light using the built-in platform
     - platform: shelly_dimmer
-      name: "Light" # Monochromatic
+      name: "Dimmer"
       id: dimmer
       leading_edge: ${dimmer_leading_edge}
       min_brightness: ${dimmer_min_level}
@@ -143,201 +143,3 @@ light:
       firmware:
         version: ${dimmer_stmfw_version}
         update: ${dimmer_stmfw_update}
-
-
-sensor:
-  # Setup the NTC (thermistor depends on resistance and ADC)
-  # and setup over-temperature protection
-  - platform: ntc
-    sensor: temp_resistance_reading
-    name: "Temperature"
-    id: temperature
-    unit_of_measurement: "°C"
-    accuracy_decimals: 1
-    icon: "mdi:thermometer"
-    calibration:
-      b_constant: 3350
-      reference_resistance: 10kOhm
-      reference_temperature: 298.15K
-    on_value_range:
-      - above: ${dimmer_max_temp}
-        then:
-          - script.execute:
-              id: script_protect_device
-              measure_name: "temperature"
-              measure_value: ${dimmer_max_temp}
-              measure_unit: "°C"
-
-  # Thermistor definition
-  - platform: resistance
-    id: temp_resistance_reading
-    sensor: temp_analog_reading
-    configuration: DOWNSTREAM
-    resistor: 32kOhm
-  
-  # Analog pin reading for the thermistor
-  - platform: adc
-    id: temp_analog_reading
-    pin: A0
-
-binary_sensor:
-
-  # This sensor maps to S1 on the device terminals
-  # so you can physically connect a momentary
-  # switch for dimming without needing remote automations
-  - platform: gpio
-    name: "S1 - Dim Down"
-    id: sensor_dim_down
-    pin:
-      number: GPIO12
-      mode: INPUT
-    internal: false
-    on_multi_click:
-    - timing:
-        - ON for at most ${timing_press_threshold}
-      then:
-        - script.execute: script_dimmer_toggle
-    - timing:
-        - ON for at least ${timing_press_threshold}
-      then:
-        - script.execute: script_start_dimming_down
-    on_release:
-      then:
-        - script.execute: script_stop_dimming
-
-  # This sensor maps to S2 on the device terminals
-  # so you can physically connect a momentary
-  # switch for dimming without needing remote automations
-  - platform: gpio
-    name: "S2 - Dim Up"
-    id: sensor_dim_up
-    pin:
-      number: GPIO14
-      mode: INPUT
-    internal: false
-    on_multi_click:
-    - timing:
-        - ON for at most ${timing_press_threshold}
-      then:
-        - script.execute: script_dimmer_toggle
-    - timing:
-        - ON for at least ${timing_press_threshold}
-      then:
-        - script.execute: script_start_dimming_up
-    on_release:
-      then:
-        - script.execute: script_stop_dimming
-
-# Define virtual control buttons
-# These simply call the scripts
-button:
-
-  - platform: template
-    name: Start Dimming Down
-    on_press:
-      then:
-        - script.execute: script_start_dimming_down
-
-  - platform: template
-    name: Start Dimmming Up
-    on_press:
-      then:
-        - script.execute: script_start_dimming_up
-
-  - platform: template
-    name: Stop Dimming
-    on_press:
-      then:
-        - script.execute: script_stop_dimming
-
-script:
-
-  # Automatic shutdown protection script
-  # Called when current, temperature or power ratings are exceeded.
-  - id: script_protect_device
-    mode: parallel
-    parameters:
-      measure_name: string
-      measure_value: float
-      measure_unit: string
-    then:
-      - light.turn_off: dimmer
-      - logger.log:
-          format: "Device turned off because %s exceeded %.1f%s"
-          args: [ 'measure_name', 'measure_value', 'measure_unit' ]
-      - homeassistant.service:
-          service: persistent_notification.create
-          data:
-            title: "Device '${uniquename}' self-protected."
-          data_template:
-            message: "Device protection activated. Max measures: ${dimmer_max_temp}°C, ${dimmer_max_current}A, ${dimmer_max_power}W."
-
-  # Stops both, dim-up and dim-down limiting timers.
-  - id: script_stop_dimming
-    then:
-      - script.stop: script_dimming_timer
-      - script.stop: script_start_dimming_down
-      - script.stop: script_start_dimming_up
-
-  # Simple timer that limits the maximum time dim-down is executed.
-  - id: script_dimming_timer
-    mode: restart
-    then:
-      - delay: ${timing_timer_duration}
-
-  # Executes while timer is running, light is on and brightness 
-  - id: script_start_dimming_down
-    mode: single
-    then:
-      - script.stop: script_start_dimming_up
-      - script.execute: script_dimming_timer
-      - while:
-          condition:
-            and:
-              # only run while timer is running and brightness >= 1%
-              - light.is_on: dimmer
-              - script.is_running: script_dimming_timer
-              - lambda: 'return(id(dimmer).remote_values.get_brightness() >= 0.01);'
-          then:
-            - light.dim_relative:
-                id: dimmer
-                relative_brightness: -${timing_dimming_step}
-                transition_length: ${timing_dimming_time}
-            - delay: ${timing_dimming_time}
-
-  - id: script_start_dimming_up
-    mode: single
-    then:
-      - script.stop: script_start_dimming_down
-      - script.execute: script_dimming_timer
-      - while:
-          # only run while timer is running and brightness <= 99.9%
-          condition:
-            and:
-              - light.is_on: dimmer
-              - script.is_running: script_dimming_timer
-              - lambda: 'return(id(dimmer).remote_values.get_brightness() <= 0.999);'
-          then:
-            - light.dim_relative:
-                id: dimmer
-                relative_brightness: ${timing_dimming_step}
-                transition_length: ${timing_dimming_time}
-            - delay: ${timing_dimming_time}
-
-  # Toggles the light on or off, depending on current state
-  - id: script_dimmer_toggle
-    mode: single
-    then:
-      - script.execute: script_stop_dimming
-      - if:
-          condition:
-            light.is_on:
-              id: dimmer
-          then:
-            - light.turn_off:
-                id: dimmer
-          else:
-            - light.turn_on:
-                id: dimmer
-                brightness: !lambda |-
-                  return id(dimmer).remote_values.get_brightness();

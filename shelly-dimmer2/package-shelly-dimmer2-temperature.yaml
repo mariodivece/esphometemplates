@@ -1,0 +1,42 @@
+substitutions:
+  dimmer_max_temp: "70"
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-shelly-dimmer2-temperature.yaml@main"
+  import_full_config: false
+
+sensor:
+  # Setup the NTC (thermistor depends on resistance and ADC)
+  # and setup over-temperature protection
+  - platform: ntc
+    sensor: temp_resistance_reading
+    name: "Temperature"
+    id: temperature
+    unit_of_measurement: "°C"
+    accuracy_decimals: 1
+    icon: "mdi:thermometer"
+    calibration:
+      b_constant: 3350
+      reference_resistance: 10kOhm
+      reference_temperature: 298.15K
+    on_value_range:
+      - above: ${dimmer_max_temp}
+        then:
+          - script.execute:
+              id: script_protect_device
+              measure_name: "temperature"
+              measure_value: ${dimmer_max_temp}
+              measure_unit: "°C"
+
+  # Thermistor definition
+  - platform: resistance
+    id: temp_resistance_reading
+    sensor: temp_analog_reading
+    configuration: DOWNSTREAM
+    resistor: 32kOhm
+  
+  # Analog pin reading for the thermistor
+  - platform: adc
+    id: temp_analog_reading
+    pin: A0
