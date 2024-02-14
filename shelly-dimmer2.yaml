@@ -121,7 +121,7 @@ light:
           - round: 1
 
       firmware:
-        version: "51.6"
+        version: "51.6" # Can use 51.7 (removes neutral line support but reduces flickering)
         update: false
 
 
