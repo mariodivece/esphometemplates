@@ -8,7 +8,7 @@ substitutions:
   device_number: "642" # recommended 3-digit serial
   device_ip: "192.168.1.31" # the ip addess that is statically assigned via DHCP
 
-  # Device Make, Model and Version (intended for device tamplete implementation)
+  # Device Make, Model and Version (intended for device template implementation)
   device_name: "Moldel 1"
   device_make: "Cool Brand"
   sw_version: "2024.2.9"
