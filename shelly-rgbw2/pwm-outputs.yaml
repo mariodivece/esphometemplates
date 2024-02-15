@@ -1,0 +1,30 @@
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/shelly-rgbw2/pwm-outputs.yaml@main"
+  import_full_config: false
+
+# Maps the PWM Channels
+output:
+  # Channel 1 (R)
+  - platform: esp8266_pwm
+    id: pwm_out_ch1
+    pin: GPIO12
+    frequency: 1000 Hz
+
+  # Channel 2 (G)
+  - platform: esp8266_pwm
+    id: pwm_out_ch2
+    pin: GPIO15
+    frequency: 1000 Hz
+
+  # Channel 3 (B)
+  - platform: esp8266_pwm
+    id: pwm_out_ch3
+    pin: GPIO14
+    frequency: 1000 Hz
+
+  # Channel 4 (W)
+  - platform: esp8266_pwm
+    id: pwm_out_ch4
+    pin: GPIO4
+    frequency: 1000 Hz

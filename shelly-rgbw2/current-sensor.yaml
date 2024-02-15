@@ -1,0 +1,17 @@
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/shelly-rgbw2/current-sensor.yaml@main"
+  import_full_config: false
+
+sensor:
+  - platform: adc
+    pin: A0
+    name: Current
+    id: current
+    unit_of_measurement: "A"
+    entity_category: "diagnostic"
+    icon: "mdi:lightning-bolt"
+    device_class: "current"
+    state_class: "measurement"
+    accuracy_decimals: 1
+    update_interval: 5s

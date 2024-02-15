@@ -100,6 +100,7 @@ light:
         device_class: "voltage"
         state_class: "measurement"
         accuracy_decimals: 1
+        update_interval: 5s
 
       # Current Sensor
       current:
@@ -111,6 +112,7 @@ light:
         device_class: "current"
         state_class: "measurement"
         accuracy_decimals: 1
+        update_interval: 5s
         on_value_range:
           - above: ${dimmer_max_current}
             then:
@@ -130,6 +132,7 @@ light:
         device_class: "power"
         state_class: "measurement"
         accuracy_decimals: 1
+        update_interval: 5s
         on_value_range:
           - above: ${dimmer_max_power}
             then:
@@ -143,3 +146,15 @@ light:
       firmware:
         version: ${dimmer_stmfw_version}
         update: ${dimmer_stmfw_update}
+
+sensor:
+  - platform: total_daily_energy
+    name: "Total Daily Energy"
+    entity_category: "diagnostic"
+    power_id: power
+    state_class: total_increasing
+    device_class: energy
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: kWh

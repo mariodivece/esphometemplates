@@ -1,0 +1,119 @@
+substitutions:
+  # Timing Configurations
+  timing_timer_duration: "5s"
+  timing_dimming_step: "0.5%"
+  timing_dimming_time: "10ms"
+  master_light: "light_ch1"
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/shelly-rgbw2/scripts-4ch.yaml@main"
+  import_full_config: false
+
+script:
+
+  # Stops both, dim-up and dim-down limiting timers.
+  - id: script_stop_dimming
+    then:
+      - script.stop: script_dimming_timer
+      - script.stop: script_start_dimming_down
+      - script.stop: script_start_dimming_up
+
+  # Simple timer that limits the maximum time dim-down is executed.
+  - id: script_dimming_timer
+    mode: restart
+    then:
+      - delay: ${timing_timer_duration}
+
+  # Executes while timer is running, light is on and brightness is in range
+  - id: script_start_dimming_down
+    mode: single
+    then:
+      - script.stop: script_start_dimming_up
+      - script.execute: script_dimming_timer
+      - script.execute: script_sync_lights
+      - while:
+          condition:
+            and:
+              # only run while timer is running and brightness >= 1%
+              - light.is_on: ${master_light}
+              - script.is_running: script_dimming_timer
+              - lambda: 'return(id(${master_light}).remote_values.get_brightness() >= 0.01);'
+          then:
+            - light.dim_relative:
+                id: light_ch1
+                relative_brightness: -${timing_dimming_step}
+                transition_length: ${timing_dimming_time}
+            - light.dim_relative:
+                id: light_ch2
+                relative_brightness: -${timing_dimming_step}
+                transition_length: ${timing_dimming_time}
+            - light.dim_relative:
+                id: light_ch3
+                relative_brightness: -${timing_dimming_step}
+                transition_length: ${timing_dimming_time}
+            - light.dim_relative:
+                id: light_ch4
+                relative_brightness: -${timing_dimming_step}
+                transition_length: ${timing_dimming_time}
+            - delay: ${timing_dimming_time}
+            
+  # Executes while timer is running, light is on and brightness is in range
+  - id: script_start_dimming_up
+    mode: single
+      - script.stop: script_start_dimming_down
+      - script.execute: script_dimming_timer
+      - script.execute: script_sync_lights
+      - while:
+          # only run while timer is running and brightness <= 99.9%
+          condition:
+            and:
+              - light.is_on: ${master_light}
+              - script.is_running: script_dimming_timer
+              - lambda: 'return(id(${master_light}).remote_values.get_brightness() <= 0.999);'
+          then:
+            - light.dim_relative:
+                id: dimmer
+                relative_brightness: ${timing_dimming_step}
+                transition_length: ${timing_dimming_time}
+            - delay: ${timing_dimming_time}
+
+  # Toggles the light on or off, depending on current state
+  - id: script_dimmer_toggle
+    mode: single
+    then:
+      - script.execute: script_stop_dimming
+      - if:
+          condition:
+            light.is_on:
+              id: ${master_light}
+          then:
+            - light.turn_off: light_ch1
+            - light.turn_off: light_ch2
+            - light.turn_off: light_ch3
+            - light.turn_off: light_ch4     
+          else:
+            - light.turn_on:
+                id: light_ch1
+                brightness: !lambda |-
+                  return id(${master_light}).remote_values.get_brightness();
+            - light.turn_on:
+                id: light_ch2
+                brightness: !lambda |-
+                  return id(${master_light}).remote_values.get_brightness();
+            - light.turn_on:
+                id: light_ch3
+                brightness: !lambda |-
+                  return id(${master_light}).remote_values.get_brightness();
+            - light.turn_on:
+                id: light_ch4
+                brightness: !lambda |-
+                  return id(${master_light}).remote_values.get_brightness();
+
+  - id: script_sync_lights
+    lambda: |-
+      LightColorValues* color_values = id(${master_light})->current_values;
+      id(light_ch1)->make_call()->from_light_color_values(color_values).perform();
+      id(light_ch2)->make_call()->from_light_color_values(color_values).perform();
+      id(light_ch3)->make_call()->from_light_color_values(color_values).perform();
+      id(light_ch4)->make_call()->from_light_color_values(color_values).perform();

@@ -1,0 +1,32 @@
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/shelly-rgbw2/status-led.yaml@main"
+  import_full_config: false
+
+light:
+  # Physical pin to the connection status LED
+  # We don't expose this to the HA UI (internal)
+  - platform: status_led
+    name: "LED"
+    id: led_status
+    pin:
+      number: GPIO02
+      inverted: false
+      ignore_strapping_warning: true
+    internal: true
+    restore_mode: RESTORE_DEFAULT_ON
+
+binary_sensor:
+
+  # Make the status LED blink when not connected/trying to connect
+  - platform: template
+    name: "API connected"
+    id: sensor_api_connected
+    internal: true
+    entity_category: 'diagnostic'
+    device_class: 'connectivity'
+    lambda: return global_api_server->is_connected();
+    on_press:
+      - light.turn_off: led_status
+    on_release:
+      - light.turn_on: led_status
