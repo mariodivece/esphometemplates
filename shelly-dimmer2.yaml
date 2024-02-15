@@ -100,7 +100,6 @@ light:
         device_class: "voltage"
         state_class: "measurement"
         accuracy_decimals: 1
-        update_interval: 5s
 
       # Current Sensor
       current:
@@ -112,7 +111,6 @@ light:
         device_class: "current"
         state_class: "measurement"
         accuracy_decimals: 1
-        update_interval: 5s
         on_value_range:
           - above: ${dimmer_max_current}
             then:
@@ -132,7 +130,6 @@ light:
         device_class: "power"
         state_class: "measurement"
         accuracy_decimals: 1
-        update_interval: 5s
         on_value_range:
           - above: ${dimmer_max_power}
             then:
