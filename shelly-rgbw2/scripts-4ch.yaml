@@ -61,6 +61,7 @@ script:
   # Executes while timer is running, light is on and brightness is in range
   - id: script_start_dimming_up
     mode: single
+    then:
       - script.stop: script_start_dimming_down
       - script.execute: script_dimming_timer
       - script.execute: script_sync_lights
@@ -111,9 +112,11 @@ script:
                   return id(${master_light}).remote_values.get_brightness();
 
   - id: script_sync_lights
-    lambda: |-
-      LightColorValues* color_values = id(${master_light})->current_values;
-      id(light_ch1)->make_call()->from_light_color_values(color_values).perform();
-      id(light_ch2)->make_call()->from_light_color_values(color_values).perform();
-      id(light_ch3)->make_call()->from_light_color_values(color_values).perform();
-      id(light_ch4)->make_call()->from_light_color_values(color_values).perform();
+    mode: single
+    then:
+      lambda: |-
+        LightColorValues* color_values = id(${master_light})->current_values;
+        id(light_ch1)->make_call()->from_light_color_values(color_values).perform();
+        id(light_ch2)->make_call()->from_light_color_values(color_values).perform();
+        id(light_ch3)->make_call()->from_light_color_values(color_values).perform();
+        id(light_ch4)->make_call()->from_light_color_values(color_values).perform();
