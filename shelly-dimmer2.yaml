@@ -34,7 +34,7 @@ substitutions:
   timing_dimming_time: "10ms"
 
   # Project Substitutions (not intended for user substitution)
-  device_name: "Dimmer2"
+  device_model: "Dimmer2"
   device_make: "Shelly"
   sw_version: "2024.2.14"
 

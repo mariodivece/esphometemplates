@@ -47,7 +47,7 @@ substitutions:
   device_ip: "0.0.0.0"
 
   # Project Substitutions (not intended for user substitution)
-  device_name: "Switchman M5 (3-Gang)"
+  device_model: "Switchman M5 (3-Gang)"
   device_make: "Sonoff"
   sw_version: "2024.2.13"
 

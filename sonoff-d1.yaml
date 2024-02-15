@@ -45,7 +45,7 @@ substitutions:
   dimmer_max_level: "100"
   dimmer_use_remote: "false"
   dimmer_gamma_correct: "0.0"
-  device_name: "D1"
+  device_model: "D1"
   device_make: "Sonoff"
   sw_version: "2024.2.9"
 
