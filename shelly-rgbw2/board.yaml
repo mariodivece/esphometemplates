@@ -1,0 +1,9 @@
+# Allow importing this package
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/shelly-rgbw2/board.yaml@main"
+  import_full_config: false
+
+# Board and preferences
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
