@@ -111,6 +111,7 @@ script:
                 brightness: !lambda |-
                   return id(${master_light}).remote_values.get_brightness();
 
+  # Makes all lights the same state as the master light
   - id: script_sync_lights
     mode: single
     then:
