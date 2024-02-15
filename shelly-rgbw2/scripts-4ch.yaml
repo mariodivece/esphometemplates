@@ -116,7 +116,7 @@ script:
     then:
       lambda: |-
         LightColorValues color_values = id(${master_light})->current_values;
-        id(light_ch1)->make_call()->from_light_color_values(color_values).perform();
-        id(light_ch2)->make_call()->from_light_color_values(color_values).perform();
-        id(light_ch3)->make_call()->from_light_color_values(color_values).perform();
-        id(light_ch4)->make_call()->from_light_color_values(color_values).perform();
+        id(light_ch1).make_call().from_light_color_values(color_values).perform();
+        id(light_ch2).make_call().from_light_color_values(color_values).perform();
+        id(light_ch3).make_call().from_light_color_values(color_values).perform();
+        id(light_ch4).make_call().from_light_color_values(color_values).perform();
