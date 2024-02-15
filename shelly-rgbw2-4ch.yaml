@@ -46,6 +46,7 @@ packages:
     ref: main
     refresh: 0d
     files:
+      - shelly-rgbw2/board.yaml
       - shelly-rgbw2/status-led.yaml
       - shelly-rgbw2/pwm-outputs.yaml
       - shelly-rgbw2/current-sensor.yaml
