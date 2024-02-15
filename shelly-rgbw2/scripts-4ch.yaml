@@ -74,7 +74,7 @@ script:
               - lambda: 'return(id(${master_light}).remote_values.get_brightness() <= 0.999);'
           then:
             - light.dim_relative:
-                id: dimmer
+                id: ${master_light}
                 relative_brightness: ${timing_dimming_step}
                 transition_length: ${timing_dimming_time}
             - delay: ${timing_dimming_time}
