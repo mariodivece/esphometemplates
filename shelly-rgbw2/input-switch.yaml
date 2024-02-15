@@ -1,0 +1,25 @@
+substitutions:
+  timing_press_threshold: "300ms"
+
+dashboard_import:
+  package_import_url: "github://mariodivece/esphometemplates/shelly-rgbw2/input-switch.yaml@main"
+  import_full_config: false
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO5
+    id: light_0_touch
+    name: "I - Dimming Control"
+    internal: false
+    on_multi_click:
+    - timing:
+        - ON for at most ${timing_press_threshold}
+      then:
+        - script.execute: script_dimmer_toggle
+    - timing:
+        - ON for at least ${timing_press_threshold}
+      then:
+        - script.execute: script_start_dimming_up
+    on_release:
+      then:
+        - script.execute: script_stop_dimming

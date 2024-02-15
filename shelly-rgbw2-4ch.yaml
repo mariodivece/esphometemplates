@@ -8,6 +8,8 @@ substitutions:
   device_number: "089"
   device_ip: "0.0.0.0"
 
+  timing_press_threshold: "300ms"
+
   # Project Substitutions (not intended for user substitution)
   device_model: "RGBW2"
   device_make: "Shelly"
@@ -51,6 +53,7 @@ packages:
       - shelly-rgbw2/pwm-outputs.yaml
       - shelly-rgbw2/current-sensor.yaml
       - shelly-rgbw2/scripts-4ch.yaml
+      - shelly-rgbw2/input-switch.yaml
 
 light:
 
@@ -70,97 +73,6 @@ light:
     output: pwm_out_ch3
 
   - platform: monochromatic
-    name: "Channel 4"
+    name: "Channel 4 (W)"
     id: light_ch4
     output: pwm_out_ch4
-
-binary_sensor:
-  - platform: gpio
-    pin: GPIO5
-    id: light_0_touch
-    name: "I - Dimming Control"
-    on_click:
-      then:
-        - if:
-            condition:
-              - light.is_off: ${device_name}_ch1
-              - light.is_off: ${device_name}_ch2
-              - light.is_off: ${device_name}_ch3
-              - light.is_off: ${device_name}_ch4
-            then:
-              - light.turn_on:
-                  id: ${device_name}_ch1
-                  brightness: 1.0
-              - light.turn_on:
-                  id: ${device_name}_ch2
-                  brightness: 1.0
-              - light.turn_on:
-                  id: ${device_name}_ch3
-                  brightness: 1.0
-              - light.turn_on:
-                  id: ${device_name}_ch4
-                  brightness: 1.0
-            else:
-              - light.turn_off: ${device_name}_ch1
-              - light.turn_off: ${device_name}_ch2
-              - light.turn_off: ${device_name}_ch3
-              - light.turn_off: ${device_name}_ch4
-    on_press:
-      then:
-        - if:
-            condition:
-              light.is_off: ${device_name}_ch1
-            then:
-              - delay: 0.5s
-              - while:
-                  condition:
-                    binary_sensor.is_on: light_0_touch
-                  then:
-                    - light.dim_relative:
-                        id: ${device_name}_ch1
-                        relative_brightness: 5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
-                    - light.dim_relative:
-                        id: ${device_name}_ch2
-                        relative_brightness: 5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
-                    - light.dim_relative:
-                        id: ${device_name}_ch3
-                        relative_brightness: 5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
-                    - light.dim_relative:
-                        id: ${device_name}_ch4
-                        relative_brightness: 5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
-            else:
-              - delay: 0.5s
-              - while:
-                  condition:
-                    and:
-                      - binary_sensor.is_on: light_0_touch
-                      - light.is_on: ${device_name}_ch1
-                  then:
-                    - light.dim_relative:
-                        id: ${device_name}_ch1
-                        relative_brightness: -5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
-                    - light.dim_relative:
-                        id: ${device_name}_ch2
-                        relative_brightness: -5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
-                    - light.dim_relative:
-                        id: ${device_name}_ch3
-                        relative_brightness: -5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
-                    - light.dim_relative:
-                        id: ${device_name}_ch4
-                        relative_brightness: -5%
-                        transition_length: 0.1s
-                    - delay: 0.1s
