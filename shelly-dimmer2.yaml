@@ -63,19 +63,19 @@ packages:
     ref: main
     refresh: 0d
     files:
-      - standard/package-project.yaml
-      - standard/package-diagnostics.yaml
-      - standard/package-wifi.yaml
+      - standard/project.yaml
+      - standard/diagnostics.yaml
+      - standard/wifi.yaml
   shelly_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
     refresh: 0d
     files:
-      - shelly-dimmer2/package-shelly-dimmer2-board.yaml
-      - shelly-dimmer2/package-shelly-dimmer2-scripts.yaml
-      - shelly-dimmer2/package-shelly-dimmer2-temperature.yaml
-      - shelly-dimmer2/package-shelly-dimmer2-switches.yaml
-      - shelly-dimmer2/package-shelly-dimmer2-buttons.yaml
+      - shelly-dimmer2/board.yaml
+      - shelly-dimmer2/scripts.yaml
+      - shelly-dimmer2/temperature.yaml
+      - shelly-dimmer2/switches.yaml
+      - shelly-dimmer2/buttons.yaml
 
 # Use the shelly_dimmer built-in platform
 light:

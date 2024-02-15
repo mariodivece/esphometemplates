@@ -1,6 +1,6 @@
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-sonoff-m5-status-led.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/status-led.yaml@main"
   import_full_config: false
 
 light:

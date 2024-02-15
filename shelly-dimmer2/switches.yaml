@@ -3,7 +3,7 @@ substitutions:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-shelly-dimmer2-switches.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/shelly-dimmer2/switches.yaml@main"
   import_full_config: false
 
 binary_sensor:

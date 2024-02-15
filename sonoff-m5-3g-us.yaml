@@ -107,26 +107,26 @@ packages:
     ref: main
     refresh: 0d
     files:
-      - standard/package-project.yaml
-      - standard/package-diagnostics.yaml
-      - standard/package-wifi.yaml
-      - standard/package-internaltemp.yaml
+      - standard/project.yaml
+      - standard/diagnostics.yaml
+      - standard/wifi.yaml
+      - standard/internaltemp.yaml
   sonoffm5_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
     refresh: 0d
     files:
-      - sonoff-m5/package-sonoff-m5-status-led.yaml
-      - sonoff-m5/package-sonoff-m5-backlight.yaml
-      - sonoff-m5/package-sonoff-m5-mode-button-a.yaml
-      - sonoff-m5/package-sonoff-m5-mode-button-b.yaml
-      - sonoff-m5/package-sonoff-m5-mode-button-c.yaml
-      - sonoff-m5/package-sonoff-m5-relay-a.yaml
-      - sonoff-m5/package-sonoff-m5-relay-b.yaml
-      - sonoff-m5/package-sonoff-m5-relay-c.yaml
-      - sonoff-m5/package-sonoff-m5-button-a.yaml
-      - sonoff-m5/package-sonoff-m5-button-b.yaml
-      - sonoff-m5/package-sonoff-m5-button-c.yaml
+      - sonoff-m5/status-led.yaml
+      - sonoff-m5/backlight.yaml
+      - sonoff-m5/mode-button-a.yaml
+      - sonoff-m5/mode-button-b.yaml
+      - sonoff-m5/mode-button-c.yaml
+      - sonoff-m5/relay-a.yaml
+      - sonoff-m5/relay-b.yaml
+      - sonoff-m5/relay-c.yaml
+      - sonoff-m5/button-a.yaml
+      - sonoff-m5/button-b.yaml
+      - sonoff-m5/button-c.yaml
 
 # Define the board for the compiler
 esp32:

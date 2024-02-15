@@ -4,7 +4,7 @@ substitutions:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/standard/package-diagnostics.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/standard/diagnostics.yaml@main"
   import_full_config: false
 
 # Enable logging via network and disable serial port

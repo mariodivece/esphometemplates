@@ -21,7 +21,7 @@ substitutions:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/standard/package-project.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/standard/project.yaml@main"
   import_full_config: false
 
 # Setup the integration and define some project variables

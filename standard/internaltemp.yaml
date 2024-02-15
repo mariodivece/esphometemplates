@@ -1,6 +1,6 @@
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/standard/package-internaltemp.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/standard/internaltemp.yaml@main"
   import_full_config: false
 
 sensor:

@@ -21,7 +21,7 @@ substitutions:
 
 # Allow importing this package
 dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/package-sonoff-m5-button-a.yaml@main"
+  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/button-a.yaml@main"
   import_full_config: false
 
 binary_sensor:

@@ -74,9 +74,9 @@ packages:
     ref: main
     refresh: 0d
     files:
-      - standard/package-project.yaml
-      - standard/package-diagnostics.yaml
-      - standard/package-wifi.yaml
+      - standard/project.yaml
+      - standard/diagnostics.yaml
+      - standard/wifi.yaml
 
 # Define the board for the compiler
 esp8266:
