@@ -43,6 +43,7 @@ packages:
       - standard/project.yaml
       - standard/diagnostics.yaml
       - standard/wifi.yaml
+      
   shelly_package:
     url: https://github.com/mariodivece/esphometemplates/
     ref: main
