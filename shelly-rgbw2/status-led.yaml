@@ -12,7 +12,6 @@ light:
     pin:
       number: GPIO02
       inverted: false
-      ignore_strapping_warning: true
     internal: true
     restore_mode: RESTORE_DEFAULT_ON
 
