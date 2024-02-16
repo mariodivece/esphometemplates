@@ -46,21 +46,11 @@ substitutions:
   device_number: "044"
   device_ip: "0.0.0.0"
 
-  # Optional import substitutions
-  log_level: INFO
-  timezone: "America/Mexico_City"
-
   # Project Substitutions (not intended for user substitution)
   device_model: "Switchman M5 (3-Gang)"
   device_make: "Sonoff"
   package_version: "2024.2.13"
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
-
-  # WiFi Substitutions
-  api_key: !secret api_key
-  wifi_ssid: !secret wifi_ssid
-  wifi_password: !secret wifi_password
-  ota_password: !secret ota_password
 
   # Relay Configurations
   relay_a_gpio: GPIO23
@@ -71,27 +61,6 @@ substitutions:
   button_a_gpio: GPIO04
   button_b_gpio: GPIO00
   button_c_gpio: GPIO15
-
-  # Button timing configurations
-  filter_delay_on: 50ms
-  filter_delay_off: 50ms
-
-  # Single Click Timings
-  timing_click_1: ON for at most 400ms
-  timing_click_2: OFF for at least 600ms
-  
-  # Double Click Timings
-  timing_double_click_1: ON for at most 500ms
-  timing_double_click_2: OFF for at most 400ms
-  timing_double_click_3: ON for at most 500ms
-  timing_double_click_4: OFF for at least 250ms
-
-  # Button Hold Timings
-  timing_hold: ON for at least 1s
-  timing_hold_repeat: 100ms
-
-  # Momentary Switch
-  timing_pulse: 250ms
 
 # Allow importing this package
 dashboard_import:
@@ -114,6 +83,7 @@ packages:
     ref: main
     refresh: 0d
     files:
+      - sonoff-m5/timings.yaml
       - sonoff-m5/status-led.yaml
       - sonoff-m5/backlight.yaml
       - sonoff-m5/mode-button-a.yaml

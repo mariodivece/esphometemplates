@@ -2,6 +2,10 @@
 # a 'root' device template and expects the substitutions that
 # are hereby referenced to be defined by its parent.
 
+substitutions:
+  log_level: INFO
+  timezone: "America/Mexico_City"
+
 # Enable logging via network and disable serial port
 logger:
   level: "${log_level}"
