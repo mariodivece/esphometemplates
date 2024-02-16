@@ -1,7 +1,6 @@
-# Allow importing this package
-dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/mode-button-a.yaml@main"
-  import_full_config: false
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
 
 select:
     # Config-only select for operation mode

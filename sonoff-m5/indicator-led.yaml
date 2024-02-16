@@ -1,5 +1,6 @@
-substitutions:
-  led_indicator_gpio: GPIO19
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
 
 # Allow importing this package
 dashboard_import:
