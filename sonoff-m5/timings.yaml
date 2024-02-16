@@ -1,0 +1,26 @@
+
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
+
+substitutions:
+  # Button timing configurations
+  filter_delay_on: 50ms
+  filter_delay_off: 50ms
+
+  # Single Click Timings
+  timing_click_1: ON for at most 400ms
+  timing_click_2: OFF for at least 600ms
+  
+  # Double Click Timings
+  timing_double_click_1: ON for at most 500ms
+  timing_double_click_2: OFF for at most 400ms
+  timing_double_click_3: ON for at most 500ms
+  timing_double_click_4: OFF for at least 250ms
+
+  # Button Hold Timings
+  timing_hold: ON for at least 1s
+  timing_hold_repeat: 100ms
+
+  # Pulse Switch
+  timing_pulse: 250ms
