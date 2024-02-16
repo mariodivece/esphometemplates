@@ -1,5 +1,4 @@
 substitutions:
-  usemac: "false"
   device_name: "My Sample Device 1"
   device_code: "my-sample-device-01"
 
