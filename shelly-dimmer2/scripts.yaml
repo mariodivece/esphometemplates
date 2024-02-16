@@ -68,11 +68,8 @@ script:
               - light.is_on: ${dimmer_id}
               - script.is_running: script_dimming_timer
               - lambda: |-
-                  auto light_state = id(${dimmer_id});
-                  auto color_Values = global_api_server->is_connected()
-                    ? light_state.remote_values
-                    : light_state.current_values;
-
+                  // we use remote values which are the target of the transition
+                  auto color_values = id(${dimmer_id}).remote_values;
                   return color_values.get_brightness() >= 0.01;
           then:
             - light.dim_relative:
@@ -94,11 +91,8 @@ script:
               - light.is_on: ${dimmer_id}
               - script.is_running: script_dimming_timer
               - lambda: |-
-                  auto light_state = id(${dimmer_id});
-                  auto color_Values = global_api_server->is_connected()
-                    ? light_state.remote_values
-                    : light_state.current_values;
-
+                  // we use remote values which are the target of the transition
+                  auto color_values = id(${dimmer_id}).remote_values;
                   return color_values.get_brightness() <= 0.999;
           then:
             - light.dim_relative:
@@ -123,9 +117,4 @@ script:
             - light.turn_on:
                 id: ${dimmer_id}
                 brightness: !lambda |-
-                  auto light_state = id(${dimmer_id});
-                  auto brightness = global_api_server->is_connected()
-                    ? light_state.remote_values.get_brightness()
-                    : 0.8;
-
-                  return brightness;
+                  return id(${dimmer_id}).remote_values.get_brightness();

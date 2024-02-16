@@ -31,26 +31,26 @@ script:
     then:
       - script.stop: script_start_dimming_up
       - script.execute: script_dimming_timer
-      - script.execute: script_sync_lights
+      - script.execute:
+          id: script_sync_lights
+          immediate: true
       - while:
           condition:
             and:
               # only run while timer is running and brightness >= 1%
               - light.is_on: ${master_light}
               - script.is_running: script_dimming_timer
-              - lambda: !-
-                  auto light_state = id(${master_light});
-                  auto color_Values = global_api_server->is_connected()
-                    ? light_state.remote_values
-                    : light_state.current_values;
-
+              - lambda: |-
+                  auto color_values = id(${master_light}).remote_values
                   return color_values.get_brightness() >= 0.01;
           then:
             - light.dim_relative:
                 id: ${master_light}
                 relative_brightness: -${timing_dimming_step}
                 transition_length: ${timing_dimming_time}
-            - script.execute: script_sync_lights
+            - script.execute:
+                id: script_sync_lights
+                immediate: false
             - delay: ${timing_dimming_time}
             
   # Executes while timer is running, light is on and brightness is in range
@@ -59,26 +59,26 @@ script:
     then:
       - script.stop: script_start_dimming_down
       - script.execute: script_dimming_timer
-      - script.execute: script_sync_lights
+      - script.execute:
+          id: script_sync_lights
+          immediate: true
       - while:
           # only run while timer is running and brightness <= 99.9%
           condition:
             and:
               - light.is_on: ${master_light}
               - script.is_running: script_dimming_timer
-              - lambda: !-
-                  auto light_state = id(${master_light});
-                  auto color_Values = global_api_server->is_connected()
-                    ? light_state.remote_values
-                    : light_state.current_values;
-
+              - lambda: |-
+                  auto color_values = id(${master_light}).remote_values
                   return color_values.get_brightness() <= 0.999;
           then:
             - light.dim_relative:
                 id: ${master_light}
                 relative_brightness: ${timing_dimming_step}
                 transition_length: ${timing_dimming_time}
-            - script.execute: script_sync_lights
+            - script.execute:
+                id: script_sync_lights
+                immediate: false
             - delay: ${timing_dimming_time}
 
   # Toggles the light on or off, depending on current state
@@ -91,30 +91,39 @@ script:
             light.is_on: ${master_light}
           then:
             - light.turn_off: ${master_light}
-            - script.execute: script_sync_lights
+            - script.execute:
+                id: script_sync_lights
+                immediate: false
           else:
             - light.turn_on:
                 id: ${master_light}
                 brightness: !lambda |-
-                  auto light_state = id(${master_light});
-                  auto brightness = global_api_server->is_connected()
-                    ? light_state.remote_values.get_brightness()
-                    : 0.8;
-                  return birghtness;
-            - script.execute: script_sync_lights
+                  return id(${master_light}).remote_values.get_brightness();
+            - script.execute:
+                id: script_sync_lights
+                immediate: false
 
   # Makes all lights the same state as the master light
+  # using the immediate (current) values and not target (remote) values
   - id: script_sync_lights
     mode: restart
+    parameters:
+      immediate: bool
     then:
       lambda: |-
-        // get current values from master light
-        // without round-tripping remote values
-        auto light_state = id(${master_light});
-        auto color_Values = light_state.current_values;
+        auto master_state = id(${master_light});
+        auto color_values = immediate ? master_state->current_values : master_state->remote_values;
+        auto transition_length = immediate ? 0 : master_state.get_default_transition_length();
+        auto lights = [id(light_ch1), id(light_ch2), id(light_ch3), id(light_ch4)];
 
-        // make them all the same
-        id(light_ch1).make_call().from_light_color_values(color_values).perform();
-        id(light_ch2).make_call().from_light_color_values(color_values).perform();
-        id(light_ch3).make_call().from_light_color_values(color_values).perform();
-        id(light_ch4).make_call().from_light_color_values(color_values).perform();
+        for (int i = 0; i < 3; i++) {
+          // skip ove the master light via reference comparison
+          if (lights[i].get_output() == master_state.get_output()) {
+            continue;
+          }
+          
+          lights[i].make_call()
+            .from_light_color_values(color_values)
+            .set_transition_length(transition_length)
+            .perform();
+        }
