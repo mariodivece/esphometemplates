@@ -1,7 +1,4 @@
 substitutions:
-  # Device Configurations
-  device_code: "unique-device-id-here"
-
   # Timing Configurations
   timing_timer_duration: "5s"
   timing_dimming_step: "0.5%"
