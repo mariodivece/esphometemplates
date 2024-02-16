@@ -122,7 +122,7 @@ script:
             continue;
           }
           
-          lights[i].make_call()
+          lights[i]->make_call()
             .from_light_color_values(color_values)
             .set_transition_length(transition_length)
             .perform();
