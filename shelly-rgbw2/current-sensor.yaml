@@ -12,5 +12,5 @@ sensor:
     icon: "mdi:lightning-bolt"
     device_class: "current"
     state_class: "measurement"
-    accuracy_decimals: 1
-    update_interval: 5s
+    accuracy_decimals: 4
+    update_interval: 1s
