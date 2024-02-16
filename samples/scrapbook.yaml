@@ -80,14 +80,34 @@ sensor:
     entity_category: diagnostic
     disabled_by_default: true
     lambda: return temperatureRead();
+
   - platform: wifi_signal
     name: "WiFi Signal"
     update_interval: 60s
+
   - platform: uptime
     name: "Uptime"
     id: sensor_uptime
-    update_interval: 300s
+    update_interval: 60s
     entity_category: "diagnostic"
+    on_raw_value:
+      then:
+        - text_sensor.template.publish:
+            id: uptime_human
+            state: !lambda |-
+              int seconds = round(id(uptime_sensor).raw_state);
+              int days = seconds / (24 * 3600);
+              seconds = seconds % (24 * 3600);
+              int hours = seconds / 3600;
+              seconds = seconds % 3600;
+              int minutes = seconds /  60;
+              seconds = seconds % 60;
+              return (
+                (days ? String(days) + "d " : "") +
+                (hours ? String(hours) + "h " : "") +
+                (minutes ? String(minutes) + "m " : "") +
+                (String(seconds) + "s")
+              ).c_str();
 
 # define global state variables
 globals:
