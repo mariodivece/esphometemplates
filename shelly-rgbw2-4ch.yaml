@@ -43,6 +43,7 @@ packages:
       - shelly-rgbw2/current-sensor.yaml
       - shelly-rgbw2/scripts-4ch.yaml
       - shelly-rgbw2/input-switch.yaml
+      - shelly-rgbw2/virtual-buttons.yaml
 
 light:
 

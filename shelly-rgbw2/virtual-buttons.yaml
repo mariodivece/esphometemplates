@@ -1,0 +1,27 @@
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
+
+
+# Define virtual control buttons
+# These simply call the available device scripts
+button:
+
+  - platform: template
+    name: Start Dimming Down
+    on_press:
+      then:
+        - script.execute: script_start_dimming_down
+
+  - platform: template
+    name: Start Dimmming Up
+    on_press:
+      then:
+        - script.execute: script_start_dimming_up
+
+  - platform: template
+    name: Stop Dimming
+    on_press:
+      then:
+        - script.execute: script_stop_dimming
+
