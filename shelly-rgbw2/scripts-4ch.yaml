@@ -112,7 +112,7 @@ script:
     then:
       lambda: |-
         auto master_state = id(${master_light});
-        auto color_values = immediate ? master_state->current_values : master_state->remote_values;
+        auto color_values = master_state->current_values; //immediate ? master_state->current_values : master_state->remote_values;
         auto transition_length = immediate ? 0 : master_state->get_default_transition_length();
         LightState* lights[] = {id(light_ch1), id(light_ch2), id(light_ch3), id(light_ch4)};
 
@@ -124,6 +124,6 @@ script:
           
           lights[i]->make_call()
             .from_light_color_values(color_values)
-            .set_transition_length(transition_length)
+            //.set_transition_length(transition_length)
             .perform();
         }
