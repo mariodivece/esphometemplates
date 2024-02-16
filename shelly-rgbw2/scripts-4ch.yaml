@@ -112,9 +112,9 @@ script:
     then:
       lambda: |-
         auto master_state = id(${master_light});
-        auto color_values = immediate ? master_state->current_values : master_state->remote_values;
+        auto color_values = immediate ? master_state.current_values : master_state.remote_values;
         auto transition_length = immediate ? 0 : master_state.get_default_transition_length();
-        auto lights = [id(light_ch1), id(light_ch2), id(light_ch3), id(light_ch4)];
+        LightState*[] lights = [id(light_ch1), id(light_ch2), id(light_ch3), id(light_ch4)];
 
         for (int i = 0; i < 3; i++) {
           // skip ove the master light via reference comparison
