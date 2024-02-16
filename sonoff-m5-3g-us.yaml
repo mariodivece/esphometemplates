@@ -46,17 +46,15 @@ substitutions:
   device_number: "044"
   device_ip: "0.0.0.0"
 
+  # Optional import substitutions
+  log_level: INFO
+  timezone: "America/Mexico_City"
+
   # Project Substitutions (not intended for user substitution)
   device_model: "Switchman M5 (3-Gang)"
   device_make: "Sonoff"
   package_version: "2024.2.13"
-
-  # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-3g-us.yaml@main"
-
-  # Diagnostics Substitutions
-  loglevel: INFO
-  timezone: "America/Mexico_City"
 
   # WiFi Substitutions
   api_key: !secret api_key

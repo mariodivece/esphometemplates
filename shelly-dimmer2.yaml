@@ -6,7 +6,7 @@
 # https://github.com/arendst/Tasmota/issues/6914
 
 substitutions:
-  # User-required substitutions
+  # Required import substitutions
   device_site: "home"
   device_location_code: "bedroom01"
   device_location_name: "Bedroom 1"
@@ -15,7 +15,11 @@ substitutions:
   device_number: "089"
   device_ip: "0.0.0.0"
 
-  # Optional user substitutions
+  # Optional import substitutions
+  log_level: INFO
+  timezone: "America/Mexico_City"
+
+  # Optional, device-specific substitutions
   dimmer_min_level: "470" # from 0 to 1000
   dimmer_max_level: "1000" # from 0 to 1000
   dimmer_warmup_level: "250" # from 0 to 1000
@@ -37,13 +41,7 @@ substitutions:
   device_model: "Dimmer2"
   device_make: "Shelly"
   package_version: "2024.2.14"
-
-  # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/shelly-dimmer2.yaml@main"
-
-  # Diagnostics Substitutions
-  loglevel: INFO
-  timezone: "America/Mexico_City"
 
   # WiFi Substitutions
   api_key: !secret api_key

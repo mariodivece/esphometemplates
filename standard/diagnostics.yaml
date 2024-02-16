@@ -4,7 +4,7 @@
 
 # Enable logging via network and disable serial port
 logger:
-  level: "${loglevel}"
+  level: "${log_level}"
   baud_rate: 0
 
 # Provide date and time

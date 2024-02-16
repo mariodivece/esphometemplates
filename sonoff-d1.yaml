@@ -40,21 +40,22 @@ substitutions:
   device_number: "044"
   device_ip: "0.0.0.0"
 
-  # Project Substitutions (not intended for user substitution)
+  # Optional import substitutions
+  log_level: INFO
+  timezone: "America/Mexico_City"
+
+  # Optional, device-specific import substitutions
   dimmer_min_level: "0"
   dimmer_max_level: "100"
   dimmer_use_remote: "false"
   dimmer_gamma_correct: "0.0"
+
+  # Project Substitutions (not intended for user substitution)
+
   device_model: "D1"
   device_make: "Sonoff"
   package_version: "2024.2.9"
-
-  # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/sonoff-d1.yaml@main"
-
-  # Diagnostics Substitutions
-  loglevel: INFO
-  timezone: "America/Mexico_City"
 
   # WiFi Substitutions
   api_key: !secret api_key
