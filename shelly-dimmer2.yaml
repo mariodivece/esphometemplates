@@ -15,10 +15,6 @@ substitutions:
   device_number: "089"
   device_ip: "0.0.0.0"
 
-  # Optional import substitutions
-  log_level: INFO
-  timezone: "America/Mexico_City"
-
   # Optional, device-specific substitutions
   dimmer_min_level: "470" # from 0 to 1000
   dimmer_max_level: "1000" # from 0 to 1000
@@ -42,12 +38,6 @@ substitutions:
   device_make: "Shelly"
   package_version: "2024.2.14"
   package_url: "github://mariodivece/esphometemplates/shelly-dimmer2.yaml@main"
-
-  # WiFi Substitutions
-  api_key: !secret api_key
-  wifi_ssid: !secret wifi_ssid
-  wifi_password: !secret wifi_password
-  ota_password: !secret ota_password
 
 # Allow importing this package
 dashboard_import:
