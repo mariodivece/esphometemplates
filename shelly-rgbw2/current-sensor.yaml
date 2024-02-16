@@ -15,7 +15,7 @@ sensor:
     accuracy_decimals: 5
     filters:
       - calibrate_polynomial:
-          degree: 2
+          degree: 1
           datapoints:
             - 0.39551 -> 0.0
             - 0.43750 -> 1.5834
