@@ -1,5 +1,6 @@
-# This file is port of a root template and expects the
-# substitutions that are referenced here.
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
 
 binary_sensor:
   # Physical Button A
@@ -22,7 +23,6 @@ binary_sensor:
         - ${timing_click_1}
         - ${timing_click_2}
         then:
-          # TODO: check global_api_server->is_connected()
           - homeassistant.event:
               event: esphome.on_gesture
               data:
@@ -36,7 +36,6 @@ binary_sensor:
           - ${timing_double_click_3}
           - ${timing_double_click_4}
         then:
-          # TODO: check global_api_server->is_connected()
           - homeassistant.event:
               event: esphome.on_gesture
               data:
@@ -52,7 +51,6 @@ binary_sensor:
                 binary_sensor.is_on: button_a
               then:
                 - light.toggle: led_status
-                # TODO: check global_api_server->is_connected()
                 - homeassistant.event:
                     event: esphome.on_gesture
                     data:

@@ -1,28 +1,6 @@
-substitutions:
-  button_b_gpio: GPIO00
-  
-  # Button timing configurations
-  filter_delay_on: 50ms
-  filter_delay_off: 50ms
-
-  # Single Click Timings
-  timing_click_1: ON for at most 400ms
-  timing_click_2: OFF for at least 600ms
-  
-  # Double Click Timings
-  timing_double_click_1: ON for at most 500ms
-  timing_double_click_2: OFF for at most 400ms
-  timing_double_click_3: ON for at most 500ms
-  timing_double_click_4: OFF for at least 250ms
-
-  # Button Hold Timings
-  timing_hold: ON for at least 1s
-  timing_hold_repeat: 100ms
-
-# Allow importing this package
-dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/sonoff-m5/button-b.yaml@main"
-  import_full_config: false
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
 
 binary_sensor:
   # Physical Button B
@@ -45,7 +23,6 @@ binary_sensor:
         - ${timing_click_1}
         - ${timing_click_2}
         then:
-          # TODO: check global_api_server->is_connected()
           - homeassistant.event:
               event: esphome.on_gesture
               data:
@@ -59,7 +36,6 @@ binary_sensor:
           - ${timing_double_click_3}
           - ${timing_double_click_4}
         then:
-          # TODO: check global_api_server->is_connected()
           - homeassistant.event:
               event: esphome.on_gesture
               data:
@@ -75,7 +51,6 @@ binary_sensor:
                 binary_sensor.is_on: button_b
               then:
                 - light.toggle: led_status
-                # TODO: check global_api_server->is_connected()
                 - homeassistant.event:
                     event: esphome.on_gesture
                     data:

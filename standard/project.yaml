@@ -1,27 +1,12 @@
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
+
 substitutions:
-  # User-required substitutions
-  device_site: "site" # for example, home
-  device_location_code: "room" # for example, office
-  device_location_name: "Room" # name for above location
-  device_type_code: "dimr" # A code for device type, example dimr
-  device_type_name: "Dimmer" # A name for the device type, example Dimmer
-  device_number: "642" # recommended 3-digit serial
-  device_ip: "192.168.1.31" # the ip addess that is statically assigned via DHCP
-
-  # Device Make, Model and Version (intended for device template implementation)
-  device_model: "Moldel 1"
-  device_make: "Cool Brand"
-  package_version: "2024.2.9"
-
   # Generated name and unique device id for the device
   # Not intended for user substitutions
   device_name: "${device_location_name} - ${device_type_name} - ${device_number}"
   device_code: "${device_site}-${device_location_code}-${device_type_code}-${device_number}"
-
-# Allow importing this package
-dashboard_import:
-  package_import_url: "github://mariodivece/esphometemplates/standard/project.yaml@main"
-  import_full_config: false
 
 # Setup the integration and define some project variables
 esphome:

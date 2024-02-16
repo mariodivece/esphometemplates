@@ -31,7 +31,6 @@ script:
       - logger.log:
           format: "Device turned off because %s exceeded %.1f%s"
           args: [ 'measure_name', 'measure_value', 'measure_unit' ]
-      # TODO: check global_api_server->is_connected()
       - homeassistant.service:
           service: persistent_notification.create
           data:
