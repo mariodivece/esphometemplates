@@ -1,5 +1,5 @@
 substitutions:
-  apikey: !secret esp_key
+  api_key: !secret api_key
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
   ota_password: !secret ota_password
@@ -13,7 +13,7 @@ dashboard_import:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "${apikey}"
+    key: "${api_key}"
 
 binary_sensor:
   # Diagnostic sensor for connection
@@ -37,7 +37,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   # password for hostspot is the same as password for net AP (needs captive_portal)
   ap:
-    ssid: "${uniquename}-setup"
+    ssid: "${device_code}-setup"
     password: "${wifi_password}"
 
 captive_portal:

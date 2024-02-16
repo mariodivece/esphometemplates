@@ -1,7 +1,7 @@
 substitutions:
   usemac: "false"
-  friendly: "My Sample Device 1"
-  uniquename: "my-sample-device-01"
+  device_name: "My Sample Device 1"
+  device_code: "my-sample-device-01"
 
 packages:
   somepackagename:

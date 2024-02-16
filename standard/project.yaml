@@ -1,22 +1,22 @@
 substitutions:
   # User-required substitutions
   device_site: "site" # for example, home
-  device_location: "room" # for example, office
-  device_location_name: "Room" # friendly name for above location
-  device_type: "dimr" # A code for device type, example dimr
-  device_type_name: "Dimmer" # A friendly name for the device type, example Dimmer
+  device_location_code: "room" # for example, office
+  device_location_name: "Room" # name for above location
+  device_type_code: "dimr" # A code for device type, example dimr
+  device_type_name: "Dimmer" # A name for the device type, example Dimmer
   device_number: "642" # recommended 3-digit serial
   device_ip: "192.168.1.31" # the ip addess that is statically assigned via DHCP
 
   # Device Make, Model and Version (intended for device template implementation)
   device_model: "Moldel 1"
   device_make: "Cool Brand"
-  sw_version: "2024.2.9"
+  package_version: "2024.2.9"
 
-  # Generated friendly and uniquename for the device
+  # Generated name and unique device id for the device
   # Not intended for user substitutions
-  friendly: "${device_location_name} - ${device_type_name} - ${device_number}"
-  uniquename: "${device_site}-${device_location}-${device_type}-${device_number}"
+  device_name: "${device_location_name} - ${device_type_name} - ${device_number}"
+  device_code: "${device_site}-${device_location_code}-${device_type_code}-${device_number}"
   usemac: "false"
 
 # Allow importing this package
@@ -26,18 +26,18 @@ dashboard_import:
 
 # Setup the integration and define some project variables
 esphome:
-  name: "${uniquename}"
-  friendly_name: "${friendly}"
+  name: "${device_code}"
+  friendly_name: "${device_name}"
   comment: "${device_model} by ${device_make}"
   name_add_mac_suffix: ${usemac}
   min_version: "2023.2.0"
   project:
     name: "${device_make}.${device_model}"
-    version: "${sw_version}"
+    version: "${package_version}"
 
 text_sensor:
   - platform: template
     name: "Deployment Version"
-    lambda: return {"${sw_version}"};
+    lambda: return {"${package_version}"};
     icon: "mdi:tag"
     entity_category: diagnostic

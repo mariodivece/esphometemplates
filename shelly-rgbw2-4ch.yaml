@@ -1,9 +1,9 @@
 substitutions:
   # User-required substitutions
   device_site: "home"
-  device_location: "bedroom01"
+  device_location_code: "bedroom01"
   device_location_name: "Bedroom 1"
-  device_type: "4cpc"
+  device_type_code: "4cpc"
   device_type_name: "4ch PWM Controller"
   device_number: "089"
   device_ip: "0.0.0.0"
@@ -13,7 +13,7 @@ substitutions:
   # Project Substitutions (not intended for user substitution)
   device_model: "RGBW2"
   device_make: "Shelly"
-  sw_version: "2024.2.15"
+  package_version: "2024.2.15"
 
   # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/shelly-rgbw2-4ch.yaml@main"
@@ -23,7 +23,7 @@ substitutions:
   timezone: "America/Mexico_City"
 
   # WiFi Substitutions
-  apikey: !secret esp_key
+  api_key: !secret api_key
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
   ota_password: !secret ota_password

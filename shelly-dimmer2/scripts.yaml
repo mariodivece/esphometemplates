@@ -1,12 +1,18 @@
 substitutions:
+  # Device Configurations
+  device_code: "unique-device-id-here"
+
   # Timing Configurations
   timing_timer_duration: "5s"
   timing_dimming_step: "0.5%"
   timing_dimming_time: "10ms"
-  uniquename: "uniquenamehere"
+
+  # Device Protection Limits
   dimmer_max_temp: "70"
   dimmer_max_current: "1.0"
   dimmer_max_power: "190"
+
+  dimmer_id: "dimmer"
 
 # Allow importing this package
 dashboard_import:
@@ -24,14 +30,15 @@ script:
       measure_value: float
       measure_unit: string
     then:
-      - light.turn_off: dimmer
+      - light.turn_off: ${dimmer_id}
       - logger.log:
           format: "Device turned off because %s exceeded %.1f%s"
           args: [ 'measure_name', 'measure_value', 'measure_unit' ]
+      # TODO: check global_api_server->is_connected()
       - homeassistant.service:
           service: persistent_notification.create
           data:
-            title: "Device '${uniquename}' self-protected."
+            title: "Device '${device_code}' self-protected."
           data_template:
             message: "Device protection activated. Max measures: ${dimmer_max_temp}°C, ${dimmer_max_current}A, ${dimmer_max_power}W."
 
@@ -58,12 +65,18 @@ script:
           condition:
             and:
               # only run while timer is running and brightness >= 1%
-              - light.is_on: dimmer
+              - light.is_on: ${dimmer_id}
               - script.is_running: script_dimming_timer
-              - lambda: 'return(id(dimmer).remote_values.get_brightness() >= 0.01);'
+              - lambda: |-
+                  auto light_state = id(${dimmer_id});
+                  auto color_Values = global_api_server->is_connected()
+                    ? light_state.remote_values
+                    : light_state.current_values;
+
+                  return color_values.get_brightness() >= 0.01;
           then:
             - light.dim_relative:
-                id: dimmer
+                id: ${dimmer_id}
                 relative_brightness: -${timing_dimming_step}
                 transition_length: ${timing_dimming_time}
             - delay: ${timing_dimming_time}
@@ -78,12 +91,18 @@ script:
           # only run while timer is running and brightness <= 99.9%
           condition:
             and:
-              - light.is_on: dimmer
+              - light.is_on: ${dimmer_id}
               - script.is_running: script_dimming_timer
-              - lambda: 'return(id(dimmer).remote_values.get_brightness() <= 0.999);'
+              - lambda: |-
+                  auto light_state = id(${dimmer_id});
+                  auto color_Values = global_api_server->is_connected()
+                    ? light_state.remote_values
+                    : light_state.current_values;
+
+                  return color_values.get_brightness() <= 0.999;
           then:
             - light.dim_relative:
-                id: dimmer
+                id: ${dimmer_id}
                 relative_brightness: ${timing_dimming_step}
                 transition_length: ${timing_dimming_time}
             - delay: ${timing_dimming_time}
@@ -96,12 +115,17 @@ script:
       - if:
           condition:
             light.is_on:
-              id: dimmer
+              id: ${dimmer_id}
           then:
             - light.turn_off:
-                id: dimmer
+                id: ${dimmer_id}
           else:
             - light.turn_on:
-                id: dimmer
+                id: ${dimmer_id}
                 brightness: !lambda |-
-                  return id(dimmer).remote_values.get_brightness();
+                  auto light_state = id(${dimmer_id});
+                  auto brightness = global_api_server->is_connected()
+                    ? light_state.remote_values.get_brightness()
+                    : 0.8;
+
+                  return brightness;

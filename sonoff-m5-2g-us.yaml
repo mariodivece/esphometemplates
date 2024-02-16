@@ -15,15 +15,15 @@
 #  - wifi_ssid: "<secret>"
 #  - wifi_password: "<secret>"
 #  - ota_password: "<secret>"
-#  - esp_key: "<32-byte-base-64-secret>"
+#  - api_key: "<32-byte-base-64-secret>"
 # 
 # Example file (lab-office-wasw-003.yaml)
 # 
 # substitutions:
 #  device_site: "lab"
-#  device_location: "office"
+#  device_location_code: "office"
 #  device_location_name: "Office"
-#  device_type: "wasw"
+#  device_type_code: "wasw"
 #  device_type_name: "Wall Switch"
 #  device_number: "003"
 #  device_ip: "192.168.1.31"
@@ -39,9 +39,9 @@
 substitutions:
   # User-required substitutions
   device_site: "home"
-  device_location: "bedroom01"
+  device_location_code: "bedroom01"
   device_location_name: "Bedroom 1"
-  device_type: "wasw"
+  device_type_code: "wasw"
   device_type_name: "Wall Switch"
   device_number: "044"
   device_ip: "0.0.0.0"
@@ -49,7 +49,7 @@ substitutions:
   # Project Substitutions (not intended for user substitution)
   device_model: "Switchman M5 (2-Gang)"
   device_make: "Sonoff"
-  sw_version: "2024.2.13"
+  package_version: "2024.2.13"
 
   # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/sonoff-m5-2g-us.yaml@main"
@@ -59,7 +59,7 @@ substitutions:
   timezone: "America/Mexico_City"
 
   # WiFi Substitutions
-  apikey: !secret esp_key
+  api_key: !secret api_key
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
   ota_password: !secret ota_password

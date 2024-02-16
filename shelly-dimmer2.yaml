@@ -1,6 +1,6 @@
-# ESPHome Firmware for
-# Shelly Dimmer2
-# initial code taken from 
+# ESPHome formware template for Shelly Dimmer2
+# 
+# initial code taken from
 # https://github.com/esphome/issues/issues/3487
 # Analysis from:
 # https://github.com/arendst/Tasmota/issues/6914
@@ -8,9 +8,9 @@
 substitutions:
   # User-required substitutions
   device_site: "home"
-  device_location: "bedroom01"
+  device_location_code: "bedroom01"
   device_location_name: "Bedroom 1"
-  device_type: "dimr"
+  device_type_code: "dimr"
   device_type_name: "Dimmer"
   device_number: "089"
   device_ip: "0.0.0.0"
@@ -36,7 +36,7 @@ substitutions:
   # Project Substitutions (not intended for user substitution)
   device_model: "Dimmer2"
   device_make: "Shelly"
-  sw_version: "2024.2.14"
+  package_version: "2024.2.14"
 
   # Adjust package URL to point to this file
   package_url: "github://mariodivece/esphometemplates/shelly-dimmer2.yaml@main"
@@ -46,7 +46,7 @@ substitutions:
   timezone: "America/Mexico_City"
 
   # WiFi Substitutions
-  apikey: !secret esp_key
+  api_key: !secret api_key
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password
   ota_password: !secret ota_password
