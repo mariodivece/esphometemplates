@@ -91,8 +91,8 @@ substitutions:
   timing_hold: ON for at least 1s
   timing_hold_repeat: 100ms
 
-  # Momentary Switch
-  timing_momentary: 250ms
+  # Pulse Switch
+  timing_pulse: 250ms
 
 # Allow importing this package
 dashboard_import:
@@ -163,7 +163,7 @@ binary_sensor:
             - lambda: 'return id(mode_a).active_index() == 2;'
           then:
             - switch.turn_on: relay_a
-            - delay: ${timing_momentary}
+            - delay: ${timing_pulse}
             - switch.turn_off: relay_a
       # Decoupled
       - if:

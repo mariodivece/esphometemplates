@@ -93,7 +93,7 @@ substitutions:
   timing_hold_repeat: 100ms
 
   # Momentary Switch
-  timing_momentary: 250ms
+  timing_pulse: 250ms
 
 # Allow importing this package
 dashboard_import:
@@ -157,7 +157,7 @@ binary_sensor:
             - lambda: 'return id(mode_a).active_index() == 2;'
           then:
             - switch.turn_on: relay_a
-            - delay: ${timing_momentary}
+            - delay: ${timing_pulse}
             - switch.turn_off: relay_a
 
     on_release:
@@ -189,7 +189,7 @@ binary_sensor:
             - lambda: 'return id(mode_b).active_index() == 2;'
           then:
             - switch.turn_on: relay_b
-            - delay: ${timing_momentary}
+            - delay: ${timing_pulse}
             - switch.turn_off: relay_b
 
     on_release:
@@ -221,7 +221,7 @@ binary_sensor:
             - lambda: 'return id(mode_c).active_index() == 2;'
           then:
             - switch.turn_on: relay_c
-            - delay: ${timing_momentary}
+            - delay: ${timing_pulse}
             - switch.turn_off: relay_c
 
     on_release:
