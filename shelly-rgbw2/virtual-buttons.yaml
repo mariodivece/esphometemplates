@@ -37,4 +37,4 @@ button:
       then:
         - script.execute:
             id: script_sync_lights
-            script_sync_lights: -1
+            transition_length_ms: -1
