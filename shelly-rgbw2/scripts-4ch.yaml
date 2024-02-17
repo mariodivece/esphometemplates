@@ -31,7 +31,14 @@ script:
     then:
       - script.stop: script_start_dimming_up
       - script.execute: script_dimming_timer
-      - script.execute: script_sync_lights
+      - if:
+        condition:
+          light.is_off: ${master_light}
+        then:
+          light.turn_on: ${master_light}
+      - script.execute:
+          id: script_sync_lights
+          transition_length_ms: -1
       - while:
           condition:
             and:
@@ -46,7 +53,9 @@ script:
                 id: ${master_light}
                 relative_brightness: -${timing_dimming_step}
                 transition_length: ${timing_dimming_time_ms}ms
-            - script.execute: script_sync_lights
+            - script.execute:
+                id: script_sync_lights
+                transition_length_ms: ${timing_dimming_time_ms}
             - delay: ${timing_dimming_time_ms}ms
             
   # Executes while timer is running, light is on and brightness is in range
@@ -55,7 +64,14 @@ script:
     then:
       - script.stop: script_start_dimming_down
       - script.execute: script_dimming_timer
-      - script.execute: script_sync_lights
+      - if:
+        condition:
+          light.is_off: ${master_light}
+        then:
+          light.turn_on: ${master_light}
+      - script.execute:
+          id: script_sync_lights
+          transition_length_ms: -1
       - while:
           # only run while timer is running and brightness <= 99.9%
           condition:
@@ -70,12 +86,14 @@ script:
                 id: ${master_light}
                 relative_brightness: ${timing_dimming_step}
                 transition_length: ${timing_dimming_time_ms}ms
-            - script.execute: script_sync_lights
+            - script.execute:
+                id: script_sync_lights
+                transition_length_ms: ${timing_dimming_time_ms}
             - delay: ${timing_dimming_time_ms}ms
 
   # Toggles the light on or off, depending on current state
   - id: script_dimmer_toggle
-    mode: single
+    mode: restart
     then:
       - script.execute: script_stop_dimming
       - if:
@@ -83,23 +101,39 @@ script:
             light.is_on: ${master_light}
           then:
             - light.turn_off: ${master_light}
-            - script.execute: script_sync_lights
+            - script.execute:
+                id: script_sync_lights
+                transition_length_ms: -1
           else:
             - light.turn_on:
                 id: ${master_light}
                 brightness: !lambda |-
                   return id(${master_light}).remote_values.get_brightness();
-            - script.execute: script_sync_lights
+            - script.execute:
+                id: script_sync_lights
+                transition_length_ms: -1
 
   # Makes all lights the same state as the master light
   # using the immediate (current) values and not target (remote) values
   - id: script_sync_lights
     mode: restart
+    parameters:
+      transition_length_ms: int
     then:
       lambda: |-
         auto master_state = id(${master_light});
+        transition_length_ms = transition_length_ms < 0
+          ? master_state->get_default_transition_length()
+          : ${timing_dimming_time_ms};
+
         auto color_values = master_state->remote_values;
-        LightState* lights[] = {id(light_ch1), id(light_ch2), id(light_ch3), id(light_ch4)};
+        
+        LightState* lights[] = {
+          id(light_ch1),
+          id(light_ch2),
+          id(light_ch3),
+          id(light_ch4)
+        };
 
         for (int i = 0; i < 4; i++) {
           // skip ove the master light via reference comparison
@@ -109,6 +143,6 @@ script:
           
           lights[i]->make_call()
             .from_light_color_values(color_values)
-            .set_transition_length(${timing_dimming_time_ms})
+            .set_transition_length((uint)transition_length_ms)
             .perform();
         }

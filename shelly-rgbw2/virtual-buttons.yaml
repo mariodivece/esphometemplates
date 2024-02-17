@@ -31,3 +31,8 @@ button:
       then:
         - script.execute: script_dimmer_toggle
 
+  - platform: template
+    name: Sync Lights
+    on_press:
+      then:
+        - script.execute: script_sync_lights
