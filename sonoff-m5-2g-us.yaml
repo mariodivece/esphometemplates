@@ -84,6 +84,7 @@ packages:
     ref: main
     refresh: 0d
     files:
+      - sonoff-m5/board.yaml 
       - sonoff-m5/timings.yaml
       - sonoff-m5/status-led.yaml
       - sonoff-m5/backlight.yaml
@@ -94,13 +95,6 @@ packages:
       - sonoff-m5/relay-b.yaml
       - sonoff-m5/button-a.yaml
       - sonoff-m5/button-b.yaml
-
-# Define the board for the compiler
-esp32:
-  board: esp32dev
-  framework:
-    type: esp-idf
-    version: recommended
 
 switch:
     
