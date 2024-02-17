@@ -60,16 +60,25 @@ captive_portal:
 
 # diagnostic output
 text_sensor:
+
   - platform: template
     name: "Deployment Version"
     lambda: return {"${package_version}"};
     icon: "mdi:tag"
     entity_category: diagnostic
+
   - platform: wifi_info
     ip_address:
       id: ip_address
       name: "IP Address"
       icon: "mdi:wan"
+
+  - platform: template
+    name: "${device_name} - Uptime"
+    id: uptime_human
+    icon: mdi:clock-start
+    update_interval: 60s
+    entity_category: "diagnostic"
       
 sensor:
   - platform: template
