@@ -99,12 +99,13 @@ sensor:
     id: sensor_uptime
     update_interval: 60s
     entity_category: "diagnostic"
+    internal: true
     on_raw_value:
       then:
         - text_sensor.template.publish:
             id: uptime_human
             state: !lambda |-
-              int seconds = round(id(uptime_sensor).raw_state);
+              int seconds = round(id(sensor_uptime).raw_state);
               int days = seconds / (24 * 3600);
               seconds = seconds % (24 * 3600);
               int hours = seconds / 3600;
