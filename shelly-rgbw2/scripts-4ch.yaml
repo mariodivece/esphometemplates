@@ -43,7 +43,7 @@ script:
           condition:
             and:
               # only run while timer is running and brightness >= 1%
-              - light.is_on: ${master_light}
+              #- light.is_on: ${master_light}
               - script.is_running: script_dimming_timer
               - lambda: |-
                   auto color_values = id(${master_light}).remote_values;
@@ -76,7 +76,7 @@ script:
           # only run while timer is running and brightness <= 99.9%
           condition:
             and:
-              - light.is_on: ${master_light}
+              #- light.is_on: ${master_light}
               - script.is_running: script_dimming_timer
               - lambda: |-
                   auto color_values = id(${master_light}).remote_values;
