@@ -42,12 +42,11 @@ script:
       - while:
           condition:
             and:
-              # only run while timer is running and brightness >= 1%
-              #- light.is_on: ${master_light}
+              # only run while timer is running and brightness >= 0%
               - script.is_running: script_dimming_timer
               - lambda: |-
                   auto color_values = id(${master_light}).remote_values;
-                  return color_values.get_brightness() >= 0.01;
+                  return color_values.get_brightness() > 0.0;
           then:
             - light.dim_relative:
                 id: ${master_light}
@@ -73,14 +72,13 @@ script:
           id: script_sync_lights
           transition_length_ms: -1
       - while:
-          # only run while timer is running and brightness <= 99.9%
+          # only run while timer is running and brightness <= 100%
           condition:
             and:
-              #- light.is_on: ${master_light}
               - script.is_running: script_dimming_timer
               - lambda: |-
                   auto color_values = id(${master_light}).remote_values;
-                  return color_values.get_brightness() <= 0.999;
+                  return color_values.get_brightness() < 1.0;
           then:
             - light.dim_relative:
                 id: ${master_light}
@@ -118,6 +116,7 @@ script:
   - id: script_sync_lights
     mode: restart
     parameters:
+      # -1 is default transition length, anything else is expressed in ms.
       transition_length_ms: int
     then:
       lambda: |-
