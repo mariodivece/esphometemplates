@@ -14,3 +14,7 @@ sensor:
     state_class: "measurement"
     accuracy_decimals: 5
     update_interval: 1s
+    filters:
+      - calibrate_linear:
+        - 0.3877 -> 0.0
+        - 0.4541 -> 2.5
