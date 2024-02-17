@@ -32,10 +32,10 @@ script:
       - script.stop: script_start_dimming_up
       - script.execute: script_dimming_timer
       - if:
-        condition:
-          light.is_off: ${master_light}
-        then:
-          light.turn_on: ${master_light}
+          condition:
+            light.is_off: ${master_light}
+          then:
+            light.turn_on: ${master_light}
       - script.execute:
           id: script_sync_lights
           transition_length_ms: -1
@@ -65,10 +65,10 @@ script:
       - script.stop: script_start_dimming_down
       - script.execute: script_dimming_timer
       - if:
-        condition:
-          light.is_off: ${master_light}
-        then:
-          light.turn_on: ${master_light}
+          condition:
+            light.is_off: ${master_light}
+          then:
+            light.turn_on: ${master_light}
       - script.execute:
           id: script_sync_lights
           transition_length_ms: -1
