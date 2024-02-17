@@ -25,3 +25,9 @@ button:
       then:
         - script.execute: script_stop_dimming
 
+  - platform: template
+    name: Toggle
+    on_press:
+      then:
+        - script.execute: script_dimmer_toggle
+
