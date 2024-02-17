@@ -35,4 +35,6 @@ button:
     name: Sync Lights
     on_press:
       then:
-        - script.execute: script_sync_lights
+        - script.execute:
+          id: script_sync_lights
+          script_sync_lights: -1
