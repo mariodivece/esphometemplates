@@ -13,3 +13,52 @@ uart:
     tx_pin: 1
     rx_pin: 3
     baud_rate: 115200
+
+# Configure unused pins as input, pull-up, internal
+# to increase stability and reduce power draw
+# TODO: Figure out which pins; see:
+# https://github.com/esphome/feature-requests/issues/2587
+
+#binary_sensor
+#
+#  - platform: gpio
+#    pin:
+#      number: GPIO02
+#      internal: true
+#      mode: INPUT_PULLUP
+#
+#  - platform: gpio
+#    pin:
+#      number: GPIO03
+#      internal: true
+#      mode: INPUT_PULLUP
+#
+#  - platform: gpio
+#    pin:
+#      number: GPIO05
+#      internal: true
+#      mode: INPUT_PULLUP
+#
+#  - platform: gpio
+#    pin:
+#      number: GPIO12
+#      internal: true
+#      mode: INPUT_PULLUP
+#
+#  - platform: gpio
+#    pin:
+#      number: GPIO13
+#      internal: true
+#      mode: INPUT_PULLUP
+#
+#  - platform: gpio
+#    pin:
+#      number: GPIO14
+#      internal: true
+#      mode: INPUT_PULLUP
+
+  - platform: gpio
+    pin:
+      number: GPIO16
+      internal: true
+      mode: INPUT_PULLUP
