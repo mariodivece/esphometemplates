@@ -20,14 +20,14 @@ binary_sensor:
 
     has_moving_target:
       id: radar_has_moving_target
-      name: Radar Moving Target
+      name: Radar Target Movement
       on_state:
         then:
           - script.execute: script_update_occupancy
           
     has_still_target:
       id: radar_has_still_target
-      name: Radar Still Target
+      name: Radar Target Stillness
       on_state:
         then:
           - script.execute: script_update_occupancy
@@ -42,7 +42,7 @@ sensor:
     ld2410_id: ld2410_radar
 
     detection_distance:
-      name: Radar Detected Distance
+      name: Radar Target Distance
       id: radar_detection_distance
 
 #Configuration entities
