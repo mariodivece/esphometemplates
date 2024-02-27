@@ -31,7 +31,7 @@ binary_sensor:
       on_state:
         then:
           - script.execute: script_update_occupancy
-          
+
   - platform: template
     name: "Radar Occupancy"
     id: radar_occupancy
@@ -90,11 +90,11 @@ script:
             or:
               - binary_sensor.is_on: radar_has_moving_target
               - binary_sensor.is_on: radar_has_still_target
-        then:
-          - binary_sensor.template.publish:
-              id: radar_occupancy
-              state: true
-        else:
-          - binary_sensor.template.publish:
-              id: radar_occupancy
-              state: false 
+          then:
+            - binary_sensor.template.publish:
+                id: radar_occupancy
+                state: true
+          else:
+            - binary_sensor.template.publish:
+                id: radar_occupancy
+                state: false 
