@@ -1,14 +1,21 @@
+
+substitutions:
+  bmp280_sda: "GPIO21"
+  bmp280_scl: "GPIO22"
+  bmp280_address: "0x76" # This might vary by mfr. (0x76 or 0x77)
+  bmp280_interval: "15s"
+
 i2c:
-  sda: GPIO21
-  scl: GPIO22
+  sda: ${bmp280_sda}
+  scl: ${bmp280_scl}
   scan: true
-  id: bus_a
+  id: i2c_bus_a
   
 sensor:
   - platform: bmp280
-    i2c_id: bus_a
-    address: 0x76 #0x77 # This might be different (test)
-    update_interval: 15s
+    i2c_id: i2c_bus_a
+    address: ${bmp280_address}
+    update_interval: ${bmp280_interval}
     iir_filter: 4x
 
     temperature:

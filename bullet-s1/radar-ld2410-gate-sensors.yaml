@@ -1,0 +1,63 @@
+# Advanced sensors for individual gates
+
+sensor:
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    moving_distance:
+      name: Radar Moving Distance
+
+    still_distance:
+      name: Radar Still Distance
+    
+    moving_energy:
+      name: Radar Move Energy
+    
+    still_energy:
+      name: Radar Still Energy
+
+    g0:
+      move_energy:
+        name: G0 move energy
+      still_energy:
+        name: G0 still energy
+    g1:
+      move_energy:
+        name: G1 move energy
+      still_energy:
+        name: G1 still energy
+    g2:
+      move_energy:
+        name: G2 move energy
+      still_energy:
+        name: G2 still energy
+    g3:
+      move_energy:
+        name: G3 move energy
+      still_energy:
+        name: G3 still energy
+    g4:
+      move_energy:
+        name: G4 move energy
+      still_energy:
+        name: G4 still energy
+    g5:
+      move_energy:
+        name: G5 move energy
+      still_energy:
+        name: G5 still energy
+    g6:
+      move_energy:
+        name: G6 move energy
+      still_energy:
+        name: G6 still energy
+    g7:
+      move_energy:
+        name: G7 move energy
+      still_energy:
+        name: G7 still energy
+    g8:
+      move_energy:
+        name: G8 move energy
+      still_energy:
+        name: G8 still energy

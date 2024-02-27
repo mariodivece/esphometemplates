@@ -1,6 +1,6 @@
 # Optional include. Requires parent radar template to be included
 # Allows you to setup 3 zones (could setup more) in case you want to enable
-# multi-zone detection
+# multi-zone configuration and detection
 
 number:
   # Config: Ending of zone 1 occupancy
@@ -51,11 +51,14 @@ number:
     icon: "mdi:arrow-collapse-right"
     entity_category: CONFIG
 
-# Occupancy sensor
 binary_sensor:
 
   - platform: ld2410
     ld2410_id: ld2410_radar
+
+    has_target:
+      name: Radar Has Target
+      id: radar_has_target
 
   # Set Up Radar Zones Based On Distance
   - platform: template
