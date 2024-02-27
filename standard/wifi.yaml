@@ -18,7 +18,7 @@ sensor:
   - platform: wifi_signal
     name: "RSSI"
     id: sensor_rssi
-    update_interval: 90s
+    update_interval: 60s
     entity_category: "diagnostic"
 
 # Enable OTA

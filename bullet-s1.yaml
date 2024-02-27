@@ -40,6 +40,6 @@ packages:
     refresh: 0d
     files:
       - bullet-s1/board-node32s.yaml 
-      - bullet-s1/radar.yaml
-      - bullet-s1/bmp280.yaml
-      - bullet-s1/motion.yaml
+      - bullet-s1/radar-ld2410.yaml
+      - bullet-s1/temp-bmp280.yaml
+      - bullet-s1/motion-am312.yaml

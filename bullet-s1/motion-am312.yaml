@@ -2,5 +2,6 @@ binary_sensor:
   # AM312 PIR Motion Sensor
   - platform: gpio
     pin: GPIO36
-    name: "PIR Sensor"
+    name: "PIR Motion"
+    id: pir_motion
     device_class: motion

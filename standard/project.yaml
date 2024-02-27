@@ -32,18 +32,22 @@ esphome:
           id(cpu_speed) = ESP.getCpuFreqMHz();
 
 text_sensor:
+  # Show firmware template version
   - platform: template
     name: "Deployment Version"
     lambda: return {"${package_version}"};
+    disabled_by_default: true
     icon: "mdi:tag"
     entity_category: diagnostic
 
 sensor:
-    #Device CPU Speed
+    # Device CPU Frequency
   - platform: template
     name: "CPU Frequency"
+    icon: "mdi:speedometer"
     accuracy_decimals: 0
     unit_of_measurement: Mhz
+    disabled_by_default: true
     lambda: |-
       return (id(cpu_speed));
-    entity_category: "diagnostic"
+    entity_category: diagnostic

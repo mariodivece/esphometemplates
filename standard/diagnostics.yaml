@@ -29,18 +29,20 @@ text_sensor:
   - platform: template
     name: "Uptime"
     id: uptime_human
-    icon: mdi:clock-start
+    icon: "mdi:timer-check-outline"
     update_interval: 60s
     entity_category: "diagnostic"
+    disabled_by_default: true
 
 binary_sensor:
   # Diagnostic sensor for connection
   - platform: status
-    name: "Status"
+    name: "API Status"
     id: sensor_status
+    disabled_by_default: true
 
 sensor:
-    #Device Memory
+    # Device Memory
   - platform: template
     id: esp_memory
     icon: mdi:memory
@@ -49,7 +51,10 @@ sensor:
     unit_of_measurement: "kB"
     state_class: measurement
     entity_category: "diagnostic"
+    disabled_by_default: true
 
+  # Captures the uptime and updates the human-readable
+  # text sensor displayed. This is an internal sensor only.
   - platform: uptime
     name: "Uptime"
     id: sensor_uptime
@@ -82,8 +87,10 @@ button:
     id: button_restart
     icon: mdi:power-cycle
 
+  # Provide a button to reset all defined flash settings.
   - platform: factory_reset
-    disabled_by_default: True
+    disabled_by_default: true
     name: "Factory Settings"
     id: factory_reset_all
+    icon: mdi:factory
     
