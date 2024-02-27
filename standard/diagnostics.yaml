@@ -83,9 +83,10 @@ sensor:
 # Provide a pre-built button for restarting the device
 button:
   - platform: restart
-    name: "Restart"
+    name: "Reboot Device"
     id: button_restart
     icon: mdi:power-cycle
+    category: "diagnostic"
 
   # Provide a button to reset all defined flash settings.
   - platform: factory_reset

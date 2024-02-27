@@ -67,11 +67,11 @@ button:
     ld2410_id: ld2410_radar
 
     factory_reset:
-      name: "Radar Factory Settings"
+      name: "Load Radar Defaults"
     restart:
-      name: "Radar Reboot"
+      name: "Reboot Radar Module"
     query_params:
-      name: "Radar Refresh Values"
+      name: "Force Radar Refresh"
 
 #Radar firmware version
 text_sensor:
