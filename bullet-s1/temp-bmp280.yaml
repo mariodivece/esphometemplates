@@ -26,7 +26,7 @@ sensor:
     name: "Altitude"
     lambda: |-
       const float STANDARD_SEA_LEVEL_PRESSURE = 1013.25; //in hPa, see note
-      return ((id(bme280_temperature).state + 273.15) / 0.0065) *
+      return ((id(ambient_temperature).state + 273.15) / 0.0065) *
         (powf((STANDARD_SEA_LEVEL_PRESSURE / id(ambient_pressure).state), 0.190234) - 1); // in meters
     update_interval: 15s
     icon: 'mdi:signal'
