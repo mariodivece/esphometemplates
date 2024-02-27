@@ -4,9 +4,17 @@
 select:
   - platform: ld2410
     ld2410_id: ld2410_radar
-    
+
     distance_resolution:
       name: "Radar Distance Resolution"
+
+binary_sensor:
+
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    out_pin_presence_status:
+      name: Radar Presence Pin
 
 #Exposes control switches
 switch:
