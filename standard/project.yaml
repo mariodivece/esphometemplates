@@ -8,6 +8,13 @@ substitutions:
   device_name: "${device_location_name} - ${device_type_name} - ${device_number}"
   device_code: "${device_site}-${device_location_code}-${device_type_code}-${device_number}"
 
+# Define a global variable for CPU speed
+globals:
+  - id: cpu_speed
+    type: int
+    restore_value: no
+    initial_value: "0"
+
 # Setup the integration and define some project variables
 esphome:
   name: "${device_code}"
@@ -18,6 +25,11 @@ esphome:
   project:
     name: "${device_make}.${device_model}"
     version: "${package_version}"
+  on_boot:
+  - priority: 900.0
+    then:
+      - lambda: |-
+          id(cpu_speed) = ESP.getCpuFreqMHz();
 
 text_sensor:
   - platform: template
@@ -25,3 +37,13 @@ text_sensor:
     lambda: return {"${package_version}"};
     icon: "mdi:tag"
     entity_category: diagnostic
+
+sensor:
+    #Device CPU Speed
+  - platform: template
+    name: "CPU Frequency"
+    accuracy_decimals: 0
+    unit_of_measurement: Mhz
+    lambda: |-
+      return (id(cpu_speed));
+    entity_category: "diagnostic"

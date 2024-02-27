@@ -1,0 +1,45 @@
+# Radar example taken from : https://smarthomescene.com/diy/diy-presence-sensor-with-hi-link-ld2410-and-esp32-for-home-assistant/
+# AM312 PIR motion sensor example taken from https://omarghader.github.io/esp32-am312-pir-motion-sensor/
+# NodeMCU 32S Pinoput taken from https://cyberblogspot.com/nodemcu-esp-32s-pin-configuration/
+
+substitutions:
+  # User-required substitutions
+  device_site: "bl24"
+  device_location_code: "office"
+  device_location_name: "Office"
+  device_type_code: "aios"
+  device_type_name: "Ambient Sensor"
+  device_number: "096"
+  device_ip: "192.168.1.11"
+
+  # Project Substitutions (not intended for user substitution)
+  device_model: "Bullet S1"
+  device_make: "Bullet Automation"
+  package_version: "2024.2.26"
+  package_url: "github://mariodivece/esphometemplates/bullet-s1.yaml@main"
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: ${package_url}
+  import_full_config: false
+
+# Import packages
+packages:
+  standard_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    refresh: 0d
+    files:
+      - standard/project.yaml
+      - standard/diagnostics.yaml
+      - standard/wifi.yaml
+      - standard/internaltemp.yaml
+  sonoffm5_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    refresh: 0d
+    files:
+      - bullet-s1/board-node32s.yaml 
+      - bullet-s1/radar.yaml
+      - bullet-s1/bmp280.yaml
+      - bullet-s1/motion.yaml

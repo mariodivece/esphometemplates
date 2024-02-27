@@ -1,0 +1,16 @@
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true
+  id: bus_a
+  
+sensor:
+  - platform: bmp280
+    i2c_id: bus_a
+    temperature:
+      name: "Ambient Temperature"
+      oversampling: 16x
+    pressure:
+      name: "Ambient Pressure"
+    address: 0x76 #0x77 # This might be different (test)
+    update_interval: 60s

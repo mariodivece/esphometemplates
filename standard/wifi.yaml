@@ -14,11 +14,12 @@ api:
   encryption:
     key: "${api_key}"
 
-binary_sensor:
-  # Diagnostic sensor for connection
-  - platform: status
-    name: "Status"
-    id: sensor_status
+sensor:
+  - platform: wifi_signal
+    name: "RSSI"
+    id: sensor_rssi
+    update_interval: 90s
+    entity_category: "diagnostic"
 
 # Enable OTA
 ota:
