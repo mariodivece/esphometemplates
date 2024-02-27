@@ -41,5 +41,6 @@ packages:
     files:
       - bullet-s1/board-node32s.yaml 
       - bullet-s1/radar-ld2410.yaml
+      - bullet-s1/radar-ld2410-zoning.yaml
       - bullet-s1/temp-bmp280.yaml
       - bullet-s1/motion-am312.yaml
