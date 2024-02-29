@@ -36,6 +36,7 @@ binary_sensor:
     name: "Radar Occupancy"
     id: radar_occupancy
     icon: mdi:account-box-outline
+    device_class: occupancy
 
 sensor:
   - platform: ld2410

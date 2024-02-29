@@ -1,0 +1,254 @@
+substitutions:
+  # User-required substitutions
+  device_site: "bl24"
+  device_location_code: "office"
+  device_location_name: "Office"
+  device_type_code: "aios"
+  device_type_name: "Ambient Sensor"
+  device_number: "097"
+  device_ip: "192.168.1.37"
+
+  # Project Substitutions (not intended for user substitution)
+  device_model: "Bullet S1"
+  device_make: "Bullet Automation"
+  package_version: "2024.2.28"
+  package_url: "github://mariodivece/esphometemplates/bullet-s3c.yaml@main"
+
+  log_level: INFO
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: ${package_url}
+  import_full_config: false
+
+esphome:
+  platformio_options:
+    board_build.flash_mode: dio
+
+# Board: Main definition
+# Chinese DevKitC-1 (enable 5V): https://forum.arduino.cc/t/chinese-esp32-s3-5v-pin-warning/1192758
+# Chinese DevKitC-1 (pinout): https://mischianti.org/vcc-gnd-studio-yd-esp32-s3-devkitc-1-clone-high-resolution-pinout-and-specs/
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 8MB
+  framework:
+    type: arduino
+    version: latest
+
+# Board: PSRAM (Has 2MB)
+psram:
+  mode: octal
+  speed: 80MHz
+
+# Import packages
+packages:
+  standard_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    refresh: 0d
+    files:
+      - standard/project.yaml
+      - standard/diagnostics.yaml
+      - standard/wifi.yaml
+      - standard/internaltemp.yaml
+
+# RGB Light
+light:
+  - platform: neopixelbus
+    type: GRB
+    variant: WS2811
+    pin: GPIO48
+    num_leds: 1
+    name: "RGB LED"
+
+i2c:
+  sda: 18
+  scl: 46
+  scan: true
+  id: i2c_bus_a
+
+sensor:
+
+  - platform: bh1750
+    i2c_id: i2c_bus_a
+    name: "Illuminance"
+    address: 0x23
+    update_interval: 1s
+
+  - platform: bme680
+    i2c_id: i2c_bus_a
+    address: 0x77
+    iir_filter : 7x
+    update_interval: 5s
+
+    temperature:
+      name: "Ambient Temperature"
+      id: ambient_temperature
+      oversampling: 16x
+      device_class: temperature
+    
+    pressure:
+      name: "Atmospheric Pressure"
+      id: ambient_pressure
+      device_class: atmospheric_pressure
+
+    humidity:
+      name: "Humidity"
+      id: relative_humidity
+
+    gas_resistance:
+      id: gas_resistance
+      name: "Gas Resistance"
+
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    detection_distance:
+      name: Radar Target Distance
+      id: radar_detection_distance
+
+  - platform: template
+    name: "Air Quality Index"
+    id: air_quality_index
+    icon: "mdi:gauge"
+    # caulculation: comp_gas = log(R_gas[ohm]) + 0.04 log(Ohm)/%rh * hum[%rh]
+    lambda: |-
+      return log(id(gas_resistance).state) + 0.04 *  id(relative_humidity).state;
+
+  - platform: template
+    name: "Altitude"
+    lambda: |-
+      const float STANDARD_SEA_LEVEL_PRESSURE = 1013.25; //in hPa, see note
+      return ((id(ambient_temperature).state + 273.15) / 0.0065) *
+        (powf((STANDARD_SEA_LEVEL_PRESSURE / id(ambient_pressure).state), 0.190234) - 1); // in meters
+    update_interval: 60s
+    icon: 'mdi:signal'
+    unit_of_measurement: 'm'
+
+text_sensor:
+  - platform: template
+    name: "Air Quality"
+    icon: "mdi:checkbox-marked-circle-outline"
+    lambda: |-
+      if (int(id(air_quality_index).state) <= 50) {
+        return {"Excellent"};
+      }
+      else if (int(id(air_quality_index).state) <= 100) {
+        return {"Good"};
+      }
+      else if (int(id(air_quality_index).state) <= 150) {
+        return {"Lightly polluted"};
+      }
+      else if (int(id(air_quality_index).state) <= 200) {
+        return {"Moderately polluted"};
+      }
+      else if (int(id(air_quality_index).state) <= 250) {
+        return {"Heavily polluted"};
+      }
+      else if (int(id(air_quality_index).state) <= 350) {
+        return {"Severely polluted"};
+      }
+      else if (int(id(air_quality_index).state) <= 500) {
+        return {"Extremely polluted"};
+      }
+      else {
+        return {"unknown"};
+      }
+
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+    
+    version:
+      name: "Radar Firmware Version"
+      
+uart:
+  tx_pin: GPIO43
+  rx_pin: GPIO44
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+  id: ld2410_uart
+
+ld2410:
+  id: ld2410_radar
+  uart_id: ld2410_uart
+  
+binary_sensor:
+  # AM312 PIR Motion Sensor
+  - platform: gpio
+    pin: GPIO05
+    name: "PIR Motion"
+    id: pir_motion
+    device_class: motion
+
+  # Radar  
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    has_moving_target:
+      id: radar_has_moving_target
+      name: Radar Target Movement
+      on_state:
+        then:
+          - script.execute: script_update_occupancy
+          
+    has_still_target:
+      id: radar_has_still_target
+      name: Radar Target Stillness
+      on_state:
+        then:
+          - script.execute: script_update_occupancy
+
+  - platform: template
+    name: "Radar Occupancy"
+    id: radar_occupancy
+    icon: mdi:account-box-outline
+    device_class: occupancy
+
+#Configuration entities
+number:
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    timeout:
+      name: Radar Occupancy Timeout
+      id: radar_occupancy_timeout
+    
+    max_move_distance_gate:
+      name: Radar Max Move Distance
+    
+    max_still_distance_gate:
+      name: Radar Max Still Distance
+    
+
+#Exposes control buttons
+button:
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    factory_reset:
+      name: "Load Radar Defaults"
+    restart:
+      name: "Reboot Radar Module"
+    query_params:
+      name: "Force Radar Refresh"
+
+script:
+  - id: script_update_occupancy
+    mode: restart
+    then:
+      - if:
+          condition:
+            or:
+              - binary_sensor.is_on: radar_has_moving_target
+              - binary_sensor.is_on: radar_has_still_target
+          then:
+            - binary_sensor.template.publish:
+                id: radar_occupancy
+                state: true
+          else:
+            - binary_sensor.template.publish:
+                id: radar_occupancy
+                state: false 

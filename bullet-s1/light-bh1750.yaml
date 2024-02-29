@@ -1,0 +1,20 @@
+substitutions:
+  bh1750_sda: "GPIO14"
+  bh1750_scl: "GPIO15"
+  bh1750_address: "0x76" # This might vary by mfr. (0x76 or 0x77)
+  bh1750_interval: "1s"
+
+i2c:
+  sda: ${bh1750_sda}
+  scl: ${bh1750_scl}
+  scan: true
+  id: i2c_bus_b
+
+sensor:
+  - platform: bh1750
+    name: "Illuminance"
+    i2c_id: i2c_bus_b
+    address: ${bh1750_address}
+    update_interval: ${bh1750_interval}
+    id: sensor_illuminance
+    device_class: illuminance
