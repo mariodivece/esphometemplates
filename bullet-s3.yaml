@@ -29,8 +29,8 @@ packages:
     refresh: 0d
     files:
       - bullet-s3/board-esp32s3zero.yaml
+      - bullet-s3/radar-ld2410.yaml
       - standard/project.yaml
       - standard/diagnostics.yaml
       - standard/wifi.yaml
       - standard/internaltemp.yaml
-      

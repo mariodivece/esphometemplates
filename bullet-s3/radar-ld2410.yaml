@@ -1,0 +1,101 @@
+# Initial example used: https://smarthomescene.com/diy/diy-presence-sensor-with-hi-link-ld2410-and-esp32-for-home-assistant/
+
+# The LD2410 uses UART for communication
+uart:
+  tx_pin: GPIO43
+  rx_pin: GPIO44
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+  id: ld2410_uart
+
+ld2410:
+  id: ld2410_radar
+  uart_id: ld2410_uart
+  
+binary_sensor:
+
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    has_moving_target:
+      id: radar_has_moving_target
+      name: Radar Target Movement
+      on_state:
+        then:
+          - script.execute: script_update_occupancy
+          
+    has_still_target:
+      id: radar_has_still_target
+      name: Radar Target Stillness
+      on_state:
+        then:
+          - script.execute: script_update_occupancy
+
+  - platform: template
+    name: "Radar Occupancy"
+    id: radar_occupancy
+    icon: mdi:account-box-outline
+    device_class: occupancy
+
+sensor:
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    detection_distance:
+      name: Radar Target Distance
+      id: radar_detection_distance
+
+#Configuration entities
+number:
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    timeout:
+      name: Radar Occupancy Timeout
+      id: radar_occupancy_timeout
+    
+    max_move_distance_gate:
+      name: Radar Max Move Distance
+    
+    max_still_distance_gate:
+      name: Radar Max Still Distance
+    
+
+#Exposes control buttons
+button:
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+
+    factory_reset:
+      name: "Load Radar Defaults"
+    restart:
+      name: "Reboot Radar Module"
+    query_params:
+      name: "Force Radar Refresh"
+
+#Radar firmware version
+text_sensor:
+  - platform: ld2410
+    ld2410_id: ld2410_radar
+    
+    version:
+      name: "Radar Firmware Version"
+
+script:
+  - id: script_update_occupancy
+    mode: restart
+    then:
+      - if:
+          condition:
+            or:
+              - binary_sensor.is_on: radar_has_moving_target
+              - binary_sensor.is_on: radar_has_still_target
+          then:
+            - binary_sensor.template.publish:
+                id: radar_occupancy
+                state: true
+          else:
+            - binary_sensor.template.publish:
+                id: radar_occupancy
+                state: false 

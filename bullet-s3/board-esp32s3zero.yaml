@@ -1,9 +1,9 @@
 # Board: Main definition
 # Waveshare ESP32S3 Zero (https://www.waveshare.com/wiki/ESP32-S3-Zero)
+# See also: https://www.waveshare.com/esp32-s3-zero.htm
 
 esp32:
   board: adafruit_feather_esp32s3 # It's a waveshare zero in reality, but matches specs
   framework:
     type: arduino
     version: latest
-    
