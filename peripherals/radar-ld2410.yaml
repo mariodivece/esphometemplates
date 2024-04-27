@@ -2,8 +2,8 @@
 
 # The LD2410 uses UART for communication
 uart:
-  tx_pin: GPIO43
-  rx_pin: GPIO44
+  tx_pin: ${radar_tx_pin}
+  rx_pin: ${radar_rx_pin}
   baud_rate: 256000
   parity: NONE
   stop_bits: 1
