@@ -1,0 +1,6 @@
+sensor:
+  - platform: bh1750
+    i2c_id: i2c_bus_a
+    name: "Illuminance"
+    address: 0x23
+    update_interval: 1s
