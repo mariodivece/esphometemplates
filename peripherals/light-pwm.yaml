@@ -1,0 +1,22 @@
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
+
+output:
+  # Physical GPIO PWM for off-state background brightness
+  # This pin controls the background brightness for all LEDs
+  # physically attached to the relays
+  - platform: ledc
+    id: pwm_output
+    pin: GPIO13
+    frequency: 1000 Hz
+
+light:
+
+  # HA UI connection to the background brightness (PWM) pin
+  - platform: monochromatic
+    output: pwm_output
+    name: "Backlight"
+    restore_mode: RESTORE_DEFAULT_OFF
+    icon: 'mdi:led-outline'
+    entity_category: 'config'
