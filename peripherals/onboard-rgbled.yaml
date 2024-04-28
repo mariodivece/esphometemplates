@@ -1,0 +1,24 @@
+# RGB Light
+light:
+  - platform: neopixelbus
+    type: GRB
+    variant: WS2812
+    pin: ${onboard_rgbled}
+    num_leds: 1
+    name: "Status LED"
+    id: led_status
+
+binary_sensor:
+
+  # Make the status LED blink when not connected/trying to connect
+  - platform: template
+    name: "API connected"
+    id: sensor_api_connected
+    internal: true
+    entity_category: 'diagnostic'
+    device_class: 'connectivity'
+    lambda: return global_api_server->is_connected();
+    on_press:
+      - light.turn_off: led_status
+    on_release:
+      - light.turn_on: led_status

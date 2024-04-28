@@ -16,6 +16,9 @@ substitutions:
 
   log_level: INFO
 
+  # Onboard RGB LED pin
+  onboard_rgbled: GPIO21
+
   # Radar Pins
   radar_tx_pin: GPIO43
   radar_rx_pin: GPIO44
@@ -42,5 +45,6 @@ packages:
       - standard/diagnostics.yaml
       - standard/wifi.yaml
       - standard/internaltemp.yaml
+      - peripherals/onboard-rgbled.yaml
       - peripherals/radar-ld2410.yaml
       - peripherals/audio-out-i2s.yaml
