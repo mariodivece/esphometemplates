@@ -24,13 +24,6 @@ sensor:
       id: gas_resistance
       name: "Gas Resistance"
 
-  - platform: ld2410
-    ld2410_id: ld2410_radar
-
-    detection_distance:
-      name: Radar Target Distance
-      id: radar_detection_distance
-
   - platform: template
     name: "Air Quality Index"
     id: air_quality_index
