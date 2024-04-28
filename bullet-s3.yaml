@@ -38,3 +38,4 @@ packages:
       - standard/wifi.yaml
       - standard/internaltemp.yaml
       - peripherals/radar-ld2410.yaml
+      - peripherals/audio-out-i2s.yaml
