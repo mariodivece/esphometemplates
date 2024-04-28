@@ -56,4 +56,4 @@ packages:
       - peripherals/radar-ld2410.yaml
       - peripherals/audio-out-i2s.yaml
       - peripherals/illuminance-bh1750.yaml
-      #- peripherals/ambient-bme680.yaml
+      - peripherals/ambient-bme680.yaml
