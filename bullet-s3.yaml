@@ -33,12 +33,12 @@ dashboard_import:
   package_import_url: ${package_url}
   import_full_config: false
 
-# Define Low voltage i2c bus
+# Define Low voltage (3v3) i2c bus
 i2c:
+  id: i2c_bus_a
   sda: GPIO07
   scl: GPIO08
   scan: true
-  id: i2c_bus_a
 
 # Import packages
 packages:
@@ -56,3 +56,4 @@ packages:
       - peripherals/radar-ld2410.yaml
       - peripherals/audio-out-i2s.yaml
       - peripherals/illuminance-bh1750.yaml
+      - peripherals/ambient-bme680.yaml
