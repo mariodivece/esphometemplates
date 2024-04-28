@@ -10,7 +10,6 @@ media_player:
     dac_type: external
     i2s_dout_pin: ${audio_out_dout}
     i2s_audio_id: i2s_bus_a
-    mode: mono
+    mode: stereo
     on_pause:
       - media_player.stop
-      
