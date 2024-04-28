@@ -1,14 +1,16 @@
 i2s_audio:
   - id: i2s_bus_a
-    i2s_lrclk_pin: GPIO06
-    i2s_bclk_pin: GPIO05
+    i2s_lrclk_pin: ${audio_out_lrclk}
+    i2s_bclk_pin: ${audio_out_bclk}
 
 media_player:
   - platform: i2s_audio
     id: audio_player
     name: Audio Player
     dac_type: external
-    i2s_dout_pin: GPIO04
+    i2s_dout_pin: ${audio_out_dout}
+    i2s_audio_id: i2s_bus_a
     mode: mono
     on_pause:
       - media_player.stop
+      

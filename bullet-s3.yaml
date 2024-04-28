@@ -16,9 +16,14 @@ substitutions:
 
   log_level: INFO
 
-  # Hardware Settings
+  # Radar Pins
   radar_tx_pin: GPIO43
   radar_rx_pin: GPIO44
+  
+  # I2S Audio Output Pins
+  audio_out_lrclk: GPIO06
+  audio_out_bclk: GPIO05
+  audio_out_dout: GPIO04
 
 # Allow importing this package
 dashboard_import:
