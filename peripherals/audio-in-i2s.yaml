@@ -8,7 +8,6 @@ i2s_audio:
 microphone:
   - platform: i2s_audio
     id: audio_in
-    name: Microphone
     i2s_audio_id: i2s_bus_b
     i2s_din_pin: ${audio_in_din}
     adc_type: external
