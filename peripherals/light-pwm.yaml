@@ -19,4 +19,3 @@ light:
     name: "Backlight"
     restore_mode: RESTORE_DEFAULT_OFF
     icon: 'mdi:led-outline'
-    entity_category: 'config'

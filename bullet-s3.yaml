@@ -28,6 +28,11 @@ substitutions:
   audio_out_bclk: GPIO05
   audio_out_dout: GPIO04
 
+  # I2S Audio Input (Mic) Pins
+  audio_in_lrclk: GPIO10 #WS
+  audio_in_bclk: GPIO11 #SCK
+  audio_in_dout: GPIO12 #SD
+
 # Allow importing this package
 dashboard_import:
   package_import_url: ${package_url}
@@ -58,3 +63,4 @@ packages:
       - peripherals/illuminance-bh1750.yaml
       - peripherals/ambient-bme680.yaml
       - peripherals/light-pwm.yaml
+      - peripherals/audio-in-i2s.yaml

@@ -1,0 +1,15 @@
+# For the INMP441 microphone i2s mic module
+
+i2s_audio:
+  - id: i2s_bus_b
+    i2s_lrclk_pin: ${audio_in_lrclk}
+    i2s_bclk_pin: ${audio_in_bclk}
+
+microphone:
+  - platform: i2s_audio
+    id: audio_in
+    name: Microphone
+    i2s_audio_id: i2s_bus_b
+    i2s_din_pin: ${audio_in_din}
+    adc_type: external
+    pdm: false
