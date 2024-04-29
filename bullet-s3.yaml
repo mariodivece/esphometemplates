@@ -31,7 +31,7 @@ substitutions:
   # I2S Audio Input (Mic) Pins
   audio_in_lrclk: GPIO10 #WS
   audio_in_bclk: GPIO11 #SCK
-  audio_in_dout: GPIO12 #SD
+  audio_in_din: GPIO12 #SD
 
 # Allow importing this package
 dashboard_import:
