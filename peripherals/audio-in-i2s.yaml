@@ -13,6 +13,8 @@
 #    adc_type: external
 #    pdm: false
 
+# TODO: See discussion https://community.home-assistant.io/t/esphome-voice-assistant/570391/15
+# Oct 2023, see example from SpikeyGG
 
 # LEVEL METER TO TEST MIC
 
@@ -26,6 +28,7 @@ i2s:
   sample_rate: 48000            # default: 48000
   bits_per_sample: 32           # default: 32
   bits_shift: 8
+  channel: left
 
 sound_level_meter:
   id: sound_meter
