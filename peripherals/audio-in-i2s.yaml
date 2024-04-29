@@ -30,7 +30,7 @@ i2s:
   use_apll: true                # default: false
 
 sound_level_meter:
-  id: sound_level_meter
+  id: sound_meter
   update_interval: 1s           # default: 60s
   buffer_size: 1024             # default: 1024
   mic_sensitivity: -26dB        # default: empty
