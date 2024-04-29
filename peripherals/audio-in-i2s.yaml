@@ -12,3 +12,33 @@ microphone:
     i2s_din_pin: ${audio_in_din}
     adc_type: external
     pdm: false
+
+
+# LEVEL METER TO TEST MIC
+external_components:
+  - source: github://stas-sl/esphome-sound-level-meter
+
+sound_level_meter:
+  id: sound_level_meter1
+  update_interval: 1s           # default: 60s
+  buffer_size: 1024             # default: 1024
+  mic_sensitivity: -26dB        # default: empty
+  mic_sensitivity_ref: 94dB     # default: empty
+
+  groups:
+    - sensors:
+        - type: eq
+          name: Leq_1s
+
+switch:
+  - platform: template
+    name: "Decibel Meter ON / OFF"
+    lambda: |-
+      return id(sound_level_meter1).is_on();
+    turn_on_action:
+      then: sound_level_meter.turn_on
+    turn_off_action:
+      then: sound_level_meter.turn_off
+    restore_mode: RESTORE_DEFAULT_ON
+  - platform: restart
+    name: "Decibel Meter Reset"
