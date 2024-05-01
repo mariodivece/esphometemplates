@@ -31,7 +31,6 @@ i2s:
   bits_shift: 0
   use_apll: true
   channel: left
-  offset: 0dB
 
 sound_level_meter:
   id: sound_meter
@@ -39,7 +38,8 @@ sound_level_meter:
   buffer_size: 1024             # default: 1024
   mic_sensitivity: -26dB        # default: empty
   mic_sensitivity_ref: 94dB     # default: empty
-  
+  offset: 0dB
+
   groups:
     - sensors:
         - type: eq
