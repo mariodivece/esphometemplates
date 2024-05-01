@@ -7,6 +7,7 @@ speaker:
   - platform: i2s_audio
     id: audio_out
     dac_type: external
+    i2s_audio_id: i2s_bus_a
     i2s_dout_pin: ${audio_out_dout}
     mode: stereo
 
