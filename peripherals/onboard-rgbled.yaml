@@ -2,6 +2,7 @@
 # See: https://esphome.io/components/light/esp32_rmt_led_strip
 light:
   - platform: esp32_rmt_led_strip
+    id: led_status
     rgb_order: GRB
     pin: ${onboard_rgbled}
     num_leds: 1
