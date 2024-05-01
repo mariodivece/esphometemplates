@@ -121,7 +121,7 @@ switch:
     restore_mode: RESTORE_DEFAULT_ON
     entity_category: config
     on_turn_on:
-      - lambda: id(va).set_use_wake_word(true);
+      - lambda: id(assist).set_use_wake_word(true);
       - if:
           condition:
             not:
@@ -131,4 +131,4 @@ switch:
     
     on_turn_off:
       - voice_assistant.stop
-      - lambda: id(va).set_use_wake_word(false);
+      - lambda: id(assist).set_use_wake_word(false);
