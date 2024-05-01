@@ -20,12 +20,16 @@ external_components:
   - source: github://stas-sl/esphome-sound-level-meter
 
 i2s:
+  id: i2s_bus_b
   bck_pin: ${audio_in_bclk}
   ws_pin: ${audio_in_lrclk}
   din_pin: ${audio_in_din}
   sample_rate: 48000            # default: 48000
   bits_per_sample: 32           # default: 32
-  bits_shift: 8
+  bits_shift: 0
+  use_apll: true
+  channel: left
+  offset: 0dB
 
 sound_level_meter:
   id: sound_meter
@@ -33,7 +37,7 @@ sound_level_meter:
   buffer_size: 1024             # default: 1024
   mic_sensitivity: -26dB        # default: empty
   mic_sensitivity_ref: 94dB     # default: empty
-
+  
   groups:
     - sensors:
         - type: eq
