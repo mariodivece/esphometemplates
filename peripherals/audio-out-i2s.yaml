@@ -3,13 +3,21 @@ i2s_audio:
     i2s_lrclk_pin: ${audio_out_lrclk}
     i2s_bclk_pin: ${audio_out_bclk}
 
-media_player:
+speaker:
   - platform: i2s_audio
     id: audio_out
-    name: Audio Player
+    name: Speaker
     dac_type: external
     i2s_dout_pin: ${audio_out_dout}
-    i2s_audio_id: i2s_bus_a
     mode: stereo
-    on_pause:
-      - media_player.stop
+
+#media_player:
+#  - platform: i2s_audio
+#    id: audio_out
+#    name: Audio Player
+#    dac_type: external
+#    i2s_dout_pin: ${audio_out_dout}
+#    i2s_audio_id: i2s_bus_a
+#    mode: stereo
+#    on_pause:
+#      - media_player.stop
