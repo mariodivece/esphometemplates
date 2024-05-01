@@ -6,4 +6,4 @@ esp32:
   board: adafruit_feather_esp32s3 # It's a waveshare zero in reality, but matches specs
   framework:
     type: arduino
-    version: recommended
+    version: latest
