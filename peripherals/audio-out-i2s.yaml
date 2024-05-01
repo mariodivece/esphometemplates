@@ -5,7 +5,7 @@ i2s_audio:
 
 media_player:
   - platform: i2s_audio
-    id: audio_player
+    id: audio_out
     name: Audio Player
     dac_type: external
     i2s_dout_pin: ${audio_out_dout}
