@@ -11,6 +11,7 @@ microphone:
     i2s_audio_id: i2s_bus_b
     i2s_din_pin: ${audio_in_din}
     adc_type: external
+    channel: right
     pdm: false
 
 # TODO: See discussion https://community.home-assistant.io/t/esphome-voice-assistant/570391/15
