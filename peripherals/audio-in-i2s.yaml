@@ -30,15 +30,18 @@ i2s:
   bits_per_sample: 32           # default: 32
   bits_shift: 8
   channel: right
+  use_apll: true
+  dma_buf_len: 256
 
 sound_level_meter:
   id: sound_meter
   i2s_id: i2s_bus_b
+  task_core: 0                  # default 1
   update_interval: 1s           # default: 60s
   buffer_size: 1024             # default: 1024
   mic_sensitivity: -26dB        # default: empty
   mic_sensitivity_ref: 94dB     # default: empty
-  #offset: 0dB
+  offset: 0dB
 
   groups:
     - sensors:
