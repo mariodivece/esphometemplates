@@ -13,6 +13,8 @@
 #    adc_type: external
 #    pdm: false
 
+# TODO: See discussion https://community.home-assistant.io/t/esphome-voice-assistant/570391/15
+# Oct 2023, see example from SpikeyGG
 
 # LEVEL METER TO TEST MIC
 
