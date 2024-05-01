@@ -29,7 +29,7 @@ i2s:
   sample_rate: 48000            # default: 48000
   bits_per_sample: 32           # default: 32
   bits_shift: 8
-  channel: left
+  channel: right
 
 sound_level_meter:
   id: sound_meter
