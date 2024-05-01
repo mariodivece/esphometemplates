@@ -29,7 +29,7 @@ i2s:
   sample_rate: 48000            # default: 48000
   bits_per_sample: 32           # default: 32
   bits_shift: 8
-  #use_apll: true
+  use_apll: true
   channel: right
 
 sound_level_meter:
@@ -39,7 +39,7 @@ sound_level_meter:
   buffer_size: 1024             # default: 1024
   mic_sensitivity: -26dB        # default: empty
   mic_sensitivity_ref: 94dB     # default: empty
-  offset: 0dB
+  #offset: 0dB
 
   groups:
     - sensors:

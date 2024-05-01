@@ -29,8 +29,8 @@ substitutions:
   audio_out_dout: GPIO04
 
   # I2S Audio Input (Mic) Pins
-  audio_in_lrclk: GPIO10 #WS
-  audio_in_bclk: GPIO11 #SCK
+  audio_in_lrclk: GPIO11 #WS
+  audio_in_bclk: GPIO10 #SCK
   audio_in_din: GPIO12 #SD
 
 # Allow importing this package
