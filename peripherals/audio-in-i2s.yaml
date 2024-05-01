@@ -11,7 +11,7 @@ microphone:
     i2s_audio_id: i2s_bus_b
     i2s_din_pin: ${audio_in_din}
     adc_type: external
-    channel: left
+    channel: right
     bits_per_sample: 32bit
     pdm: false
 
