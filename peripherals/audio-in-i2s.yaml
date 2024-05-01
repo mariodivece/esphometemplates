@@ -28,9 +28,9 @@ i2s:
   din_pin: ${audio_in_din}
   sample_rate: 48000            # default: 48000
   bits_per_sample: 32           # default: 32
-  #bits_shift: 8
+  bits_shift: 8
   #use_apll: true
-  channel: left
+  channel: right
 
 sound_level_meter:
   id: sound_meter
