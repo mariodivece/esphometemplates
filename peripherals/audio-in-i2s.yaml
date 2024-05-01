@@ -34,7 +34,7 @@ i2s:
 
 sound_level_meter:
   id: sound_meter
-  i2s_id: 12s_bus_b
+  i2s_id: i2s_bus_b
   update_interval: 1s           # default: 60s
   buffer_size: 1024             # default: 1024
   mic_sensitivity: -26dB        # default: empty
