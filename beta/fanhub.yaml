@@ -1,0 +1,162 @@
+esphome:
+  name: fanhub-01
+  friendly_name: fanhub-01
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "cpIZV4ttWi1/l3PCBGDc1oj8GDQkQNWSYYqDl2DI/N8="
+
+ota:
+  - platform: esphome
+    password: "2348f7357d9040953d776dcd55004b98"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Fanhub-01 Fallback Hotspot"
+    password: "e4AbKjPW49ak"
+
+web_server:
+  port: 80
+  version: 3
+
+captive_portal:
+    
+
+i2c:
+  sda: GPIO02
+  scl: GPIO01
+  scan: true
+  id: bus_a
+
+sensor:
+  - platform: bmp280_i2c
+    i2c_id: bus_a
+    address: 0x76
+    update_interval: 30s
+    temperature:
+      name: "Airflow Temperature"
+    pressure:
+      name: "Pressure"
+
+  - platform: pulse_counter
+    id: fan_tacho_01
+    name: "Fan 01 - Speed"
+    pin: 
+      number: GPIO13
+      mode: INPUT_PULLUP
+    unit_of_measurement: 'RPM'
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.5
+    count_mode:
+      rising_edge: INCREMENT
+      falling_edge: DISABLE
+    update_interval: 2s
+
+  - platform: pulse_counter
+    id: fan_tacho_02
+    name: "Fan 02 - Speed"
+    pin: 
+      number: GPIO10
+      mode: INPUT_PULLUP
+    unit_of_measurement: 'RPM'
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.5
+    count_mode:
+      rising_edge: INCREMENT
+      falling_edge: DISABLE
+    update_interval: 2s
+
+  - platform: pulse_counter
+    id: fan_tacho_03
+    name: "Fan 03 - Speed"
+    pin: 
+      number: GPIO08
+      mode: INPUT_PULLUP
+    unit_of_measurement: 'RPM'
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.5
+    count_mode:
+      rising_edge: INCREMENT
+      falling_edge: DISABLE
+    update_interval: 2s
+
+  - platform: pulse_counter
+    id: fan_tacho_04
+    name: "Fan 04 - Speed"
+    pin: 
+      number: GPIO05
+      mode: INPUT_PULLUP
+    unit_of_measurement: 'RPM'
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.5
+    count_mode:
+      rising_edge: INCREMENT
+      falling_edge: DISABLE
+    update_interval: 2s
+
+fan:
+  - platform: speed
+    id: fan_control_01
+    name: "Fan 01 - Control"
+    output: fan_pwm_01
+    restore_mode: RESTORE_DEFAULT_ON
+
+  - platform: speed
+    id: fan_control_02
+    name: "Fan 02 - Control"
+    output: fan_pwm_02
+    restore_mode: RESTORE_DEFAULT_ON
+
+  - platform: speed
+    id: fan_control_03
+    name: "Fan 03 - Control"
+    output: fan_pwm_03
+    restore_mode: RESTORE_DEFAULT_ON
+
+  - platform: speed
+    id: fan_control_04
+    name: "Fan 04 - Control"
+    output: fan_pwm_04
+    restore_mode: RESTORE_DEFAULT_ON
+
+output:
+  - platform: ledc
+    id: fan_pwm_01
+    channel: 0
+    pin: GPIO11
+    frequency: 25000Hz
+
+  - platform: ledc
+    id: fan_pwm_02
+    channel: 2
+    pin: GPIO09
+    frequency: 25000Hz
+
+  - platform: ledc
+    id: fan_pwm_03
+    channel: 4
+    pin: GPIO07
+    frequency: 25000Hz
+
+  - platform: ledc
+    id: fan_pwm_04
+    channel: 6
+    pin: GPIO06
+    frequency: 25000Hz
