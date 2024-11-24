@@ -2,7 +2,7 @@ sensor:
   - platform: pulse_counter
     id: fan_tacho_02
     name: "Fan 02 - Speed"
-    icon: 'mdi:speedometer'
+    icon: ${pulse_counter_icon}
     pin: 
       number: GPIO10
       mode: INPUT_PULLUP
@@ -13,7 +13,7 @@ sensor:
     count_mode:
       rising_edge: INCREMENT
       falling_edge: DISABLE
-    update_interval: 2s
+    update_interval: ${pulse_counter_interval}
 
 fan:
   - platform: speed

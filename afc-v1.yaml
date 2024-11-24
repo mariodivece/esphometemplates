@@ -1,3 +1,19 @@
+# Example Usage:
+#substitutions:
+#  device_site: "bl24"
+#  device_location_code: "caracal"
+#  device_location_name: "Caracal"
+#  device_number: "160"
+#  device_ip: "10.16.40.85"
+#
+#packages:
+#  base_package:
+#    url: https://github.com/mariodivece/esphometemplates/
+#    ref: main
+#    file: afc-v1.yaml
+#    refresh: 0d
+
+
 substitutions:
   # User-required substitutions
   device_site: "bl24"
@@ -16,15 +32,14 @@ substitutions:
 
   log_level: INFO
 
+  # GPIO Configurations
+  pulse_counter_icon: 'mdi:speedometer'
+  pulse_counter_interval: 2s
+
 # Allow importing this package
 dashboard_import:
   package_import_url: ${package_url}
   import_full_config: false
-
-# Enable Web Server Control
-web_server:
-  port: 80
-  version: 3
 
 # Import packages
 packages:
@@ -38,6 +53,7 @@ packages:
       - standard/diagnostics.yaml
       - standard/wifi.yaml
       - standard/internaltemp.yaml
+      - afc-v1/webserver.yaml
       - afc-v1/onboard-rgbled.yaml
       - peripherals/bmp280.yaml
       - afc-v1/pwmfan-01.yaml
