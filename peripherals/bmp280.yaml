@@ -1,0 +1,17 @@
+i2c:
+  scl: GPIO05
+  sda: GPIO04
+  scan: true
+  frequency: 100kHz
+  id: bus_a
+
+sensor:
+  - platform: bmp280_i2c
+    i2c_id: bus_a
+    address: 0x76
+    update_interval: 30s
+    iir_filter: 4x
+    temperature:
+      name: "Airflow Temperature"
+    pressure:
+      name: "Atmospheric Pressure"

@@ -1,0 +1,29 @@
+sensor:
+  - platform: pulse_counter
+    id: fan_tacho_01
+    name: "Fan 01 - Speed"
+    pin: 
+      number: GPIO12
+      mode: INPUT_PULLUP
+    unit_of_measurement: 'RPM'
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.5
+    count_mode:
+      rising_edge: INCREMENT
+      falling_edge: DISABLE
+    update_interval: 2s
+
+fan:
+  - platform: speed
+    id: fan_control_01
+    name: "Fan 01 - Control"
+    output: fan_pwm_01
+    restore_mode: RESTORE_DEFAULT_ON
+
+output:
+  - platform: ledc
+    id: fan_pwm_01
+    channel: 0
+    pin: GPIO13
+    frequency: 25000Hz
