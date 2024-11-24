@@ -7,3 +7,21 @@ light:
     num_leds: 1
     name: "Status LED"
     id: led_status
+    effects:
+      - strobe:
+        name: "Temp Green"
+        colors:
+          - state: true
+            brightness: 30%
+            red: 0%
+            green: 90%
+            blue: 0%
+            duration: 400ms
+            transition_legnth: 100ms
+          - state: true
+            brightness: 75%
+            red: 0%
+            green: 90%
+            blue: 0%
+            duration: 400ms
+            transition_legnth: 100ms
