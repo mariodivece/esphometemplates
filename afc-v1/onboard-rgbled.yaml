@@ -9,19 +9,19 @@ light:
     id: led_status
     effects:
       - strobe:
-        name: "PulseGreen"
-        colors:
-          - state: true
-            brightness: 30%
-            red: 0%
-            green: 90%
-            blue: 0%
-            duration: 400ms
-            transition_legnth: 100ms
-          - state: true
-            brightness: 75%
-            red: 0%
-            green: 90%
-            blue: 0%
-            duration: 400ms
-            transition_legnth: 100ms
+          name: "PulseGreen"
+          colors:
+            - state: true
+              brightness: 30%
+              red: 0%
+              green: 90%
+              blue: 0%
+              duration: 400ms
+              transition_legnth: 100ms
+            - state: true
+              brightness: 75%
+              red: 0%
+              green: 90%
+              blue: 0%
+              duration: 400ms
+              transition_legnth: 100ms
