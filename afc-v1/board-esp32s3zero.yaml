@@ -2,6 +2,7 @@ esp32:
   board: adafruit_feather_esp32s3
   framework:
     type: arduino
+    version: latest
 
 psram:
   mode: octal
