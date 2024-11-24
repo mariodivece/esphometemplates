@@ -2,6 +2,7 @@ sensor:
   - platform: pulse_counter
     id: fan_tacho_04
     name: "Fan 04 - Speed"
+    icon: 'mdi:speedometer'
     pin: 
       number: GPIO07
       mode: INPUT_PULLUP
@@ -18,6 +19,7 @@ fan:
   - platform: speed
     id: fan_control_04
     name: "Fan 04 - Control"
+    icon: 'mdi:fan'
     output: fan_pwm_04
     restore_mode: RESTORE_DEFAULT_ON
 

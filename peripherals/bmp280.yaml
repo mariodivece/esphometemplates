@@ -13,5 +13,8 @@ sensor:
     iir_filter: 4x
     temperature:
       name: "Airflow Temperature"
+      device_class: temperature
     pressure:
       name: "Atmospheric Pressure"
+      device_class: atmospheric_pressure
+      
