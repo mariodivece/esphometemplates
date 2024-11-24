@@ -11,6 +11,8 @@ substitutions:
 
 # Enable Home Assistant API
 api:
+  # Disable reboot if no client connected (defaults to 15min)
+  reboot_timeout: 0s
   encryption:
     key: "${api_key}"
 

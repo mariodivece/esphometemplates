@@ -9,7 +9,7 @@ light:
     id: led_status
     effects:
       - strobe:
-        name: "Temp Green"
+        name: "PulseGreen"
         colors:
           - state: true
             brightness: 30%
