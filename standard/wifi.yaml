@@ -23,8 +23,9 @@ sensor:
 
 # Enable OTA
 ota:
-  safe_mode: true
-  password: "${ota_password}"
+  - platform: esphome
+    safe_mode: true
+    password: "${ota_password}"
 
 # Enable WiFi and AP for captive portal
 wifi:
