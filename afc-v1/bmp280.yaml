@@ -1,0 +1,47 @@
+i2c:
+  scl: GPIO05
+  sda: GPIO04
+  scan: true
+  frequency: 50kHz
+  id: bus_a
+
+sensor:
+  - platform: bmp280_i2c
+    i2c_id: bus_a
+    address: 0x76
+    update_interval: 30s
+    iir_filter: 4x
+    temperature:
+      name: "Airflow Temperature"
+      device_class: temperature
+      on_value_range:
+        - below: 26.0
+          then:
+            - light.turn_on:
+              id: led_status
+              red: 20%
+              green: 40%
+              blue: 0%
+              effect: "Status Pulse"
+        - above: 26.0
+          below: 35.0
+          then:
+            - light.turn_on:
+              id: led_status
+              red: 100%
+              green: 40%
+              blue: 0%
+              effect: "Status Pulse"
+        - above: 35.0
+          then:
+            - light.turn_on:
+              id: led_status
+              red: 80%
+              green: 0%
+              blue: 0%
+              effect: "Status Pulse"
+    pressure:
+      name: "Atmospheric Pressure"
+      device_class: atmospheric_pressure
+
+      

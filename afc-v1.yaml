@@ -55,7 +55,7 @@ packages:
       - standard/internaltemp.yaml
       - afc-v1/webserver.yaml
       - afc-v1/onboard-rgbled.yaml
-      - peripherals/bmp280.yaml
+      - afc-v1/bmp280.yaml
       - afc-v1/pwmfan-01.yaml
       - afc-v1/pwmfan-02.yaml
       - afc-v1/pwmfan-03.yaml
