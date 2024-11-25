@@ -32,7 +32,7 @@ sensor:
                 green: 40%
                 blue: 0%
                 effect: "Temperature Pulse"
-        - above: 35.0
+        - above: 36.0
           then:
             - light.turn_on:
                 id: led_status

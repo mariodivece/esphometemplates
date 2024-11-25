@@ -1,0 +1,9 @@
+# TODO:
+# Global Variables: https://community.home-assistant.io/t/substitutions-in-lambda/172717
+# Linear Temp control: https://www.speaktothegeek.co.uk/2023/01/esphome-fan-v3-variable-speed-pwm-and-temperature-control/
+# Label Fans
+# Make more holes in the case
+# Join 12v and 5v grounds on chip (fan startup was weird)
+# Minimum speed (~20%) for safety
+# Always turn on fans on boot on boot
+

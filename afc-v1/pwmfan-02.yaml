@@ -21,7 +21,7 @@ fan:
     name: "${fan_name_prefix}02${pwm_name_suffix}"
     icon: ${pwm_icon}
     output: "${pwm_id_prefix}02"
-    restore_mode: RESTORE_DEFAULT_ON
+    restore_mode: ${fan_restore_mode}
 
 output:
   - platform: ledc
@@ -29,3 +29,4 @@ output:
     channel: 2
     pin: ${fan_02_o_pin}
     frequency: ${pwm_frequency}
+    min_power: ${pwm_min_power}

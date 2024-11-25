@@ -34,6 +34,7 @@ substitutions:
 
   # GPIO Configurations -- Not intended for user substitutions
   fan_name_prefix: "Fan "
+  fan_restore_mode: ALWAYS_ON
   fan_control_id_prefix: "fan_control_"
   fan_01_i_pin: 'GPIO12'
   fan_01_o_pin: 'GPIO13'
@@ -54,6 +55,7 @@ substitutions:
   pulse_counter_rising: 'INCREMENT'
   pulse_counter_falling: 'DISABLE'
   pwm_frequency: 25000Hz
+  pwm_min_power: '0.25'
   pwm_icon: 'mdi:fan'
   pwm_name_suffix: ' - Control'
   pwm_id_prefix: 'fan_pwm_'
