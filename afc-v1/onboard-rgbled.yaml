@@ -7,6 +7,8 @@ light:
     num_leds: 1
     name: "Status LED"
     id: led_status
+    blue: 80%
+
     effects:
       - pulse:
           name: "Status Pulse"
