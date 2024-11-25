@@ -18,28 +18,28 @@ sensor:
         - below: 26.0
           then:
             - light.turn_on:
-              id: led_status
-              red: 20%
-              green: 40%
-              blue: 0%
-              effect: "Status Pulse"
+                id: led_status
+                red: 20%
+                green: 40%
+                blue: 0%
+                effect: "Status Pulse"
         - above: 26.0
           below: 35.0
           then:
             - light.turn_on:
-              id: led_status
-              red: 100%
-              green: 40%
-              blue: 0%
-              effect: "Status Pulse"
+                id: led_status
+                red: 100%
+                green: 40%
+                blue: 0%
+                effect: "Status Pulse"
         - above: 35.0
           then:
             - light.turn_on:
-              id: led_status
-              red: 80%
-              green: 0%
-              blue: 0%
-              effect: "Status Pulse"
+                id: led_status
+                red: 80%
+                green: 0%
+                blue: 0%
+                effect: "Status Pulse"
     pressure:
       name: "Atmospheric Pressure"
       device_class: atmospheric_pressure
