@@ -1,7 +1,7 @@
 sensor:
   - platform: pulse_counter
     id: "${pulse_counter_id_prefix}02"
-    name: "{fan_name_prefix}02${pulse_counter_name_suffix}"
+    name: "${fan_name_prefix}02${pulse_counter_name_suffix}"
     icon: ${pulse_counter_icon}
     pin: 
       number: ${fan_02_i_pin}
@@ -18,7 +18,7 @@ sensor:
 fan:
   - platform: speed
     id: "${fan_control_id_prefix}02"
-    name: "{fan_name_prefix}02${pwm_name_suffix}"
+    name: "${fan_name_prefix}02${pwm_name_suffix}"
     icon: ${pwm_icon}
     output: "${pwm_id_prefix}02"
     restore_mode: RESTORE_DEFAULT_ON
