@@ -9,8 +9,8 @@ light:
     id: led_status
     effects:
       - pulse:
-          name: "Fast Pulse"
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0%
-          max_brightness: 100%
+          name: "Status Pulse"
+          transition_length: 250ms
+          update_interval: 250ms
+          min_brightness: 30%
+          max_brightness: 75%
