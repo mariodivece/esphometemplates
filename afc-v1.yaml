@@ -39,6 +39,7 @@ substitutions:
   pwm_frequency: 25000Hz
   pwm_icon: 'mdi:fan'
   pwm_name_suffix: 'Control'
+  pwm_id_prefix: 'fan_pwm_'
 
 # Allow importing this package
 dashboard_import:

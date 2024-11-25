@@ -25,7 +25,7 @@ fan:
 
 output:
   - platform: ledc
-    id: fan_pwm_03
+    id: "${pwm_id_prefix}03"
     channel: 4
     pin: GPIO08
     frequency: ${pwm_frequency}
