@@ -1,15 +1,15 @@
 sensor:
   - platform: pulse_counter
-    id: fan_tacho_01
-    name: "Fan 01 - Speed"
+    id: "${pulse_counter_id_prefix}01"
+    name: "{fan_name_prefix}01${pulse_counter_name_suffix}"
     icon: ${pulse_counter_icon}
     pin: 
       number: GPIO12
       mode: INPUT_PULLUP
-    unit_of_measurement: 'RPM'
+    unit_of_measurement: ${pulse_counter_unit}
     accuracy_decimals: 0
     filters:
-      - multiply: 0.5
+      - multiply: ${pulse_counter_factor}
     count_mode:
       rising_edge: INCREMENT
       falling_edge: DISABLE
@@ -17,10 +17,10 @@ sensor:
 
 fan:
   - platform: speed
-    id: fan_control_01
-    name: "Fan 01 - ${pwm_name_suffix}"
+    id: "${fan_control_id_prefix}01"
+    name: "{fan_name_prefix}04${pwm_name_suffix}"
     icon: ${pwm_icon}
-    output: fan_pwm_01
+    output: "${pwm_id_prefix}01"
     restore_mode: RESTORE_DEFAULT_ON
 
 output:

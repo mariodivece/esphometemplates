@@ -34,11 +34,17 @@ substitutions:
   log_level: INFO
 
   # GPIO Configurations
+  fan_name_prefix: "Fan "
+  fan_control_id_prefix: "fan_control_"
   pulse_counter_icon: 'mdi:speedometer'
   pulse_counter_interval: 2s
+  pulse_counter_id_prefix: 'fan_tacho_'
+  pulse_counter_name_suffix: ' - Speed'
+  pulse_counter_factor: 0.5
+  pulse_counter_unit: 'RPM'
   pwm_frequency: 25000Hz
   pwm_icon: 'mdi:fan'
-  pwm_name_suffix: 'Control'
+  pwm_name_suffix: ' - Control'
   pwm_id_prefix: 'fan_pwm_'
 
 # Allow importing this package
