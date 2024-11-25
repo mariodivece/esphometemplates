@@ -18,8 +18,8 @@ sensor:
 fan:
   - platform: speed
     id: fan_control_02
-    name: "Fan 02 - Control"
-    icon: 'mdi:fan'
+    name: "Fan 02 - ${pwm_name_suffix}"
+    icon: ${pwm_icon}
     output: fan_pwm_02
     restore_mode: RESTORE_DEFAULT_ON
 
@@ -28,4 +28,4 @@ output:
     id: fan_pwm_02
     channel: 2
     pin: GPIO11
-    frequency: 25000Hz
+    frequency: ${pwm_frequency}

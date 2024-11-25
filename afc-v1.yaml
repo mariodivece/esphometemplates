@@ -1,4 +1,5 @@
 # Example Usage:
+#
 #substitutions:
 #  device_site: "bl24"
 #  device_location_code: "caracal"
@@ -35,6 +36,9 @@ substitutions:
   # GPIO Configurations
   pulse_counter_icon: 'mdi:speedometer'
   pulse_counter_interval: 2s
+  pwm_frequency: 25000Hz
+  pwm_icon: 'mdi:fan'
+  pwm_name_suffix: 'Control'
 
 # Allow importing this package
 dashboard_import:
