@@ -4,15 +4,15 @@ sensor:
     name: "{fan_name_prefix}02${pulse_counter_name_suffix}"
     icon: ${pulse_counter_icon}
     pin: 
-      number: GPIO10
-      mode: INPUT_PULLUP
+      number: ${fan_02_i_pin}
+      mode: ${pulse_counter_pin_mode}
     unit_of_measurement: ${pulse_counter_unit}
-    accuracy_decimals: 0
+    accuracy_decimals: ${pulse_counter_decimals}
     filters:
       - multiply: ${pulse_counter_factor}
     count_mode:
-      rising_edge: INCREMENT
-      falling_edge: DISABLE
+      rising_edge: ${pulse_counter_rising}
+      falling_edge: ${pulse_counter_falling}
     update_interval: ${pulse_counter_interval}
 
 fan:
@@ -27,5 +27,5 @@ output:
   - platform: ledc
     id: "${pwm_id_prefix}02"
     channel: 2
-    pin: GPIO11
+    pin: ${fan_02_o_pin}
     frequency: ${pwm_frequency}

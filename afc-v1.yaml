@@ -33,15 +33,27 @@ substitutions:
 
   log_level: INFO
 
-  # GPIO Configurations
+  # GPIO Configurations -- Not intended for user substitutions
   fan_name_prefix: "Fan "
   fan_control_id_prefix: "fan_control_"
+  fan_01_i_pin: 'GPIO12'
+  fan_01_o_pin: 'GPIO13'
+  fan_02_i_pin: 'GPIO10'
+  fan_02_o_pin: 'GPIO11'
+  fan_03_i_pin: 'GPIO09'
+  fan_03_o_pin: 'GPIO08'
+  fan_04_i_pin: 'GPIO07'
+  fan_04_o_pin: 'GPIO06'
   pulse_counter_icon: 'mdi:speedometer'
   pulse_counter_interval: 2s
   pulse_counter_id_prefix: 'fan_tacho_'
   pulse_counter_name_suffix: ' - Speed'
   pulse_counter_factor: '0.5'
   pulse_counter_unit: 'RPM'
+  pulse_counter_decimals: '0'
+  pulse_counter_pin_mode: 'INPUT_PULLUP'
+  pulse_counter_rising: 'INCREMENT'
+  pulse_counter_falling: 'DISABLE'
   pwm_frequency: 25000Hz
   pwm_icon: 'mdi:fan'
   pwm_name_suffix: ' - Control'
