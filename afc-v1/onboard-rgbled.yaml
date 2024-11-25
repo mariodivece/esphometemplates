@@ -7,10 +7,6 @@ light:
     num_leds: 1
     name: "Status LED"
     id: led_status
-    red: 90%
-    green: 0%
-    blue: 0%
-    brightness: 30%
     effects:
       - addressable_color_wipe:
           name: "PulseGreen"
