@@ -17,12 +17,19 @@ light:
           green: 20%
           blue: 100%
           brightness: 50%
-          effect: "Status Pulse"
+          effect: "Booting Pulse"
 
     effects:
       - pulse:
-          name: "Status Pulse"
+          name: "Booting Pulse"
           transition_length: 250ms
           update_interval: 250ms
+          min_brightness: 30%
+          max_brightness: 75%
+
+      - pulse:
+          name: "Temperature Pulse"
+          transition_length: 1s
+          update_interval: 1s
           min_brightness: 30%
           max_brightness: 75%

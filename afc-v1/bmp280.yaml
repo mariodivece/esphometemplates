@@ -22,7 +22,7 @@ sensor:
                 red: 20%
                 green: 40%
                 blue: 0%
-                effect: "Status Pulse"
+                effect: "Temperature Pulse"
         - above: 26.0
           below: 35.0
           then:
@@ -31,7 +31,7 @@ sensor:
                 red: 100%
                 green: 40%
                 blue: 0%
-                effect: "Status Pulse"
+                effect: "Temperature Pulse"
         - above: 35.0
           then:
             - light.turn_on:
@@ -39,7 +39,7 @@ sensor:
                 red: 80%
                 green: 0%
                 blue: 0%
-                effect: "Status Pulse"
+                effect: "Temperature Pulse"
     pressure:
       name: "Atmospheric Pressure"
       device_class: atmospheric_pressure
