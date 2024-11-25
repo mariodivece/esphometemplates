@@ -7,7 +7,12 @@ light:
     num_leds: 1
     name: "Status LED"
     id: led_status
-    blue: 80%
+    #internal: true
+    on_turn_on:
+      red: 80%
+      green: 0%
+      blue: 0%
+
 
     effects:
       - pulse:
