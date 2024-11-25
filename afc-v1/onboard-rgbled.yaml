@@ -8,7 +8,7 @@ light:
     num_leds: 1
     name: "Status LED"
     id: led_status
-    #internal: true
+    internal: true
     restore_mode: ALWAYS_ON
     on_turn_on:
       - light.turn_on:
