@@ -40,7 +40,7 @@ substitutions:
   pulse_counter_interval: 2s
   pulse_counter_id_prefix: 'fan_tacho_'
   pulse_counter_name_suffix: ' - Speed'
-  pulse_counter_factor: 0.5
+  pulse_counter_factor: '0.5'
   pulse_counter_unit: 'RPM'
   pwm_frequency: 25000Hz
   pwm_icon: 'mdi:fan'
