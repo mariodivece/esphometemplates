@@ -21,12 +21,14 @@ sensor:
     temperature:
       name: "Ambient Temperature"
       id: ambient_temperature
+      icon: "mdi:thermometer"
       oversampling: 16x
       device_class: temperature
     
     pressure:
       name: "Atmospheric Pressure"
       id: ambient_pressure
+      icon: "mdi:altimeter"
       device_class: atmospheric_pressure
 
   - platform: template

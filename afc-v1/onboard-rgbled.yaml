@@ -1,4 +1,5 @@
 # RGB Light (neopixel bus)
+
 light:
   - platform: neopixelbus
     type: GRB
@@ -8,11 +9,14 @@ light:
     name: "Status LED"
     id: led_status
     #internal: true
+    restore_mode: ALWAYS_ON
     on_turn_on:
-      red: 80%
-      green: 0%
-      blue: 0%
-
+      - light.turn_on:
+          id: led_status
+          red: 90%
+          green: 0%
+          blue: 0%
+          brightness: 50%
 
     effects:
       - pulse:
