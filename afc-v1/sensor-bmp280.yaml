@@ -15,7 +15,7 @@ sensor:
       name: "Airflow Temperature"
       device_class: temperature
       on_value_range:
-        - below: 26.0
+        - below: 27.0
           then:
             - light.turn_on:
                 id: led_status
@@ -23,8 +23,8 @@ sensor:
                 green: 40%
                 blue: 0%
                 effect: "Temperature Pulse"
-        - above: 26.0
-          below: 35.0
+        - above: 27.0
+          below: 36.0
           then:
             - light.turn_on:
                 id: led_status
