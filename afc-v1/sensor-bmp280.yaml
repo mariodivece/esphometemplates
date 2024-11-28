@@ -14,6 +14,8 @@ sensor:
     temperature:
       name: "Airflow Temperature"
       device_class: temperature
+      web_server:
+        sorting_group_id: sg_sensor
       on_value_range:
         - below: 27.0
           then:
@@ -43,5 +45,7 @@ sensor:
     pressure:
       name: "Atmospheric Pressure"
       device_class: atmospheric_pressure
+      web_server:
+        sorting_group_id: sg_sensor
 
       
