@@ -20,6 +20,7 @@ sensor:
   - platform: wifi_signal
     name: "RSSI"
     id: sensor_rssi
+    icon: 'mdi:signal'
     update_interval: 60s
     entity_category: "diagnostic"
 
