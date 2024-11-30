@@ -1,6 +1,6 @@
 i2c:
-  scl: GPIO05
-  sda: GPIO04
+  scl: ${i2c_scl}
+  sda: ${i2c_sda}
   scan: true
   frequency: 50kHz
   id: bus_a

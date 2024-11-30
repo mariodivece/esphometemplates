@@ -11,7 +11,7 @@
 #  base_package:
 #    url: https://github.com/mariodivece/esphometemplates/
 #    ref: main
-#    file: afc-v1.yaml
+#    file: afc-v2.yaml
 #    refresh: 0d
 
 substitutions:
@@ -19,33 +19,33 @@ substitutions:
   device_site: "bl24"
   device_location_code: "caracal"
   device_location_name: "Caracal"
-  device_type_code: "afc1"
+  device_type_code: "afc2"
   device_type_name: "Advanced Fan Controller"
   device_number: "160"
   device_ip: "10.16.16.101"
 
   # Project Substitutions (not intended for user substitution)
-  device_model: "AFC V1"
+  device_model: "AFC V2"
   device_make: "Bullet Automation"
-  package_version: "2024.11.24"
-  package_url: "github://mariodivece/esphometemplates/afc-v1.yaml@main"
+  package_version: "2024.11.29"
+  package_url: "github://mariodivece/esphometemplates/afc-v2.yaml@main"
 
   log_level: INFO
 
   # GPIO Configurations -- Not intended for user substitutions
   i2c_scl: 'GPIO05'
-  i2c_sda: 'GPIO04'
+  i2c_sda: 'GPIO06'
   fan_name_prefix: "Fan "
   fan_restore_mode: ALWAYS_ON
   fan_control_id_prefix: "fan_control_"
-  fan_01_i_pin: 'GPIO12'
-  fan_01_o_pin: 'GPIO13'
-  fan_02_i_pin: 'GPIO10'
-  fan_02_o_pin: 'GPIO11'
-  fan_03_i_pin: 'GPIO09'
-  fan_03_o_pin: 'GPIO08'
+  fan_01_i_pin: 'GPIO10'
+  fan_01_o_pin: 'GPIO01'
+  fan_02_i_pin: 'GPIO09'
+  fan_02_o_pin: 'GPIO02'
+  fan_03_i_pin: 'GPIO08'
+  fan_03_o_pin: 'GPIO03'
   fan_04_i_pin: 'GPIO07'
-  fan_04_o_pin: 'GPIO06'
+  fan_04_o_pin: 'GPIO04'
   pulse_counter_icon: 'mdi:speedometer'
   pulse_counter_interval: 2s
   pulse_counter_id_prefix: 'fan_tacho_'
