@@ -5,7 +5,7 @@ web_server:
   local: true
   sorting_groups:
     - id: sg_sensor
-      name: "BMP280 Sensor"
+      name: ${ambient_sensor_label}
       sorting_weight: 5
     - id: "${sg_fan_prefix}01"
       name: "Fan 01 - ${fan_label_01}"

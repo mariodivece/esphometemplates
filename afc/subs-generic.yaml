@@ -29,3 +29,4 @@ substitutions:
   fan_label_02: '(Not Connected)'
   fan_label_03: '(Not Connected)'
   fan_label_04: '(Not Connected)'
+  ambient_sensor_label: 'Ambient Sensor (BMP280)'

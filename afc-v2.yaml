@@ -10,6 +10,7 @@
 #  fan_label_02: "PCIe Blower"
 #  fan_label_03: "(Not Connected)"
 #  fan_label_04: "Exhaust"
+#  ambient_sensor_label: "Ambient Sensor (BMP280)"
 #
 #packages:
 #  base_package:
