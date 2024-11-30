@@ -15,7 +15,7 @@ sensor:
       falling_edge: ${pulse_counter_falling}
     update_interval: ${pulse_counter_interval}
     web_server:
-      sorting_group_id: sg_fan_04
+      sorting_group_id: "${sg_fan_prefix}04"
 
 fan:
   - platform: speed
@@ -25,7 +25,7 @@ fan:
     output: "${pwm_id_prefix}04"
     restore_mode: ${fan_restore_mode}
     web_server:
-      sorting_group_id: sg_fan_04
+      sorting_group_id: "${sg_fan_prefix}04"
 
 output:
   - platform: ledc

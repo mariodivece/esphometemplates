@@ -6,7 +6,10 @@
 #  device_location_name: "Caracal"
 #  device_number: "160"
 #  device_ip: "10.16.40.85"
-#
+#  fan_label_01: "Front Grill"
+#  fan_label_02: "PCIe Blower"
+#  fan_label_03: "(Not Connected)"
+#  fan_label_04: "Exhaust"
 #packages:
 #  base_package:
 #    url: https://github.com/mariodivece/esphometemplates/
@@ -35,9 +38,6 @@ substitutions:
   # GPIO Configurations -- Not intended for user substitutions
   i2c_scl: 'GPIO05'
   i2c_sda: 'GPIO04'
-  fan_name_prefix: "Fan "
-  fan_restore_mode: ALWAYS_ON
-  fan_control_id_prefix: "fan_control_"
   fan_01_i_pin: 'GPIO12'
   fan_01_o_pin: 'GPIO13'
   fan_02_i_pin: 'GPIO10'
@@ -46,21 +46,6 @@ substitutions:
   fan_03_o_pin: 'GPIO08'
   fan_04_i_pin: 'GPIO07'
   fan_04_o_pin: 'GPIO06'
-  pulse_counter_icon: 'mdi:speedometer'
-  pulse_counter_interval: 2s
-  pulse_counter_id_prefix: 'fan_tacho_'
-  pulse_counter_name_suffix: ' - Speed'
-  pulse_counter_factor: '0.5'
-  pulse_counter_unit: 'RPM'
-  pulse_counter_decimals: '0'
-  pulse_counter_pin_mode: 'INPUT_PULLUP'
-  pulse_counter_rising: 'INCREMENT'
-  pulse_counter_falling: 'DISABLE'
-  pwm_frequency: 25000Hz
-  pwm_min_power: '0.25'
-  pwm_icon: 'mdi:fan'
-  pwm_name_suffix: ' - Control'
-  pwm_id_prefix: 'fan_pwm_'
 
 # Allow importing this package
 dashboard_import:
@@ -74,15 +59,16 @@ packages:
     ref: main
     refresh: 0d
     files:
-      - afc-v1/board-esp32s3zero.yaml
+      - afc/board-esp32s3zero.yaml
+      - afc/subs-generic.yaml
       - standard/project.yaml
       - standard/diagnostics.yaml
       - standard/wifi.yaml
       - standard/internaltemp.yaml
-      - afc-v1/webserver.yaml
-      - afc-v1/onboard-rgbled.yaml
-      - afc-v1/sensor-bmp280.yaml
-      - afc-v1/pwmfan-01.yaml
-      - afc-v1/pwmfan-02.yaml
-      - afc-v1/pwmfan-03.yaml
-      - afc-v1/pwmfan-04.yaml
+      - afc/webserver.yaml
+      - afc/onboard-rgbled.yaml
+      - afc/sensor-bmp280.yaml
+      - afc/pwmfan-01.yaml
+      - afc/pwmfan-02.yaml
+      - afc/pwmfan-03.yaml
+      - afc/pwmfan-04.yaml
