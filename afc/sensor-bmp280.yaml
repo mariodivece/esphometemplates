@@ -14,6 +14,7 @@ sensor:
     temperature:
       name: "Airflow Temperature"
       device_class: temperature
+      icon: 'mdi:thermometer'
       web_server:
         sorting_group_id: sg_sensor
       on_value_range:
@@ -44,8 +45,7 @@ sensor:
                 effect: "Temperature Pulse"
     pressure:
       name: "Atmospheric Pressure"
+      icon: 'mdi:altimeter'
       device_class: atmospheric_pressure
       web_server:
         sorting_group_id: sg_sensor
-
-      

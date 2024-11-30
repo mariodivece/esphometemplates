@@ -37,6 +37,7 @@ text_sensor:
 binary_sensor:
   # Diagnostic sensor for connection
   - platform: status
+    icon: 'mdi:home-assistant'
     name: "API Status"
     id: sensor_status
     disabled_by_default: true
