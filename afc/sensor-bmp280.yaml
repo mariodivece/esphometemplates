@@ -88,5 +88,5 @@ script:
         }
 
         auto call = fan->turn_on();
-        call->set_speed(id(fan1_s1));
-        call->perform();
+        call.set_speed(id(fan1_s1));
+        call.perform();
