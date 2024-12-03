@@ -78,14 +78,15 @@ globals:
 
 script:
   - id: set_fan_state
-    then: !lambda |-
-      auto fan = id(${fan_control_id_prefix}01);
-      if (!fan.state) {
+    then:
+      lambda: |-
+        auto fan = id(${fan_control_id_prefix}01);
+        if (!fan.state) {
+          auto call fan.turn_on();
+          call.set_speed(id(fan1_s1));
+          call.perform();
+        }
+
         auto call fan.turn_on();
         call.set_speed(id(fan1_s1));
         call.perform();
-      }
-
-      auto call fan.turn_on();
-      call.set_speed(id(fan1_s1));
-      call.perform();
