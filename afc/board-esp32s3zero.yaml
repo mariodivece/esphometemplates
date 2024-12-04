@@ -4,6 +4,6 @@ esp32:
     type: arduino
     version: latest
 
-psram:
-  mode: octal
-  speed: 80MHz
+#psram:
+#  mode: octal
+#  speed: 80MHz

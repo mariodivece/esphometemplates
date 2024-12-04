@@ -1,0 +1,100 @@
+# Example Usage:
+#
+#substitutions:
+#  device_site: "bl24"
+#  device_location_code: "caracal"
+#  device_location_name: "Caracal"
+#  device_number: "162"
+#  device_ip: "10.16.40.85"
+#  fan_label_01: "Front Grill"
+#  fan_label_02: "PCIe Blower"
+#  fan_label_03: "(Not Connected)"
+#  fan_label_04: "Exhaust"
+#  ambient_sensor_label: "Ambient Sensor (BMP280)"
+#
+#packages:
+#  base_package:
+#    url: https://github.com/mariodivece/esphometemplates/
+#    ref: main
+#    file: afc-v2.yaml
+#    refresh: 0d
+
+substitutions:
+  # User-required substitutions
+  device_site: "bl24"
+  device_location_code: "caracal"
+  device_location_name: "Caracal"
+  device_type_code: "basic"
+  device_type_name: "Basic Test"
+  device_number: "162"
+  device_ip: "10.16.16.103"
+
+  # Project Substitutions (not intended for user substitution)
+  device_model: "Basic S3 Zero"
+  device_make: "Bullet Automation"
+  package_version: "2024.12.3"
+  package_url: "github://mariodivece/esphometemplates/basic-s3-zero.yaml@main"
+
+  log_level: DEBUG
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: ${package_url}
+  import_full_config: false
+
+# Import packages
+packages:
+  standard_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    refresh: 0d
+    files:
+      - standard/project.yaml
+      - standard/diagnostics.yaml
+      - standard/wifi.yaml
+
+esp32:
+  board: adafruit_feather_esp32s3
+  framework:
+    type: arduino
+    version: recommended
+
+web_server:
+  port: 80
+  version: 3
+  local: true
+
+# RGB Light (neopixel bus)
+light:
+  - platform: neopixelbus
+    type: GRB
+    variant: WS2812
+    pin: GPIO21
+    num_leds: 1
+    name: "Status LED"
+    id: led_status
+    internal: false
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - light.turn_on:
+          id: led_status
+          red: 80%
+          green: 20%
+          blue: 100%
+          brightness: 50%
+          effect: "Booting Pulse"
+
+    effects:
+      - pulse:
+          name: "Booting Pulse"
+          transition_length: 250ms
+          update_interval: 250ms
+          min_brightness: 30%
+          max_brightness: 75%
+
+      - pulse:
+          name: "Temperature Pulse"
+          transition_length: 1s
+          update_interval: 1s
+          min_brightness: 30%
+          max_brightness: 75%
