@@ -2,8 +2,8 @@ esp32:
   board: adafruit_feather_esp32s3
   framework:
     type: arduino
-    version: latest
+    version: recommended
 
-psram:
-  mode: octal
-  speed: 80MHz
+#psram:
+#  mode: octal
+#  speed: 80MHz

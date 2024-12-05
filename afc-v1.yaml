@@ -65,7 +65,7 @@ packages:
       - standard/project.yaml
       - standard/diagnostics.yaml
       - standard/wifi.yaml
-      - standard/internaltemp.yaml
+      #- standard/internaltemp.yaml
       - afc/webserver.yaml
       - afc/onboard-rgbled.yaml
       - afc/sensor-bmp280.yaml
