@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+afc/schematics/afc-backups/
+afc/schematics-v2/afc-backups/
+*.kicad_pcb.lck
