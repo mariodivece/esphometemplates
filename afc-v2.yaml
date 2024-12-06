@@ -74,3 +74,5 @@ packages:
       - afc/pwmfan-02.yaml
       - afc/pwmfan-03.yaml
       - afc/pwmfan-04.yaml
+      - afc/controller.yaml
+      
