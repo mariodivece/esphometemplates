@@ -12,12 +12,12 @@ globals:
   # Low Temp
   - id: fan1_t1
     type: float
-    initial_value: '30.0'
+    initial_value: '30.5'
     restore_value: no
   # High temp
   - id: fan1_t2
     type: float
-    initial_value: '36.0'
+    initial_value: '38.0'
     restore_value: no
   # Low Speed %
   - id: fan1_s1
