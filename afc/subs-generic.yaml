@@ -18,7 +18,7 @@ substitutions:
 
   # Fan PWM Controller (oputput)
   pwm_frequency: 25000Hz
-  pwm_min_power: '0.15'
+  pwm_min_power: '0.05'
   pwm_icon: 'mdi:fan'
   pwm_name_suffix: ' - Control'
   pwm_id_prefix: 'fan_pwm_'
