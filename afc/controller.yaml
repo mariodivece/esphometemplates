@@ -12,7 +12,7 @@ globals:
   # Low Temp
   - id: fan1_t1
     type: float
-    initial_value: '30.0'
+    initial_value: '28.0'
     restore_value: no
   # High temp
   - id: fan1_t2
@@ -22,12 +22,12 @@ globals:
   # Low Speed %
   - id: fan1_s1
     type: float
-    initial_value: '2.0'
+    initial_value: '5.0'
     restore_value: no
   # High Speed %
   - id: fan1_s2
     type: float
-    initial_value: '34.0'
+    initial_value: '35.0'
     restore_value: no
 
 script:
