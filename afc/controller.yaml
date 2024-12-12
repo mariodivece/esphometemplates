@@ -75,6 +75,6 @@ script:
         }
 
         // Make the call with the latest value of sc.
-        auto call = fan->turn_on();
-        call.set_speed(sc);
-        call.perform();
+        //auto call = fan->turn_on();
+        //call.set_speed(sc);
+        //#call.perform();
