@@ -398,4 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 afc/schematics/afc-backups/
 afc/schematics-v2/afc-backups/
+afc/schematics-v3/afc-xiao-backups/
 *.kicad_pcb.lck
