@@ -36,8 +36,8 @@ esphome:
       - lambda: |-
           id(cpu_speed) = ESP.getCpuFreqMHz();
 
+# Show firmware template version
 text_sensor:
-  # Show firmware template version
   - platform: template
     name: "Deployment Version"
     lambda: return {"${package_version}"};
@@ -45,8 +45,8 @@ text_sensor:
     icon: "mdi:tag"
     entity_category: diagnostic
 
+# Device CPU Frequency
 sensor:
-    # Device CPU Frequency
   - platform: template
     name: "CPU Frequency"
     icon: "mdi:speedometer"
