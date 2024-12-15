@@ -6,7 +6,7 @@
 	(descr "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F350211%7FU5%7Fpdf%7FEnglish%7FENG_CD_350211_U5.pdf%7F350211-1")
 	(tags "connector TE MATE-N-LOK top entry ATA PATA IDE 5.25 inch floppy drive power")
 	(property "Reference" "REF**"
-		(at 0 11.5 0)
+		(at 0.22 11.5 0)
 		(layer "F.SilkS")
 		(uuid "23ca6746-c718-4f11-b862-7af9c59db32d")
 		(effects
@@ -17,7 +17,7 @@
 		)
 	)
 	(property "Value" "Molex 4-Pin Power Connector"
-		(at 5.08 0 -90)
+		(at -4.86 0 -90)
 		(layer "F.Fab")
 		(uuid "c3fb906a-9f52-4b10-aa87-6f68c4589736")
 		(effects
@@ -28,7 +28,7 @@
 		)
 	)
 	(property "Footprint" ""
-		(at 0.22 7.62 90)
+		(at 0 7.62 90)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
@@ -41,7 +41,7 @@
 		)
 	)
 	(property "Datasheet" ""
-		(at 0.22 7.62 90)
+		(at 0 7.62 90)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
@@ -54,7 +54,7 @@
 		)
 	)
 	(property "Description" ""
-		(at 0.22 7.62 90)
+		(at 0 7.62 90)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
@@ -68,8 +68,8 @@
 	)
 	(attr through_hole)
 	(fp_line
-		(start -3 -10.57)
-		(end 1.61 -10.57)
+		(start -3.22 -10.57)
+		(end 1.39 -10.57)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -78,8 +78,8 @@
 		(uuid "c6429295-e53b-4ce2-8c04-5077d4950d8d")
 	)
 	(fp_line
-		(start -3 10.57)
-		(end -3 -10.57)
+		(start -3.22 10.57)
+		(end -3.22 -10.57)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -88,8 +88,8 @@
 		(uuid "6be421d2-ee91-4f4d-870b-bd1b6ec1e2ea")
 	)
 	(fp_line
-		(start 1.61 -10.57)
-		(end 3.44 -8.74)
+		(start 1.39 -10.57)
+		(end 3.22 -8.74)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -98,8 +98,8 @@
 		(uuid "20bc06bd-5e83-4a5f-9530-31a878f78ca1")
 	)
 	(fp_line
-		(start 1.61 10.57)
-		(end -3 10.57)
+		(start 1.39 10.57)
+		(end -3.22 10.57)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -108,8 +108,8 @@
 		(uuid "f5a950a3-b2d8-4071-9fa9-740c83c1d728")
 	)
 	(fp_line
-		(start 3.44 -8.74)
-		(end 3.44 8.74)
+		(start 3.22 -8.74)
+		(end 3.22 8.74)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -118,8 +118,8 @@
 		(uuid "39b40dda-5e5f-47e2-a7ea-64bd4c2a829a")
 	)
 	(fp_line
-		(start 3.44 8.74)
-		(end 1.61 10.57)
+		(start 3.22 8.74)
+		(end 1.39 10.57)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -128,8 +128,8 @@
 		(uuid "00ff7edf-f172-4acf-85fe-e705b1ddf27b")
 	)
 	(fp_line
-		(start -3 -10.57)
-		(end 1.61 -10.57)
+		(start -3.22 -10.57)
+		(end 1.39 -10.57)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -138,8 +138,8 @@
 		(uuid "3a12376a-094e-4aa5-9204-d11dc1f47316")
 	)
 	(fp_line
-		(start -3 10.57)
-		(end -3 -10.57)
+		(start -3.22 10.57)
+		(end -3.22 -10.57)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -148,8 +148,8 @@
 		(uuid "ac8d8f07-dbf2-42fb-8795-75015daca835")
 	)
 	(fp_line
-		(start 1.61 -10.57)
-		(end 3.44 -8.74)
+		(start 1.39 -10.57)
+		(end 3.22 -8.74)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -158,8 +158,8 @@
 		(uuid "fef125f7-f2a8-483d-99e3-9c6f0d8c84b5")
 	)
 	(fp_line
-		(start 1.61 10.57)
-		(end -3 10.57)
+		(start 1.39 10.57)
+		(end -3.22 10.57)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -168,8 +168,8 @@
 		(uuid "027fed4e-fa65-4738-a48a-75ce02751010")
 	)
 	(fp_line
-		(start 3.44 -8.74)
-		(end 3.44 8.74)
+		(start 3.22 -8.74)
+		(end 3.22 8.74)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -178,8 +178,8 @@
 		(uuid "86db06aa-f759-442c-aceb-5ac5a6241be0")
 	)
 	(fp_line
-		(start 3.44 8.74)
-		(end 1.61 10.57)
+		(start 3.22 8.74)
+		(end 1.39 10.57)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -188,7 +188,7 @@
 		(uuid "de303ed9-5fd2-4709-9838-b9648b022335")
 	)
 	(fp_text user "GND"
-		(at -6.5 -2 0)
+		(at 6.72 -2 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "423c6a0d-2418-43f2-84c9-1653790361d3")
@@ -197,11 +197,11 @@
 				(size 1 1)
 				(thickness 0.1)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 	)
 	(fp_text user "GND"
-		(at -6.5 3 0)
+		(at 6.72 3 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "a04858b8-c747-4281-bc3c-abd3cb1e1af6")
@@ -210,11 +210,11 @@
 				(size 1 1)
 				(thickness 0.1)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 	)
 	(fp_text user "12V"
-		(at -6.5 8.5 0)
+		(at 6.72 8.5 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "c24c8497-fc38-4ac2-a13d-40ff121349e4")
@@ -223,11 +223,11 @@
 				(size 1 1)
 				(thickness 0.1)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 	)
 	(fp_text user "5V"
-		(at -5.5 -7 0)
+		(at 5.72 -7 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "cc1685ae-69c3-4b0b-9311-6c3538a22b6c")
@@ -236,25 +236,25 @@
 				(size 1 1)
 				(thickness 0.1)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 	)
 	(pad "" np_thru_hole circle
-		(at -4.78 -12.62 90)
+		(at 5 -12.62 270)
 		(size 2.78 2.78)
 		(drill 1.78)
 		(layers "F&B.Cu" "*.Mask")
 		(uuid "ff1ab4ee-7247-4171-aea5-323008caac5a")
 	)
 	(pad "" np_thru_hole circle
-		(at -4.78 12.62 90)
+		(at 5 12.62 270)
 		(size 2.78 2.78)
 		(drill 1.78)
 		(layers "F&B.Cu" "*.Mask")
 		(uuid "b97a8d70-fb1a-4636-8e60-1aff7c5a960b")
 	)
 	(pad "1" thru_hole rect
-		(at 0.22 7.62 90)
+		(at 0 7.62 270)
 		(size 2.78 2.78)
 		(drill 1.78)
 		(layers "*.Cu" "*.Mask")
@@ -262,7 +262,7 @@
 		(uuid "c29e0cdc-fcc2-4a13-beeb-dbbbfda7d8b8")
 	)
 	(pad "2" thru_hole circle
-		(at 0.22 2.54 90)
+		(at 0 2.54 270)
 		(size 2.78 2.78)
 		(drill 1.78)
 		(layers "*.Cu" "*.Mask")
@@ -270,7 +270,7 @@
 		(uuid "7f6d0771-f084-436e-b04a-cdfa11721351")
 	)
 	(pad "3" thru_hole circle
-		(at 0.22 -2.54 90)
+		(at 0 -2.54 270)
 		(size 2.78 2.78)
 		(drill 1.78)
 		(layers "*.Cu" "*.Mask")
@@ -278,7 +278,7 @@
 		(uuid "effb71ae-8d20-49a8-ba19-50506ce2ef99")
 	)
 	(pad "4" thru_hole circle
-		(at 0.22 -7.62 90)
+		(at 0 -7.62 270)
 		(size 2.78 2.78)
 		(drill 1.78)
 		(layers "*.Cu" "*.Mask")
