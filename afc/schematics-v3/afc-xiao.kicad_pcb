@@ -103,7 +103,7 @@
 		(descr "4-pin CPU fan Through hole pin header, e.g. for Wieson part number 2366C888-007 Molex 47053-1000, Foxconn HF27040-M1, Tyco 1470947-1 or equivalent, see http://www.formfactors.org/developer%5Cspecs%5Crev1_2_public.pdf")
 		(tags "pin header 4-pin CPU fan")
 		(property "Reference" "FAN3"
-			(at 6.604 0 90)
+			(at 6.604 1.31 90)
 			(layer "F.SilkS")
 			(uuid "78619d38-5d3a-4b9c-a560-b7d000edd274")
 			(effects
@@ -5919,7 +5919,7 @@
 		(descr "4-pin CPU fan Through hole pin header, e.g. for Wieson part number 2366C888-007 Molex 47053-1000, Foxconn HF27040-M1, Tyco 1470947-1 or equivalent, see http://www.formfactors.org/developer%5Cspecs%5Crev1_2_public.pdf")
 		(tags "pin header 4-pin CPU fan")
 		(property "Reference" "FAN2"
-			(at 6.604 0 90)
+			(at 6.604 1.31 90)
 			(layer "F.SilkS")
 			(uuid "63cb98ac-fbfb-464f-adee-9b4d2ad21d3e")
 			(effects
@@ -8312,7 +8312,7 @@
 		(descr "4-pin CPU fan Through hole pin header, e.g. for Wieson part number 2366C888-007 Molex 47053-1000, Foxconn HF27040-M1, Tyco 1470947-1 or equivalent, see http://www.formfactors.org/developer%5Cspecs%5Crev1_2_public.pdf")
 		(tags "pin header 4-pin CPU fan")
 		(property "Reference" "FAN4"
-			(at 6.604 0 90)
+			(at 6.604 1.31 90)
 			(layer "F.SilkS")
 			(uuid "8bd34c26-c803-468c-8a06-6534d2e13eb4")
 			(effects
@@ -8680,7 +8680,7 @@
 		(descr "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F350211%7FU5%7Fpdf%7FEnglish%7FENG_CD_350211_U5.pdf%7F350211-1")
 		(tags "connector TE MATE-N-LOK top entry ATA PATA IDE 5.25 inch floppy drive power")
 		(property "Reference" "PWR"
-			(at 0.22 11.5 0)
+			(at 0.22 12.7 0)
 			(layer "F.SilkS")
 			(uuid "07b230be-841d-4899-abe1-875ab1c8e41d")
 			(effects
@@ -8862,7 +8862,7 @@
 			(uuid "0a184eac-0694-4031-9503-c7b6cd994e81")
 		)
 		(fp_text user "GND"
-			(at 6.72 3 0)
+			(at -4.445 3 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "193af070-a433-469d-86b7-bfe2187bd414")
@@ -8875,7 +8875,7 @@
 			)
 		)
 		(fp_text user "5V"
-			(at 5.72 -7 0)
+			(at -4.445 -8.89 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "23b462dd-7d27-4c9c-8d35-cc230a251897")
@@ -8888,7 +8888,7 @@
 			)
 		)
 		(fp_text user "12V"
-			(at 6.72 8.5 0)
+			(at -4.445 10.16 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "4875ee5f-3d74-4ba5-a7c4-ccb72e954d55")
@@ -8901,7 +8901,7 @@
 			)
 		)
 		(fp_text user "GND"
-			(at 6.72 -2 0)
+			(at -4.445 -2 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "56a9ecdd-8669-4c22-82f4-01e3c4e3572e")
@@ -8982,7 +8982,7 @@
 		(descr "4-pin CPU fan Through hole pin header, e.g. for Wieson part number 2366C888-007 Molex 47053-1000, Foxconn HF27040-M1, Tyco 1470947-1 or equivalent, see http://www.formfactors.org/developer%5Cspecs%5Crev1_2_public.pdf")
 		(tags "pin header 4-pin CPU fan")
 		(property "Reference" "FAN1"
-			(at 6.604 0 90)
+			(at 6.604 1.31 90)
 			(layer "F.SilkS")
 			(uuid "363a2e68-5e57-4d7b-8181-185746792290")
 			(effects
@@ -9350,7 +9350,7 @@
 		(descr "4-pin CPU fan Through hole pin header, e.g. for Wieson part number 2366C888-007 Molex 47053-1000, Foxconn HF27040-M1, Tyco 1470947-1 or equivalent, see http://www.formfactors.org/developer%5Cspecs%5Crev1_2_public.pdf")
 		(tags "pin header 4-pin CPU fan")
 		(property "Reference" "ENV1"
-			(at 2.52 -5.12 90)
+			(at 6.33 -1.945 0)
 			(layer "F.SilkS")
 			(uuid "926de79e-ab9e-41e0-9261-a08dcde5e182")
 			(effects
@@ -9612,7 +9612,7 @@
 			(uuid "122ec3a7-37ee-4e41-884e-c68451adc22f")
 		)
 		(fp_text user "D"
-			(at -4.318 2.54 -90)
+			(at -4.318 8.215 -90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "1592373c-489d-46ed-8e97-1cffac1b12d1")
@@ -9625,7 +9625,7 @@
 			)
 		)
 		(fp_text user "G"
-			(at 0.762 2.54 -90)
+			(at 0.762 8.215 -90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "2722bc2c-249a-485d-97af-be5dde0ee8fb")
@@ -9638,7 +9638,7 @@
 			)
 		)
 		(fp_text user "C"
-			(at -1.778 2.54 -90)
+			(at -1.778 8.215 -90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "d9f2c746-d44b-4e84-92b4-130e4c23f7e4")
@@ -9651,7 +9651,7 @@
 			)
 		)
 		(fp_text user "3"
-			(at 3.302 2.54 -90)
+			(at 3.302 8.215 -90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "f598d6b2-0d16-4594-bde3-d5e417bb5bbd")
@@ -10244,6 +10244,14 @@
 		(uuid "f9147619-64cc-4879-8d3f-937099a4e23d")
 	)
 	(segment
+		(start 99.695 109.855)
+		(end 99.695 81.28)
+		(width 0.9525)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "0564d190-605b-4db2-89ff-905d9e5c1345")
+	)
+	(segment
 		(start 111.125 80.01)
 		(end 120.015 80.01)
 		(width 0.9525)
@@ -10268,20 +10276,20 @@
 		(uuid "0d89cacc-65a2-4168-9337-f7905ca5483a")
 	)
 	(segment
+		(start 100.965 80.01)
+		(end 108.585 80.01)
+		(width 0.9525)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "11638a65-dc87-4b45-97e8-15e1d1af53ab")
+	)
+	(segment
 		(start 130.175 81.28)
 		(end 130.175 82.55)
 		(width 0.9525)
 		(layer "F.Cu")
 		(net 5)
 		(uuid "14426c5b-d758-45ba-a29d-e98e334c725f")
-	)
-	(segment
-		(start 108.585 80.01)
-		(end 109.855 81.28)
-		(width 0.9525)
-		(layer "F.Cu")
-		(net 5)
-		(uuid "161c302d-5664-441d-91b9-ca4096c69d18")
 	)
 	(segment
 		(start 160.655 91.44)
@@ -10298,6 +10306,22 @@
 		(layer "F.Cu")
 		(net 5)
 		(uuid "1e944a4c-1b30-4f60-ad3f-8da06c27158d")
+	)
+	(segment
+		(start 108.585 80.01)
+		(end 109.855 81.28)
+		(width 0.9525)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "20f9e4c3-aecf-41ec-be82-1eb182d093b4")
+	)
+	(segment
+		(start 101.6 111.76)
+		(end 99.695 109.855)
+		(width 0.9525)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "248773dd-0108-4d2d-9ac7-b703b1a7b802")
 	)
 	(segment
 		(start 135.255 107.95)
@@ -10330,6 +10354,14 @@
 		(layer "F.Cu")
 		(net 5)
 		(uuid "349df602-86e7-40ff-a36b-cb11a48711fd")
+	)
+	(segment
+		(start 104.655 111.76)
+		(end 101.6 111.76)
+		(width 0.9525)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "36febc68-51fb-4195-9c93-27dc544804f3")
 	)
 	(segment
 		(start 169.545 80.01)
@@ -10372,14 +10404,6 @@
 		(uuid "57377e71-0f77-4dbd-85cf-9e72de7ff79e")
 	)
 	(segment
-		(start 101.005 111.8)
-		(end 99.695 110.49)
-		(width 0.9525)
-		(layer "F.Cu")
-		(net 5)
-		(uuid "5cb3668b-9a3c-4285-9888-9e09b92a8876")
-	)
-	(segment
 		(start 128.905 80.01)
 		(end 130.175 81.28)
 		(width 0.9525)
@@ -10388,12 +10412,12 @@
 		(uuid "6360aa16-19ff-4526-8454-e88acefb6551")
 	)
 	(segment
-		(start 104.695 111.8)
-		(end 101.005 111.8)
+		(start 99.695 81.28)
+		(end 100.965 80.01)
 		(width 0.9525)
 		(layer "F.Cu")
 		(net 5)
-		(uuid "6939c7da-5f35-48e8-9176-605159c41038")
+		(uuid "6a0fea9b-0550-4a28-b01e-e132d093b5c1")
 	)
 	(segment
 		(start 174.625 92.67)
@@ -10452,20 +10476,20 @@
 		(uuid "83d2a938-1e3f-4166-afc3-87e84f5554a7")
 	)
 	(segment
-		(start 99.695 110.49)
-		(end 99.695 81.28)
-		(width 0.9525)
-		(layer "F.Cu")
-		(net 5)
-		(uuid "8f319c56-21c8-4b4c-85a3-2f5dabcf6289")
-	)
-	(segment
 		(start 150.495 81.28)
 		(end 150.495 82.55)
 		(width 0.9525)
 		(layer "F.Cu")
 		(net 5)
 		(uuid "942c7f52-cfa2-408d-a89c-4d2da1d3316d")
+	)
+	(segment
+		(start 104.695 111.8)
+		(end 104.655 111.76)
+		(width 0.9525)
+		(layer "F.Cu")
+		(net 5)
+		(uuid "94f91156-15d3-41d1-a8b5-221cb83a67a3")
 	)
 	(segment
 		(start 187.325 104.14)
@@ -10498,22 +10522,6 @@
 		(layer "F.Cu")
 		(net 5)
 		(uuid "a2a45c9c-20d4-413a-8632-675a99f66c23")
-	)
-	(segment
-		(start 100.965 80.01)
-		(end 108.585 80.01)
-		(width 0.9525)
-		(layer "F.Cu")
-		(net 5)
-		(uuid "a302bbfb-e1d8-4a58-8573-5969f5a726f9")
-	)
-	(segment
-		(start 99.695 81.28)
-		(end 100.965 80.01)
-		(width 0.9525)
-		(layer "F.Cu")
-		(net 5)
-		(uuid "a6d8d12e-3474-44f7-a658-49c46f3c8e59")
 	)
 	(segment
 		(start 151.765 80.01)
