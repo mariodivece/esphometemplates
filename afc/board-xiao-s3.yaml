@@ -63,11 +63,15 @@ esp32:
     type: arduino
     version: recommended
 
+output:
+  - platform: ledc
+    id: "led_pwm"
+    pin: GPIO21
+    frequency: ${pwm_frequency}
 
 light:
   - platform: monochromatic
-    pin: GPIO21
-    num_leds: 1
+    output: led_pwm
     name: "Status LED"
     id: led_status
     internal: true
