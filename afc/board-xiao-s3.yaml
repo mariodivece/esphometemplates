@@ -68,6 +68,7 @@ output:
     id: "led_pwm"
     pin: GPIO21
     frequency: ${pwm_frequency}
+    channel: 7
 
 light:
   - platform: monochromatic
