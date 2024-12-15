@@ -1,0 +1,63 @@
+# NOTE: This file is not a stand-alone package. It is part of
+# a 'root' device template and expects the substitutions that
+# are hereby referenced to be defined by its parent.
+
+substitutions:
+  # Generated name and unique device id for the device
+  # Not intended for user substitutions
+  device_name: "${device_location_name} - ${device_type_name} - ${device_number}"
+  device_code: "${device_site}-${device_location_code}-${device_type_code}-${device_number}"
+
+# Define a global variable for CPU speed
+globals:
+  - id: cpu_speed
+    type: int
+    restore_value: no
+    initial_value: "0"
+
+# Setup the integration and define some project variables
+esphome:
+  platformio_options:
+    build_flags: -DBOARD_HAS_PSRAM
+    board_build.arduino.memory_type: qio_opi
+    board_build.f_flash: 80000000L
+    board_build.flash_mode: qio
+  name: "${device_code}"
+  friendly_name: "${device_name}"
+  comment: "${device_model} by ${device_make}"
+  name_add_mac_suffix: false
+  min_version: "2023.2.0"
+  project:
+    name: "${device_make}.${device_model}"
+    version: "${package_version}"
+  on_boot:
+  - priority: 900.0
+    then:
+      - lambda: |-
+          id(cpu_speed) = ESP.getCpuFreqMHz();
+
+text_sensor:
+  # Show firmware template version
+  - platform: template
+    name: "Deployment Version"
+    lambda: return {"${package_version}"};
+    disabled_by_default: true
+    icon: "mdi:tag"
+    entity_category: diagnostic
+
+sensor:
+    # Device CPU Frequency
+  - platform: template
+    name: "CPU Frequency"
+    icon: "mdi:speedometer"
+    accuracy_decimals: 0
+    unit_of_measurement: Mhz
+    disabled_by_default: true
+    lambda: |-
+      return (id(cpu_speed));
+    entity_category: diagnostic
+
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+    version: recommended
