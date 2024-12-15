@@ -62,3 +62,36 @@ esp32:
   framework:
     type: arduino
     version: recommended
+
+
+light:
+  - platform: monochromatic
+    pin: GPIO21
+    num_leds: 1
+    name: "Status LED"
+    id: led_status
+    internal: true
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - light.turn_on:
+          id: led_status
+          red: 80%
+          green: 20%
+          blue: 100%
+          brightness: 50%
+          effect: "Booting Pulse"
+
+    effects:
+      - pulse:
+          name: "Booting Pulse"
+          transition_length: 250ms
+          update_interval: 250ms
+          min_brightness: 30%
+          max_brightness: 75%
+
+      - pulse:
+          name: "Temperature Pulse"
+          transition_length: 1s
+          update_interval: 1s
+          min_brightness: 30%
+          max_brightness: 75%
