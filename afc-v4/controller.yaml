@@ -34,6 +34,7 @@ script:
   - id: set_fan_state
     then:
       lambda: |-
+        return;
         // Fan entity
         auto fan = id(${fan_control_id_prefix}01);
         
