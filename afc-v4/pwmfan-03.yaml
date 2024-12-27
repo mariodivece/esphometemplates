@@ -1,0 +1,36 @@
+sensor:
+  - platform: pulse_counter
+    id: "${pulse_counter_id_prefix}03"
+    name: "${fan_name_prefix}03${pulse_counter_name_suffix}"
+    icon: ${pulse_counter_icon}
+    pin: 
+      number: ${fan_03_i_pin}
+      mode: ${pulse_counter_pin_mode}
+    unit_of_measurement: ${pulse_counter_unit}
+    accuracy_decimals: ${pulse_counter_decimals}
+    filters:
+      - multiply: ${pulse_counter_factor}
+    count_mode:
+      rising_edge: ${pulse_counter_rising}
+      falling_edge: ${pulse_counter_falling}
+    update_interval: ${pulse_counter_interval}
+    web_server:
+      sorting_group_id: "${sg_fan_prefix}03"
+
+fan:
+  - platform: speed
+    id: "${fan_control_id_prefix}03"
+    name: "${fan_name_prefix}03${pwm_name_suffix}"
+    icon: ${pwm_icon}
+    output: "${pwm_id_prefix}03"
+    restore_mode: ${fan_restore_mode}
+    web_server:
+      sorting_group_id: "${sg_fan_prefix}03"
+
+output:
+  - platform: ledc
+    id: "${pwm_id_prefix}03"
+    channel: 4
+    pin: ${fan_03_o_pin}
+    frequency: ${pwm_frequency}
+    min_power: ${pwm_min_power}

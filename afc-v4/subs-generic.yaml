@@ -1,0 +1,32 @@
+substitutions:
+  # Basic Configs
+  fan_name_prefix: "Fan "
+  fan_restore_mode: ALWAYS_ON
+  fan_control_id_prefix: "fan_control_"
+
+  # Fan Pulse Counter (input)
+  pulse_counter_icon: 'mdi:speedometer'
+  pulse_counter_interval: 2s
+  pulse_counter_id_prefix: 'fan_tacho_'
+  pulse_counter_name_suffix: ' - Speed'
+  pulse_counter_factor: '0.5'
+  pulse_counter_unit: 'RPM'
+  pulse_counter_decimals: '0'
+  pulse_counter_pin_mode: 'INPUT_PULLUP'
+  pulse_counter_rising: 'INCREMENT'
+  pulse_counter_falling: 'DISABLE'
+
+  # Fan PWM Controller (oputput)
+  pwm_frequency: 25000Hz
+  pwm_min_power: '0.05'
+  pwm_icon: 'mdi:fan'
+  pwm_name_suffix: ' - Control'
+  pwm_id_prefix: 'fan_pwm_'
+
+  # Web Server
+  sg_fan_prefix: 'sg_fan_'
+  fan_label_01: '(Not Connected)'
+  fan_label_02: '(Not Connected)'
+  fan_label_03: '(Not Connected)'
+  fan_label_04: '(Not Connected)'
+  ambient_sensor_label: 'Ambient Sensor (BMP280)'
