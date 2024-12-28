@@ -1,0 +1,56 @@
+i2c:
+  scl: ${i2c_scl}
+  sda: ${i2c_sda}
+  scan: true
+  frequency: 50kHz
+  id: bus_a
+
+sensor:
+  - platform: bmp280_i2c
+    i2c_id: bus_a
+    address: 0x76
+    update_interval: 10s
+    iir_filter: 4x
+    temperature:
+      name: "Airflow Temperature"
+      id: 'sensor_tcurrent'
+      device_class: temperature
+      icon: 'mdi:thermometer'
+      web_server:
+        sorting_group_id: sg_sensor
+      on_value_range:
+        - below: 27.0
+          then:
+            - light.turn_on:
+                id: led_status
+                red: 20%
+                green: 40%
+                blue: 0%
+                effect: "Temperature Pulse"
+        - above: 27.0
+          below: 36.0
+          then:
+            - light.turn_on:
+                id: led_status
+                red: 100%
+                green: 40%
+                blue: 0%
+                effect: "Temperature Pulse"
+        - above: 36.0
+          then:
+            - light.turn_on:
+                id: led_status
+                red: 80%
+                green: 0%
+                blue: 0%
+                effect: "Temperature Pulse"
+      on_value:
+        then:
+          - script.execute: set_fan_state
+    pressure:
+      name: "Atmospheric Pressure"
+      icon: 'mdi:altimeter'
+      device_class: atmospheric_pressure
+      web_server:
+        sorting_group_id: sg_sensor
+
