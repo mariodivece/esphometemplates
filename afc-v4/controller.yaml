@@ -8,33 +8,48 @@
 # Minimum speed (~20%) for safety
 # Always turn on fans on boot on boot
 
+substitutions:
+  fan1_auto_enable: 'false'
+  fan1_temp_low: '30.0'
+  fan1_temp_high: '36.0'
+  fan1_speed_low: '5.0'
+  fan1_speed_high: '35.0'
+
 globals:
+  # Enable Auto Controller
+  - id: fan1_en
+    type: bool
+    initial_value: ${fan1_auto_enable}
+    restore_value: yes
   # Low Temp
   - id: fan1_t1
     type: float
-    initial_value: '30.0'
-    restore_value: no
+    initial_value: ${fan1_temp_low}
+    restore_value: yes
   # High temp
   - id: fan1_t2
     type: float
-    initial_value: '36.0'
-    restore_value: no
+    initial_value: ${fan1_temp_high}
+    restore_value: yes
   # Low Speed %
   - id: fan1_s1
     type: float
-    initial_value: '5.0'
-    restore_value: no
+    initial_value: ${fan1_speed_low}
+    restore_value: yes
   # High Speed %
   - id: fan1_s2
     type: float
-    initial_value: '35.0'
-    restore_value: no
+    initial_value: ${fan1_speed_high}
+    restore_value: yes
 
 script:
   - id: set_fan_state
     then:
       lambda: |-
-        return;
+        if (fan1_en == false) {
+          return;
+        }
+
         // Fan entity
         auto fan = id(${fan_control_id_prefix}01);
         
