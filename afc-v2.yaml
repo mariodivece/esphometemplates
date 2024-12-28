@@ -29,6 +29,13 @@ substitutions:
   device_number: "160"
   device_ip: "10.16.16.101"
 
+  # Auto controller Tuning
+  temp_low: '30.0'
+  temp_high: '36.0'
+  speed_low: '5.0'
+  speed_high: '35.0'
+  pwm_min_power: '0.05'
+
   # Project Substitutions (not intended for user substitution)
   device_model: "AFC V2"
   device_make: "Bullet Automation"

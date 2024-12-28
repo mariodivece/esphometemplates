@@ -8,26 +8,32 @@
 # Minimum speed (~20%) for safety
 # Always turn on fans on boot on boot
 
+substitutions:
+  temp_low: '30.0'
+  temp_high: '36.0'
+  speed_low: '5.0'
+  speed_high: '35.0'
+
 globals:
   # Low Temp
   - id: fan1_t1
     type: float
-    initial_value: '30.0'
+    initial_value: ${temp_low}
     restore_value: no
   # High temp
   - id: fan1_t2
     type: float
-    initial_value: '36.0'
+    initial_value: ${temp_high}
     restore_value: no
   # Low Speed %
   - id: fan1_s1
     type: float
-    initial_value: '5.0'
+    initial_value: ${speed_low}
     restore_value: no
   # High Speed %
   - id: fan1_s2
     type: float
-    initial_value: '35.0'
+    initial_value: ${speed_high}
     restore_value: no
 
 script:
