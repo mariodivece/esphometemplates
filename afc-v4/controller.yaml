@@ -19,27 +19,27 @@ globals:
   # Fan 1: Enable Auto Controller
   - id: fan1_en
     type: bool
-    initial_value: ${fan1_auto_enable}
+    initial_value: ${fan_01_auto_enable}
     restore_value: yes
   # Low Temp
   - id: fan1_t1
     type: float
-    initial_value: ${fan1_temp_low}
+    initial_value: ${fan_01_temp_low}
     restore_value: yes
   # High temp
   - id: fan1_t2
     type: float
-    initial_value: ${fan1_temp_high}
+    initial_value: ${fan_01_temp_high}
     restore_value: yes
   # Low Speed %
   - id: fan1_s1
     type: float
-    initial_value: ${fan1_speed_low}
+    initial_value: ${fan_01_speed_low}
     restore_value: yes
   # High Speed %
   - id: fan1_s2
     type: float
-    initial_value: ${fan1_speed_high}
+    initial_value: ${fan_01_speed_high}
     restore_value: yes
 
 script:
