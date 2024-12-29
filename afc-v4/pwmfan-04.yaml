@@ -33,4 +33,4 @@ output:
     channel: 6
     pin: ${fan_04_o_pin}
     frequency: ${pwm_frequency}
-    min_power: ${pwm_min_power}
+    min_power: ${fan_04_min_power}

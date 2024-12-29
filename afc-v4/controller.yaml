@@ -9,14 +9,14 @@
 # Always turn on fans on boot on boot
 
 substitutions:
-  fan1_auto_enable: 'false'
-  fan1_temp_low: '30.0'
-  fan1_temp_high: '36.0'
-  fan1_speed_low: '5.0'
-  fan1_speed_high: '35.0'
+  fan_01_auto_enable: 'false'
+  fan_01_temp_low: '30.0'
+  fan_01_temp_high: '36.0'
+  fan_01_speed_low: '5.0'
+  fan_01_speed_high: '35.0'
 
 globals:
-  # Enable Auto Controller
+  # Fan 1: Enable Auto Controller
   - id: fan1_en
     type: bool
     initial_value: ${fan1_auto_enable}
