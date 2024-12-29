@@ -46,7 +46,7 @@ script:
   - id: set_fan_state
     then:
       lambda: |-
-        if (fan1_en == false) {
+        if (id(fan1_en) == false) {
           return;
         }
 
