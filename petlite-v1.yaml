@@ -1,0 +1,51 @@
+# Example Usage:
+#
+#substitutions:
+#  device_site: "bl24"
+#  device_location_code: "caracal"
+#  device_location_name: "Caracal"
+#  device_number: "148"
+#  device_ip: "10.16.40.148"
+#
+#packages:
+#  base_package:
+#    url: https://github.com/mariodivece/esphometemplates/
+#    ref: main
+#    file: petlite-v1.yaml
+#    refresh: 0d
+
+substitutions:
+  # User-required substitutions
+  device_site: "valle"
+  device_location_code: "dante"
+  device_location_name: "Dante"
+  device_number: "148"
+  device_ip: "10.16.40.148"
+
+  # Project Substitutions (not intended for user substitution)
+  device_type_code: "petv1"
+  device_type_name: "PetLiteV1"
+  device_model: "PetLite v1"
+  device_make: "Bullet Automation"
+  package_version: "2025.04.13"
+  package_url: "github://mariodivece/esphometemplates/petlite-v1.yaml@main"
+
+  log_level: INFO
+
+# Allow importing this package
+dashboard_import:
+  package_import_url: ${package_url}
+  import_full_config: false
+
+# Import packages
+packages:
+  standard_package:
+    url: https://github.com/mariodivece/esphometemplates/
+    ref: main
+    refresh: 0d
+    files:
+      - petlite-v1/board-xiao-s3.yaml
+      - standard/diagnostics.yaml
+      - standard/wifi.yaml
+      - petlite-v1/webserver.yaml
+      
