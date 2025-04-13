@@ -68,7 +68,7 @@ output:
   - platform: ledc
     id: "led_pwm"
     pin: GPIO21
-    frequency: ${pwm_frequency}
+    frequency: 1000Hz
     channel: 7
 
 light:
