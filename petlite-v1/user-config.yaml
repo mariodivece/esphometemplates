@@ -1,7 +1,13 @@
-output:
+number:
   - platform: template
-    type: float
+    internal: true
     id: color_sleep_r
+
+
+output:
+#  - platform: template
+#    type: float
+#    id: color_sleep_r
   - platform: template
     type: float
     id: color_sleep_g
