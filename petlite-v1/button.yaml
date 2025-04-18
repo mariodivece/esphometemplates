@@ -1,5 +1,7 @@
 binary_sensor:
   - platform: gpio
+    id: button_external
+    internal: true
     pin:
       number: GPIO07
       mode:
