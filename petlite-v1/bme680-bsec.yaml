@@ -45,7 +45,7 @@ sensor:
         sorting_group_id: sg_environment
 
 text_sensor:
-  - platform: bme680_bsec
+  - platform: bme68x_bsec2
     iaq_accuracy:
       name: "IAQ Accuracy"
       web_server:
