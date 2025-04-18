@@ -1,6 +1,6 @@
 i2c:
-  sda: GPIOXX
-  scl: GPIOXX
+  sda: GPIO05
+  scl: GPIO06
   scan: true
   id: i2cbus_bme
 

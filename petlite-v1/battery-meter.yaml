@@ -15,7 +15,7 @@
 sensor:
   - platform: adc
     id: batt_voltage 
-    pin: GPIOXX
+    pin: GPIO04
     attenuation: auto
     name: Battery Voltage
     update_interval: 1s
