@@ -1,39 +1,3 @@
-number:
-  - platform: template
-    internal: true
-    id: color_sleep_r
-    min_value: 0
-    max_value: 1
-
-  - platform: template
-    internal: true
-    id: color_sleep_g
-    min_value: 0
-    max_value: 1
-
-  - platform: template
-    internal: true
-    id: color_sleep_b
-    min_value: 0
-    max_value: 1
-
-  - platform: template
-    internal: true
-    id: color_wake_r
-    min_value: 0
-    max_value: 1
-
-  - platform: template
-    internal: true
-    id: color_wake_g
-    min_value: 0
-    max_value: 1
-
-  - platform: template
-    internal: true
-    id: color_wake_b
-    min_value: 0
-    max_value: 1
 
 #output:
 #  - platform: template
@@ -55,6 +19,10 @@ number:
 #    type: float
 #    id: color_wake_b
 
+globals:
+  - id: color_sleep_r
+    type: float  
+
 light:
   - platform: rgb
     name: "Sleep Time Color"
@@ -62,8 +30,8 @@ light:
     web_server:
       sorting_group_id: sg_sleep
     red: color_sleep_r
-    green: color_sleep_g
-    blue: color_sleep_b
+    green: color_sleep_r
+    blue: color_sleep_r
     restore_mode: RESTORE_DEFAULT_ON
     initial_state:
       brightness: 60%
@@ -76,9 +44,9 @@ light:
     entity_category: CONFIG
     web_server:
       sorting_group_id: sg_sleep
-    red: color_wake_r
-    green: color_wake_g
-    blue: color_wake_b
+    red: color_sleep_r
+    green: color_sleep_r
+    blue: color_sleep_r
     restore_mode: RESTORE_DEFAULT_ON
     initial_state:
       brightness: 60%
