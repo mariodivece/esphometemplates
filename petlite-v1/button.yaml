@@ -1,0 +1,12 @@
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIOXX
+      mode:
+        input: true
+        pulldown: true
+    filters:
+      - delayed_on: 5s
+    on_press:
+      then:
+        - button.press: button_restart

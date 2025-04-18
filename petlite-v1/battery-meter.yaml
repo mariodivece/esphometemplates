@@ -1,0 +1,50 @@
+# https://community.home-assistant.io/t/onboard-battery-level-of-this-esp32-voltage-divider-battery-level/326056/6
+# https://wiki.seeedstudio.com/check_battery_voltage/
+# https://community.home-assistant.io/t/esphome-battery-level-sensor/245196/19
+#  VCC
+#  |
+#  R1 100k
+#  |
+#  ----> Vout -> ADC(GPIO)
+#  |
+#  R2 330k
+#  |
+#  GND
+# 
+
+sensor:
+  - platform: adc
+    id: batt_voltage 
+    pin: GPIOXX
+    attenuation: auto
+    name: Battery Voltage
+    update_interval: 1s
+    accuracy_decimals: 1
+    filters:
+    #use moving median to smooth spikes
+      - median:
+          window_size: 10
+          send_every: 10
+          send_first_at: 10
+      - delta: 0.1 #Only send values to HA if they change 
+      - throttle: 30s #Limit values sent to Ha
+#Convert the Voltage to a battery  level (%)
+  - platform: copy
+    source_id: batt_voltage
+    id: batt_level
+    icon: "mdi:battery"
+    name: Battery Level
+    unit_of_measurement: '%'
+    accuracy_decimals: 1
+    filters:
+      - calibrate_linear:
+      # Map from voltage to Battery level
+          - 0.41 -> 0
+          - 3.1 -> 100
+      #Handle/cap boundaries
+      - lambda: |
+          if (x < 0) return 0; 
+          else if (x > 100) return 100;
+          else return (x);
+      - delta: 0.5 #Only send values to HA if they change 
+      - throttle: 30s #Limit values sent to Ha

@@ -1,0 +1,81 @@
+output:
+  - platform: template
+    id: color_sleep_r
+  - platform: template
+    id: color_sleep_g
+  - platform: template
+    id: color_sleep_b
+  - platform: template
+    id: color_wake_r
+  - platform: template
+    id: color_wake_g
+  - platform: template
+    id: color_wake_b
+
+light:
+  - platform: rgb
+    name: "Sleep Time Color"
+    entity_category: CONFIG
+    webserver:
+      sorting_group_id: sg_sleep
+    red: color_sleep_r
+    green: color_sleep_g
+    blue: color_sleep_b
+    restore_mode: RESTORE_DEFAULT_ON
+    initial_state:
+      brightness: 60%
+      red: 100%
+      green: 0%
+      blue: 0%
+
+  - platform: rgb
+    name: "Wake Time Color"
+    entity_category: CONFIG
+    webserver:
+      sorting_group_id: sg_sleep
+    red: color_wake_r
+    green: color_wake_g
+    blue: color_wake_b
+    restore_mode: RESTORE_DEFAULT_ON
+    initial_state:
+      brightness: 60%
+      red: 0%
+      green: 100%
+      blue: 0%
+
+datetime:
+  - platform: template
+    id: sleep_start
+    type: time
+    name: "Bedtime Starts"
+    entity_category: CONFIG
+    icon: 'mdi:icon-moon'
+    webserver:
+      sorting_group_id: sg_sleep
+    optimistic: yes
+    initial_value: "19:00:00"
+    restore_value: true
+
+  - platform: template
+    id: sleep_end
+    type: time
+    name: Bedtime Ends at"
+    entity_category: CONFIG
+    icon: 'mdi:icon-sun'
+    webserver:
+      sorting_group_id: sg_sleep
+    optimistic: yes
+    initial_value: "06:00:00"
+    restore_value: true
+
+  - platform: template
+    id: wake_end
+    type: time
+    name: "Wakeup Ends at"
+    entity_category: CONFIG
+    icon: 'mdi:icon-star'
+    webserver:
+      sorting_group_id: sg_sleep
+    optimistic: yes
+    initial_value: "06:00:00"
+    restore_value: true    

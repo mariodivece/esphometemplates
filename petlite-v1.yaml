@@ -48,4 +48,9 @@ packages:
       - standard/diagnostics.yaml
       - standard/wifi.yaml
       - petlite-v1/webserver.yaml
-      
+      - petlite-v1/battery-meter.yaml
+      - petlite-v1/bme680-bsec.yaml
+      - petlite-v1/button.yaml
+      - petlite-v1/led-lights.yaml
+      - petlite-v1/time-ntp.yaml
+      - petlite-v1/user-config.yaml

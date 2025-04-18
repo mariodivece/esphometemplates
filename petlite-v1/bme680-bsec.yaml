@@ -1,0 +1,80 @@
+i2c:
+  sda: GPIOXX
+  scl: GPIOXX
+  scan: true
+  id: i2cbus_bme
+
+bme680_bsec:
+  - id: lib_bsec
+    i2c_id: i2cbus_bme
+
+sensor:
+  - platform: bme680_bsec
+    bme680_bsec_id: lib_bsec
+    temperature:
+      name: "Temperature"
+      webserver:
+        sorting_group_id: sg_environment
+    pressure:
+      name: "Pressure"
+      webserver:
+        sorting_group_id: sg_environment
+    humidity:
+      name: "Humidity"
+      webserver:
+        sorting_group_id: sg_environment
+    gas_resistance:
+      name: "Gas Resistance"
+      webserver:
+        sorting_group_id: sg_environment
+    iaq:
+      name: "IAQ"
+      id: iaq
+      webserver:
+        sorting_group_id: sg_environment
+    co2_equivalent:
+      name: "CO2"
+      webserver:
+        sorting_group_id: sg_environment
+    breath_voc_equivalent:
+      name: "Breath VOC"
+      webserver:
+        sorting_group_id: sg_environment
+
+text_sensor:
+  - platform: bme680_bsec
+    iaq_accuracy:
+      name: "IAQ Accuracy"
+      webserver:
+        sorting_group_id: sg_environment
+
+  - platform: template
+    name: "IAQ Status"
+    icon: "mdi:checkbox-marked-circle-outline"
+    webserver:
+      sorting_group_id: sg_environment
+    lambda: |-
+      if ( int(id(iaq).state) <= 50) {
+        return {"Excellent"};
+      }
+      else if (int(id(iaq).state) >= 51 && int(id(iaq).state) <= 100) {
+        return {"Good"};
+      }
+      else if (int(id(iaq).state) >= 101 && int(id(iaq).state) <= 150) {
+        return {"Lightly Polluted"};
+      }
+      else if (int(id(iaq).state) >= 151 && int(id(iaq).state) <= 200) {
+        return {"Moderately Polluted"};
+      }
+      else if (int(id(iaq).state) >= 201 && int(id(iaq).state) <= 250) {
+        return {"Heavily Polluted"};
+      }
+      else if (int(id(iaq).state) >= 251 && int(id(iaq).state) <= 350) {
+        return {"Severely Polluted"};
+      }
+      else if (int(id(iaq).state) >= 351) {
+        return {"Extremely Polluted"};
+      }
+      else {
+        return {"Sensor Error!"};
+      }

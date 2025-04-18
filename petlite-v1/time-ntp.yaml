@@ -1,0 +1,18 @@
+time:
+  - platform: sntp
+    id: sntp_time
+    timezone: America/Mexico_City
+    servers:
+     - 0.pool.ntp.org
+     - 1.pool.ntp.org
+     - 2.pool.ntp.org
+
+text-sensor:
+  - platform: template
+    name: "Current Time"
+    icon: "mdi:checkbox-marked-circle-outline"
+    lambda: |-
+      return id(sntp_time).now().strftime("%Y-%m-%d %H:%M")
+
+
+
