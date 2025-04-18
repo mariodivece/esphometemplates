@@ -1,15 +1,21 @@
 output:
   - platform: template
+    type: float
     id: color_sleep_r
   - platform: template
+    type: float
     id: color_sleep_g
   - platform: template
+    type: float
     id: color_sleep_b
   - platform: template
+    type: float
     id: color_wake_r
   - platform: template
+    type: float
     id: color_wake_g
   - platform: template
+    type: float
     id: color_wake_b
 
 light:
