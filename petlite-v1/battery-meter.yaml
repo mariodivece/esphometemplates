@@ -15,10 +15,10 @@
 sensor:
   - platform: adc
     id: batt_voltage 
-    pin: GPIO04
+    pin: GPIO01
     attenuation: auto
     name: Battery Voltage
-    update_interval: 1s
+    update_interval: 5s
     accuracy_decimals: 1
     filters:
     #use moving median to smooth spikes
