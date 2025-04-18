@@ -4,7 +4,7 @@ output:
     type: float
     id: color_sleep_r
     write_action:
-      - gloabals.set:
+      - globals.set:
           id: sleep_r
           value: !lambda return state;
 
@@ -12,7 +12,7 @@ output:
     type: float
     id: color_sleep_g
     write_action:
-      - gloabals.set:
+      - globals.set:
           id: sleep_r
           value: !lambda return state;
 
@@ -20,7 +20,7 @@ output:
     type: float
     id: color_sleep_b
     write_action:
-      - gloabals.set:
+      - globals.set:
           id: sleep_r
           value: !lambda return state;
 
@@ -28,7 +28,7 @@ output:
     type: float
     id: color_wake_r
     write_action:
-      - gloabals.set:
+      - globals.set:
           id: sleep_r
           value: !lambda return state;
 
@@ -36,7 +36,7 @@ output:
     type: float
     id: color_wake_g
     write_action:
-      - gloabals.set:
+      - globals.set:
           id: sleep_r
           value: !lambda return state;
 
@@ -44,7 +44,7 @@ output:
     type: float
     id: color_wake_b
     write_action:
-      - gloabals.set:
+      - globals.set:
           id: sleep_r
           value: !lambda return state;
 
