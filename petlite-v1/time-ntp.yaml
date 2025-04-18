@@ -7,12 +7,9 @@ time:
      - 1.pool.ntp.org
      - 2.pool.ntp.org
 
-text-sensor:
+text_sensor:
   - platform: template
     name: "Current Time"
     icon: "mdi:checkbox-marked-circle-outline"
     lambda: |-
       return id(sntp_time).now().strftime("%Y-%m-%d %H:%M")
-
-
-
