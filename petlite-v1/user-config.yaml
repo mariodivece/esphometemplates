@@ -1,27 +1,58 @@
 
-#output:
-#  - platform: template
-#    type: float
-#    id: color_sleep_r
-#  - platform: template
-#    type: float
-#    id: color_sleep_g
-#  - platform: template
-#    type: float
-#    id: color_sleep_b
-#  - platform: template
-#    type: float
-#    id: color_wake_r
-#  - platform: template
-#    type: float
-#    id: color_wake_g
-#  - platform: template
-#    type: float
-#    id: color_wake_b
+output:
+  - platform: template
+    type: float
+    id: color_sleep_r
+    write_action:
+      - gloabals.set:
+          id: sleep_r
+          value: !lamda return state;
+
+  - platform: template
+    type: float
+    id: color_sleep_g
+    write_action:
+      - gloabals.set:
+          id: sleep_r
+          value: !lamda return state;
+
+  - platform: template
+    type: float
+    id: color_sleep_b
+    write_action:
+      - gloabals.set:
+          id: sleep_r
+          value: !lamda return state;
+
+  - platform: template
+    type: float
+    id: color_wake_r
+    write_action:
+      - gloabals.set:
+          id: sleep_r
+          value: !lamda return state;
+
+  - platform: template
+    type: float
+    id: color_wake_g
+    write_action:
+      - gloabals.set:
+          id: sleep_r
+          value: !lamda return state;
+
+  - platform: template
+    type: float
+    id: color_wake_b
+    write_action:
+      - gloabals.set:
+          id: sleep_r
+          value: !lamda return state;
 
 globals:
-  - id: color_sleep_r
-    type: float  
+  - id: sleep_r
+    type: float
+    restore_value: no
+
 
 light:
   - platform: rgb
