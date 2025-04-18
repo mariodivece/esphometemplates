@@ -19,7 +19,7 @@ sensor:
     attenuation: auto
     name: Battery Voltage
     update_interval: 5s
-    accuracy_decimals: 1
+    accuracy_decimals: 3
     filters:
     #use moving median to smooth spikes
       - median:
