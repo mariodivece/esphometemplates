@@ -67,7 +67,7 @@ globals:
 
   - id: wake_g
     type: float
-    restore_value: no\
+    restore_value: no
 
   - id: wake_b
     type: float
