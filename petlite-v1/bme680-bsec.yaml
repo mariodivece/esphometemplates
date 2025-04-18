@@ -5,6 +5,7 @@ i2c:
   id: i2cbus_bme
 
 bme68x_bsec2_i2c:
+  id: lib_bsec
   address: 0x76
   model: bme680
   operating_age: 28d
@@ -13,7 +14,7 @@ bme68x_bsec2_i2c:
 
 sensor:
   - platform: bme68x_bsec2
-    bme680_bsec_id: lib_bsec
+    bme68x_bsec2_id: lib_bsec
     temperature:
       name: "Temperature"
       web_server:
