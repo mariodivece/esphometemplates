@@ -6,7 +6,7 @@ output:
     write_action:
       - gloabals.set:
           id: sleep_r
-          value: !lamda return state;
+          value: !lambda return state;
 
   - platform: template
     type: float
@@ -14,7 +14,7 @@ output:
     write_action:
       - gloabals.set:
           id: sleep_r
-          value: !lamda return state;
+          value: !lambda return state;
 
   - platform: template
     type: float
@@ -22,7 +22,7 @@ output:
     write_action:
       - gloabals.set:
           id: sleep_r
-          value: !lamda return state;
+          value: !lambda return state;
 
   - platform: template
     type: float
@@ -30,7 +30,7 @@ output:
     write_action:
       - gloabals.set:
           id: sleep_r
-          value: !lamda return state;
+          value: !lambda return state;
 
   - platform: template
     type: float
@@ -38,7 +38,7 @@ output:
     write_action:
       - gloabals.set:
           id: sleep_r
-          value: !lamda return state;
+          value: !lambda return state;
 
   - platform: template
     type: float
@@ -46,7 +46,7 @@ output:
     write_action:
       - gloabals.set:
           id: sleep_r
-          value: !lamda return state;
+          value: !lambda return state;
 
 globals:
   - id: sleep_r
