@@ -4,12 +4,15 @@ i2c:
   scan: true
   id: i2cbus_bme
 
-bme680_bsec:
-  - id: lib_bsec
-    i2c_id: i2cbus_bme
+bme68x_bsec2_i2c:
+  address: 0x76
+  model: bme680
+  operating_age: 28d
+  sample_rate: LP
+  supply_voltage: 3.3V
 
 sensor:
-  - platform: bme680_bsec
+  - platform: bme68x_bsec2
     bme680_bsec_id: lib_bsec
     temperature:
       name: "Temperature"
