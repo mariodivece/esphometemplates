@@ -3,11 +3,11 @@
 # https://community.home-assistant.io/t/esphome-battery-level-sensor/245196/19
 #  VCC
 #  |
-#  R1 100k
+#  R1 200k
 #  |
 #  ----> Vout -> ADC(GPIO)
 #  |
-#  R2 330k
+#  R2 200k
 #  |
 #  GND
 # 
@@ -28,6 +28,7 @@ sensor:
           send_first_at: 10
       - delta: 0.1 #Only send values to HA if they change 
       - throttle: 30s #Limit values sent to Ha
+      - multiply: 2.0
 #Convert the Voltage to a battery  level (%)
   - platform: copy
     source_id: batt_voltage
@@ -38,9 +39,14 @@ sensor:
     accuracy_decimals: 1
     filters:
       - calibrate_linear:
-      # Map from voltage to Battery level
-          - 0.41 -> 0
-          - 3.1 -> 100
+         method: exact
+         datapoints:
+          - 0.00 -> 0.0
+          - 3.30 -> 1.0
+          - 3.39 -> 10.0
+          - 3.75 -> 50.0
+          - 4.11 -> 90.0
+          - 4.20 -> 100.0
       #Handle/cap boundaries
       - lambda: |
           if (x < 0) return 0; 
