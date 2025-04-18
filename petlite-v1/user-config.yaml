@@ -2,21 +2,38 @@ number:
   - platform: template
     internal: true
     id: color_sleep_r
+    min_value: 0
+    max_value: 1
+
   - platform: template
     internal: true
     id: color_sleep_g
+    min_value: 0
+    max_value: 1
+
   - platform: template
     internal: true
     id: color_sleep_b
+    min_value: 0
+    max_value: 1
+
   - platform: template
     internal: true
     id: color_wake_r
+    min_value: 0
+    max_value: 1
+
   - platform: template
     internal: true
     id: color_wake_g
+    min_value: 0
+    max_value: 1
+
   - platform: template
     internal: true
     id: color_wake_b
+    min_value: 0
+    max_value: 1
 
 #output:
 #  - platform: template
