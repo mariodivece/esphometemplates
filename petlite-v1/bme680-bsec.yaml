@@ -7,7 +7,7 @@ i2c:
 bme68x_bsec2_i2c:
   id: lib_bsec
   i2c_id: i2cbus_bme
-  address: 0x76
+  address: 0x77
   model: bme680
   operating_age: 28d
   sample_rate: LP
