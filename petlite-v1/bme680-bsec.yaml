@@ -13,45 +13,45 @@ sensor:
     bme680_bsec_id: lib_bsec
     temperature:
       name: "Temperature"
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
     pressure:
       name: "Pressure"
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
     humidity:
       name: "Humidity"
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
     gas_resistance:
       name: "Gas Resistance"
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
     iaq:
       name: "IAQ"
       id: iaq
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
     co2_equivalent:
       name: "CO2"
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
     breath_voc_equivalent:
       name: "Breath VOC"
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
 
 text_sensor:
   - platform: bme680_bsec
     iaq_accuracy:
       name: "IAQ Accuracy"
-      webserver:
+      web_server:
         sorting_group_id: sg_environment
 
   - platform: template
     name: "IAQ Status"
     icon: "mdi:checkbox-marked-circle-outline"
-    webserver:
+    web_server:
       sorting_group_id: sg_environment
     lambda: |-
       if ( int(id(iaq).state) <= 50) {

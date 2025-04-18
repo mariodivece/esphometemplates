@@ -16,7 +16,7 @@ light:
   - platform: rgb
     name: "Sleep Time Color"
     entity_category: CONFIG
-    webserver:
+    web_server:
       sorting_group_id: sg_sleep
     red: color_sleep_r
     green: color_sleep_g
@@ -31,7 +31,7 @@ light:
   - platform: rgb
     name: "Wake Time Color"
     entity_category: CONFIG
-    webserver:
+    web_server:
       sorting_group_id: sg_sleep
     red: color_wake_r
     green: color_wake_g
@@ -50,7 +50,7 @@ datetime:
     name: "Bedtime Starts"
     entity_category: CONFIG
     icon: 'mdi:icon-moon'
-    webserver:
+    web_server:
       sorting_group_id: sg_sleep
     optimistic: yes
     initial_value: "19:00:00"
@@ -62,7 +62,7 @@ datetime:
     name: Bedtime Ends at"
     entity_category: CONFIG
     icon: 'mdi:icon-sun'
-    webserver:
+    web_server:
       sorting_group_id: sg_sleep
     optimistic: yes
     initial_value: "06:00:00"
@@ -74,7 +74,7 @@ datetime:
     name: "Wakeup Ends at"
     entity_category: CONFIG
     icon: 'mdi:icon-star'
-    webserver:
+    web_server:
       sorting_group_id: sg_sleep
     optimistic: yes
     initial_value: "06:00:00"
