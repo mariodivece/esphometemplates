@@ -44,12 +44,6 @@ esphome:
         - delay: 3s
         - output.turn_on: pwr_bme
 
-sensor:
-  - platform: internal_temperature
-    name: "Internal Temperature"
-    disabled_by_default: true
-    icon: mdi:heat-wave
-
 text_sensor:
   # Show firmware template version
   - platform: template
@@ -60,6 +54,12 @@ text_sensor:
     entity_category: diagnostic
 
 sensor:
+    # Device CPU Temperature
+  - platform: internal_temperature
+    name: "Internal Temperature"
+    disabled_by_default: true
+    icon: mdi:heat-wave
+
     # Device CPU Frequency
   - platform: template
     name: "CPU Frequency"
