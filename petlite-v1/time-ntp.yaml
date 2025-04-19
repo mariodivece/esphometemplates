@@ -3,9 +3,16 @@ time:
     id: sntp_time
     timezone: America/Mexico_City
     servers:
-     - 0.pool.ntp.org
-     - 1.pool.ntp.org
-     - 2.pool.ntp.org
+      - 0.pool.ntp.org
+      - 1.pool.ntp.org
+      - 2.pool.ntp.org
+    on_time:
+      - seconds: /5
+      - if:
+          condition:
+            time.has_time:
+          then:
+            - logger.log: Time has been set and is valid!
 
 text_sensor:
   - platform: template
