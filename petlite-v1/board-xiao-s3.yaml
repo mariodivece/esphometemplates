@@ -40,10 +40,7 @@ esphome:
     # RESET THE BME680. Boot priority needs to be higher than 1000 (i2c priority)
     - priority: 1100.0
       then:
-        - output.turn_off: pwr_bme
-        - delay: 3s
         - output.turn_on: pwr_bme
-        - delay: 3s
 
 text_sensor:
   # Show firmware template version
