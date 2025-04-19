@@ -37,8 +37,8 @@ esphome:
       then:
         - lambda: |-
             id(cpu_speed) = ESP.getCpuFreqMHz();
-    # RESET THE BME680
-    - priority: 1000.0
+    # RESET THE BME680. Boot priority needs to be higher than 1000 (i2c priority)
+    - priority: 1100.0
       then:
         - output.turn_off: pwr_bme
         - delay: 3s
