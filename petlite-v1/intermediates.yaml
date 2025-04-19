@@ -1,0 +1,73 @@
+output:
+  - platform: template
+    type: float
+    id: color_sleep_r
+    write_action:
+      - globals.set:
+          id: sleep_r
+          value: !lambda return state;
+
+  - platform: template
+    type: float
+    id: color_sleep_g
+    write_action:
+      - globals.set:
+          id: sleep_g
+          value: !lambda return state;
+
+  - platform: template
+    type: float
+    id: color_sleep_b
+    write_action:
+      - globals.set:
+          id: sleep_b
+          value: !lambda return state;
+
+  - platform: template
+    type: float
+    id: color_wake_r
+    write_action:
+      - globals.set:
+          id: wake_r
+          value: !lambda return state;
+
+  - platform: template
+    type: float
+    id: color_wake_g
+    write_action:
+      - globals.set:
+          id: wake_g
+          value: !lambda return state;
+
+  - platform: template
+    type: float
+    id: color_wake_b
+    write_action:
+      - globals.set:
+          id: wake_b
+          value: !lambda return state;
+
+globals:
+  - id: sleep_r
+    type: float
+    restore_value: no
+
+  - id: sleep_g
+    type: float
+    restore_value: no
+
+  - id: sleep_b
+    type: float
+    restore_value: no
+
+  - id: wake_r
+    type: float
+    restore_value: no
+
+  - id: wake_g
+    type: float
+    restore_value: no
+
+  - id: wake_b
+    type: float
+    restore_value: no

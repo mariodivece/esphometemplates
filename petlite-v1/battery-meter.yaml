@@ -14,27 +14,31 @@
 
 sensor:
   - platform: adc
-    id: batt_voltage 
+    id: batt_voltage
+    icon: "mdi:lightning-bolt"
     pin: GPIO01
     attenuation: auto
     name: Battery Voltage
+    entity_category: "diagnostic"
     update_interval: 5s
     accuracy_decimals: 3
     filters:
-    #use moving median to smooth spikes
+      - multiply: 2.0
+      #use moving median to smooth spikes
       - median:
           window_size: 10
           send_every: 10
           send_first_at: 10
       - delta: 0.1 #Only send values to HA if they change 
       - throttle: 30s #Limit values sent to Ha
-      - multiply: 2.0
+
 #Convert the Voltage to a battery  level (%)
   - platform: copy
     source_id: batt_voltage
     id: batt_level
     icon: "mdi:battery"
     name: Battery Level
+    entity_category: "diagnostic"
     unit_of_measurement: '%'
     accuracy_decimals: 1
     filters:

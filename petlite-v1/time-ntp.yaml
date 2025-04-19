@@ -10,6 +10,7 @@ time:
 text_sensor:
   - platform: template
     name: "Current Time"
-    icon: "mdi:checkbox-marked-circle-outline"
+    entity_category: "diagnostic"
+    icon: "mdi:clock-time-eight"
     lambda: |-
-      return id(sntp_time).now().strftime("%Y-%m-%d %H:%M");
+      return id(sntp_time).now().strftime("%A, %B %d %Y %I:%M %p");

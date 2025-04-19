@@ -1,84 +1,50 @@
-
-output:
+datetime:
   - platform: template
-    type: float
-    id: color_sleep_r
-    write_action:
-      - globals.set:
-          id: sleep_r
-          value: !lambda return state;
-
-  - platform: template
-    type: float
-    id: color_sleep_g
-    write_action:
-      - globals.set:
-          id: sleep_g
-          value: !lambda return state;
+    id: sleep_start
+    type: time
+    name: Bedtime Starts at
+    entity_category: CONFIG
+    icon: 'mdi:icon-moon'
+    web_server:
+      sorting_group_id: sg_schedule
+      sorting_weight: 10
+    optimistic: yes
+    initial_value: "19:00:00"
+    restore_value: true
 
   - platform: template
-    type: float
-    id: color_sleep_b
-    write_action:
-      - globals.set:
-          id: sleep_b
-          value: !lambda return state;
+    id: sleep_end
+    type: time
+    name: Bedtime Ends at
+    entity_category: CONFIG
+    icon: 'mdi:icon-sun'
+    web_server:
+      sorting_group_id: sg_schedule
+      sorting_weight: 20
+    optimistic: yes
+    initial_value: "06:00:00"
+    restore_value: true
 
   - platform: template
-    type: float
-    id: color_wake_r
-    write_action:
-      - globals.set:
-          id: wake_r
-          value: !lambda return state;
-
-  - platform: template
-    type: float
-    id: color_wake_g
-    write_action:
-      - globals.set:
-          id: wake_g
-          value: !lambda return state;
-
-  - platform: template
-    type: float
-    id: color_wake_b
-    write_action:
-      - globals.set:
-          id: wake_b
-          value: !lambda return state;
-
-globals:
-  - id: sleep_r
-    type: float
-    restore_value: no
-
-  - id: sleep_g
-    type: float
-    restore_value: no
-
-  - id: sleep_b
-    type: float
-    restore_value: no
-
-  - id: wake_r
-    type: float
-    restore_value: no
-
-  - id: wake_g
-    type: float
-    restore_value: no
-
-  - id: wake_b
-    type: float
-    restore_value: no
+    id: wake_end
+    type: time
+    name: Wakeup Ends at
+    entity_category: CONFIG
+    icon: 'mdi:icon-star'
+    web_server:
+      sorting_group_id: sg_schedule
+      sorting_weight: 30
+    optimistic: yes
+    initial_value: "06:30:00"
+    restore_value: true
 
 light:
   - platform: rgb
     name: "Bedtime Color"
     entity_category: CONFIG
     web_server:
-      sorting_group_id: sg_sleep
+      sorting_group_id: sg_schedule
+      sorting_weight: 40
     red: color_sleep_r
     green: color_sleep_g
     blue: color_sleep_b
@@ -93,7 +59,8 @@ light:
     name: "Wakeup Time Color"
     entity_category: CONFIG
     web_server:
-      sorting_group_id: sg_sleep
+      sorting_group_id: sg_schedule
+      sorting_weight: 50
     red: color_wake_r
     green: color_wake_g
     blue: color_wake_b
@@ -103,40 +70,3 @@ light:
       red: 0%
       green: 100%
       blue: 0%
-
-datetime:
-  - platform: template
-    id: sleep_start
-    type: time
-    name: Bedtime Starts at
-    entity_category: CONFIG
-    icon: 'mdi:icon-moon'
-    web_server:
-      sorting_group_id: sg_sleep
-    optimistic: yes
-    initial_value: "19:00:00"
-    restore_value: true
-
-  - platform: template
-    id: sleep_end
-    type: time
-    name: Bedtime Ends at
-    entity_category: CONFIG
-    icon: 'mdi:icon-sun'
-    web_server:
-      sorting_group_id: sg_sleep
-    optimistic: yes
-    initial_value: "06:00:00"
-    restore_value: true
-
-  - platform: template
-    id: wake_end
-    type: time
-    name: Wakeup Ends at
-    entity_category: CONFIG
-    icon: 'mdi:icon-star'
-    web_server:
-      sorting_group_id: sg_sleep
-    optimistic: yes
-    initial_value: "06:30:00"
-    restore_value: true

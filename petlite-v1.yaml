@@ -53,4 +53,5 @@ packages:
       - petlite-v1/button.yaml
       - petlite-v1/led-lights.yaml
       - petlite-v1/time-ntp.yaml
+      - petlite-v1/intermediates.yaml
       - petlite-v1/user-config.yaml

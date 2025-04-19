@@ -4,12 +4,9 @@ web_server:
   version: 3
   local: true
   sorting_groups:
-    - id: sg_sleep
-      name: "Bedtime Settings"
+    - id: sg_schedule
+      name: "Schedule Settings"
       sorting_weight: 10
-    - id: sg_wake
-      name: "Wakeup Settings"
-      sorting_weight: 20
     - id: sg_environment
       name: "Environment"
       sorting_weight: 30
