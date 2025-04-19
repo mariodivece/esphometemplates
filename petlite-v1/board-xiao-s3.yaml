@@ -32,10 +32,23 @@ esphome:
     name: "${device_make}.${device_model}"
     version: "${package_version}"
   on_boot:
-  - priority: 900.0
-    then:
-      - lambda: |-
-          id(cpu_speed) = ESP.getCpuFreqMHz();
+    # Initial priority - Get Speed
+    - priority: 900.0
+      then:
+        - lambda: |-
+            id(cpu_speed) = ESP.getCpuFreqMHz();
+    # RESET THE BME680
+    - priority: 850.0
+      then:
+        - output.turn_off: pwr_bme
+        - delay: 3s
+        - output.turn_on: pwr_bme
+
+sensor:
+  - platform: internal_temperature
+    name: "Internal Temperature"
+    disabled_by_default: true
+    icon: mdi:heat-wave
 
 text_sensor:
   # Show firmware template version
