@@ -47,6 +47,5 @@ script:
           }
 
           id(demo_sleep) = 0;
-          return;
         }
 
