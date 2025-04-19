@@ -71,3 +71,11 @@ globals:
   - id: wake_b
     type: float
     restore_value: no
+
+  - id: demo_sleep
+    type: float
+    restore_value: no
+
+  - id: demo_wake
+    type: float
+    restore_value: no
