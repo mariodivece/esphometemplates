@@ -75,7 +75,7 @@ globals:
 
 light:
   - platform: rgb
-    name: "Sleep Time Color"
+    name: "Bedtime Color"
     entity_category: CONFIG
     web_server:
       sorting_group_id: sg_sleep
@@ -90,7 +90,7 @@ light:
       blue: 0%
 
   - platform: rgb
-    name: "Wake Time Color"
+    name: "Wakeup Time Color"
     entity_category: CONFIG
     web_server:
       sorting_group_id: sg_sleep
@@ -138,5 +138,5 @@ datetime:
     web_server:
       sorting_group_id: sg_sleep
     optimistic: yes
-    initial_value: "06:00:00"
+    initial_value: "06:30:00"
     restore_value: true
