@@ -30,8 +30,7 @@ sensor:
         sorting_group_id: sg_environment
     gas_resistance:
       name: "Gas Resistance"
-      web_server:
-        sorting_group_id: sg_environment
+      entity_category: "diagnostic"
     iaq:
       name: "IAQ"
       id: iaq
@@ -50,8 +49,7 @@ text_sensor:
   - platform: bme68x_bsec2
     iaq_accuracy:
       name: "IAQ Accuracy"
-      web_server:
-        sorting_group_id: sg_environment
+      entity_category: "diagnostic"
 
   - platform: template
     name: "IAQ Status"
