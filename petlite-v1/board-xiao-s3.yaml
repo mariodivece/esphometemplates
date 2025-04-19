@@ -38,11 +38,12 @@ esphome:
         - lambda: |-
             id(cpu_speed) = ESP.getCpuFreqMHz();
     # RESET THE BME680
-    - priority: 850.0
+    - priority: 1000.0
       then:
         - output.turn_off: pwr_bme
         - delay: 3s
         - output.turn_on: pwr_bme
+        - delay: 3s
 
 text_sensor:
   # Show firmware template version
