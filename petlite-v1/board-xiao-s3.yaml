@@ -54,12 +54,6 @@ text_sensor:
     entity_category: diagnostic
 
 sensor:
-    # Device CPU Temperature
-  - platform: internal_temperature
-    name: "Internal Temperature"
-    disabled_by_default: true
-    icon: mdi:heat-wave
-
     # Device CPU Frequency
   - platform: template
     name: "CPU Frequency"
