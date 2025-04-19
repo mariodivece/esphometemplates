@@ -29,7 +29,7 @@ text_sensor:
 
 script:
   id: time_loop
-  mode: single
+  mode: restart
   then:
     - logger.log:
         format: "Script is being called"
@@ -39,14 +39,13 @@ script:
           LightState* source_state = id(sleep_light);
           LightState* target_state = id(light_strip);
 
-          //while (id(demo_sleep > 0)) {
+          while (id(demo_sleep) > 0) {
             auto color_values = source_state->remote_values;
             target_state->make_call().from_light_color_values(color_values).perform();
-            //delay(250);
-            //id(demo_sleep) -= 250;
-          //}
+            delay(250);
+            id(demo_sleep) -= 250;
+          }
 
-          id(demo_sleep) = 0;
           return;
         }
 
