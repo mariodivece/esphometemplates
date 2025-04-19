@@ -42,8 +42,10 @@ esphome:
       then:
         - lambda: |-
             pinMode(44, OUTPUT);
+            digitalWrite(44, LOW);
+            delay(2000);
             digitalWrite(44, HIGH);
-            delay(100);
+            delay(1000);
 
 text_sensor:
   # Show firmware template version
