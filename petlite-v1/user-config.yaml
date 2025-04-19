@@ -60,8 +60,7 @@ light:
       then:
         - globals.set:
             id: demo_sleep
-            value: '1'
-        - script.execute: time_loop
+            value: '5000'
 
   - platform: rgb
     name: "Wakeup Light"
@@ -84,5 +83,4 @@ light:
       then:
         - globals.set:
             id: demo_wake
-            value: '1'
-        - script.execute: time_loop
+            value: '5000'
