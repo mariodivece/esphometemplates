@@ -14,8 +14,8 @@ time:
               time.has_time:
             then:
               - logger.log:
-                format: "Time has been set and is valid!"
-                level: INFO
+                  format: "Time has been set and is valid!"
+                  level: INFO
 
 text_sensor:
   - platform: template
