@@ -41,6 +41,7 @@ datetime:
 light:
   - platform: rgb
     name: "Bedtime Color"
+    id: sleep_color
     entity_category: CONFIG
     icon: "mdi:bed"
     web_server:
@@ -57,7 +58,8 @@ light:
       blue: 0%
 
   - platform: rgb
-    name: "Wakeup Time Color"
+    name: "Wakeup Color"
+    id: wake_color
     entity_category: CONFIG
     icon: "mdi:white-balance-sunny"
     web_server:
