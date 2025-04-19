@@ -35,7 +35,7 @@ script:
         format: "Script is being called"
         level: INFO
     - lambda: |-
-        LisghtState* source_state = id(sleep_light);
-        LisghtState* target_state = id(light_strip);
+        LightState* source_state = id(sleep_light);
+        LightState* target_state = id(light_strip);
         auto color_values = source_state->remote_values;
         target_state->make_call().from_light_color_values(color_values).perform();
