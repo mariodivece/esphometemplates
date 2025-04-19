@@ -60,7 +60,7 @@ light:
       then:
         - globals.set:
             id: demo_sleep
-            value: 5000.0
+            value: '1'
 
   - platform: rgb
     name: "Wakeup Light"
@@ -83,4 +83,4 @@ light:
       then:
         - globals.set:
             id: demo_wake
-            value: 5000.0
+            value: '1'
