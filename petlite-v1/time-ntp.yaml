@@ -16,6 +16,7 @@ time:
               - logger.log:
                   format: "Time has been set and is valid!"
                   level: INFO
+              - script.execute: time_loop
 
 text_sensor:
   - platform: template
@@ -24,3 +25,12 @@ text_sensor:
     icon: "mdi:clock-time-eight"
     lambda: |-
       return id(sntp_time).now().strftime("%A, %B %d %Y %I:%M %p");
+
+
+script:
+  id: time_loop
+  mode: single
+  then:
+    - logger.log:
+        format: "Script is being called"
+        level: INFO
