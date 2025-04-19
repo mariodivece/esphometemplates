@@ -4,7 +4,7 @@ datetime:
     type: time
     name: Bedtime Starts at
     entity_category: CONFIG
-    icon: 'mdi:icon-moon'
+    icon: 'mdi:weather-night'
     web_server:
       sorting_group_id: sg_schedule
       sorting_weight: 10
@@ -17,7 +17,7 @@ datetime:
     type: time
     name: Bedtime Ends at
     entity_category: CONFIG
-    icon: 'mdi:icon-sun'
+    icon: 'mdi:sun-clock'
     web_server:
       sorting_group_id: sg_schedule
       sorting_weight: 20
@@ -30,7 +30,7 @@ datetime:
     type: time
     name: Wakeup Ends at
     entity_category: CONFIG
-    icon: 'mdi:icon-star'
+    icon: 'mdi:clock-star-four-points-outline'
     web_server:
       sorting_group_id: sg_schedule
       sorting_weight: 30
@@ -42,6 +42,7 @@ light:
   - platform: rgb
     name: "Bedtime Color"
     entity_category: CONFIG
+    icon: "mdi:bed"
     web_server:
       sorting_group_id: sg_schedule
       sorting_weight: 40
@@ -58,6 +59,7 @@ light:
   - platform: rgb
     name: "Wakeup Time Color"
     entity_category: CONFIG
+    icon: "mdi:white-balance-sunny"
     web_server:
       sorting_group_id: sg_schedule
       sorting_weight: 50
