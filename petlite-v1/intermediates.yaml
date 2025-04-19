@@ -75,7 +75,10 @@ globals:
   - id: demo_sleep
     type: float
     restore_value: no
+    initial_value: '0'
 
   - id: demo_wake
     type: float
     restore_value: no
+    initial_value: '0'
+    
