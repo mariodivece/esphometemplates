@@ -6,22 +6,6 @@ time:
       - 0.pool.ntp.org
       - 1.pool.ntp.org
       - 2.pool.ntp.org
-    on_time:
-      - seconds: /5
-        minutes: '*'
-        then:
-          - logger.log:
-              format: "Time triggered!"
-              level: INFO
-          - script.execute: time_loop
-#        - if:
-#            condition:
-#              time.has_time:
-#            then:
-#              - logger.log:
-#                  format: "Time has been set and is valid!"
-#                  level: INFO
-#              - script.execute: time_loop
 
 text_sensor:
   - platform: template
@@ -31,7 +15,13 @@ text_sensor:
     lambda: |-
       return id(sntp_time).now().strftime("%A, %B %d %Y %I:%M %p");
 
-
+interval:
+  - interval: 5s
+    then:
+      - logger.log:
+          format: "Time triggered!"
+          level: INFO
+      - script.execute: time_loop
 
 script:
   id: time_loop
