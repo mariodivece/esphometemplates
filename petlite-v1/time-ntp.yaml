@@ -38,7 +38,7 @@ script:
         LightState* sleep_light = id(sleep_light);
         LightState* output_light = id(light_strip);
 
-        LightColorValues sleep_color_current = sleep_light->remote_values;
+        LightColorValues* sleep_color_current = &(sleep_light->remote_values);
         LightColorValues* sleep_color_last = id(sleep_last_color);
 
         if (sleep_color_current != sleep_color_last) {
