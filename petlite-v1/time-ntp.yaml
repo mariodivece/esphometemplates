@@ -35,25 +35,25 @@ script:
         format: "Script is being called"
         level: INFO
     - lambda: |-
-        LightState* sleep_light_state = id(sleep_light);
-        LightState* output_light = id(light_strip);
+        LightState* ls_sleep = id(sleep_light);
+        LightState* ls_output = id(light_strip);
 
-        LightColorValues sleep_color_current = sleep_light_state->remote_values;
+        LightColorValues cv_current_sleep = ls_sleep->remote_values;
 
-        float r = sleep_color_current.get_red();
-        int x = 22;
-        ESP_LOGI("main", "Current r: %f", r);
+        //float r = cv_current_sleep.get_red();
+        //int x = 22;
+        //ESP_LOGI("main", "Current r: %f", r);
 
         //LightColorValues sleep_color_last = id(sleep_last_color);
 
         //ESP_LOGI("main", "Current r: %f", sleep_color_current.get_red());
 
-        //ESP_LOGI("main", "Current r: %f g: %f b: %f h: %f s: %f",
-        //  sleep_color_current.get_red(),
-        //  sleep_color_current.get_green(),
-        //  sleep_color_current.get_blue(),
-        //  sleep_color_current.get_brightness(),
-        //  sleep_color_current.get_state());
+        ESP_LOGI("main", "Current r: %f g: %f b: %f h: %f s: %f",
+          cv_current_sleep.get_red(),
+          cv_current_sleep.get_green(),
+          cv_current_sleep.get_blue(),
+          cv_current_sleep.get_brightness(),
+          cv_current_sleep.get_state());
 
         //if (*sleep_color_current != *sleep_color_last) {
         //  output_light->make_call().from_light_color_values(sleep_color_current).perform();
