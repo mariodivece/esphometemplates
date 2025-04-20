@@ -82,10 +82,10 @@ globals:
     restore_value: no
     initial_value: '0'
 
-  - id: sleep_last_color
-    type: LightColorValues
-    restore_value: no
+#  - id: sleep_last_color
+#    type: LightColorValues
+#    restore_value: no
 
-  - id: wake_last_color
-    type: LightColorValues
-    restore_value: no
+#  - id: wake_last_color
+#    type: LightColorValues
+#    restore_value: no
