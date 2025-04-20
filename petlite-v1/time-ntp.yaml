@@ -115,7 +115,7 @@ script:
         while (current_hour != end_hour) {
           total_hours++;
           if (current_hour > 23) {
-            current_hour = 0
+            current_hour = 0;
           } else {
             current_hour++;
           }
