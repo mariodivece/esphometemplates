@@ -61,7 +61,7 @@ script:
         };
 
         // Logs color values of the given source
-        auto log_color = [](const std::string name, LightColorValues* source) {
+        auto log_color = [](const char* name, LightColorValues* source) {
           ESP_LOGI("COLOR", "%s r: %f g: %f b: %f h: %f s: %f",
             name,
             source->get_red(),
