@@ -59,7 +59,7 @@ script:
             cv_current_sleep->get_warm_white());
         }
         else {
-          if (cv_current_sleep != id(sleep_last_color)) {
+          if (*cv_current_sleep != *id(sleep_last_color)) {
             ESP_LOGI("main", "CHANGE DETECTED");
           }
         }
