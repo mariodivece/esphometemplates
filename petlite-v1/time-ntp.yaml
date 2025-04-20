@@ -39,9 +39,9 @@ script:
         LightState* output_light = id(light_strip);
 
         LightColorValues sleep_current_color = sleep_light->remote_values;
-        LightColorValues sleep_last_color = *id(sleep_last_color);
+        LightColorValues sleep_color_last = *id(sleep_last_color);
 
-        if (sleep_current_color != sleep_last_color) {
+        if (sleep_current_color != sleep_color_last) {
           output_light->make_call().from_light_color_values(sleep_current_color).perform();
           id(sleep_last_color) = sleep_current_color;
         }
