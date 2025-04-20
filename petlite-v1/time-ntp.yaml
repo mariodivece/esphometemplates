@@ -39,7 +39,7 @@ script:
         LightState* output_light = id(light_strip);
 
         LightColorValues sleep_color_current = sleep_light->remote_values;
-        LightColorValues sleep_color_last = id(sleep_last_color);
+        //LightColorValues sleep_color_last = id(sleep_last_color);
 
         ESP_LOGI("sample", "Current r: %f g: %f b: %f h: %f s: %f",
           sleep_color_current.get_red(),
