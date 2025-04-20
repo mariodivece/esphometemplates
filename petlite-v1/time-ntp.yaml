@@ -70,6 +70,13 @@ script:
           cv_current_sleep.get_brightness(),
           cv_current_sleep.get_state());
 
+        ESP_LOGI("main", "Saved r: %f g: %f b: %f h: %f s: %f",
+          id(sleep_last_color)->get_red(),
+          id(sleep_last_color)->get_green(),
+          id(sleep_last_color)->get_blue(),
+          id(sleep_last_color)->get_brightness(),
+          id(sleep_last_color)->get_state());
+
         //if (*sleep_color_current != *sleep_color_last) {
         //  output_light->make_call().from_light_color_values(sleep_color_current).perform();
         //  id(sleep_last_color) = *sleep_color_current;
