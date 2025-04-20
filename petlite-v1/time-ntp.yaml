@@ -110,8 +110,8 @@ script:
         int total_minutes = 0;
         if (start_minute > end_minute) {
           total_minutes = (60 - start_minute) + end_minute;
-          if (start_hour == end_hour)
-            total_hours = 23;
+          total_hours--;
+          if (total_hours < 0) total_hours = 23;
         } else {
           total_minutes = end_minute - start_minute;
         }
