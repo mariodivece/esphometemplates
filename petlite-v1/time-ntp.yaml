@@ -50,7 +50,7 @@ script:
 
         if (!id(sleep_last_color)) {
           id(sleep_last_color) = new LightColorValues(
-            esphome::light::ColorMode::RGB
+            esphome::light::ColorMode::RGB,
             cv_current_sleep.get_state(),
             cv_current_sleep.get_brightness(),
             cv_current_sleep.get_color_brightness(),
