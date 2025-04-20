@@ -36,6 +36,20 @@ script:
         format: "Script is being called"
         level: INFO
     - lambda: |-
+
+        auto copy_color_values = [](LightColorValues* source, LightColorValues* target) {
+          target->set_state(source->get_state());
+          target->set_brightness(source->get_brightness());
+          target->set_color_brightness(source->get_color_brightness());
+          target->set_red(source->get_red());
+          target->set_green(source->get_green());
+          target->set_blue(source->get_blue());
+          target->set_white(source->get_white());
+          target->set_color_temperature(source->get_color_temperature());
+          target->set_cold_white(source->get_cold_white());
+          target->set_warm_white(source->get_warm_white());
+        };
+
         LightState* ls_sleep = id(sleep_light);
         LightState* ls_output = id(light_strip);
 
@@ -84,11 +98,11 @@ script:
           cv_current_sleep->get_state());
 
         ESP_LOGI("main", "Saved r: %f g: %f b: %f h: %f s: %f",
-          id(sleep_last_color)->get_red(),
-          id(sleep_last_color)->get_green(),
-          id(sleep_last_color)->get_blue(),
-          id(sleep_last_color)->get_brightness(),
-          id(sleep_last_color)->get_state());
+          cv_last_sleep->get_red(),
+          cv_last_sleep->get_green(),
+          cv_last_sleep->get_blue(),
+          cv_last_sleep->get_brightness(),
+          cv_last_sleep->get_state());
 
         //if (*sleep_color_current != *sleep_color_last) {
         //  output_light->make_call().from_light_color_values(sleep_color_current).perform();
