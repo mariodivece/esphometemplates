@@ -37,6 +37,7 @@ script:
         level: INFO
     - lambda: |-
 
+        // Copies color values from source to target
         auto copy_color_values = [](LightColorValues* source, LightColorValues* target) {
           target->set_color_mode(source->get_color_mode());
           target->set_state(source->get_state());
@@ -51,6 +52,7 @@ script:
           target->set_warm_white(source->get_warm_white());
         };
 
+        // Applies color values to the output LED light strip
         auto apply_color = [](LightColorValues* source) {
           LightState* ls_output = id(light_strip);
           ls_output->make_call()
@@ -58,11 +60,20 @@ script:
             .perform();
         };
 
+        // Logs color values of the given source
+        auto log_color(const std::string name, LightColorValues* source) {
+          ESP_LOGI("COLOR", "%s r: %f g: %f b: %f h: %f s: %f",
+            name,
+            source->get_red(),
+            source->get_green(),
+            source->get_blue(),
+            source->get_brightness(),
+            source->get_state());
+        };
+
         LightState* ls_sleep = id(sleep_light);
         LightColorValues* cv_current_sleep = &(ls_sleep->remote_values);
         LightColorValues* cv_last_sleep = id(sleep_last_color);
-
-        //ESP_LOGI("main", "Current r: %f", sleep_color_current.get_red());
 
         if (!id(sleep_last_color)) {
           id(sleep_last_color) = new LightColorValues();
@@ -76,6 +87,8 @@ script:
             apply_color(cv_last_sleep);
           }
         }
+
+        log_color("current_sleep", cv_current_sleep);
 
         ESP_LOGI("main", "Current r: %f g: %f b: %f h: %f s: %f",
           cv_current_sleep->get_red(),
