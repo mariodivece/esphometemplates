@@ -62,6 +62,11 @@ script:
             cv_current_sleep.get_cold_white(),
             cv_current_sleep.get_warm_white());
         }
+        else {
+          if (cv_current_sleep != id(sleep_last_color)) {
+            ESP_LOGI("main", "CHANGE DETECTED");
+          }
+        }
 
         ESP_LOGI("main", "Current r: %f g: %f b: %f h: %f s: %f",
           cv_current_sleep.get_red(),
