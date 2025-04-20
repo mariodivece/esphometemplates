@@ -9,11 +9,11 @@ time:
     on_time:
       - seconds: /5
         then:
-        - if:
           - logger.log:
-              format: "Time has been set and is valid!"
+              format: "Time triggered!"
               level: INFO
           - script.execute: time_loop
+#        - if:
 #            condition:
 #              time.has_time:
 #            then:
