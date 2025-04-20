@@ -41,7 +41,8 @@ script:
         LightColorValues sleep_color_current = sleep_light->remote_values;
 
         float r = sleep_color_current.get_red();
-        ESP_LOGI("main", "Current r: ");
+        int x = 22;
+        ESP_LOGI("main", "Current r: %i", x);
 
         //LightColorValues sleep_color_last = id(sleep_last_color);
 
