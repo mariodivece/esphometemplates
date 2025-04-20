@@ -10,13 +10,17 @@ time:
       - seconds: /5
         then:
         - if:
-            condition:
-              time.has_time:
-            then:
-              - logger.log:
-                  format: "Time has been set and is valid!"
-                  level: INFO
-              - script.execute: time_loop
+          - logger.log:
+              format: "Time has been set and is valid!"
+              level: INFO
+          - script.execute: time_loop
+#            condition:
+#              time.has_time:
+#            then:
+#              - logger.log:
+#                  format: "Time has been set and is valid!"
+#                  level: INFO
+#              - script.execute: time_loop
 
 text_sensor:
   - platform: template
@@ -62,7 +66,7 @@ script:
 
         // Logs color values of the given source
         auto log_color = [](const char* name, LightColorValues* source) {
-          ESP_LOGI("COLOR", "%s r: %f g: %f b: %f h: %f s: %f",
+          ESP_LOGI("lights", "%s R=%f, G=%f, B=%f, H=%f, S=%f",
             name,
             source->get_red(),
             source->get_green(),
@@ -87,11 +91,13 @@ script:
         }
         else {
           if (*cv_current_sleep != *cv_last_sleep) {
-            ESP_LOGI("main", "CHANGE DETECTED");
+            ESP_LOGI("lights", "Sleep light change detected. Will demo.");
+            log_color("current_sleep", cv_current_sleep);
+            log_color("last_sleep", cv_last_sleep);
+
             copy_color_values(cv_current_sleep, cv_last_sleep);
             apply_color(cv_last_sleep);
           }
         }
 
-        log_color("current_sleep", cv_current_sleep);
-        log_color("last_sleep", cv_last_sleep);
+
