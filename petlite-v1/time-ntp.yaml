@@ -38,6 +38,7 @@ script:
     - lambda: |-
 
         auto copy_color_values = [](LightColorValues* source, LightColorValues* target) {
+          target->set_color_mode(source->get_color_mode());
           target->set_state(source->get_state());
           target->set_brightness(source->get_brightness());
           target->set_color_brightness(source->get_color_brightness());
@@ -59,34 +60,14 @@ script:
         //ESP_LOGI("main", "Current r: %f", sleep_color_current.get_red());
 
         if (!id(sleep_last_color)) {
-          id(sleep_last_color) = new LightColorValues(
-            esphome::light::ColorMode::RGB,
-            cv_current_sleep->get_state(),
-            cv_current_sleep->get_brightness(),
-            cv_current_sleep->get_color_brightness(),
-            cv_current_sleep->get_red(),
-            cv_current_sleep->get_green(),
-            cv_current_sleep->get_blue(),
-            cv_current_sleep->get_white(),
-            cv_current_sleep->get_color_temperature(),
-            cv_current_sleep->get_cold_white(),
-            cv_current_sleep->get_warm_white());
-
+          id(sleep_last_color) = new LightColorValues();
           cv_last_sleep = id(sleep_last_color);
+          copy_color_values(cv_current_sleep, cv_last_sleep);
         }
         else {
           if (*cv_current_sleep != *cv_last_sleep) {
             ESP_LOGI("main", "CHANGE DETECTED");
-            cv_last_sleep->set_state(cv_current_sleep->get_state());
-            cv_last_sleep->set_brightness(cv_current_sleep->get_brightness());
-            cv_last_sleep->set_color_brightness(cv_current_sleep->get_color_brightness());
-            cv_last_sleep->set_red(cv_current_sleep->get_red());
-            cv_last_sleep->set_green(cv_current_sleep->get_green());
-            cv_last_sleep->set_blue(cv_current_sleep->get_blue());
-            cv_last_sleep->set_white(cv_current_sleep->get_white());
-            cv_last_sleep->set_color_temperature(cv_current_sleep->get_color_temperature());
-            cv_last_sleep->set_cold_white(cv_current_sleep->get_cold_white());
-            cv_last_sleep->set_warm_white(cv_current_sleep->get_warm_white());
+            copy_color_values(cv_current_sleep, cv_last_sleep);
           }
         }
 
