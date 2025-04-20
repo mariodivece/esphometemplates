@@ -102,13 +102,10 @@ script:
 
         int current_hour = start_hour;
         int total_hours = 0;
-        while (current_hour != end_hour) {
-          total_hours++;
-          if (current_hour > 23) {
-            current_hour = 0;
-          } else {
-            current_hour++;
-          }
+        if (start_hour > end_hour) {
+          total_hours = (24 - start_hour) + end_hour;
+        } else {
+          total_hours = end_hour - start_hour;
         }
 
         ESP_LOGI("sched", "%i:%i -> %i:%i Total %i",
