@@ -38,11 +38,7 @@ script:
         LightState* ls_sleep = id(sleep_light);
         LightState* ls_output = id(light_strip);
 
-        LightColorValues cv_current_sleep = ls_sleep->remote_values;
-
-        //float r = cv_current_sleep.get_red();
-        //int x = 22;
-        //ESP_LOGI("main", "Current r: %f", r);
+        LightColorValues* cv_current_sleep = &(ls_sleep->remote_values);
 
         //LightColorValues sleep_color_last = id(sleep_last_color);
 
@@ -51,16 +47,16 @@ script:
         if (!id(sleep_last_color)) {
           id(sleep_last_color) = new LightColorValues(
             esphome::light::ColorMode::RGB,
-            cv_current_sleep.get_state(),
-            cv_current_sleep.get_brightness(),
-            cv_current_sleep.get_color_brightness(),
-            cv_current_sleep.get_red(),
-            cv_current_sleep.get_green(),
-            cv_current_sleep.get_blue(),
-            cv_current_sleep.get_white(),
-            cv_current_sleep.get_color_temperature(),
-            cv_current_sleep.get_cold_white(),
-            cv_current_sleep.get_warm_white());
+            cv_current_sleep->get_state(),
+            cv_current_sleep->get_brightness(),
+            cv_current_sleep->get_color_brightness(),
+            cv_current_sleep->get_red(),
+            cv_current_sleep->get_green(),
+            cv_current_sleep->get_blue(),
+            cv_current_sleep->get_white(),
+            cv_current_sleep->get_color_temperature(),
+            cv_current_sleep->get_cold_white(),
+            cv_current_sleep->get_warm_white());
         }
         else {
           if (cv_current_sleep != id(sleep_last_color)) {
@@ -69,11 +65,11 @@ script:
         }
 
         ESP_LOGI("main", "Current r: %f g: %f b: %f h: %f s: %f",
-          cv_current_sleep.get_red(),
-          cv_current_sleep.get_green(),
-          cv_current_sleep.get_blue(),
-          cv_current_sleep.get_brightness(),
-          cv_current_sleep.get_state());
+          cv_current_sleep->get_red(),
+          cv_current_sleep->get_green(),
+          cv_current_sleep->get_blue(),
+          cv_current_sleep->get_brightness(),
+          cv_current_sleep->get_state());
 
         ESP_LOGI("main", "Saved r: %f g: %f b: %f h: %f s: %f",
           id(sleep_last_color)->get_red(),
