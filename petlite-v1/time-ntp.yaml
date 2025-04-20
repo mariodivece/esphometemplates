@@ -72,8 +72,13 @@ script:
         };
 
         LightState* ls_sleep = id(sleep_light);
+        LightState* ls_wake = id(wake_light);
+        
         LightColorValues* cv_current_sleep = &(ls_sleep->remote_values);
+        LightColorValues* cv_current_wake = &(ls_wake->remote_values);
+
         LightColorValues* cv_last_sleep = id(sleep_last_color);
+        LightColorValues* cv_last_wake = id(wake_last_color);
 
         if (!id(sleep_last_color)) {
           id(sleep_last_color) = new LightColorValues();
@@ -89,23 +94,4 @@ script:
         }
 
         log_color("current_sleep", cv_current_sleep);
-
-        ESP_LOGI("main", "Current r: %f g: %f b: %f h: %f s: %f",
-          cv_current_sleep->get_red(),
-          cv_current_sleep->get_green(),
-          cv_current_sleep->get_blue(),
-          cv_current_sleep->get_brightness(),
-          cv_current_sleep->get_state());
-
-        ESP_LOGI("main", "Saved r: %f g: %f b: %f h: %f s: %f",
-          cv_last_sleep->get_red(),
-          cv_last_sleep->get_green(),
-          cv_last_sleep->get_blue(),
-          cv_last_sleep->get_brightness(),
-          cv_last_sleep->get_state());
-
-        //if (*sleep_color_current != *sleep_color_last) {
-        //  output_light->make_call().from_light_color_values(sleep_color_current).perform();
-        //  id(sleep_last_color) = *sleep_color_current;
-        //}
-
+        log_color("last_sleep", cv_last_sleep);
