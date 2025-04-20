@@ -35,10 +35,10 @@ script:
         format: "Script is being called"
         level: INFO
     - lambda: |-
-        LightState sleep_light_state = id(sleep_light);
-        LightState output_light = id(light_strip);
+        LightState* sleep_light_state = id(sleep_light);
+        LightState* output_light = id(light_strip);
 
-        LightColorValues sleep_color_current = sleep_light_state.remote_values;
+        LightColorValues sleep_color_current = sleep_light_state->remote_values;
 
         float r = sleep_color_current.get_red();
         int x = 22;
