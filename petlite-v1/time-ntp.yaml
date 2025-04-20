@@ -48,6 +48,21 @@ script:
 
         //ESP_LOGI("main", "Current r: %f", sleep_color_current.get_red());
 
+        if (!id(sleep_last_color)) {
+          id(sleep_last_color) = new LightColorValues(
+            RGB
+            cv_current_sleep.get_state(),
+            cv_current_sleep.get_brightness(),
+            cv_current_sleep.get_color_brightness(),
+            cv_current_sleep.get_red(),
+            cv_current_sleep.get_green(),
+            cv_current_sleep.get_blue(),
+            cv_current_sleep.get_white(),
+            cv_current_sleep.get_color_temperature(),
+            cv_current_sleep.get_cold_white(),
+            cv_current_sleep.get_warm_white());
+        }
+
         ESP_LOGI("main", "Current r: %f g: %f b: %f h: %f s: %f",
           cv_current_sleep.get_red(),
           cv_current_sleep.get_green(),
