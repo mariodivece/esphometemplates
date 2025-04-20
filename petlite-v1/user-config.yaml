@@ -56,11 +56,6 @@ light:
       red: 100%
       green: 0%
       blue: 0%
-    on_state:
-      then:
-        - globals.set:
-            id: demo_sleep
-            value: '5000'
 
   - platform: rgb
     name: "Wakeup Light"
@@ -79,8 +74,3 @@ light:
       red: 0%
       green: 100%
       blue: 0%
-    on_state:
-      then:
-        - globals.set:
-            id: demo_wake
-            value: '5000'
