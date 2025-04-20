@@ -56,7 +56,7 @@ script:
           ls_output->make_call()
             .from_light_color_values(*source)
             .perform();
-        }
+        };
 
         LightState* ls_sleep = id(sleep_light);
         LightColorValues* cv_current_sleep = &(ls_sleep->remote_values);
