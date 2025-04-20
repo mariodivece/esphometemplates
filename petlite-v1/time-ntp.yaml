@@ -8,6 +8,7 @@ time:
       - 2.pool.ntp.org
     on_time:
       - seconds: /5
+        minutes: '*'
         then:
           - logger.log:
               format: "Time triggered!"
@@ -84,6 +85,7 @@ script:
         LightColorValues* cv_last_sleep = id(sleep_last_color);
         LightColorValues* cv_last_wake = id(wake_last_color);
 
+        // Initialize and demo the sleep light
         if (!id(sleep_last_color)) {
           id(sleep_last_color) = new LightColorValues();
           cv_last_sleep = id(sleep_last_color);
@@ -97,7 +99,27 @@ script:
 
             copy_color_values(cv_current_sleep, cv_last_sleep);
             apply_color(cv_last_sleep);
+            return;
           }
         }
 
+        int hours = 0;
+        int start_hour = id(sleep_start).state_as_esptime().hour;
+        int start_minute = id(sleep_start).state_as_esptime().minute;
+        
+        int end_hour = id(sleep_end).state_as_esptime().hour;
+        int end_minute = id(sleep_end).state_as_esptime().minute;
 
+        int current_hour = start_hour;
+        int total_hours = 0;
+        while (current_hour != end_hour) {
+          total_hours++;
+          if (current_hour > 23) {
+            current_hour = 0
+          } else {
+            current_hour++;
+          }
+        }
+
+        ESP_LOGI("sched", "%i:%i -> %i:%i Total %i",
+          start_hour, start_minute, end_hour, end_minute, total_hours);
