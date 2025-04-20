@@ -116,5 +116,5 @@ script:
           total_minutes = end_minute - start_minute;
         }
 
-        ESP_LOGI("sched", "%i:%i -> %i:%i Total %i",
-          start_hour, start_minute, end_hour, end_minute, total_hours);
+        ESP_LOGI("sched", "%i:%i -> %i:%i Total %i:%i",
+          start_hour, start_minute, end_hour, end_minute, total_hours, total_minutes);
