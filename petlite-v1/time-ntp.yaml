@@ -42,7 +42,7 @@ script:
 
         float r = sleep_color_current.get_red();
         int x = 22;
-        ESP_LOGI("main", "Current r: %i", x);
+        ESP_LOGI("main", "Current r: %f", r);
 
         //LightColorValues sleep_color_last = id(sleep_last_color);
 
