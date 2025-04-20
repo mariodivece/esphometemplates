@@ -51,9 +51,14 @@ script:
           target->set_warm_white(source->get_warm_white());
         };
 
-        LightState* ls_sleep = id(sleep_light);
-        LightState* ls_output = id(light_strip);
+        auto apply_color = [](LightColorValues* source) {
+          LightState* ls_output = id(light_strip);
+          ls_output->make_call()
+            .from_light_color_values(*source)
+            .perform();
+        }
 
+        LightState* ls_sleep = id(sleep_light);
         LightColorValues* cv_current_sleep = &(ls_sleep->remote_values);
         LightColorValues* cv_last_sleep = id(sleep_last_color);
 
@@ -68,6 +73,7 @@ script:
           if (*cv_current_sleep != *cv_last_sleep) {
             ESP_LOGI("main", "CHANGE DETECTED");
             copy_color_values(cv_current_sleep, cv_last_sleep);
+            apply_color(cv_last_sleep);
           }
         }
 
