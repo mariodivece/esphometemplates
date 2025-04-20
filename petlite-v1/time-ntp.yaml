@@ -35,17 +35,14 @@ script:
         format: "Script is being called"
         level: INFO
     - lambda: |-
-        if (id(demo_sleep) > 0) {
-          LightState* source_state = id(sleep_light);
-          LightState* target_state = id(light_strip);
+        LightState* sleep_light = id(sleep_light);
+        LightState* output_light = id(light_strip);
 
-          //while (id(demo_sleep) > 0) {
-            auto color_values = source_state->remote_values;
-            target_state->make_call().from_light_color_values(color_values).perform();
-            //delay(250);
-            id(demo_sleep) -= 250;
-          //}
+        auto sleep_current_color = sleep_light->remote_values;
+        auto sleep_last_color = id(sleep_last_color);
 
-          return;
+        if (sleep_current_color != sleep_last_color) {
+          output_light->make_call().from_light_color_values(sleep_current_color).perform();
+          id(sleep_last_color) = sleep_current_color;
         }
 
