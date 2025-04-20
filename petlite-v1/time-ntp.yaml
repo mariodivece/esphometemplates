@@ -38,11 +38,18 @@ script:
         LightState* sleep_light = id(sleep_light);
         LightState* output_light = id(light_strip);
 
-        LightColorValues* sleep_color_current = &(sleep_light->remote_values);
-        LightColorValues* sleep_color_last = id(sleep_last_color);
+        LightColorValues sleep_color_current = sleep_light->remote_values;
+        LightColorValues sleep_color_last = id(sleep_last_color);
 
-        if (*sleep_color_current != *sleep_color_last) {
-          output_light->make_call().from_light_color_values(sleep_color_current).perform();
-          id(sleep_last_color) = *sleep_color_current;
-        }
+        ESP_LOGI("sample", "Current r: %f g: %f b: %f h: %f s: %f",
+          sleep_color_current.get_red(),
+          sleep_color_current.get_green(),
+          sleep_color_current.get_blue(),
+          sleep_color_current.get_brightness(),
+          sleep_color_current.get_state());
+
+        //if (*sleep_color_current != *sleep_color_last) {
+        //  output_light->make_call().from_light_color_values(sleep_color_current).perform();
+        //  id(sleep_last_color) = *sleep_color_current;
+        //}
 
