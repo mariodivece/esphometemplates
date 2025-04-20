@@ -100,12 +100,20 @@ script:
         int end_hour = id(sleep_end).state_as_esptime().hour;
         int end_minute = id(sleep_end).state_as_esptime().minute;
 
-        int current_hour = start_hour;
         int total_hours = 0;
         if (start_hour > end_hour) {
           total_hours = (24 - start_hour) + end_hour;
         } else {
           total_hours = end_hour - start_hour;
+        }
+
+        int total_minutes = 0;
+        if (start_minute > end_minute) {
+          total_minutes = (60 - start_minute) + end_minute;
+          if (start_hour == end_hour)
+            total_hours = 23;
+        } else {
+          total_minutes = end_minute - start_minute;
         }
 
         ESP_LOGI("sched", "%i:%i -> %i:%i Total %i",
