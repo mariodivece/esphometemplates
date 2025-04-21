@@ -27,7 +27,7 @@ substitutions:
   device_type_name: "PetLiteV1"
   device_model: "PetLite v1"
   device_make: "Bullet Automation"
-  package_version: "2025.04.13"
+  package_version: "2025.04.21"
   package_url: "github://mariodivece/esphometemplates/petlite-v1.yaml@main"
 
   log_level: INFO
