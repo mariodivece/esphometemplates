@@ -57,7 +57,7 @@ script:
 
         // Logs color values of the given source
         auto log_color = [](const char* name, LightColorValues* source) {
-          ESP_LOGI("lights", "%s R=%f, G=%f, B=%f, H=%f, S=%f",
+          ESP_LOGD("lights", "%s R=%f, G=%f, B=%f, H=%f, S=%f",
             name,
             source->get_red(),
             source->get_green(),
@@ -83,7 +83,7 @@ script:
         }
         else {
           if (*cv_current_sleep != *cv_last_sleep) {
-            ESP_LOGI("lights", "Sleep light change detected. Will demo.");
+            ESP_LOGD("lights", "Sleep light change detected. Will demo.");
             log_color("current_sleep", cv_current_sleep);
             log_color("last_sleep", cv_last_sleep);
 
@@ -123,7 +123,7 @@ script:
           String(sleep_hours) + " hours, " +
           String(sleep_minutes) + " minutes").c_str());
 
-        ESP_LOGI("sched", "%i:%i -> %i:%i Total %i:%i",
+        ESP_LOGD("sched", "%i:%i -> %i:%i Total %i:%i",
           sleep_start_hour, sleep_start_minute, sleep_end_hour, sleep_end_minute, sleep_hours, sleep_minutes);
 
 
@@ -154,9 +154,17 @@ script:
         }
 
         id(schedule_status).publish_state(
-            status == 0 ? "Lamp Off"
-          : status == 1 ? "Night Light On"
-          : status == 2 ? "Wakeup Light On"
+            status == ScheduleStatus::OFF      ? "Lamp Off"
+          : status == ScheduleStatus::SLEEPING ? "Night Light On"
+          : status == ScheduleStatus::WAKING   ? "Wakeup Light On"
           : "Unknown");
 
-        ESP_LOGI("sched", "STATUS: %i", status);
+        if (status == ScheduleStatus::SLEEPING) {
+          apply_color(cv_current_sleep);
+        } else if (status == ScheduleStatus::WAKING) {
+          apply_color(cv_current_wake);
+        } else {
+          id(light_strip).turn_off().perform();
+        }
+
+        ESP_LOGD("sched", "STATUS: %i", status);
