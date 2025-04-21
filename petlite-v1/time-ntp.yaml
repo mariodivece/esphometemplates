@@ -20,7 +20,7 @@ interval:
     then:
       - logger.log:
           format: "Time triggered!"
-          level: INFO
+          level: DEBUG
       - script.execute: time_loop
 
 script:
@@ -29,7 +29,7 @@ script:
   then:
     - logger.log:
         format: "Script is being called"
-        level: INFO
+        level: DEBUG
     - lambda: |-
 
         // Copies color values from source to target
