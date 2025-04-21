@@ -93,6 +93,11 @@ script:
           }
         }
 
+        int sleep_start_hour   = id(sleep_start).hour;
+        int sleep_start_minute = id(sleep_start).minute;
+        int sleep_end_hour     = id(sleep_end).hour;
+        int sleep_end_minute   = id(sleep_end).minute;
+
         int sleep_hours = 0;
         if (sleep_start_hour > sleep_end_hour) {
           sleep_hours = (24 - sleep_start_hour) + sleep_end_hour;
@@ -101,16 +106,19 @@ script:
         }
 
         int sleep_minutes = 0;
-        if (start_minute > sleep_end_minute) {
-          sleep_minutes = (60 - start_minute) + sleep_end_minute;
+        if (sleep_start_minute > sleep_end_minute) {
+          sleep_minutes = (60 - sleep_start_minute) + sleep_end_minute;
           sleep_hours--;
-          if (sleep_hours < 0) sleep_hours = 23;
+          if (sleep_hours < 0) {
+            sleep_hours = 0;
+            sleep_minutes = 0;
+          }
         } else {
-          sleep_minutes = sleep_end_minute - start_minute;
+          sleep_minutes = sleep_end_minute - sleep_start_minute;
         }
 
         ESP_LOGI("sched", "%i:%i -> %i:%i Total %i:%i",
-          sleep_start_hour, start_minute, sleep_end_hour, sleep_end_minute, sleep_hours, sleep_minutes);
+          sleep_start_hour, sleep_start_minute, sleep_end_hour, sleep_end_minute, sleep_hours, sleep_minutes);
 
 
         enum ScheduleStatus { OFF = 0, SLEEPING = 1, WAKING = 2 };
