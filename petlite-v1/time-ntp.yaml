@@ -126,26 +126,16 @@ script:
         int current_hour = id(sntp_time).now().hour;
         int current_minute = id(sntp_time).now().minute;
         ScheduleStatus status = ScheduleStatus::OFF;
-
-        // Handle minutes only. Sleeping only on the minutes range.
-        if (sleep_start_hour == sleep_end_hour) {
-          if (current_hour == sleep_end_hour) {
-            if (sleep_start_minute < sleep_end_minute &&
-                current_minute >= sleep_start_minute &&
-                current_minute <= sleep_end_minute) {
-              status = ScheduleStatus::SLEEPING;
-            }
-          }
-        }
-        else if (sleep_start_hour < sleep_end_hour) {
-          if (current_hour >= sleep_start_hour && current_minute >= sleep_start_minute &&
-              current_hour <= sleep_end_hour && current_minute <= sleep_end_minute) {
+        
+        if (sleep_start_hour <= sleep_end_hour) {
+          if ((current_hour > sleep_start_hour || (current_hour == sleep_start_hour && current_minute >= sleep_start_minute)) &&
+              (current_hour < sleep_end_hour   || (current_hour == sleep_end_hour   && current_minute <= sleep_end_minute  ))) {
             status = ScheduleStatus::SLEEPING;
           }
         }
-        else if (sleep_end_hour < sleep_start_hour) {
-          if ((current_hour >= sleep_start_hour && current_minute >= sleep_start_minute) ||
-              (current_hour <= sleep_end_hour && current_minute <= sleep_end_minute)) {
+        else{
+          if ((current_hour > sleep_start_hour || (current_hour == sleep_start_hour && current_minute >= sleep_start_minute)) ||
+              (current_hour < sleep_end_hour   || (current_hour == sleep_end_hour   && current_minute <= sleep_end_minute  ))) {
             status = ScheduleStatus::SLEEPING;
           }
         }
