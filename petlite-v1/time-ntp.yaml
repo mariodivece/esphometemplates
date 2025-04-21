@@ -1,3 +1,7 @@
+# TODO: Change icons for text_seonsor schedules
+# TODO: Error status (badly configured schedule)
+# TODO: Check for SNTP time is valid
+
 time:
   - platform: sntp
     id: sntp_time
