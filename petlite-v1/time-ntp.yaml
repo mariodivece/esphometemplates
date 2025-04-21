@@ -93,28 +93,53 @@ script:
           }
         }
 
-        int hours = 0;
-        int start_hour = id(sleep_start).state_as_esptime().hour;
-        int start_minute = id(sleep_start).state_as_esptime().minute;
-        
-        int end_hour = id(sleep_end).state_as_esptime().hour;
-        int end_minute = id(sleep_end).state_as_esptime().minute;
-
-        int total_hours = 0;
-        if (start_hour > end_hour) {
-          total_hours = (24 - start_hour) + end_hour;
+        int sleep_hours = 0;
+        if (sleep_start_hour > sleep_end_hour) {
+          sleep_hours = (24 - sleep_start_hour) + sleep_end_hour;
         } else {
-          total_hours = end_hour - start_hour;
+          sleep_hours = sleep_end_hour - sleep_start_hour;
         }
 
-        int total_minutes = 0;
-        if (start_minute > end_minute) {
-          total_minutes = (60 - start_minute) + end_minute;
-          total_hours--;
-          if (total_hours < 0) total_hours = 23;
+        int sleep_minutes = 0;
+        if (start_minute > sleep_end_minute) {
+          sleep_minutes = (60 - start_minute) + sleep_end_minute;
+          sleep_hours--;
+          if (sleep_hours < 0) sleep_hours = 23;
         } else {
-          total_minutes = end_minute - start_minute;
+          sleep_minutes = sleep_end_minute - start_minute;
         }
 
         ESP_LOGI("sched", "%i:%i -> %i:%i Total %i:%i",
-          start_hour, start_minute, end_hour, end_minute, total_hours, total_minutes);
+          sleep_start_hour, start_minute, sleep_end_hour, sleep_end_minute, sleep_hours, sleep_minutes);
+
+
+        enum ScheduleStatus { OFF = 0, SLEEPING = 1, WAKING = 2 };
+
+        int current_hour = id(sntp_time).now().hour;
+        int current_minute = id(sntp_time).now().minute;
+        ScheduleStatus status = ScheduleStatus::OFF;
+
+        // Handle minutes only. Sleeping only on the minutes range.
+        if (sleep_start_hour == sleep_end_hour) {
+          if (current_hour == sleep_end_hour) {
+            if (sleep_start_minute < sleep_end_minute &&
+                current_minute >= sleep_start_minute &&
+                current_minute <= sleep_end_minute) {
+              status = ScheduleStatus::SLEEPING;
+            }
+          }
+        }
+        else if (sleep_start_hour < sleep_end_hour) {
+          if (current_hour >= start_sleep_hour && current_minute >= start_sleep_minute &&
+              current_hour <= end_sleep_hour && current_minute <= end_sleep_minute) {
+            status = ScheduleStatus::SLEEPING;
+          }
+        }
+        else if (sleep_end_hour < sleep_start_hour) {
+          if ((current_hour >= start_sleep_hour && current_minute >= start_sleep_minute) ||
+              (current_hour <= end_sleep_hour && current_minute <= end_sleep_minute)) {
+            status = ScheduleStatus::SLEEPING;
+          }
+        }
+
+        ESP_LOGI("sched", "STATUS: %i", status);
