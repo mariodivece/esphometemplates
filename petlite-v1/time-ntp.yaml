@@ -93,6 +93,25 @@ script:
           }
         }
 
+        // Initialize and demo the wake light
+        if (!id(wake_last_color)) {
+          id(wake_last_color) = new LightColorValues();
+          cv_last_wake = id(wake_last_color);
+          copy_color_values(cv_current_wake, cv_last_wake);
+        }
+        else {
+          if (*cv_current_wake != *cv_last_wake) {
+            ESP_LOGD("lights", "wake light change detected. Will demo.");
+            log_color("current_wake", cv_current_wake);
+            log_color("last_wake", cv_last_wake);
+
+            copy_color_values(cv_current_wake, cv_last_wake);
+            apply_color(cv_last_wake);
+            return;
+          }
+        }
+
+        // Compute sleeping hours
         int sleep_start_hour   = id(sleep_start).hour;
         int sleep_start_minute = id(sleep_start).minute;
         int sleep_end_hour     = id(sleep_end).hour;
@@ -126,8 +145,12 @@ script:
         ESP_LOGD("sched", "%i:%i -> %i:%i Total %i:%i",
           sleep_start_hour, sleep_start_minute, sleep_end_hour, sleep_end_minute, sleep_hours, sleep_minutes);
 
-
-        enum ScheduleStatus { OFF = 0, SLEEPING = 1, WAKING = 2 };
+        // Compute and apply light state
+        enum ScheduleStatus {
+          OFF = 0,
+          SLEEPING = 1,
+          WAKING = 2
+        };
 
         int current_hour = id(sntp_time).now().hour;
         int current_minute = id(sntp_time).now().minute;
