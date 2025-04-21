@@ -152,7 +152,7 @@ script:
         id(schedule_status).publish_state(
             status == 0 ? "Lamp Off"
           : status == 1 ? "Night Light On"
-          : status == 2 ? "Wakeup Light On")
-          : "Unknown";
+          : status == 2 ? "Wakeup Light On"
+          : "Unknown");
 
         ESP_LOGI("sched", "STATUS: %i", status);
