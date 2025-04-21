@@ -97,6 +97,8 @@ script:
         int sleep_start_minute = id(sleep_start).minute;
         int sleep_end_hour     = id(sleep_end).hour;
         int sleep_end_minute   = id(sleep_end).minute;
+        int wake_end_hour      = id(wake_end).hour;
+        int wake_end_minute    = id(wake_end).minute;
 
         int sleep_hours = 0;
         if (sleep_start_hour > sleep_end_hour) {
@@ -140,4 +142,19 @@ script:
           }
         }
 
+        if (wake_end_hour > sleep_end_hour || (wake_end_hour == sleep_end_hour && wake_end_minute >= sleep_end_minute)) {
+          if ((current_hour > sleep_end_hour || (current_hour == sleep_end_hour && current_minute >= sleep_end_minute)) &&
+              (current_hour < wake_end_hour   || (current_hour == wake_end_hour   && current_minute <= wake_end_minute  ))) {
+            status = ScheduleStatus::WAKING;
+          }
+        }
+
+        id(schedule_status).publish_state(status == 0
+          ? "Lamp Off"
+          : status == 1
+          ? "Night Light On"
+          : status == 2
+          ? "Wakeup Light On");
+
         ESP_LOGI("sched", "STATUS: %i", status);
+        

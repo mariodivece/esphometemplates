@@ -38,6 +38,16 @@ datetime:
     initial_value: "06:30:00"
     restore_value: true
 
+text_sensor:
+  - platform: template
+    id: schedule_status
+    name: "Schedule Status"
+    icon: "mdi:sun-clock"
+    web_server:
+      sorting_group_id: sg_schedule
+      sorting_weight: 34
+    entity_category: CONFIG
+
 light:
   - platform: rgb
     name: "Bedtime Light"
