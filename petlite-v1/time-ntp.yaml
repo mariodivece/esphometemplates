@@ -119,6 +119,10 @@ script:
           sleep_minutes = sleep_end_minute - sleep_start_minute;
         }
 
+        id(schedule_sleeping_hours).publish_state(
+          String(sleep_hours) + " hours, " +
+          String(sleep_minutes) + " minutes");
+
         ESP_LOGI("sched", "%i:%i -> %i:%i Total %i:%i",
           sleep_start_hour, sleep_start_minute, sleep_end_hour, sleep_end_minute, sleep_hours, sleep_minutes);
 

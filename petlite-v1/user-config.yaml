@@ -40,6 +40,15 @@ datetime:
 
 text_sensor:
   - platform: template
+    id: schedule_sleeping_hours
+    name: "Sleeping Hours"
+    icon: "mdi:sun-clock"
+    web_server:
+      sorting_group_id: sg_schedule
+      sorting_weight: 32
+    entity_category: CONFIG
+
+  - platform: template
     id: schedule_status
     name: "Schedule Status"
     icon: "mdi:sun-clock"
