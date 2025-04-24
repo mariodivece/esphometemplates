@@ -17,7 +17,7 @@ sensor:
     id: batt_voltage
     icon: "mdi:lightning-bolt"
     pin: GPIO01
-    attenuation: auto
+    attenuation: 11db
     name: Battery Voltage
     entity_category: "diagnostic"
     update_interval: 5s
