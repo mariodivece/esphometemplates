@@ -72,9 +72,11 @@ script:
 
         LightState* ls_sleep = id(sleep_light);
         LightState* ls_wake = id(wake_light);
+        LightState* ls_output = id(light_strip);
         
         LightColorValues* cv_current_sleep = &(ls_sleep->remote_values);
         LightColorValues* cv_current_wake = &(ls_wake->remote_values);
+        LightColorValues* cv_current_output = &(ls_output->remote_values);
 
         LightColorValues* cv_last_sleep = id(sleep_last_color);
         LightColorValues* cv_last_wake = id(wake_last_color);
@@ -186,12 +188,14 @@ script:
           : status == ScheduleStatus::WAKING   ? "Wakeup Light On"
           : "Unknown");
 
-        if (status == ScheduleStatus::SLEEPING) {
+        if (status == ScheduleStatus::SLEEPING && *cv_current_sleep != *cv_current_output) {
           apply_color(cv_current_sleep);
-        } else if (status == ScheduleStatus::WAKING) {
+        } else if (status == ScheduleStatus::WAKING && *cv_current_wake != *cv_current_output) {
           apply_color(cv_current_wake);
         } else {
-          id(light_strip).turn_off().perform();
+          if (ls_output->is_on()) {
+            ls_output->turn_off().perform();
+          }
         }
 
         ESP_LOGD("sched", "STATUS: %i", status);
