@@ -57,6 +57,7 @@ text_sensor:
       sorting_weight: 34
     entity_category: CONFIG
     update_interval: 5s
+    internal: false
     lambda: |-
       return {
            id(schedule_status_code) == 0 ? "Lamp Off"
