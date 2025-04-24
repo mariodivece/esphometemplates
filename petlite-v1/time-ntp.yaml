@@ -193,7 +193,7 @@ script:
         } else if (status == ScheduleStatus::WAKING && *cv_current_wake != *cv_current_output) {
           apply_color(cv_current_wake);
         } else {
-          if (ls_output->is_on()) {
+          if (ls_output->remote_values.is_on()) {
             ls_output->turn_off().perform();
           }
         }
