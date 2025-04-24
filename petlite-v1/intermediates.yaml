@@ -92,4 +92,4 @@ globals:
 
   - id: schedule_status_code
     type: int
-    restore_value: now
+    restore_value: no
