@@ -182,12 +182,10 @@ script:
           }
         }
 
-        id(schedule_status).publish_state(
-            status == ScheduleStatus::OFF      ? "Lamp Off"
-          : status == ScheduleStatus::SLEEPING ? "Night Light On"
-          : status == ScheduleStatus::WAKING   ? "Wakeup Light On"
-          : "Unknown");
+        // For the Schedule Status test sensor.
+        id(schedule_status_code) = status;
 
+        // Apply the light effect if not already applied
         if (status == ScheduleStatus::SLEEPING) {
           if (*cv_current_sleep != *cv_current_output)
             apply_color(cv_current_sleep);

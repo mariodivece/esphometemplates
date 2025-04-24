@@ -89,3 +89,7 @@ globals:
   - id: wake_last_color
     type: LightColorValues*
     restore_value: no
+
+  - id: schedule_status_code
+    type: int
+    restore_value: now

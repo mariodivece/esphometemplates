@@ -56,6 +56,13 @@ text_sensor:
       sorting_group_id: sg_schedule
       sorting_weight: 34
     entity_category: CONFIG
+    update_interval: 5s
+    lambda: |-
+      return
+           id(schedule_status_code) == 0 ? "Lamp Off"
+        :  id(schedule_status_code) == 1 ? "Sleep Light On"
+        :  id(schedule_status_code) == 2 ? "Wake Light On"
+        :  "Unknown";
 
 light:
   - platform: rgb
