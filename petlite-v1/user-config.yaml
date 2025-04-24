@@ -56,7 +56,7 @@ sensor:
     web_server:
       sorting_group_id: sg_schedule
       sorting_weight: 34
-    entity_category: CONFIG
+    entity_category: diagnostic
     update_interval: 5s
     internal: false
     lambda: |-
