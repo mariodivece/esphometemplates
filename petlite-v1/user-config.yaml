@@ -59,10 +59,10 @@ text_sensor:
     update_interval: 5s
     lambda: |-
       return
-           id(schedule_status_code) == 0 ? "Lamp Off"
-        :  id(schedule_status_code) == 1 ? "Sleep Light On"
-        :  id(schedule_status_code) == 2 ? "Wake Light On"
-        :  "Unknown";
+           id(schedule_status_code) == 0 ? {"Lamp Off"}
+        :  id(schedule_status_code) == 1 ? {"Sleep Light On"}
+        :  id(schedule_status_code) == 2 ? {"Wake Light On"}
+        :  {"Unknown"};
 
 light:
   - platform: rgb
