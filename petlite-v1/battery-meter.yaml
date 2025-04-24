@@ -20,16 +20,16 @@ sensor:
     attenuation: 11db
     name: Battery Voltage
     entity_category: "diagnostic"
-    update_interval: 5s
+    update_interval: 1s
     accuracy_decimals: 3
     filters:
       - multiply: 2.0
       #use moving median to smooth spikes
-      - median:
-          window_size: 5
-          send_every: 5
-          send_first_at: 5
-      - delta: 0.01 #Only send values to HA if they change 
+      - sliding_window_moving_average:
+          window_size: 10
+          send_every: 10
+          send_first_at: 10
+      - delta: 0.025 #Only send values to HA if they change 
       - throttle: 10s #Limit values sent to Ha
 
 #Convert the Voltage to a battery  level (%)
@@ -47,14 +47,13 @@ sensor:
          datapoints:
           - 0.00 -> 0.0
           - 3.274 -> 1.0
-          - 3.385 -> 12.5
-          - 3.494 -> 25.0
-          - 3.599 -> 37.5
-          - 3.699 -> 50.0
-          - 3.801 -> 62.5
-          - 3.907 -> 75.0
-          - 4.008 -> 87.5
-          - 4.115 -> 100.0
+          - 3.385 -> 14.32
+          - 3.494 -> 28.60
+          - 3.599 -> 42.88
+          - 3.699 -> 57.16
+          - 3.801 -> 71.44
+          - 3.907 -> 85.72
+          - 4.059 -> 100.0
       #Handle/cap boundaries
       - lambda: |
           if (x < 0) return 0; 
