@@ -48,22 +48,24 @@ text_sensor:
       sorting_weight: 32
     entity_category: CONFIG
 
+sensor:
   - platform: template
-    id: schedule_status
     name: "Schedule Status"
+    id: schedule_status
     icon: "mdi:sun-clock"
     web_server:
       sorting_group_id: sg_schedule
       sorting_weight: 34
-    entity_category: CONFIG
+      entity_category: CONFIG
     update_interval: 5s
     internal: false
-    lambda: |-
-      return {
-           id(schedule_status_code) == 0 ? "Lamp Off"
-        :  id(schedule_status_code) == 1 ? "Sleep Light On"
-        :  id(schedule_status_code) == 2 ? "Wake Light On"
-        :  "Unknown"};
+    state: |-
+        return {
+            id(schedule_status_code) == 0 ? "Lamp Off"
+          :  id(schedule_status_code) == 1 ? "Sleep Light On"
+          :  id(schedule_status_code) == 2 ? "Wake Light On"
+          :  "Unknown"};
+
 
 light:
   - platform: rgb
