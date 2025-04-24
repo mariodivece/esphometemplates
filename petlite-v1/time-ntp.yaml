@@ -188,14 +188,15 @@ script:
           : status == ScheduleStatus::WAKING   ? "Wakeup Light On"
           : "Unknown");
 
-        if (status == ScheduleStatus::SLEEPING && *cv_current_sleep != *cv_current_output) {
-          apply_color(cv_current_sleep);
-        } else if (status == ScheduleStatus::WAKING && *cv_current_wake != *cv_current_output) {
-          apply_color(cv_current_wake);
+        if (status == ScheduleStatus::SLEEPING) {
+          if (*cv_current_sleep != *cv_current_output)
+            apply_color(cv_current_sleep);
+        } else if (status == ScheduleStatus::WAKING) {
+          if (*cv_current_wake != *cv_current_output)
+            apply_color(cv_current_wake);
         } else {
-          if (ls_output->remote_values.is_on()) {
+          if (ls_output->remote_values.is_on())
             ls_output->turn_off().perform();
-          }
         }
 
         ESP_LOGD("sched", "STATUS: %i", status);
