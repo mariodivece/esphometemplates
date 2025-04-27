@@ -1,6 +1,6 @@
 substitutions:
   led_variant: "WS2811"
-  led_count: 11
+  led_count: "11"
 
 light:
   - platform: neopixelbus
