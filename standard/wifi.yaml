@@ -45,5 +45,6 @@ wifi:
   ap:
     ssid: "${device_code}-setup"
     password: "${wifi_password}"
+    ap_timeout: 5min
 
 captive_portal:
