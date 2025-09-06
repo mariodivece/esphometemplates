@@ -35,7 +35,7 @@ safe_mode:
 # Enable WiFi and AP for captive portal
 wifi:
   fast_connect: false
-  power_save_mode: none
+  power_save_mode: light
   ssid: "${wifi_ssid}"
   password: "${wifi_password}"
   use_address: "${device_ip}"
