@@ -16,6 +16,11 @@ time:
   - platform: sntp
     id: time_service
     timezone: ${timezone}
+    update_interval: 15min
+    servers: 
+      - 0.pool.ntp.org
+      - 1.pool.ntp.org
+      - 2.pool.ntp.org
 
 # Diagnostic output sensors
 text_sensor:

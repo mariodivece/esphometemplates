@@ -2,14 +2,15 @@
 # TODO: Error status (badly configured schedule)
 # TODO: Check for SNTP time is valid
 
-time:
-  - platform: sntp
-    id: sntp_time
-    timezone: America/Mexico_City
-    servers:
-      - 0.pool.ntp.org
-      - 1.pool.ntp.org
-      - 2.pool.ntp.org
+# this one is already in diagnostics.yaml
+#time:
+#  - platform: sntp
+#    id: time_service
+#    timezone: America/Mexico_City
+#    servers:
+#      - 0.pool.ntp.org
+#      - 1.pool.ntp.org
+#      - 2.pool.ntp.org
 
 text_sensor:
   - platform: template
@@ -17,7 +18,7 @@ text_sensor:
     entity_category: "diagnostic"
     icon: "mdi:clock-time-eight"
     lambda: |-
-      return id(sntp_time).now().strftime("%A, %B %d %Y %I:%M %p");
+      return id(time_service).now().strftime("%A, %B %d %Y %I:%M %p");
 
 interval:
   - interval: 5s
@@ -158,8 +159,8 @@ script:
           WAKING = 2
         };
 
-        int current_hour = id(sntp_time).now().hour;
-        int current_minute = id(sntp_time).now().minute;
+        int current_hour = id(time_service).now().hour;
+        int current_minute = id(time_service).now().minute;
         ScheduleStatus status = ScheduleStatus::OFF;
         
         if (sleep_start_hour <= sleep_end_hour) {
