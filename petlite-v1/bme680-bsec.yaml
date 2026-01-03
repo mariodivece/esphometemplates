@@ -10,7 +10,7 @@ bme68x_bsec2_i2c:
   address: 0x77
   model: bme680
   operating_age: 28d
-  sample_rate: ULP
+  sample_rate: LP
   supply_voltage: 3.3V
   state_save_interval: 6h
 
@@ -19,39 +19,44 @@ sensor:
     bme68x_bsec2_id: lib_bsec
     temperature:
       name: "Temperature"
-      sample_rate: LP
       filters:
         - throttle: 10s  # Only send data to HA once every minute
       web_server:
         sorting_group_id: sg_environment
     pressure:
       name: "Pressure"
-      sample_rate: LP
       filters:
         - throttle: 10s  # Only send data to HA once every minute
       web_server:
         sorting_group_id: sg_environment
     humidity:
       name: "Humidity"
-      sample_rate: LP
       filters:
         - throttle: 10s  # Only send data to HA once every minute
       web_server:
         sorting_group_id: sg_environment
     gas_resistance:
       name: "Gas Resistance"
+      filters:
+        - throttle: 10s  # Only send data to HA once every minute
       entity_category: "diagnostic"
     iaq:
       name: "IAQ"
       id: iaq
+      filters:
+        - throttle: 10s  # Only send data to HA once every minute
       web_server:
         sorting_group_id: sg_environment
     co2_equivalent:
       name: "CO2"
+      filters:
+        - throttle: 10s  # Only send data to HA once every minute
       web_server:
         sorting_group_id: sg_environment
     breath_voc_equivalent:
       name: "Breath VOC"
+      filters:
+        - throttle: 10s  # Only send data to HA once every minute
       web_server:
         sorting_group_id: sg_environment
 
