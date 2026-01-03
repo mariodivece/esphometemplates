@@ -20,7 +20,7 @@ sensor:
     attenuation: auto
     name: Battery Voltage
     entity_category: "diagnostic"
-    update_interval: 1s
+    update_interval: 5s
     accuracy_decimals: 3
     filters:
       - multiply: 2.0
